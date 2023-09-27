@@ -1,0 +1,158 @@
+{% extends "./base.html" %}
+
+{% block title %} Edita Contacto {% endblock%}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-12">
+        <h2>{% if contacto.IdContacto %}Edicion de Contacto {% else %}Agrega Contacto {% endif%}
+            {% if Gestion %}
+                <a href="/gestionContactos/{{cliente.IdCliente}}"><img src="https://cotizadorhitecpretest.z13.web.core.windows.net/back.png" height="40px" width="40px"></a></h2>
+            {% else %}
+                <a href="/edicionCliente/{{cliente.IdCliente}}"><img src="https://cotizadorhitecpretest.z13.web.core.windows.net/back.png" height="40px" width="40px"></a>
+            {% endif %}
+        </h2>
+        <div class="card">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card-body">
+                        <div class="form-group">
+                                <div class="form-group">
+                                    <label class="etiqueta">{{Gestion}}Codigo Cliente</label>
+                                    <input type="text" name="claveExterna" value="{{cliente.IdCliente}}" class="form-control form-control-sm disabled" readonly disabled>
+                                </div>
+                        </div>
+                    </div> 
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label class="etiqueta"></label>
+                                <input type="text" name="namecliente" value="{{cliente.NombreCliente}}" class="form-control form-control-sm disabled" readonly disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="card-body">
+                        <div class="form-group">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <form action="/editarCliente/" method="POST">{% csrf_token %}
+                    <div class="row">
+                        <div class='form-group col-md-2' style='display: none;'><label class='etiqueta'>IdCliente</label><input type='text'  name='IdCliente' value='{{contacto.IdCliente}}' class='form-control form-control-sm'></div>
+                        <div class='form-group col-md-2'><label class='etiqueta'>IdContacto</label><input type='text'  name='IdContacto' value='{{contacto.IdContacto}}' class='form-control form-control-sm'></div>
+                        <div class='form-group col-md-3'><label class='etiqueta'>Nombre</label><input type='text'  name='Nombre' value='{{contacto.Nombre}}' class='form-control form-control-sm'></div>
+                        <div class='form-group col-md-3'><label class='etiqueta'>SegundoNombre</label><input type='text'  name='SegundoNombre' value='{{contacto.SegundoNombre}}' class='form-control form-control-sm'></div>
+                        <div class='form-group col-md-4'><label class='etiqueta'>Apellidos</label><input type='text'  name='Apellidos' value='{{contacto.Apellidos}}' class='form-control form-control-sm'></div>
+                        <div class='form-group col-md-2'><label class='etiqueta'>Telefono</label><input type='text'  name='Telefono' value='{{contacto.Telefono}}' class='form-control form-control-sm'></div>
+                        <div class='form-group col-md-2'><label class='etiqueta'>TelefonoMovil</label><input type='text'  name='TelefonoMovil' value='{{contacto.TelefonoMovil}}' class='form-control form-control-sm'></div>
+                        <div class='form-group col-md-4'><label class='etiqueta'>CorreoElectronico</label><input type='text'  name='CorreoElectronico' value='{{contacto.CorreoElectronico}}' class='form-control form-control-sm'></div>
+                        <div class='form-group col-md-4'></div>
+                        <div class='form-group col-md-5'><label class='etiqueta'>Departamento</label><input type='text'  name='Departamento' value='{{contacto.Departamento}}' class='form-control form-control-sm'></div>
+                        <div class='form-group col-md-5'><label class='etiqueta'>Funcion</label><input type='text'  name='Funcion' value='{{contacto.Funcion}}' class='form-control form-control-sm'></div>
+                        <div class="form-group col-md-1">
+                            <!--label class='etiqueta'>Principal</label><input type='text'  name='Principal' value='{{contacto.Principal}}' class='form-control form-control-sm'-->
+                            <label class='etiqueta'></label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="check1" name="option1" value="something" checked>
+                                <label class="form-check-label">Principal</label>
+                            </div>
+                        </div>
+                        <div class='form-group col-md-1'>
+                            <!--label class='etiqueta'>Vip</label><input type='text'  name='Vip' value='{{contacto.Vip}}' class='form-control form-control-sm'-->
+                            <label class='etiqueta'></label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="check2" name="option2" value="something" checked>
+                                <label class="form-check-label">VIP</label>
+                            </div>
+                        </div>
+                        <div class='form-group col-md-6'>
+                            <label class='etiqueta'>PaisRegion</label>
+                            <!--input type='text'  name='PaisRegion' value='{{contacto.PaisRegion}}' class='form-control form-control-sm'-->
+                            <select name="PaisRegion" class="form-control form-control-sm minimal">
+                                {% if contacto.PaisRegion %}
+                                    <option value="{{contacto.PaisRegion}}" disabled selected>"{{contacto.PaisRegion}}"</option>
+                                {% else %}
+                                    <option value="NA" disabled selected>Seleccione País</option>
+                                {% endif%}
+                                <option value="1">País1</option>
+                                <option value="0">País2</option>
+                            </select>
+                        </div>
+                        <div class='form-group col-md-6'>
+                            <label class='etiqueta'>Estado</label>
+                            <!--input type='text'  name='Estado' value='{{contacto.Estado}}' class='form-control form-control-sm'-->
+                            <select name="Estado" class="form-control form-control-sm minimal">
+                                {% if contacto.Estado %}
+                                    <option value="{{contacto.Estado}}" disabled selected>"{{contacto.Estado}}"</option>
+                                {% else %}
+                                    <option value="NA" disabled selected>Seleccione Estado</option>
+                                {% endif%}
+                                <option value="1">Estado1</option>
+                                <option value="0">Estado2</option>
+                            </select>
+                        </div>
+                        <div class='form-group col-md-2'>
+                            <label class='etiqueta'>Código Postal</label>
+                            <!--input type='text'  name='CodigoPostal' value='{{contacto.CodigoPostal}}' class='form-control form-control-sm'-->
+                            <select name="CodigoPostal" class="form-control form-control-sm minimal">
+                                {% if contacto.CodigoPostal %}
+                                    <option value="{{contacto.CodigoPostal}}" disabled selected>"{{contacto.CodigoPostal}}"</option>
+                                {% else %}
+                                    <option value="NA" disabled selected>Seleccione CP</option>
+                                {% endif%}
+                                <option value="1">CP1</option>
+                                <option value="0">CP2</option>
+                            </select>
+                        </div>
+                        <div class='form-group col-md-5'><label class='etiqueta'>Ciudad, Municipio o Alcaldía</label><input type='text'  name='Ciudad' value='{{contacto.Ciudad}}' class='form-control form-control-sm'></div>
+                        <div class='form-group col-md-5'>
+                            <label class='etiqueta'>Colonia o Distrito</label>
+                            <!--input type='text'  name='Distrito' value='{{contacto.Distrito}}' class='form-control form-control-sm'-->
+                            <select name="Distrito" class="form-control form-control-sm minimal">
+                                {% if contacto.Distrito %}
+                                    <option value="{{contacto.Distrito}}" disabled selected>"{{contacto.Distrito}}"</option>
+                                {% else %}
+                                    <option value="NA" disabled selected>Seleccione Colonia o Distrito</option>
+                                {% endif%}
+                                <option value="1">Distrito1</option>
+                                <option value="0">Distrito2</option>
+                            </select>
+                        </div>
+                        <div class='form-group col-md-6'><label class='etiqueta'>Calle</label><input type='text'  name='Calle' value='{{contacto.Calle}}' class='form-control form-control-sm'></div>            
+                        <div class='form-group col-md-2'><label class='etiqueta'>Numero</label><input type='text'  name='Numero' value='{{contacto.Numero}}' class='form-control form-control-sm'></div>
+                        <div class='form-group col-md-2'><label class='etiqueta'>Edificio</label><input type='text'  name='Edificio' value='{{contacto.Edificio}}' class='form-control form-control-sm'></div>
+                        <div class='form-group col-md-2'><label class='etiqueta'>Planta</label><input type='text'  name='Planta' value='{{contacto.Planta}}' class='form-control form-control-sm'></div>
+                        <div class='form-group col-md-4'><label class='etiqueta'>PaisExp</label><input type='text'  name='PaisExp' value='{{contacto.PaisExp}}' class='form-control form-control-sm'></div>
+                        <div class='form-group col-md-4'><label class='etiqueta'>MedioComunicacion</label><input type='text'  name='MedioComunicacion' value='{{contacto.MedioComunicacion}}' class='form-control form-control-sm'></div>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-control d-grid gap-2 col-6 mx-auto">
+                    <button class="btn btn-primary text-white btn-block">Guardar</button>
+                    {% if Gestion %}
+                        <a href="/gestionContactos/{{cliente.IdCliente}}" class="btn btn-danger text-white">Cancelar</a>
+                    {% else %}
+                    <a href="/edicionCliente/{{cliente.IdCliente}}" class="btn btn-danger text-white">Cancelar</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+{% endblock %}

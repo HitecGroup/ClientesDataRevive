@@ -1,0 +1,180 @@
+{% extends "./base.html" %}
+
+{% block title %} Agrega Dirección {% endblock%}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-12">
+        <h2>Agregar Dirección Cliente <a href="/edicionCliente/{{ cliente.IdCliente }}"><img src="https://cotizadorhitecpretest.z13.web.core.windows.net/back.png" height="40px" width="40px"></a></h2>
+        <div class="card">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card-body">
+                        <div class="form-group">
+                                <div class="form-group">
+                                    <label class="etiqueta">Codigo Cliente</label>
+                                    <input type="text" name="claveExterna" value="{{cliente.IdCliente}}" class="form-control form-control-sm disabled" readonly disabled>
+                                </div>
+                        </div>
+                    </div> 
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label class="etiqueta"></label>
+                                <input type="text" name="namecliente" value="{{cliente.NombreCliente}}" class="form-control form-control-sm disabled" readonly disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="card-body">
+                        <div class="form-group">
+                                <div class="form-group">
+
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <form action="/agregarClienteDireccion/" method="POST">{% csrf_token %}
+                    <input type="text" name="claveExterna" value="{{direcciones.IdCliente}}" class="form-control form-control-sm" hidden>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="etiqueta">Pais</label>
+                            <!--input type="text" name="PaisRegion" value="{{direcciones.PaisRegion}}" class="form-control form-control-sm"-->
+                            <select name="PaisRegion" class="form-control form-control-sm minimal" value="{{direcciones.PaisRegion}}">
+                                <option value="NA" disabled selected>Seleccione País</option>
+                                <option value="1">País1</option>
+                                <option value="0">País2</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="etiqueta">Estado</label>
+                            <!--input type="text" name="Calle" value="{{direcciones.Ciudad}}" class="form-control form-control-sm"-->
+                            <select name="estado" class="form-control form-control-sm minimal" value="{{direcciones.Estado}}">
+                                <option value="NA" disabled selected>Seleccione Estado</option>
+                                <option value="1">Estado1</option>
+                                <option value="0">Estado2</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label class="etiqueta">Código Postal</label>
+                            <!--input type="text" name="Calle" value="{{direcciones.CodigoPostal}}" class="form-control form-control-sm"-->
+                            <select name="CP" class="form-control form-control-sm minimal" value="{{direcciones.CodigoPostal}}">
+                                <option value="NA" disabled selected>Seleccione CP</option>
+                                <option value="1">CP1</option>
+                                <option value="0">CP2</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label class="etiqueta">Ciudad, Municipio o Alcaldía</label>
+                            <input type="text" name="Ciudad" value="{{direcciones.Ciudad}}" class="form-control form-control-sm">
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label class="etiqueta">Colonia o Distrito</label>
+                            <!--input type="text" name="Calle" value="{{direcciones.Distrito}}" class="form-control form-control-sm"-->
+                            <select name="Distrito" class="form-control form-control-sm minimal" value="{{direcciones.Distrito}}">
+                                <option value="NA" disabled selected>Seleccione Colonia o Distrito</option>
+                                <option value="1">Colonia1</option>
+                                <option value="0">Colonia2</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group col-md-12">
+                            <label class="etiqueta">Calle</label>
+                            <input type="text" name="Calle" value="{{direcciones.Calle}}" class="form-control form-control-sm">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label class="etiqueta">Número</label>
+                            <input type="text" name="Numero" value="{{direcciones.Numero}}" class="form-control form-control-sm">
+                        </div>
+                        <div class="form-group col-md-10">
+                            <label class="etiqueta">Calle 2</label>
+                            <input type="text" name="calle2" value="{{direcciones.calle2}}" class="form-control form-control-sm">
+                        </div>
+                                               
+                        <div class="form-group col-md-6">
+                            <label class="etiqueta">Codigo Dom Fiscal</label>
+                            <!--input type="text" name="CodigoDomFiscal" value="{{direcciones.CodigoDomFiscal}}" class="form-control form-control-sm"-->
+                            <select name="CodigoDomFiscal" class="form-control form-control-sm minimal" value="{{direcciones.CodigoDomFiscal}}">
+                                <option value="NA" disabled selected>Seleccione Código Domicilio fiscal</option>
+                                <option value="1">Estado1</option>
+                                <option value="0">Estado2</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label> </label>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="etiqueta">Teléfono</label>
+                            <input type="text" name="Calle" value="{{direcciones.Telefono}}" class="form-control form-control-sm">
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label class="etiqueta">CorreoElectronico</label>
+                            <input type="text" name="Calle" value="{{direcciones.CorreoElectronico}}" class="form-control form-control-sm">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="etiqueta">Sitio Web</label>
+                            <input type="text" name="Calle" value="{{direcciones.SitioWeb}}" class="form-control form-control-sm">
+                        </div>                        
+                        <div class="form-group col-md-12">
+                            <label> </label>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <!--label class="etiqueta">Principal</label>
+                            <input type="text" name="Calle" value="{{direcciones.DireccionPrincipal}}" class="form-control form-control-sm"-->
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="check1" name="option1" value="something" checked>
+                                <label class="form-check-label">Dirección Principal</label>
+                            </div>
+                        </div>                        
+                        <div class="form-group col-md-3">
+                            <!--label class="etiqueta">Dest Factura</label>
+                            <input type="text" name="Calle" value="{{direcciones.DestinatarioFactura}}" class="form-control form-control-sm"-->
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="check2" name="option2" value="something" checked>
+                                <label class="form-check-label">Destinatario Factura</label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <!--label class="etiqueta">Entrega</label>
+                            <input type="text" name="Calle" value="{{direcciones.Entrega}}" class="form-control form-control-sm"-->
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="check3" name="option3" value="something" checked>
+                                <label class="form-check-label">Dirección Entrega</label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <!--label class="etiqueta">Dest Merc Std</label>
+                            <input type="text" name="Calle" value="{{direcciones.DestinatarioMercEstandar}}" class="form-control form-control-sm"-->
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="check4" name="option4" value="something" checked>
+                                <label class="form-check-label">Destinatario de mercancías estándar</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-control d-grid gap-2 col-6 mx-auto">
+                    <button class="btn btn-primary text-white btn-block">Agregar</button>
+                    <a href="/edicionCliente/{{cliente.IdCliente}}" class="btn btn-danger text-white">Cancelar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+{% endblock %}

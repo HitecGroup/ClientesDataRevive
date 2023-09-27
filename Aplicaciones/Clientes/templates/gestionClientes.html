@@ -1,0 +1,78 @@
+{% extends "./base.html" %}
+
+{% block title %} 
+
+    Gestión de Clientes 
+
+{% endblock%}
+
+{% block body %}
+<div class="row">
+    <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4">
+        <h4>Buscar Clientes Disponibles</h4>
+        <div class="card">
+            <div class="card-body">
+                <div class="form-control">
+                    <label id="nombreBusqueda" class="etiqueta">Nombre de Cliente</label><input class="form-control form-control-sm" type="text" placeholder="Nombre Cliente">
+                    <label id="rfcBisqueda" class="etiqueta">RFC Cliente</label><input class="form-control form-control-sm" type="text" placeholder="RFC Cliente">
+                    <label id="telefonoBusqueda" class="etiqueta">Teléfono Cliente</label><input class="form-control form-control-sm" type="text" placeholder="Teléfono Cliente">
+                    <label id="adicionalBusqueda" class="etiqueta">Nombre Adicional</label><input class="form-control form-control-sm" type="text" placeholder="Nombre Adicional Cliente">
+                    <hr><a onclick="clic()" name="btnBuscar" href="/" class="btn btn-danger btn-block" disabled>Buscar Cliente</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8">
+        <h4>Clientes Disponibles</h4>
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive py-1">
+                    <table class="table table-striped" id="clientes-table">
+                        <thead style="background-color: #E5E5E5;font-size: 14px;">
+                            <tr>
+                                <th>#</th>
+                                <th>Id Cliente</th>
+                                <th><small>Nombre</small></th>
+                                <th>RFC</th>
+                                <th>Suc Servicio</th>
+                                <th>Reg Ventas</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for c in clientes %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{c.IdCliente}}</td>
+                                <td>{{c.NombreCliente}}</td>
+                                <td>{{c.RFC}}</td>
+                                <td>{{c.SucServicio}}</td>
+                                <td>{{c.RegionVts}}</td>
+                                <td><a href="edicionCliente/{{c.IdCliente}}" class="btn btn-success btn-sm">Editar</a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+/*
+if(document.getElementById('nombreBusqueda') != null) {
+    $(".btnBusqueda").removeAttr("disabled");
+  }
+  */
+  
+//rfcBisqueda
+//telefonoBusqueda
+//adicionalBusqueda
+function clic(){
+    let p = document.getElementById("nombreBusqueda").val;
+    alert(p);
+}
+
+</script>
+{% endblock %}

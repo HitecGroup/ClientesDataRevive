@@ -1,0 +1,440 @@
+{% extends "./base.html" %}
+
+{% block title %} Gestion de Clientes {% endblock%}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-12">
+        <h2>Edicion de Clientes <a href="/"><img src="https://cotizadorhitecpretest.z13.web.core.windows.net/back.png" height="40px" width="40px"></a></h2>
+        <div class="card">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <div class="form-group">
+                                <div class="form-group">
+                                    <label class="etiqueta">Codigo Cliente</label>
+                                    <input type="text" name="claveExterna" value="{{cliente.IdCliente}}" class="form-control form-control-sm disabled" readonly disabled>
+                                </div>
+                        </div>
+                    </div> 
+                </div>
+                <div class="col-md-3">
+                    <div class="card-body">
+                        <div class="form-group">
+                                <div class="form-group">
+                                    <br>
+                                    <a href="/gestionContactos/{{cliente.IdCliente}}" class="btn btn-dark"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                                        <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+                                      </svg>  <b>Contactos</b></a>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card-body">
+                        <div class="form-group">
+                                <div class="form-group">
+                                    <br>
+                                    <a href="/gestionDirecciones/{{cliente.IdCliente}}" class="btn btn-danger btn-block"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-truck" viewBox="0 0 16 16">
+                                        <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                                      </svg> <b>Direcciones Cliente</b></a>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <form action="/editarCliente/" method="POST">{% csrf_token %}
+                    <input type="text" name="claveExterna" value="{{cliente.IdCliente}}" class="form-control form-control-sm" hidden>
+                    <div class="form-group">
+                        <label class="etiqueta">Nombre Cliente</label>
+                        <input type="text" style="display: none;" name="nombreCliente" value="{{cliente.NombreCliente}}" class="form-control form-control-sm" readonly>
+                        <input type="text" name="nombreClienteMirror" value="{{cliente.NombreCliente}}" class="form-control form-control-sm" readonly disabled>
+                    </div>
+                    <div class="form-group">
+                        <label class="etiqueta">Fecha Constitución</label>
+                        <input type="date" class="form-control form-control-sm" id="fechaNacimiento" name="fechaNacimiento" value="{{cliente.FechaNacimiento}}">
+                    </div>
+                    <div class="form-group">
+                        <label class="etiqueta">Sector</label>
+                        <select name="Sector" class="form-control form-control-sm minimal" value="{{cliente.sector}}">
+                            <option value="NA" disabled>Seleccione uno</option>
+                            <option value='11'>Agrícola</option>
+                            <option value='22'>Servicios públicos</option>
+                            <option value='23'>Construcción</option>
+                            <option value='31'>Fabricación</option>
+                            <option value='42'>Comercio mayorista</option>
+                            <option value='44'>Comercio minorista</option>
+                            <option value='48'>Transporte y almacenamiento</option>
+                            <option value='51'>Información</option>
+                            <option value='52'>Finanzas y seguro</option>
+                            <option value='53'>Bienes inmuebles, alquiler y leasing</option>
+                            <option value='54'>Servicios profesionales, científicos y técnicos</option>
+                            <option value='55'>Gestión de compañías y empresas</option>
+                            <option value='56'>Servicios de recuperación, gestión de desechos y soporte administrativo</option>
+                            <option value='61'>Servicios educativos</option>
+                            <option value='62'>Atención médica y asistencia social</option>
+                            <option value='71'>Arte, entretenimiento y recreación</option>
+                            <option value='72'>Servicios de alimentación y alojamiento</option>
+                            <option value='81'>Otros servicios (excepto administración pública)</option>
+                            <option value='92'>Administración pública</option>
+                            <option value='Z01'>Aeroespacial y Aeronáutica</option>
+                            <option value='Z02'>Alimentos y bebidas</option>
+                            <option value='Z03'>Artículos y Maquinaria Industrial</option>
+                            <option value='Z04'>Automotriz</option>
+                            <option value='Z05'>Bearings</option>
+                            <option value='Z06'>Bombas y válvulas otras</option>
+                            <option value='Z07'>Bombas y válvulas PET</option>
+                            <option value='Z08'>Calzado</option>
+                            <option value='Z10'>Corte lámina</option>
+                            <option value='Z11'>Educación</option>
+                            <option value='Z12'>Eléctrico / Electrónica</option>
+                            <option value='Z13'>Entretenimiento y Deportes</option>
+                            <option value='Z14'>Estructuras y Perfiles</option>
+                            <option value='Z15'>Farmacéutico</option>
+                            <option value='Z16'>Ferrocarril</option>
+                            <option value='Z17'>Forja</option>
+                            <option value='Z18'>Fundición</option>
+                            <option value='Z19'>Generación de Energía</option>
+                            <option value='Z20'>Gobierno</option>
+                            <option value='Z21'>Herramientas y utillaje</option>
+                            <option value='Z22'>Instrumental de precisión</option>
+                            <option value='Z23'>Joyería</option>
+                            <option value='Z24'>Línea blanca</option>
+                            <option value='Z25'>Mantenimiento</option>
+                            <option value='Z26'>Médico / Dental</option>
+                            <option value='Z27'>Militar</option>
+                            <option value='Z28'>Minera</option>
+                            <option value='Z29'>Moldes, troqueles y matrices</option>
+                            <option value='Z30'>Muebles</option>
+                            <option value='Z31'>Naval</option>
+                            <option value='Z33'>Otras</option>
+                            <option value='Z34'>Papelero</option>
+                            <option value='Z35'>Petróleo y Gas</option>
+                            <option value='Z36'>Plástico</option>
+                            <option value='Z37'>Prensado</option>
+                            <option value='Z38'>Químico</option>
+                            <option value='Z39'>Robótica y automatización</option>
+                            <option value='Z40'>Textil</option>
+                            <option value='Z41'>Taller/Maquiladora</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="etiqueta">Tipo de Cliente</label>
+                        <select name="tipoCliente" class="form-control form-control-sm minimal" value="{{cliente.tipoCliente}}">
+                            <option value="NA" disabled>Seleccione uno</option>
+                            <option value="Coorporativo">Coorporativo</option>
+                            <option value="Particular">Particular</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="etiqueta">Cliente Potencial</label>
+                        <select name="clientePotencial" class="form-control form-control-sm minimal" value="{{cliente.clientePotencial}}">
+                            <option value="NA" disabled selected>Seleccione uno</option>
+                            <option value="1">Si</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="etiqueta">Estado</label>
+                        <select name="estadoCliente" class="form-control form-control-sm minimal" value="{{cliente.estadoCliente}}">
+                            <option value="NA" disabled selected>Seleccione uno</option>
+                            <option value="1">Activo</option>
+                            <option value="0">Inactivo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="etiqueta">D-U-N-S</label>
+                        <input type="text" name="DUNS" class="form-control form-control-sm" value="{{cliente.Duns}}">
+                    </div>
+                    <div class="form-group">
+                        <label class="etiqueta">Clasificación ABC</label>
+                        <select name="clasificacionCliente" class="form-control form-control-sm minimal" value="{{cliente.Clasificacion}}">
+                            <option value="NA" disabled selected>Seleccione uno</option>
+                            <option value='HTA'>HTA</option>
+                            <option value='HTAA'>HTAA</option>
+                            <option value='HTAAA'>HTAAA</option>
+                            <option value='PA'>PA</option>
+                            <option value='PAA'>PAA</option>
+                            <option value='PAAA'>PAAA</option>
+                            <option value='PB'>PB</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="etiqueta">División</label>
+                        <select name="division" class="form-control form-control-sm minimal" value="{{cliente.Division}}">
+                            <option value="NA" disabled selected>Seleccione uno</option>
+                            <option value="Haas CAM">Haas CAM</option>
+                            <option value="Haas Colombia">Haas Colombia</option>
+                            <option value="Haas Ecuador">Haas Ecuador</option>
+                            <option value="Haas México">Haas México</option>
+                            <option value="Hitec CNC Maquinaria de México">Hitec CNC Maquinaria de México</option>
+                            <option value="Hitec Tools">Hitec Tools</option>
+                            <option value="Nexttec Machinery">Nexttec Machinery</option>
+                            <option value="A&G Plastic Machinery ">A&G Plastic Machinery </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="etiqueta">Sub División</label>
+                        <select name="subDivision" class="form-control form-control-sm minimal" value="{{cliente.subDivision}}">
+                            <option value="NA" disabled selected>Seleccione uno</option>
+                            <option value='HFO'>HFO</option>
+                            <option value='CNC'>CNC</option>
+                            <option value='OT'>OT</option>
+                            <option value='Htools'>Htools</option>
+                            <option value='EDM'>EDM</option>
+                            <option value='FAB'>FAB</option>
+                            <option value='PM'>PM</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="etiqueta">Zona Servicio</label>
+                        <select name="zonaServicio" class="form-control form-control-sm minimal" value="{{cliente.SucServicio}}">
+                            <option value="NA" disabled selected>Seleccione uno</option>
+                            <option value="Norte">Norte</option>
+                            <option value="Sur">Sur</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="etiqueta">Tipo Empresa</label>
+                        <select name="tipoEmpresa" class="form-control form-control-sm minimal" value="{{cliente.TipoEmpresa}}">
+                            <option value="NA" disabled selected>Seleccione uno</option>
+                            <option value='Producto propio / Own product'>Producto propio / Own product</option>
+                            <option value='Maquiladora / Factories'>Maquiladora / Factories</option>
+                            <option value='Gobierno / Government'>Gobierno / Government</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="etiqueta">ID de Nielsen</label>
+                        <input type="text" name="iDNielsen" class="form-control form-control-sm" value="{{cliente.iDNielsen}}">
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group">
+                    <label class="etiqueta">No Turnos C</label>
+                    <select name="noTurnos" class="form-control form-control-sm minimal">
+                        <option value="NA" disabled selected>Seleccione uno</option>
+                        <option value="1 Turnos">1 Turno</option>
+                        <option value="2 Turnos">2 Turnos</option>
+                        <option value="3 Turnos">3 Turnos</option>
+                        <option value="4 Turnos">4 Turnos</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="etiqueta">No Maquinas Convencionales C</label>
+                    <select name="NoMaqConve" class="form-control form-control-sm minimal">
+                        <option value="NA" disabled selected>Seleccione uno</option>
+                        <option value='0'>0</option>
+                        <option value='1-2'> 1-2</option>
+                        <option value='3-4'> 3-4</option>
+                        <option value='5-10'> 5-10</option>
+                        <option value='+10'>+10</option>
+                    </select>
+                </div>
+                    <!--<div class="form-group">
+                        <label class="etiqueta">MX email de envio</label>
+                        <input type="text" name="mxEmailEnvio" class="form-control form-control-sm">
+                    </div>-->
+                    <div class="form-group">
+                        <label class="etiqueta">Tier (Cadena)</label>
+                        <select name="tier" class="form-control form-control-sm minimal">
+                            <option value="NA" disabled selected>Seleccione uno</option>
+                            <option value='Tier 1'>Tier 1</option>
+                            <option value='Tier 2'>Tier 2</option>
+                            <option value='Tier 3'>Tier 3</option>
+                            <option value='Gobierno'>Gobierno</option>
+                            <option value='N/A'>N/A </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="etiqueta">No Maquinas CNC C</label>
+                        <select name="NoMaqCNC" class="form-control form-control-sm minimal">
+                            <option value="NA" disabled selected>Seleccione uno</option>
+                            <option value='0'>0</option>
+                            <option value='1-2'> 1-2</option>
+                            <option value='3-4'> 3-4</option>
+                            <option value='5-10'> 5-10</option>
+                            <option value='+10'>+10</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="etiqueta">No de Maquinas HT C</label>
+                        <select name="NoMaqHT" class="form-control form-control-sm minimal">
+                            <option value="NA" disabled selected>Seleccione uno</option>
+                            <option value='0'>0</option>
+                            <option value='1-2'> 1-2</option>
+                            <option value='3-4'> 3-4</option>
+                            <option value='5-10'> 5-10</option>
+                            <option value='+10'>+10</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="etiqueta">Materiales que utilizan CHMER</label>
+                        <select name="MatUseCHMER" class="form-control form-control-sm minimal">
+                            <option value="NA" disabled selected>Seleccione uno</option>
+                            <option value='Aceros al carbón /  Carbon Steel'>Aceros al carbón /  Carbon Steel</option>
+                            <option value='Acero inoxidable /  Stainless  Steel'>Acero inoxidable /  Stainless  Steel</option>
+                            <option value='Carburo de tuxteno /  Tungsten carbide'>Carburo de tuxteno /  Tungsten carbide</option>
+                            <option value='No Ferrosos / Non-Ferric'>No Ferrosos / Non-Ferric</option>
+                            <option value='Aleaciones Especiales / Special Alloys'>Aleaciones Especiales / Special Alloys</option>
+                            <option value='Fundición / Casting'>Fundición / Casting</option>
+                            <option value='Varios /  Others'>Varios /  Others</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="etiqueta">Materiales que utilizan YZUMI</label>
+                        <select name="MatUseYIZUMI" class="form-control form-control-sm minimal">
+                            <option value="NA" disabled selected>Seleccione uno</option>
+                            <option value='PETE (Polietileno tereftalato) / PETE'>PETE (Polietileno tereftalato) / PETE</option>
+                            <option value='HDPE (Polietileno de alta densidad) / HDPE'>HDPE (Polietileno de alta densidad) / HDPE</option>
+                            <option value='V (Policloruro de vinilo) / V'>V (Policloruro de vinilo) / V</option>
+                            <option value='LDPE (Polietileno de baja densidad) / LDPE'>LDPE (Polietileno de baja densidad) / LDPE</option>
+                            <option value='PP (Polipropileno) / PP '>PP (Polipropileno) / PP </option>
+                            <option value='PS (Poliestireno) / PS'>PS (Poliestireno) / PS</option>
+                            <option value='Otros Plásticos, resinas, composites / Other Plastics, resins, composites'>Otros Plásticos, resinas, composites / Other Plastics, resins, composites</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="etiqueta">Frecuencia de Compra C</label>
+                        <select name="FrecuenciaCompra" class="form-control form-control-sm minimal">
+                            <option value="NA" disabled selected>Seleccione uno</option>
+                            <option value="Dummy1">Dummy1</option>
+                            <option value="Dummy2">Dummy2</option>
+                            <option value="Dummy3">Dummy3</option>
+                            <option value="Dummy4">Dummy4</option>
+                        </select>
+                    </div>
+                    <!--<div class="form-group">
+                        <label class="etiqueta">División PM</label>
+                        <select name="division" class="form-control form-control-sm minimal">
+                            <option value="NA" disabled selected>Seleccione uno</option>
+                            <option value="Divisón Plásticos">Divisón Plásticos</option>
+                            <option value="Die Casting">Die Casting</option>
+                        </select>
+                    </div>-->
+                    <div class="form-group">
+                        <label class="etiqueta">Región Ventas</label>
+                        <select name="regVentas" class="form-control form-control-sm minimal">
+                            <option value="NA" disabled selected>Seleccione uno</option>
+                            <option value='Norte'>Norte</option>
+                            <option value='Sur'>Sur</option>
+                            <option value='Centro'>Centro</option>
+                            <option value='Bajío'>Bajío</option>
+                            <option value='Pacífico'>Pacífico</option>
+                            <option value='Ecuador'>Ecuador</option>
+                            <option value='Colombia'>Colombia</option>
+                            <option value='CAM'>CAM</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="etiqueta">Actividad Principal FAB</label>
+                        <select name="ActPriFAB" class="form-control form-control-sm minimal">
+                            <option value="NA" disabled selected>Seleccione uno</option>
+                            <option value='Estructuras metálicas /  Metalic structures'>Estructuras metálicas /  Metalic structures</option>
+                            <option value='Bridas, valvulas,conexiones, sellos, rodamientos, tubos, coples / Flanges, valves, connections, seals, bearings, tubes, coupling'>Bridas, valvulas,conexiones, sellos, rodamientos, tubos, coples / Flanges, valves, connections, seals, bearings, tubes, coupling</option>
+                            <option value='Herramientas / TOOL industry'>Herramientas / TOOL industry</option>
+                            <option value='Maquinado de partes / Parts machining'>Maquinado de partes / Parts machining</option>
+                            <option value='Transformación de piezas de fundición / '>Transformación de piezas de fundición / </option>
+                            <option value='Casting Parts machinining'>Casting Parts machinining</option>
+                            <option value='Maquinas, Equipos y automatización /'>Maquinas, Equipos y automatización /</option>
+                            <option value='Machines, Equipment and Automation'>Machines, Equipment and Automation</option>
+                            <option value='Prototipos / Prototypes'>Prototipos / Prototypes</option>
+                            <option value='Troqueles y Matrices / Dies'>Troqueles y Matrices / Dies</option>
+                            <option value='Transformación de lámina /'>Transformación de lámina /</option>
+                            <option value='Sheet transformation'>Sheet transformation</option>
+                            <option value='Estantería y Mobiliario Público /'>Estantería y Mobiliario Público /</option>
+                            <option value='Shelving and Public Furniture'>Shelving and Public Furniture</option>
+                            <option value='Distribuidores de acero /'>Distribuidores de acero /</option>
+                            <option value='Steel distributors'>Steel distributors</option>
+                            <option value='Carrocerías  - Remolques de marca propia /'>Carrocerías  - Remolques de marca propia /</option>
+                            <option value='Bodyworks - Own brand trailers'>Bodyworks - Own brand trailers</option>
+                            <option value='Pailería /  Pailería '>Pailería /  Pailería </option>
+                            <option value='Básculas - Fabricantes de básculas /  Scales - Scale manufacturers'>Básculas - Fabricantes de básculas /  Scales - Scale manufacturers</option>
+                            <option value='Fabricantes de Piezas Metálicas en serie /'>Fabricantes de Piezas Metálicas en serie /</option>
+                            <option value='Serial Metal Parts Manufacturing'>Serial Metal Parts Manufacturing</option>
+                            <option value='Ductos de Lámina / Ductos para aire / Recolectores de Polvo / Filtros Industriales --  Foil Ducts / Air Ducts / Dust Collectors / Industrial Filters'>Ductos de Lámina / Ductos para aire / Recolectores de Polvo / Filtros Industriales --  Foil Ducts / Air Ducts / Dust Collectors / Industrial Filters</option>
+                        </select>
+                    </div>
+                    <!--<div class="form-group">
+                        <label class="etiqueta">Materiales que utilizan CNC, HAAS</label>
+                        <select name="MatUsoCNC_Haas" class="form-control form-control-sm minimal">
+                            <option value='Aceros al carbón /  Carbon Steel'>Aceros al carbón /  Carbon Steel</option>
+                            <option value='Acero inoxidable /  Stainless  Steel'>Acero inoxidable /  Stainless  Steel</option>
+                            <option value='Fundición / Casting'>Fundición / Casting</option>
+                            <option value='No Ferrosos / Non-Ferric'>No Ferrosos / Non-Ferric</option>
+                            <option value='Aleaciones Especiales / Special Alloys'>Aleaciones Especiales / Special Alloys</option>
+                            <option value='Varios / Others '>Varios / Others </option>
+
+                        </select>
+                    </div>-->
+                    <div class="form-group">
+                        <label class="etiqueta">Actividad principal a efectuar con el equipo CNC</label>
+                        <select name="ActPriEquipoCNC" class="form-control form-control-sm minimal">
+                            <option value="NA" disabled selected>Seleccione uno</option>
+                            <option value='Anclas, estructuras metálicas / Anchors, metal structures'>Anclas, estructuras metálicas / Anchors, metal structures</option>
+                            <option value='Bridas, valvulas,conexiones, sellos, rodamientos, tubos, coples / Flanges, valves, connections, seals, bearings, tubes, coupling'>Bridas, valvulas,conexiones, sellos, rodamientos, tubos, coples / Flanges, valves, connections, seals, bearings, tubes, coupling</option>
+                            <option value='Dados de extrusión / Extrusion Dice'>Dados de extrusión / Extrusion Dice</option>
+                            <option value='Dispositivos , gages, herramentales /  Devices, gages, tools'>Dispositivos , gages, herramentales /  Devices, gages, tools</option>
+                            <option value='Grabado /  CNC Engraving'>Grabado /  CNC Engraving</option>
+                            <option value='Herramientas /  Tools'>Herramientas /  Tools</option>
+                            <option value='Investigación, desarrollo, enseñanza / Research, development, training'>Investigación, desarrollo, enseñanza / Research, development, training</option>
+                            <option value='Maquinado de partes / Parts machining'>Maquinado de partes / Parts machining</option>
+                            <option value='Maquinado de piezas de fundición /  Casting Parts Machining'>Maquinado de piezas de fundición /  Casting Parts Machining</option>
+                            <option value='Maquinas, Equipos y automatización / Machinery, Equipment and Automation'>Maquinas, Equipos y automatización / Machinery, Equipment and Automation</option>
+                            <option value='Moldes / Molds'>Moldes / Molds</option>
+                            <option value='Partes para mantenimiento /  maintenance parts'>Partes para mantenimiento /  maintenance parts</option>
+                            <option value='Prototipos /  Prototypes'>Prototipos /  Prototypes</option>
+                            <option value='Tornillos y tuercas / Nuts and bolts'>Tornillos y tuercas / Nuts and bolts</option>
+                            <option value='Troqueles y Matrices / Dies'>Troqueles y Matrices / Dies</option>
+                            <option value='Turbinas / Turbines'>Turbinas / Turbines</option>
+                            <option value='Otros / Others'>Otros / Others</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="etiqueta">Materiales FAB</label>
+                        <select name="MatUsoFab" class="form-control form-control-sm minimal">
+                            <option value="NA" disabled selected>Seleccione uno</option>
+                            <option value='Aluminio / Aluminum'>Aluminio / Aluminum</option>
+                            <option value='Acero /  Steel'>Acero /  Steel</option>
+                            <option value='Acero inoxidable /  Stainless  Steel'>Acero inoxidable /  Stainless  Steel</option>
+                            <option value='No Ferrosos / Non-Ferric'>No Ferrosos / Non-Ferric</option>
+                            <option value='Lámina /  Sheet'>Lámina /  Sheet</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="etiqueta">Material arranque de viruta</label>
+                        <select name="MatViruta" class="form-control form-control-sm minimal">
+                            <option value="NA" disabled selected>Seleccione uno</option>
+                            <option value='Aceros al carbón /  Carbon Steel'>Aceros al carbón /  Carbon Steel</option>
+                            <option value='Acero inoxidable /  Stainless  Steel'>Acero inoxidable /  Stainless  Steel</option>
+                            <option value='Fundición / Casting'>Fundición / Casting</option>
+                            <option value='No Ferrosos / Non-Ferric'>No Ferrosos / Non-Ferric</option>
+                            <option value='Aleaciones Especiales / Special Alloys'>Aleaciones Especiales / Special Alloys</option>
+                            <option value='Varios / Others '>Varios / Others </option>
+                        </select>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-control d-grid gap-2 col-6 mx-auto">
+                    <button class="btn btn-primary text-white btn-block">Guardar</button>
+                    <a href="/" class="btn btn-danger text-white">Cancelar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+{% endblock %}
