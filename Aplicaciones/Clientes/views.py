@@ -138,3 +138,14 @@ def get_estados(request, codigo):
         data={"message":"Not Found"}
 
     return JsonResponse(data)
+
+def bloquearContacto(request, codigo,cliente):
+    contacto = Contactos.objects.get(IdContacto=codigo)
+    contacto.Bloqueo = True
+    contacto.save()
+
+    contactosListados = Contactos.objects.all().filter(IdCliente=cliente)
+
+    return render(request,"gestionContactos.html",{"contactos":contactosListados, "cliente":cliente})
+
+

@@ -105,6 +105,7 @@ class Contactos(models.Model):
     PaisExp=models.CharField(max_length=40,default="Sin Dato")
     MedioComunicacion=models.CharField(max_length=30,default="mail@hitec.com")
     RFC=models.CharField(max_length=60,default="XAXX010101000")
+    Bloqueo=models.BooleanField(default=False)
 
     def __str__(self):
         texto = "{0} ({1})"
@@ -130,7 +131,8 @@ class Contactos(models.Model):
                             self.Edificio,
                             self.Planta,
                             self.PaisExp,
-                            self.MedioComunicacion
+                            self.MedioComunicacion,
+                            self.Bloqueo
                             )
 
 class Direcciones(models.Model):
