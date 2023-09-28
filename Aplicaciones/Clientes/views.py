@@ -141,11 +141,26 @@ def get_estados(request, codigo):
 
 def bloquearContacto(request, codigo,cliente):
     contacto = Contactos.objects.get(IdContacto=codigo)
-    contacto.Bloqueo = True
+    if contacto.Bloqueo != True:
+        contacto.Bloqueo = True
+    else:
+        contacto.Bloqueo = False
     contacto.save()
 
     contactosListados = Contactos.objects.all().filter(IdCliente=cliente)
 
     return render(request,"gestionContactos.html",{"contactos":contactosListados, "cliente":cliente})
+
+def bloquearDireccion(request, cliente,idDireccion):
+    direccion = Direcciones.objects.get(IdRegistro=idDireccion)
+    if direccion.Bloqueo != True:
+        direccion.Bloqueo = True
+    else:
+        direccion.Bloqueo = False
+    direccion.save()
+    direccionesListados = Direcciones.objects.all().filter(IdCliente=cliente)
+
+    return render(request,"gestionDirecciones.html",{"direcciones":direccionesListados, "cliente":cliente})
+
 
 
