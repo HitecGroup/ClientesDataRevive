@@ -159,6 +159,7 @@ def bloquearDireccion(request, cliente,idDireccion):
         direccion.Bloqueo = False
     direccion.save()
     direccionesListados = Direcciones.objects.all().filter(IdCliente=cliente)
+    cliente = Clientes.objects.get(IdCliente=cliente)
 
     return render(request,"gestionDirecciones.html",{"direcciones":direccionesListados, "cliente":cliente})
 

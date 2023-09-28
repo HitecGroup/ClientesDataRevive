@@ -37,13 +37,12 @@
                         <path d="M2 13c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z"/>
                         </svg> Agregar Dirección</a>                                   
                     </div>
-                    <div class="col-md-12">
+                    <div class="card-body">
                         <div class="table-responsive py-1">
                             <table class="table table-striped" id="clientes-table">
                                 <thead style="background-color: #E5E5E5;font-size: 14px;">
                                     <tr>
                                         <th>#</th>
-                                        <th><small>Id</small></th>
                                         <th><small>Pais</small></th>
                                         <th><small>Estado</small></th>
                                         <th><small>CP</small></th>
@@ -57,7 +56,6 @@
                                     {% for d in direcciones %}
                                     <tr>
                                         <td><small>{{forloop.counter}}</small></td>
-                                        <td><small>{{d.IdRegistro}}</small></td>
                                         <td><small>{{d.PaisRegion}}</small></td>
                                         <td><small>{{d.Estado}}</small></td>
                                         <td><small>{{d.CodigoPostal}}</small></td>
