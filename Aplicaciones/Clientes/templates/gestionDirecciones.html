@@ -37,18 +37,18 @@
                         <path d="M2 13c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z"/>
                         </svg> Agregar Dirección</a>                                   
                     </div>
-                    <div class="col-md-12">
+                    <div class="card-body">
                         <div class="table-responsive py-1">
                             <table class="table table-striped" id="clientes-table">
                                 <thead style="background-color: #E5E5E5;font-size: 14px;">
                                     <tr>
                                         <th>#</th>
-                                        <th><small>Id</small></th>
                                         <th><small>Pais</small></th>
                                         <th><small>Estado</small></th>
                                         <th><small>CP</small></th>
                                         <th><small>Ciudad/Mnpio/Alcaldía</small></th>
                                         <th><small>Colonia/Distrito</small></small></th>
+                                        <th><small>Boqueado</small></small></th>
                                         <th style="text-align: center;"><small>Opciones</small></th>
                                     </tr>
                                 </thead>
@@ -56,19 +56,22 @@
                                     {% for d in direcciones %}
                                     <tr>
                                         <td><small>{{forloop.counter}}</small></td>
-                                        <td><small>{{d.IdRegistro}}</small></td>
+                                        <td><small>id</small></td>
                                         <td><small>{{d.PaisRegion}}</small></td>
                                         <td><small>{{d.Estado}}</small></td>
                                         <td><small>{{d.CodigoPostal}}</small></td>
                                         <td><small>{{d.Ciudad}}</small></td>
                                         <td><small>{{d.Distrito}}</small></td>
+                                        <td><small>{% if d.Bloqueo == True %}
+                                            SI
+                                          {% endif %}</small></td>
                                         <td style="text-align: center;"><a href="/edicionClienteDireccion/{{d.IdCliente}}/{{d.IdRegistro}}/True" class="btn btn-success btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                             <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                                             </svg></a>
-                                            <a href="/eliminarDireccion/{{c.IdCliente}}" class="btn btn-danger btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eraser" viewBox="0 0 16 16">
-                                            <path d="M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828l6.879-6.879zm2.121.707a1 1 0 0 0-1.414 0L4.16 7.547l5.293 5.293 4.633-4.633a1 1 0 0 0 0-1.414l-3.879-3.879zM8.746 13.547 3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293l.16-.16z"/>
-                                        </svg></a></td>
+                                            <a href="/bloquearDireccion/{{d.IdCliente}}/{{d.IdRegistro}}" class="btn btn-danger btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ban" viewBox="0 0 16 16">
+                                                <path d="M15 8a6.973 6.973 0 0 0-1.71-4.584l-9.874 9.875A7 7 0 0 0 15 8ZM2.71 12.584l9.874-9.875a7 7 0 0 0-9.874 9.874ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0Z"/>
+                                              </svg></a></td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>

@@ -105,6 +105,7 @@ class Contactos(models.Model):
     PaisExp=models.CharField(max_length=40,default="Sin Dato")
     MedioComunicacion=models.CharField(max_length=30,default="mail@hitec.com")
     RFC=models.CharField(max_length=60,default="XAXX010101000")
+    Bloqueo=models.BooleanField(default=False)
 
     def __str__(self):
         texto = "{0} ({1})"
@@ -130,7 +131,8 @@ class Contactos(models.Model):
                             self.Edificio,
                             self.Planta,
                             self.PaisExp,
-                            self.MedioComunicacion
+                            self.MedioComunicacion,
+                            self.Bloqueo
                             )
 
 class Direcciones(models.Model):
@@ -140,7 +142,7 @@ class Direcciones(models.Model):
     Calle=models.CharField(max_length=60,default="Sin Dato")
     Numero=models.CharField(max_length=10,default="Sin Dato")
     Calle2=models.CharField(max_length=40,default="Sin Dato")
-    Ciudad=models.CharField(max_length=40,default="Sin Dato")
+    Ciudad=models.CharField(max_length=80,default="Sin Dato")
     Estado=models.CharField(max_length=80,default="Sin Dato")
     CodigoPostal=models.CharField(max_length=10,default="Sin Dato")
     Distrito=models.CharField(max_length=40,default="Sin Dato")
@@ -152,6 +154,8 @@ class Direcciones(models.Model):
     Telefono=models.CharField(max_length=40,default="Sin Dato")
     CorreoElectronico=models.CharField(max_length=500,default="Sin Dato")
     SitioWeb=models.CharField(max_length=500,default="Sin Dato")
+    DireccionUUID=models.CharField(max_length=20,default="000000000000")
+    Bloqueo=models.BooleanField(default=False)
     
 
     def __str__(self):
@@ -173,7 +177,9 @@ class Direcciones(models.Model):
                             self.DestinatarioFactura,
                             self.Telefono,
                             self.CorreoElectronico,
-                            self.SitioWeb)
+                            self.SitioWeb,
+                            self.DireccionUUID,
+                            self.Bloqueo)
 
 class Country(models.Model):
     CodeId=models.CharField(primary_key=True,max_length=2)
