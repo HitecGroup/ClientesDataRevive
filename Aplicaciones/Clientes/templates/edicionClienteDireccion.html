@@ -3,7 +3,9 @@
 {% block title %} Edita dirección {% endblock%}
 
 {% block body %}
+{% load static %}
 <div class="row">
+<form action="/editarCliente/" method="POST">{% csrf_token %}
     <div class="col-md-12">
         <h2>{% if direcciones.IdCliente %}Edita Dirección Cliente {% else %}Agrega nueva dirección {% endif %} 
             {% if Gestion %}
@@ -37,9 +39,7 @@
                 <div class="col-md-1">
                     <div class="card-body">
                         <div class="form-group">
-                                <div class="form-group">
-
-                                </div>
+                                <div class="form-group"></div>
                         </div>
                     </div>
                 </div>
@@ -47,146 +47,146 @@
 
         </div>
     </div>
-    <div class="col-md-12">
+    <div class="col-md-12">        
         <div class="card">
             <div class="card-body">
-                <form action="/editarCliente/" method="POST">{% csrf_token %}
-                    <input type="text" name="claveExterna" value="{{direcciones.IdCliente}}" class="form-control form-control-sm" hidden>
-                    <div class="row">
+                <div class="row">                
+                    <input type="text" name="claveExterna" value="{{direcciones.IdCliente}}" class="form-control form-control-sm" hidden>                
+                    <div class="form-group col-md-6"> 
+                        <input type="hidden" id="idRegistro" value="{{id}}">
+                        <input type="hidden" id="idPais" value="{{iniPais.CodeId}}">
+                        <input type="hidden" id="Pais" value="{{iniPais.Descrip}}">
+                        <label class="etiqueta">Pais</label>
+                        <select id="PaisRegion" name="PaisRegion" class="form-control form-control-sm minimal" value="{{direcciones.PaisRegion}}"></select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <input type="hidden" id="idRegion" value="{{iniRegion.CodeId}}">
+                        <input type="hidden" id="Region" value="{{iniRegion.Descrip}}">
+                        <label class="etiqueta">Estado</label>
+                        <select id="Estado" name="Estado" class="form-control form-control-sm minimal"></select>
+                    </div>
+                </div>
+                {% if dataInt %}
+                <div id="dataNac" class="row" hidden>                
+                {% else %}
+                <div id="dataNac" class="row">
+                {% endif %}
+                    <div class="form-group col-md-2">
+                        <input type="hidden" id="idCodPos" value="{{iniCodPos}}">
+                        <label class="etiqueta">Código Postal</label>
+                        <select id="CodigoPostal" name="CodigoPostal" class="form-control form-control-sm minimal"></select>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label class="etiqueta">Municipio o Alcaldía</label>
+                        <input type="text" id="Ciudad" name="Ciudad" value="{{direcciones.Ciudad}}" class="form-control form-control-sm">
+                    </div>
+                    <div class="form-group col-md-5">
+                        <input type="hidden" id="iniDistrito" value="{{iniDistrito}}">
+                        <label class="etiqueta">Colonia</label>
+                        <select id="Distrito" name="Distrito" class="form-control form-control-sm minimal"></select>
+                    </div>
+                </div>
+                {% if dataInt %}
+                <div id="dataInt" class="row">                
+                {% else %}
+                <div id="dataInt" class="row" hidden>
+                {% endif %}
+                    <div class="form-group col-md-2">
+                        <label class="etiqueta">Zona Postal</label>
+                        <input type="text" id="IntCodigoPostal" name="IntCodigoPostal" value="{{direcciones.CodigoPostal}}" class="form-control form-control-sm" readonly>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label class="etiqueta">Ciudad</label>
+                        <input type="text" id="IntCiudad" name="IntCiudad" value="{{direcciones.Ciudad}}" class="form-control form-control-sm">
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label class="etiqueta">Distrito</label>
+                        <input type="text" id="IntDistrito" name="IntDistrito" value="{{direcciones.Distrito}}" class="form-control form-control-sm">
+                    </div>
+                    {% if dataUS %}
+                    <div id="dataUS" class="row">                
+                    {% else %}
+                    <div id="dataUS" class="row" hidden>
+                    {% endif %}
                         <div class="form-group col-md-6">
-                            <label class="etiqueta">Pais</label>
-                            <!--input type="text" name="PaisRegion" value="{{direcciones.PaisRegion}}" class="form-control form-control-sm"-->
-                            <select id="PaisRegion" name="PaisRegion" class="form-control form-control-sm minimal" value="{{direcciones.PaisRegion}}">
-                                {% if direcciones.PaisRegion %}
-                                    <option value="{{direcciones.PaisRegion}}" disabled selected>{{direcciones.PaisRegion}}</option>
-                                {% else %}
-                                    <option value="NA" disabled selected>Seleccione País</option>
-                                {% endif%}
-                                {% for value in listPaises %}
-                                <option value="{{value}}">{{value}}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="etiqueta">Estado</label>
-                            <!--input type="text" name="Calle" value="{{direcciones.Ciudad}}" class="form-control form-control-sm"-->
-                            <select name="Estado" class="form-control form-control-sm minimal">
-                                {% if direcciones.Estado %}
-                                    <option value="{{direcciones.Estado}}" disabled selected>"{{direcciones.Estado}}"</option>
-                                {% else %}
-                                    <option value="NA" disabled selected>Seleccione Estado</option>
-                                {% endif%}
-                                <option value="1">Estado1</option>
-                                <option value="0">Estado2</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label class="etiqueta">CP</label>
-                            <!--input type="text" name="Calle" value="{{direcciones.CodigoPostal}}" class="form-control form-control-sm"-->
-                            <select name="CodigoPostal" class="form-control form-control-sm minimal">
-                                {% if direcciones.CodigoPostal %}
-                                    <option value="{{direcciones.CodigoPostal}}" disabled selected>"{{direcciones.CodigoPostal}}"</option>
-                                {% else %}
-                                    <option value="NA" disabled selected>Seleccione CP</option>
-                                {% endif%}
-                                <option value="1">CP1</option>
-                                <option value="0">CP2</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-5">
-                            <label class="etiqueta">Ciudad, Municipio o Alcaldía</label>
-                            <input type="text" name="Calle" value="{{direcciones.Ciudad}}" class="form-control form-control-sm">
-                        </div>
-                        <div class="form-group col-md-5">
-                            <label class="etiqueta">Distrito</label>
-                            <!--input type="text" name="Calle" value="{{direcciones.Distrito}}" class="form-control form-control-sm"-->
-                            <select name="Distrito" class="form-control form-control-sm minimal">
-                                {% if direcciones.Distrito %}
-                                    <option value="{{direcciones.Distrito}}" disabled selected>"{{direcciones.Distrito}}"</option>
-                                {% else %}
-                                    <option value="NA" disabled selected>Seleccione Colonia o Distrito</option>
-                                {% endif%}
-                                <option value="1">Distrito1</option>
-                                <option value="0">Distrito2</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-12">
-                            <label class="etiqueta">Calle</label>
-                            <input type="text" name="Calle" value="{{direcciones.Calle}}" class="form-control form-control-sm">
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label class="etiqueta">Número</label>
-                            <input type="text" name="Numero" value="{{direcciones.Numero}}" class="form-control form-control-sm">
-                        </div>
-                        <div class="form-group col-md-10">
-                            <label class="etiqueta">Calle 2</label>
-                            <input type="text" name="Calle2" value="{{direcciones.Calle2}}" class="form-control form-control-sm">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="etiqueta">Codigo Dom Fiscal</label>
-                            <!--input type="text" name="Calle" value="{{direcciones.CodigoDomFiscal}}" class="form-control form-control-sm"-->
-                            <select name="CodigoDomFiscal" class="form-control form-control-sm minimal" value="{{direcciones.CodigoDomFiscal}}" >
-                                {% if direcciones.Distrito %}
-                                    <option value="{{direcciones.CodigoDomFiscal}}" disabled selected>"{{direcciones.CodigoDomFiscal}}"</option>
-                                {% else %}
-                                    <option value="NA" disabled selected>Seleccione Código Domicilio fiscal</option>
-                                {% endif %}
-                                <option value="1">Estado1</option>
-                                <option value="0">Estado2</option>
+                            <input type="hidden" id="idCodDomFis" value="{{iniCodDomFis.CodeId}}">
+                            <input type="hidden" id="CodDomFis" value="{{iniCodDomFis.Descrip}}">
+                            <label class="etiqueta">Código Domicilio Fiscal</label>
+                            <select id="CodigoDomFiscal" name="CodigoDomFiscal" class="form-control form-control-sm minimal" value="{{direcciones.CodigoDomFiscal}}" >
                             </select>
                         </div>
                         <div class="form-group col-md-6">
                             <label> </label>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <label class="etiqueta">Teléfono</label>
-                            <input type="text" name="Calle" value="{{direcciones.Telefono}}" class="form-control form-control-sm">
-                        </div>
-                        <div class="form-group col-md-5">
-                            <label class="etiqueta">CorreoElectronico</label>
-                            <input type="text" name="Calle" value="{{direcciones.CorreoElectronico}}" class="form-control form-control-sm">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label class="etiqueta">Sitio Web</label>
-                            <input type="text" name="Calle" value="{{direcciones.SitioWeb}}" class="form-control form-control-sm">
-                        </div>
-                        <div class="form-group col-md-12">
-                            <label> </label>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <!--label class="etiqueta">Principal</label>
-                            <input type="text" name="Calle" value="{{direcciones.DireccionPrincipal}}" class="form-control form-control-sm"-->
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="check1" name="option1" value="something" checked>
-                                <label class="form-check-label">Dirección Principal</label>
-                            </div>
-                        </div>                        
-                        <div class="form-group col-md-3">
-                            <!--label class="etiqueta">Dest Factura</label>
-                            <input type="text" name="Calle" value="{{direcciones.DestinatarioFactura}}" class="form-control form-control-sm"-->
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="check2" name="option2" value="something" checked>
-                                <label class="form-check-label">Destinatario Factura</label>
-                            </div>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <!--label class="etiqueta">Entrega</label>
-                            <input type="text" name="Calle" value="{{direcciones.Entrega}}" class="form-control form-control-sm"-->
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="check3" name="option3" value="something" checked>
-                                <label class="form-check-label">Dirección Entrega</label>
-                            </div>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <!--label class="etiqueta">Dest Merc Std</label>
-                            <input type="text" name="Calle" value="{{direcciones.DestinatarioMercEstandar}}" class="form-control form-control-sm"-->
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="check4" name="option4" value="something" checked>
-                                <label class="form-check-label">Destinatario de mercancías estándar</label>
-                            </div>
                         </div>
                     </div>
-                    
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                            <label class="etiqueta">Calle</label>
+                            <input type="text" name="Calle" value="{{direcciones.Calle}}" class="form-control form-control-sm">
+                    </div>
+                    <div class="form-group col-md-2">
+                            <label class="etiqueta">Número</label>
+                            <input type="text" name="Numero" value="{{direcciones.Numero}}" class="form-control form-control-sm">
+                    </div>
+                    <div class="form-group col-md-10">
+                            <label class="etiqueta">Calle 2</label>
+                            <input type="text" name="Calle2" value="{{direcciones.Calle2}}" class="form-control form-control-sm">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="etiqueta">Teléfono</label>
+                        <input type="text" name="Telefono" value="{{direcciones.Telefono}}" class="form-control form-control-sm">
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label class="etiqueta">CorreoElectronico</label>
+                        <input type="text" name="CorreoElectronico" value="{{direcciones.CorreoElectronico}}" class="form-control form-control-sm">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="etiqueta">Sitio Web</label>
+                        <input type="text" name="SitioWeb" value="{{direcciones.SitioWeb}}" class="form-control form-control-sm">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <div class="form-check">                            
+                                                          
+                            {% if iniCheckbox.DireccionPrincipal %}
+                                <input class="form-check-input" type="checkbox" name="DireccionPrincipal" value="" checked>
+                            {% else %}
+                                <input class="form-check-input" type="checkbox" name="DireccionPrincipal" value="">
+                            {% endif %}
+                            <label class="etiqueta"> Dirección Principal</label>                           
+                        </div>
+                    </div>                        
+                    <div class="form-group col-md-3">
+                        <div class="form-check">
+                            {% if iniCheckbox.DestinatarioFactura %}
+                                <input class="form-check-input" type="checkbox" name="DestinatarioFactura" value="" checked>
+                            {% else %}
+                                <input class="form-check-input" type="checkbox" name="DestinatarioFactura" value="">
+                            {% endif %}
+                            <label class="etiqueta">Destinatario Factura</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <div class="form-check">
+                            {% if iniCheckbox.Entrega %}
+                                <input class="form-check-input" type="checkbox" name="Entrega" value="" checked>
+                            {% else %}
+                                <input class="form-check-input" type="checkbox" name="Entrega" value="">
+                            {% endif %}
+                            <label class="etiqueta">Dirección Entrega</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <div class="form-check">
+                            {% if iniCheckbox.DestinatarioMercEstandar %}
+                                <input class="form-check-input" type="checkbox" name="DestinatarioMercEstandar" value="" checked>
+                            {% else %}
+                            <input class="form-check-input" type="checkbox" name="DestinatarioMercEstandar" value="">
+                            {% endif %}
+                            <label class="etiqueta">Destinatario de mercancías estándar</label>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -206,5 +206,5 @@
     </div>
 </form>
 </div>
-
+<script src="{% static 'js/listas.js' %}"></script>
 {% endblock %}

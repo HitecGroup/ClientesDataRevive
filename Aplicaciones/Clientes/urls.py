@@ -15,5 +15,8 @@ urlpatterns = [
     #path('agregarClienteDireccion/<codigo>',views.agregarClienteDireccion),
     path('paises/',views.get_paises),
     path('estados/<codigo>',views.get_estados),
+    path('codigos/<codigo>',views.get_codigos),
+    path('colonias/<codigo>',views.get_colonias),
+
     path('buscarCliente/',views.buscarCliente)
 ]
