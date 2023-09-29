@@ -6,7 +6,7 @@ from .models import Direcciones
 
 # Create your views here.
 def home(request):
-    clientes = Clientes.objects.all()
+    clientes = Clientes.objects.all()[0:200]
     return render(request, "gestionClientes.html",{"clientes":clientes})
 
 def edicionCliente(request,codigo):
@@ -162,6 +162,47 @@ def bloquearDireccion(request, cliente,idDireccion):
     cliente = Clientes.objects.get(IdCliente=cliente)
 
     return render(request,"gestionDirecciones.html",{"direcciones":direccionesListados, "cliente":cliente})
+
+def buscarCliente(request):
+    nombreBusqueda = request.POST['nombreBusqueda']
+    rfcBusqueda = request.POST['rfcBusqueda']
+    telefonoBusqueda = request.POST['telefonoBusqueda']
+    adicionalBusqueda = request.POST['adicionalBusqueda']
+
+    resultadoNombreBusqueda = []
+    resultadoRfcBusqueda = []
+    resultadoTelefonoBusqueda = []
+    resultadoAdicionalBusqueda = []
+    qs1 = []
+    qs2 = []
+    qsf = []
+
+    if(len(nombreBusqueda) == 0):
+        nombreBusqueda = ' '
+    if(len(rfcBusqueda) == 0):
+        rfcBusqueda = ' '
+    if(len(telefonoBusqueda) == 0):
+        telefonoBusqueda = ' '
+    if(len(adicionalBusqueda) == 0):
+        adicionalBusqueda = ' '
+    
+    if(len(nombreBusqueda) > 0):
+        resultadoNombreBusqueda = Clientes.objects.all().filter(NombreCliente__contains=nombreBusqueda)
+    
+    if(len(rfcBusqueda) > 0):
+        resultadoRfcBusqueda = Clientes.objects.all().filter(RFC__contains=rfcBusqueda)
+    
+    if(len(telefonoBusqueda) > 0):
+        resultadoTelefonoBusqueda = Clientes.objects.all().filter(TelefonoPrincipal__contains=telefonoBusqueda)
+    
+    if(len(adicionalBusqueda) > 0):
+        resultadoAdicionalBusqueda = Clientes.objects.all().filter(NombreAdicional__contains=telefonoBusqueda)
+
+    qs1 = resultadoNombreBusqueda.union(resultadoRfcBusqueda)
+    qs2 = resultadoTelefonoBusqueda.union(resultadoAdicionalBusqueda)
+    qsf = qs1.union(qs2)
+    
+    return render(request, "gestionClientes.html",{"clientes":qsf})
 
 
 

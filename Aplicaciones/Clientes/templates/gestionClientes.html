@@ -14,10 +14,10 @@
             <div class="card-body">
                 <div class="form-control">
                     <form id="formBusqueda" action="/buscarCliente/" method="POST">{% csrf_token %}
-                        <label class="etiqueta">Nombre de Cliente</label><input class="form-control form-control-sm" onfocus="validaFormulario()" type="text" placeholder="Nombre Cliente"id="nombreBusqueda">
-                        <label class="etiqueta">RFC Cliente</label><input class="form-control form-control-sm" onfocus="validaFormulario()" type="text" placeholder="RFC Cliente"id="rfcBusqueda">
-                        <label class="etiqueta">Teléfono Cliente</label><input class="form-control form-control-sm" onfocus="validaFormulario()" type="text" placeholder="Teléfono Cliente"id="telefonoBusqueda">
-                        <labell class="etiqueta">Nombre Adicional</label><input class="form-control form-control-sm" onfocus="validaFormulario()" type="text" placeholder="Nombre Adicional Cliente"id="adicionalBusqueda">
+                        <label class="etiqueta">Nombre de Cliente</label><input class="form-control form-control-sm" onfocus="validaFormulario()" type="text" placeholder="Nombre Cliente" id="nombreBusqueda" name="nombreBusqueda">
+                        <label class="etiqueta">RFC Cliente</label><input class="form-control form-control-sm" onfocus="validaFormulario()" type="text" placeholder="RFC Cliente" id="rfcBusqueda" name="rfcBusqueda">
+                        <label class="etiqueta">Teléfono Cliente</label><input class="form-control form-control-sm" onfocus="validaFormulario()" type="text" placeholder="Teléfono Cliente" id="telefonoBusqueda" name="telefonoBusqueda">
+                        <labell class="etiqueta">Nombre Adicional</label><input class="form-control form-control-sm" onfocus="validaFormulario()" type="text" placeholder="Nombre Adicional Cliente" id="adicionalBusqueda" name="adicionalBusqueda">
                         <hr><input type="submit" id="btnBuscar" class="btn btn-danger btn-block" value="Buscar...">
                     </form>
                 </div>
