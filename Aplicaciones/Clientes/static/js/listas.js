@@ -1,4 +1,5 @@
 let rutaVista = "../../../";
+let vista = document.getElementById('vista').value;
 let idRegistro = document.getElementById('idRegistro').value;
 let idPais = document.getElementById('idPais').value;
 let pais = document.getElementById('Pais').value;
@@ -26,15 +27,19 @@ const cargaInicial = async() => {
 
         let tagNac = document.getElementById('dataNac');
         let tagInt = document.getElementById('dataInt');
-        let tagUS = document.getElementById('dataUS');
+        var tagUS = false
+        if(vista=="Cliente") {
+            tagUS = document.getElementById('dataUS');  }
 
         if(event.target.value != "MX") {
             tagNac.setAttribute("hidden", true);
             tagInt.removeAttribute("hidden");
-            if(event.target.value == "US") {
-                tagUS.removeAttribute("hidden"); }                
-            else {
-                tagUS.setAttribute("hidden", true); }
+            if(vista=="Cliente") {
+                if(event.target.value == "US") {
+                    tagUS.removeAttribute("hidden"); }                
+                else {
+                    tagUS.setAttribute("hidden", true); }
+            }
         }
         else {
             tagInt.setAttribute("hidden", true);
@@ -96,12 +101,12 @@ const ListarEstados = async(idPais, inival) => {
             });
             Estado.innerHTML = opciones;
 
-            if(idPais=="US") {
-                CodigoDomFiscal.innerHTML = opciones;
-            }
-            else {
-                opciones = ``;
-                CodigoDomFiscal.innerHTML = opciones;
+            if(vista=='Cliente') {
+                if(idPais=="US") {
+                    CodigoDomFiscal.innerHTML = opciones;   }
+                else {
+                    opciones = ``;
+                    CodigoDomFiscal.innerHTML = opciones;   }
             }
         }
         else {
@@ -131,7 +136,8 @@ const ListarCodPos = async(idRegion, inival) => {
             CodigoPostal.innerHTML = opciones;
         }
         else {
-            alert("Códigos Postales no encontrados");
+            if(!inival)
+                alert("Códigos Postales no encontrados");
         }
 
     } catch (error) {

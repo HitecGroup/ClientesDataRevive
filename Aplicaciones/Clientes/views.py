@@ -72,17 +72,54 @@ def gestionContactos(request,codigo):
         return render(request,"gestionContactos.html",{"contactos":contactosListados, "cliente":cliente})
     else:
     # Si no hay contactos registrados, se envía agregar un contacto
-        return render(request, "edicionContactos.html",{"Gestion":False, "idContacto":0, "contacto":None, "cliente":cliente, "variable":True})
+        contacto = None
+        flag1 = flag2 =False
+        iniCodPos = ""
+        iniDistrito = ""
+        iniPais = {"CodeId":"MX", "Descrip":"México"}
+        iniRegion = {"CodeId":"CMX", "Descrip":"Ciudad de México"}
+        iniCheckbox = {"Principal":flag1, "VIP":flag2}
+        return render(request, "edicionContactos.html",{"vista":"Contacto", "Gestion":False, "idContacto":codigo, "contacto":contacto, "cliente":cliente, "iniPais":iniPais, "iniRegion":iniRegion, "iniCodPos":iniCodPos, "iniDistrito":iniDistrito, "dataInt":False, "iniCheckbox":iniCheckbox })
 
-def edicionContacto(request, idCliente, codigo, Gestion):
-        
+def edicionContacto(request, idCliente, codigo, Gestion):        
     cliente = Clientes.objects.get(IdCliente=idCliente)
+    iniCodPos = ""
+    iniDistrito = ""
+    dataInt = False
+    flag1 = flag2 =False
     if codigo=="0" :
         contacto = None
+        iniPais = {"CodeId":"MX", "Descrip":"México"}
+        iniRegion = {"CodeId":"CMX", "Descrip":"Ciudad de México"}
     else :
         contacto = Contactos.objects.get(IdContacto=codigo)
-        
-    return render(request, "edicionContactos.html",{"Gestion":Gestion, "idContacto":codigo, "contacto":contacto, "cliente":cliente, "variable":True})
+        idPais = contacto.PaisRegion
+        pais = region = None
+        pdescrip = rdescrip = ""
+        if Country.objects.filter(CodeId=contacto.PaisRegion).exists():
+            pais = Country.objects.get(CodeId=contacto.PaisRegion)
+            pdescrip = pais.Descrip
+            
+            if Region.objects.filter(IdCountry=idPais, CodeId=contacto.Estado).exists():
+                region = Region.objects.get(IdCountry=idPais, CodeId=contacto.Estado)
+                rdescrip = region.Descrip
+
+        iniCodPos = contacto.CodigoPostal
+        iniDistrito = contacto.Distrito
+
+        if(idPais!='MX'):
+            dataInt = True
+        iniPais = {"CodeId":idPais, "Descrip":pdescrip}
+        iniRegion = {"CodeId":contacto.Estado, "Descrip":rdescrip}
+
+        if(contacto.Principal!=""):
+            flag1 = True
+        if(contacto.Vip!=""):
+            flag2 = True
+
+    iniCheckbox = {"Principal":flag1, "VIP":flag2}
+    
+    return render(request, "edicionContactos.html",{"vista":"Contacto", "Gestion":Gestion, "idContacto":codigo, "contacto":contacto, "cliente":cliente, "iniPais":iniPais, "iniRegion":iniRegion, "iniCodPos":iniCodPos, "iniDistrito":iniDistrito, "dataInt":dataInt, "iniCheckbox":iniCheckbox })
 
 def editarContacto(request):
     IdCliente = request.POST['claveExterna']
@@ -118,7 +155,7 @@ def gestionDirecciones(request,codigo):
         iniCodDomFis = {"CodeId":"US", "Descrip":"Alabama"}
         iniCheckbox = {"DireccionPrincipal":flag1, "Entrega":flag2, "DestinatarioMercEstandar":flag3, "DestinatarioFactura":flag4}    
         
-        return render(request,"edicionClienteDireccion.html",{"Gestion":False, "id":0, "cliente":cliente, "iniPais":iniPais, "iniRegion":iniRegion, "iniCodPos":iniCodPos, "iniCodDomFis":iniCodDomFis, "iniDistrito":iniDistrito, "dataInt":False, "dataUS":False, "iniCheckbox":iniCheckbox})
+        return render(request,"edicionClienteDireccion.html",{"vista":"Cliente", "Gestion":False, "id":0, "cliente":cliente, "iniPais":iniPais, "iniRegion":iniRegion, "iniCodPos":iniCodPos, "iniCodDomFis":iniCodDomFis, "iniDistrito":iniDistrito, "dataInt":False, "dataUS":False, "iniCheckbox":iniCheckbox})
     
 def edicionClienteDireccion(request,idCliente, codigo, Gestion):
     cliente = Clientes.objects.get(IdCliente=idCliente)
@@ -133,13 +170,20 @@ def edicionClienteDireccion(request,idCliente, codigo, Gestion):
         direcciones = None
         iniPais = {"CodeId":"MX", "Descrip":"México"}
         iniRegion = {"CodeId":"CMX", "Descrip":"Ciudad de México"}
-        iniCodDomFis = {"CodeId":"US", "Descrip":"Alabama"}
-        
+        iniCodDomFis = {"CodeId":"US", "Descrip":"Alabama"}        
     else :
         direcciones = Direcciones.objects.get(IdRegistro=codigo)
         idPais = direcciones.PaisRegion
-        pais = Country.objects.get(CodeId=direcciones.PaisRegion)
-        region = Region.objects.get(IdCountry=idPais, CodeId=direcciones.Estado)        
+        pais = region = None
+        pdescrip = rdescrip = ""
+        if Country.objects.filter(CodeId=direcciones.PaisRegion).exists():
+            pais = Country.objects.get(CodeId=direcciones.PaisRegion)
+            pdescrip = pais.Descrip
+            
+            if Region.objects.filter(IdCountry=idPais, CodeId=direcciones.Estado).exists():
+                region = Region.objects.get(IdCountry=idPais, CodeId=direcciones.Estado)
+                rdescrip = region.Descrip        
+                
         iniCodPos = direcciones.CodigoPostal
         iniDistrito = direcciones.Distrito
         if(idPais!='MX'):
@@ -151,8 +195,8 @@ def edicionClienteDireccion(request,idCliente, codigo, Gestion):
                     regcoddomfis = Region.objects.get(IdCountry=idPais, CodeId=direcciones.CodigoDomFiscal)
                     coddomfis=regcoddomfis.Descrip
 
-        iniPais = {"CodeId":idPais, "Descrip":pais.Descrip}
-        iniRegion = {"CodeId":direcciones.Estado, "Descrip":region.Descrip}
+        iniPais = {"CodeId":idPais, "Descrip":pdescrip}
+        iniRegion = {"CodeId":direcciones.Estado, "Descrip":rdescrip}
         iniCodDomFis = {"CodeId":direcciones.CodigoDomFiscal, "Descrip":coddomfis}
 
         if(direcciones.DireccionPrincipal!=""):
@@ -165,7 +209,62 @@ def edicionClienteDireccion(request,idCliente, codigo, Gestion):
             flag4 = True
 
     iniCheckbox = {"DireccionPrincipal":flag1, "Entrega":flag2, "DestinatarioMercEstandar":flag3, "DestinatarioFactura":flag4}
-    return render(request, "edicionClienteDireccion.html",{"Gestion": Gestion, "id":codigo, "direcciones":direcciones, "cliente":cliente, "iniPais":iniPais, "iniRegion":iniRegion, "iniCodPos":iniCodPos, "iniCodDomFis":iniCodDomFis, "iniDistrito":iniDistrito, "dataInt":dataInt, "dataUS":dataUS, "iniCheckbox":iniCheckbox})
+    return render(request, "edicionClienteDireccion.html",{"vista":"Cliente", "Gestion": Gestion, "id":codigo, "direcciones":direcciones, "cliente":cliente, "iniPais":iniPais, "iniRegion":iniRegion, "iniCodPos":iniCodPos, "iniCodDomFis":iniCodDomFis, "iniDistrito":iniDistrito, "dataInt":dataInt, "dataUS":dataUS, "iniCheckbox":iniCheckbox})
+
+def editarDireccion(request):
+    idRegistro = request.POST['idRegistro']
+    IdCliente = request.POST['idCliente']
+    PaisRegion = request.POST['PaisRegion']
+    Calle = request.POST['Calle']
+    Numero = request.POST['Numero']
+    Calle2 = request.POST['Calle2']
+    Ciudad = request.POST['Ciudad']
+    Estado = request.POST['Estado']
+    CodigoPostal = request.POST['CodigoPostal']
+    Distrito = request.POST['Distrito']
+    CodigoDomFiscal = ""
+    Telefono = request.POST['Telefono']
+    CorreoElectronico = request.POST['CorreoElectronico']
+    SitioWeb = request.POST['SitioWeb']   
+
+    if(PaisRegion=="US"):
+        CodigoDomFiscal = request.POST['CodigoDomFiscal']
+    
+    DireccionPrincipal = Entrega = ""
+    DestinatarioMercEstandar = DestinatarioFactura = ""
+
+    if "DireccionPrincipal" in request.POST:
+        DireccionPrincipal = "X"    
+    if 'Entrega' in request.POST:
+        Entrega = "X"
+    if "DestinatarioMercEstandar" in request.POST:
+        DestinatarioMercEstandar = "X"
+    if 'DestinatarioFactura' in request.POST:
+        DestinatarioFactura = "X"
+
+    if(idRegistro!="0"):
+        direcciones = Direcciones.objects.get(IdRegistro=idRegistro)
+        direcciones.IdCliente = IdCliente
+        direcciones.PaisRegion = PaisRegion
+        direcciones.Calle = Calle
+        direcciones.Numero = Numero
+        direcciones.Calle2 = Calle2
+        direcciones.Ciudad = Ciudad
+        direcciones.Estado = Estado
+        direcciones.CodigoPostal = CodigoPostal
+        direcciones.Distrito = Distrito
+        direcciones.CodigoDomFiscal = CodigoDomFiscal
+        direcciones.DireccionPrincipal = DireccionPrincipal
+        direcciones.Entrega = Entrega
+        direcciones.DestinatarioMercEstandar = DestinatarioMercEstandar
+        direcciones.DestinatarioFactura = DestinatarioFactura
+        direcciones.Telefono = Telefono
+        direcciones.CorreoElectronico = CorreoElectronico
+        direcciones.SitioWeb =SitioWeb
+        direcciones.save
+
+    return redirect("../gestionDirecciones/"+IdCliente)
+
 
 #def agregarClienteDireccion(request,codigo):
 #    return render(request,"agregarClienteDireccion.html",{"cliente":codigo})
@@ -189,14 +288,17 @@ def get_estados(request, codigo):
     return JsonResponse(data)
 
 def get_codigos(request, codigo):
-    relregedo = RelReg_Edo.objects.get(idRegion=codigo)   
-    c_estado = relregedo.c_estado
-    codigos = list(Sepomex.objects.annotate(cnt=Count('D_codigo')).filter(C_estado=c_estado).values('cnt', 'D_codigo').order_by('D_codigo'))
+    if RelReg_Edo.objects.filter(idRegion=codigo).exists():
+        relregedo = RelReg_Edo.objects.get(idRegion=codigo)   
+        c_estado = relregedo.c_estado
+        codigos = list(Sepomex.objects.annotate(cnt=Count('D_codigo')).filter(C_estado=c_estado).values('cnt', 'D_codigo').order_by('D_codigo'))
     
-    if (len(codigos)>0):
-        data={'message':"Success", 'codigos':codigos}
+        if (len(codigos)>0):
+            data={'message':"Success", 'codigos':codigos}
+        else:
+            data={"message":"Not Found"}
     else:
-        data={"message":"Not Found"}
+            data={"message":"Not Found"}
 
     return JsonResponse(data)
 

@@ -3,7 +3,9 @@
 {% block title %} Edita Contacto {% endblock%}
 
 {% block body %}
+{% load static %}
 <div class="row">
+<form action="/editarCliente/" method="POST">{% csrf_token %}
     <div class="col-md-12">
         <h2>{% if contacto.IdContacto %}Edicion de Contacto {% else %}Agrega Contacto {% endif%}
             {% if Gestion %}
@@ -47,95 +49,106 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
-                <form action="/editarCliente/" method="POST">{% csrf_token %}
-                    <div class="row">
-                        <div class='form-group col-md-2' style='display: none;'><label class='etiqueta'>IdCliente</label><input type='text'  name='IdCliente' value='{{contacto.IdCliente}}' class='form-control form-control-sm'></div>
-                        <div class='form-group col-md-2'><label class='etiqueta'>IdContacto</label><input type='text'  name='IdContacto' value='{{contacto.IdContacto}}' class='form-control form-control-sm'></div>
-                        <div class='form-group col-md-3'><label class='etiqueta'>Nombre</label><input type='text'  name='Nombre' value='{{contacto.Nombre}}' class='form-control form-control-sm'></div>
-                        <div class='form-group col-md-3'><label class='etiqueta'>SegundoNombre</label><input type='text'  name='SegundoNombre' value='{{contacto.SegundoNombre}}' class='form-control form-control-sm'></div>
-                        <div class='form-group col-md-4'><label class='etiqueta'>Apellidos</label><input type='text'  name='Apellidos' value='{{contacto.Apellidos}}' class='form-control form-control-sm'></div>
-                        <div class='form-group col-md-2'><label class='etiqueta'>Telefono</label><input type='text'  name='Telefono' value='{{contacto.Telefono}}' class='form-control form-control-sm'></div>
-                        <div class='form-group col-md-2'><label class='etiqueta'>TelefonoMovil</label><input type='text'  name='TelefonoMovil' value='{{contacto.TelefonoMovil}}' class='form-control form-control-sm'></div>
-                        <div class='form-group col-md-4'><label class='etiqueta'>CorreoElectronico</label><input type='text'  name='CorreoElectronico' value='{{contacto.CorreoElectronico}}' class='form-control form-control-sm'></div>
-                        <div class='form-group col-md-4'></div>
-                        <div class='form-group col-md-5'><label class='etiqueta'>Departamento</label><input type='text'  name='Departamento' value='{{contacto.Departamento}}' class='form-control form-control-sm'></div>
-                        <div class='form-group col-md-5'><label class='etiqueta'>Funcion</label><input type='text'  name='Funcion' value='{{contacto.Funcion}}' class='form-control form-control-sm'></div>
-                        <div class="form-group col-md-1">
-                            <!--label class='etiqueta'>Principal</label><input type='text'  name='Principal' value='{{contacto.Principal}}' class='form-control form-control-sm'-->
-                            <label class='etiqueta'></label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="check1" name="option1" value="something" checked>
-                                <label class="form-check-label">Principal</label>
-                            </div>
-                        </div>
-                        <div class='form-group col-md-1'>
-                            <!--label class='etiqueta'>Vip</label><input type='text'  name='Vip' value='{{contacto.Vip}}' class='form-control form-control-sm'-->
-                            <label class='etiqueta'></label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="check2" name="option2" value="something" checked>
-                                <label class="form-check-label">VIP</label>
-                            </div>
-                        </div>
-                        <div class='form-group col-md-6'>
-                            <label class='etiqueta'>PaisRegion</label>
-                            <!--input type='text'  name='PaisRegion' value='{{contacto.PaisRegion}}' class='form-control form-control-sm'-->
-                            <select name="PaisRegion" class="form-control form-control-sm minimal">
-                                {% if contacto.PaisRegion %}
-                                    <option value="{{contacto.PaisRegion}}" disabled selected>"{{contacto.PaisRegion}}"</option>
-                                {% else %}
-                                    <option value="NA" disabled selected>Seleccione País</option>
-                                {% endif%}
-                                <option value="1">País1</option>
-                                <option value="0">País2</option>
-                            </select>
-                        </div>
-                        <div class='form-group col-md-6'>
-                            <label class='etiqueta'>Estado</label>
-                            <!--input type='text'  name='Estado' value='{{contacto.Estado}}' class='form-control form-control-sm'-->
-                            <select name="Estado" class="form-control form-control-sm minimal">
-                                {% if contacto.Estado %}
-                                    <option value="{{contacto.Estado}}" disabled selected>"{{contacto.Estado}}"</option>
-                                {% else %}
-                                    <option value="NA" disabled selected>Seleccione Estado</option>
-                                {% endif%}
-                                <option value="1">Estado1</option>
-                                <option value="0">Estado2</option>
-                            </select>
-                        </div>
-                        <div class='form-group col-md-2'>
-                            <label class='etiqueta'>Código Postal</label>
-                            <!--input type='text'  name='CodigoPostal' value='{{contacto.CodigoPostal}}' class='form-control form-control-sm'-->
-                            <select name="CodigoPostal" class="form-control form-control-sm minimal">
-                                {% if contacto.CodigoPostal %}
-                                    <option value="{{contacto.CodigoPostal}}" disabled selected>"{{contacto.CodigoPostal}}"</option>
-                                {% else %}
-                                    <option value="NA" disabled selected>Seleccione CP</option>
-                                {% endif%}
-                                <option value="1">CP1</option>
-                                <option value="0">CP2</option>
-                            </select>
-                        </div>
-                        <div class='form-group col-md-5'><label class='etiqueta'>Ciudad, Municipio o Alcaldía</label><input type='text'  name='Ciudad' value='{{contacto.Ciudad}}' class='form-control form-control-sm'></div>
-                        <div class='form-group col-md-5'>
-                            <label class='etiqueta'>Colonia o Distrito</label>
-                            <!--input type='text'  name='Distrito' value='{{contacto.Distrito}}' class='form-control form-control-sm'-->
-                            <select name="Distrito" class="form-control form-control-sm minimal">
-                                {% if contacto.Distrito %}
-                                    <option value="{{contacto.Distrito}}" disabled selected>"{{contacto.Distrito}}"</option>
-                                {% else %}
-                                    <option value="NA" disabled selected>Seleccione Colonia o Distrito</option>
-                                {% endif%}
-                                <option value="1">Distrito1</option>
-                                <option value="0">Distrito2</option>
-                            </select>
-                        </div>
-                        <div class='form-group col-md-6'><label class='etiqueta'>Calle</label><input type='text'  name='Calle' value='{{contacto.Calle}}' class='form-control form-control-sm'></div>            
-                        <div class='form-group col-md-2'><label class='etiqueta'>Numero</label><input type='text'  name='Numero' value='{{contacto.Numero}}' class='form-control form-control-sm'></div>
-                        <div class='form-group col-md-2'><label class='etiqueta'>Edificio</label><input type='text'  name='Edificio' value='{{contacto.Edificio}}' class='form-control form-control-sm'></div>
-                        <div class='form-group col-md-2'><label class='etiqueta'>Planta</label><input type='text'  name='Planta' value='{{contacto.Planta}}' class='form-control form-control-sm'></div>
-                        <div class='form-group col-md-4'><label class='etiqueta'>PaisExp</label><input type='text'  name='PaisExp' value='{{contacto.PaisExp}}' class='form-control form-control-sm'></div>
-                        <div class='form-group col-md-4'><label class='etiqueta'>MedioComunicacion</label><input type='text'  name='MedioComunicacion' value='{{contacto.MedioComunicacion}}' class='form-control form-control-sm'></div>
+                <div class="row">
+                    <div class='form-group col-md-2' style='display: none;'><label class='etiqueta'>IdCliente</label><input type='text'  name='IdCliente' value='{{contacto.IdCliente}}' class='form-control form-control-sm'></div>
+                    <div class='form-group col-md-2'><label class='etiqueta'>IdContacto</label><input type='text'  name='IdContacto' value='{{contacto.IdContacto}}' class='form-control form-control-sm'></div>
+                    <div class='form-group col-md-3'><label class='etiqueta'>Nombre</label><input type='text'  name='Nombre' value='{{contacto.Nombre}}' class='form-control form-control-sm'></div>
+                    <div class='form-group col-md-3'><label class='etiqueta'>SegundoNombre</label><input type='text'  name='SegundoNombre' value='{{contacto.SegundoNombre}}' class='form-control form-control-sm'></div>
+                    <div class='form-group col-md-4'><label class='etiqueta'>Apellidos</label><input type='text'  name='Apellidos' value='{{contacto.Apellidos}}' class='form-control form-control-sm'></div>
+                    <div class='form-group col-md-2'><label class='etiqueta'>Telefono</label><input type='text'  name='Telefono' value='{{contacto.Telefono}}' class='form-control form-control-sm'></div>
+                    <div class='form-group col-md-2'><label class='etiqueta'>TelefonoMovil</label><input type='text'  name='TelefonoMovil' value='{{contacto.TelefonoMovil}}' class='form-control form-control-sm'></div>
+                    <div class='form-group col-md-4'><label class='etiqueta'>CorreoElectronico</label><input type='text'  name='CorreoElectronico' value='{{contacto.CorreoElectronico}}' class='form-control form-control-sm'></div>
+                    <div class='form-group col-md-4'></div>
+                    <div class='form-group col-md-5'><label class='etiqueta'>Departamento</label><input type='text'  name='Departamento' value='{{contacto.Departamento}}' class='form-control form-control-sm'></div>
+                    <div class='form-group col-md-5'><label class='etiqueta'>Funcion</label><input type='text'  name='Funcion' value='{{contacto.Funcion}}' class='form-control form-control-sm'></div>
+                    
+                    <div class="form-group col-md-1">
+                        <label class="etiqueta"></label>  
+                        <div class="form-check">
+                            {% if iniCheckbox.Principal %}
+                                <input class="form-check-input" type="checkbox" name="Principal" value="" checked>
+                            {% else %}
+                            <input class="form-check-input" type="checkbox" name="Principal" value="">
+                            {% endif %}
+                            <label class="etiqueta">Principal</label>
+                        </div>                        
+                    </div>                      
+                    <div class="form-group col-md-1">
+                        <label class="etiqueta"></label>  
+                        <div class="form-check">
+                            {% if iniCheckbox.VIP %}
+                                <input class="form-check-input" type="checkbox" name="VIP" value="" checked>
+                            {% else %}
+                            <input class="form-check-input" type="checkbox" name="VIP" value="">
+                            {% endif %}
+                            <label class="etiqueta">VIP</label>
+                        </div>                        
                     </div>
+                    <div class="row">
+                        <input type="hidden" id="vista" value="{{vista}}">
+                        <input type="hidden" id="idRegistro" value="0">
+                        <input type="hidden" id="idCodDomFis" value="0">
+                        <input type="hidden" id="CodDomFis" value="">
+                        <input type="hidden" id="idCodPos" value="{{iniCodPos}}">
+                        <input type="hidden" id="iniDistrito" value="{{iniDistrito}}">
+                        <div class="form-group col-md-6">                            
+                            <input type="hidden" id="idPais" value="{{iniPais.CodeId}}">
+                            <input type="hidden" id="Pais" value="{{iniPais.Descrip}}">
+                            <label class="etiqueta">Pais</label>
+                            <select id="PaisRegion" name="PaisRegion" class="form-control form-control-sm minimal" value="{{contacto.PaisRegion}}"></select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <input type="hidden" id="idRegion" value="{{iniRegion.CodeId}}">
+                            <input type="hidden" id="Region" value="{{iniRegion.Descrip}}">
+                            <label class="etiqueta">Estado</label>
+                            <select id="Estado" name="Estado" class="form-control form-control-sm minimal"></select>
+                        </div>
+                    </div>
+                    {% if dataInt %}
+                    <div id="dataNac" class="row" hidden>                
+                    {% else %}
+                    <div id="dataNac" class="row">
+                    {% endif %}
+                        <div class="form-group col-md-2">
+                            <input type="hidden" id="idCodPos" value="{{iniCodPos}}">
+                            <label class="etiqueta">Código Postal</label>
+                            <select id="CodigoPostal" name="CodigoPostal" class="form-control form-control-sm minimal"></select>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label class="etiqueta">Municipio o Alcaldía</label>
+                            <input type="text" id="Ciudad" name="Ciudad" value="{{contacto.Ciudad}}" class="form-control form-control-sm">
+                        </div>
+                        <div class="form-group col-md-5">
+                            <input type="hidden" id="iniDistrito" value="{{iniDistrito}}">
+                            <label class="etiqueta">Colonia</label>
+                            <select id="Distrito" name="Distrito" class="form-control form-control-sm minimal"></select>
+                        </div>
+                    </div>
+                    {% if dataInt %}
+                    <div id="dataInt" class="row">                
+                    {% else %}
+                    <div id="dataInt" class="row" hidden>
+                    {% endif %}
+                        <div class="form-group col-md-2">
+                            <label class="etiqueta">Zona Postal</label>
+                            <input type="text" id="IntCodigoPostal" name="IntCodigoPostal" value="{{contacto.CodigoPostal}}" class="form-control form-control-sm" readonly>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label class="etiqueta">Ciudad</label>
+                            <input type="text" id="IntCiudad" name="IntCiudad" value="{{contacto.Ciudad}}" class="form-control form-control-sm">
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label class="etiqueta">Distrito</label>
+                            <input type="text" id="IntDistrito" name="IntDistrito" value="{{contacto.Distrito}}" class="form-control form-control-sm">
+                        </div>                        
+                    </div>
+                    <div class='form-group col-md-6'><label class='etiqueta'>Calle</label><input type='text'  name='Calle' value='{{contacto.Calle}}' class='form-control form-control-sm'></div>            
+                    <div class='form-group col-md-2'><label class='etiqueta'>Numero</label><input type='text'  name='Numero' value='{{contacto.Numero}}' class='form-control form-control-sm'></div>
+                    <div class='form-group col-md-2'><label class='etiqueta'>Edificio</label><input type='text'  name='Edificio' value='{{contacto.Edificio}}' class='form-control form-control-sm'></div>
+                    <div class='form-group col-md-2'><label class='etiqueta'>Planta</label><input type='text'  name='Planta' value='{{contacto.Planta}}' class='form-control form-control-sm'></div>
+                    <div class='form-group col-md-4'><label class='etiqueta'>PaisExp</label><input type='text'  name='PaisExp' value='{{contacto.PaisExp}}' class='form-control form-control-sm'></div>
+                    <div class='form-group col-md-4'><label class='etiqueta'>MedioComunicacion</label><input type='text'  name='MedioComunicacion' value='{{contacto.MedioComunicacion}}' class='form-control form-control-sm'></div>
+                </div>
             </div>
         </div>
     </div>
@@ -155,4 +168,5 @@
     </div>
 </form>
 </div>
+<script src="{% static 'js/listas.js' %}"></script>
 {% endblock %}

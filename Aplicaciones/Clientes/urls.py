@@ -10,7 +10,7 @@ urlpatterns = [
     path('edicionContacto/<idCliente>/<codigo>/<Gestion>',views.edicionContacto),
     path('gestionDirecciones/<codigo>',views.gestionDirecciones),
     path('edicionClienteDireccion/<idCliente>/<codigo>/<Gestion>',views.edicionClienteDireccion),
-    #path('agregarClienteDireccion/<codigo>',views.agregarClienteDireccion),
+    path('editarDireccion/', views.editarDireccion),
     path('paises/',views.get_paises),
     path('estados/<codigo>',views.get_estados),
     path('codigos/<codigo>',views.get_codigos),

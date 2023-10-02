@@ -5,7 +5,7 @@
 {% block body %}
 {% load static %}
 <div class="row">
-<form action="/editarCliente/" method="POST">{% csrf_token %}
+<form action="/editarDireccion/" method="POST">{% csrf_token %}
     <div class="col-md-12">
         <h2>{% if direcciones.IdCliente %}Edita Dirección Cliente {% else %}Agrega nueva dirección {% endif %} 
             {% if Gestion %}
@@ -21,7 +21,8 @@
                         <div class="form-group">
                                 <div class="form-group">
                                     <label class="etiqueta">Codigo Cliente</label>
-                                    <input type="text" name="claveExterna" value="{{cliente.IdCliente}}" class="form-control form-control-sm disabled" readonly disabled>
+                                    <input type="hidden" name="idCliente" value="{{cliente.IdCliente}}">
+                                    <input type="text" name="IdCliente" value="{{cliente.IdCliente}}" class="form-control form-control-sm disabled" readonly disabled>
                                 </div>
                         </div>
                     </div> 
@@ -51,9 +52,10 @@
         <div class="card">
             <div class="card-body">
                 <div class="row">                
-                    <input type="text" name="claveExterna" value="{{direcciones.IdCliente}}" class="form-control form-control-sm" hidden>                
+                    <input type="text" name="claveExterna" value="{{direcciones.IdCliente}}" class="form-control form-control-sm" hidden>
+                    <input type="hidden" id="vista" value="{{vista}}">
+                    <input type="hidden" id="idRegistro" name="idRegistro" value="{{id}}">
                     <div class="form-group col-md-6"> 
-                        <input type="hidden" id="idRegistro" value="{{id}}">
                         <input type="hidden" id="idPais" value="{{iniPais.CodeId}}">
                         <input type="hidden" id="Pais" value="{{iniPais.Descrip}}">
                         <label class="etiqueta">Pais</label>
