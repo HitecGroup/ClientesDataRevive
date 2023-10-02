@@ -1,12 +1,13 @@
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
-from . models import Clientes
-from . models import Contactos
-from .models import Direcciones
-from .models import Country
-from .models import Region
-from .models import RelReg_Edo
-from .models import Sepomex
+from .models import *
+#from models import Clientes
+#from models import Contactos
+#from models import Direcciones
+#from models import Country
+#from models import Region
+#from models import RelReg_Edo
+#from models import Sepomex
 from django.db.models.aggregates import Count
 from django.db.models.aggregates import Sum
 
@@ -227,11 +228,11 @@ def editarDireccion(request):
     CorreoElectronico = request.POST['CorreoElectronico']
     SitioWeb = request.POST['SitioWeb']   
 
-    if(PaisRegion=="US"):
-        CodigoDomFiscal = request.POST['CodigoDomFiscal']
-    
-    DireccionPrincipal = Entrega = ""
-    DestinatarioMercEstandar = DestinatarioFactura = ""
+    #if(PaisRegion=="US"):
+    #    CodigoDomFiscal = request.POST['CodigoDomFiscal']
+    DestinatarioFactura = ""
+    #DireccionPrincipal = Entrega = ""
+    DestinatarioMercEstandar = DestinatarioFactura
 
     if "DireccionPrincipal" in request.POST:
         DireccionPrincipal = "X"    
@@ -241,27 +242,27 @@ def editarDireccion(request):
         DestinatarioMercEstandar = "X"
     if 'DestinatarioFactura' in request.POST:
         DestinatarioFactura = "X"
+    
 
-    if(idRegistro!="0"):
-        direcciones = Direcciones.objects.get(IdRegistro=idRegistro)
-        direcciones.IdCliente = IdCliente
-        direcciones.PaisRegion = PaisRegion
-        direcciones.Calle = Calle
-        direcciones.Numero = Numero
-        direcciones.Calle2 = Calle2
-        direcciones.Ciudad = Ciudad
-        direcciones.Estado = Estado
-        direcciones.CodigoPostal = CodigoPostal
-        direcciones.Distrito = Distrito
-        direcciones.CodigoDomFiscal = CodigoDomFiscal
-        direcciones.DireccionPrincipal = DireccionPrincipal
-        direcciones.Entrega = Entrega
-        direcciones.DestinatarioMercEstandar = DestinatarioMercEstandar
-        direcciones.DestinatarioFactura = DestinatarioFactura
-        direcciones.Telefono = Telefono
-        direcciones.CorreoElectronico = CorreoElectronico
-        direcciones.SitioWeb =SitioWeb
-        direcciones.save
+    direcciones = Direcciones.objects.get(IdRegistro=idRegistro)
+    direcciones.IdCliente = IdCliente
+    direcciones.PaisRegion = PaisRegion
+    direcciones.Calle = Calle
+    direcciones.Numero = Numero
+    direcciones.Calle2 = Calle2
+    direcciones.Ciudad = Ciudad
+    direcciones.Estado = Estado
+    direcciones.CodigoPostal = CodigoPostal
+    direcciones.Distrito = Distrito
+    direcciones.CodigoDomFiscal = CodigoDomFiscal
+    direcciones.DireccionPrincipal = DireccionPrincipal
+    direcciones.Entrega = Entrega
+    direcciones.DestinatarioMercEstandar = DestinatarioMercEstandar
+    direcciones.DestinatarioFactura = DestinatarioFactura
+    direcciones.Telefono = Telefono
+    direcciones.CorreoElectronico = CorreoElectronico
+    direcciones.SitioWeb =SitioWeb
+    direcciones.save
 
     return redirect("../gestionDirecciones/"+IdCliente)
 
