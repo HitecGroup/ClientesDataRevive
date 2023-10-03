@@ -59,13 +59,13 @@
                         <input type="hidden" id="idPais" value="{{iniPais.CodeId}}">
                         <input type="hidden" id="Pais" value="{{iniPais.Descrip}}">
                         <label class="etiqueta">Pais</label>
-                        <select id="PaisRegion" name="PaisRegion" class="form-control form-control-sm minimal" value="{{direcciones.PaisRegion}}"></select>
+                        <select id="PaisRegion" name="PaisRegion" class="form-control form-control-sm minimal" value="{{direcciones.PaisRegion}}" required></select>
                     </div>
                     <div class="form-group col-md-6">
                         <input type="hidden" id="idRegion" value="{{iniRegion.CodeId}}">
                         <input type="hidden" id="Region" value="{{iniRegion.Descrip}}">
                         <label class="etiqueta">Estado</label>
-                        <select id="Estado" name="Estado" class="form-control form-control-sm minimal"></select>
+                        <select id="Estado" name="Estado" class="form-control form-control-sm minimal" required></select>
                     </div>
                 </div>
                 {% if dataInt %}
@@ -85,7 +85,7 @@
                     <div class="form-group col-md-5">
                         <input type="hidden" id="iniDistrito" value="{{iniDistrito}}">
                         <label class="etiqueta">Colonia</label>
-                        <select id="Distrito" name="Distrito" class="form-control form-control-sm minimal"></select>
+                        <select id="Distrito" name="Distrito" class="form-control form-control-sm minimal" required></select>
                     </div>
                 </div>
                 {% if dataInt %}

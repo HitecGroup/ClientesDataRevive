@@ -8,6 +8,7 @@ urlpatterns = [
     path('eliminarContacto/<contacto>/<cliente>',views.eliminarContacto),
     path('gestionContactos/<codigo>',views.gestionContactos),
     path('edicionContacto/<idCliente>/<codigo>/<Gestion>',views.edicionContacto),
+    path('editarContacto/', views.editarContacto),
     path('gestionDirecciones/<codigo>',views.gestionDirecciones),
     path('edicionClienteDireccion/<idCliente>/<codigo>/<Gestion>',views.edicionClienteDireccion),
     path('editarDireccion/', views.editarDireccion),

@@ -53,20 +53,49 @@
                     <input type="text" name="claveExterna" value="{{cliente.IdCliente}}" class="form-control form-control-sm" hidden>
                     <div class="form-group">
                         <label class="etiqueta">Nombre Cliente</label>
-                        <input type="text" style="display: none;" name="nombreCliente" value="{{cliente.NombreCliente}}" class="form-control form-control-sm" readonly>
+                        <input type="text" style="display: none;" name="NombreCliente" value="{{cliente.NombreCliente}}" class="form-control form-control-sm" readonly>
                         <input type="text" name="nombreClienteMirror" value="{{cliente.NombreCliente}}" class="form-control form-control-sm" readonly disabled>
                     </div>
                     <div class="form-group">
                         <label class="etiqueta">Fecha Constitución</label>
-                        <input type="date" class="form-control form-control-sm" id="fechaNacimiento" name="fechaNacimiento" value="{{cliente.FechaNacimiento}}">
+                        <input type="date" class="form-control form-control-sm" id="fechaNacimiento" name="FechaNacimiento" value="{{cliente.FechaNacimiento}}">
+                    </div>
+                    <div class="form-group">
+                        <label class="etiqueta">Tipo Empresa</label>
+                        <select name="TipoEmpresa" class="form-control form-control-sm minimal" value="{{cliente.TipoEmpresa}}" required>
+                            {% if cliente.TipoEmpresa %}
+                            <option value='{{cliente.TipoEmpresa}}'>{{cliente.dTipoEmpresa}}</option>
+                            {% else %}
+                            <option value="" disabled selected>Seleccione uno</option>
+                            {% endif %}
+                            <option value='193'>Producto propio</option>
+                            <option value='194'>Maquiladora</option>
+                            <option value='195'>Gobierno</option>
+                            <option value='196'>Educación</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="etiqueta">Tipo de Cliente</label>
+                        <select name="TipoCliente" class="form-control form-control-sm minimal" value="{{cliente.TipoCliente}}" required>
+                            {% if cliente.TipoCliente %}
+                            <option value='{{cliente.TipoCliente}}'>{{cliente.dTipoCliente}}</option>
+                            {% else %}
+                            <option value="" disabled selected>Seleccione uno</option>
+                            {% endif %}
+                            <option value="Coorporativo">Coorporativo</option>
+                            <option value="Particular">Particular</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label class="etiqueta">Sector</label>
-                        <select name="Sector" class="form-control form-control-sm minimal" value="{{cliente.sector}}">
-                            <option value="NA" disabled>Seleccione uno</option>
+                        <select name="Sector" class="form-control form-control-sm minimal" value="{{cliente.Sector}}" required>
+                            {% if cliente.Sector %}
+                            <option value='{{cliente.Sector}}'>{{cliente.dSector}}</option>
+                            {% else %}
+                            <option value="" disabled selected>Seleccione uno</option>
+                            {% endif %}
                             <option value='11'>Agrícola</option>
                             <option value='22'>Servicios públicos</option>
-                            <option value='23'>Construcción</option>
                             <option value='31'>Fabricación</option>
                             <option value='42'>Comercio mayorista</option>
                             <option value='44'>Comercio minorista</option>
@@ -125,50 +154,49 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="etiqueta">Tipo de Cliente</label>
-                        <select name="tipoCliente" class="form-control form-control-sm minimal" value="{{cliente.tipoCliente}}">
-                            <option value="NA" disabled>Seleccione uno</option>
-                            <option value="Coorporativo">Coorporativo</option>
-                            <option value="Particular">Particular</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <label class="etiqueta">Cliente Potencial</label>
-                        <select name="clientePotencial" class="form-control form-control-sm minimal" value="{{cliente.clientePotencial}}">
-                            <option value="NA" disabled selected>Seleccione uno</option>
+                        <select name="ClientePotencial" class="form-control form-control-sm minimal" value="{{cliente.ClientePotencial}}">
+                            <option value='{{cliente.ClientePotencial}}'>{{cliente.dClientePotencial}}</option>
                             <option value="1">Si</option>
                             <option value="0">No</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label class="etiqueta">Estado</label>
-                        <select name="estadoCliente" class="form-control form-control-sm minimal" value="{{cliente.estadoCliente}}">
-                            <option value="NA" disabled selected>Seleccione uno</option>
+                        <select name="Estado" class="form-control form-control-sm minimal" value="{{cliente.Estado}}" required>
+                            <option value='{{cliente.Estado}}'>{{cliente.dEstado}}</option>
                             <option value="1">Activo</option>
                             <option value="0">Inactivo</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label class="etiqueta">D-U-N-S</label>
-                        <input type="text" name="DUNS" class="form-control form-control-sm" value="{{cliente.Duns}}">
+                        <input type="text" name="Duns" class="form-control form-control-sm" value="{{cliente.Duns}}">
                     </div>
                     <div class="form-group">
                         <label class="etiqueta">Clasificación ABC</label>
-                        <select name="clasificacionCliente" class="form-control form-control-sm minimal" value="{{cliente.Clasificacion}}">
-                            <option value="NA" disabled selected>Seleccione uno</option>
-                            <option value='HTA'>HTA</option>
-                            <option value='HTAA'>HTAA</option>
-                            <option value='HTAAA'>HTAAA</option>
-                            <option value='PA'>PA</option>
-                            <option value='PAA'>PAA</option>
-                            <option value='PAAA'>PAAA</option>
-                            <option value='PB'>PB</option>
+                        <select name="Clasificacion" class="form-control form-control-sm minimal" value="{{cliente.Clasificacion}}" required>
+                            {% if cliente.Clasificacion %}
+                            <option value='{{cliente.Clasificacion}}'>{{cliente.dClasificacion}}</option>
+                            {% else %}
+                            <option value="" disabled selected>Seleccione uno</option>
+                            {% endif %}<option value='A'>HTAAA</option>
+                            <option value='B'>HTAA</option>
+                            <option value='C'>HTA</option>
+                            <option value='L'>PAAA</option>
+                            <option value='M'>PAA</option>
+                            <option value='N'>PA</option>
+                            <option value='O'>PB</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label class="etiqueta">División</label>
-                        <select name="division" class="form-control form-control-sm minimal" value="{{cliente.Division}}">
-                            <option value="NA" disabled selected>Seleccione uno</option>
+                        <select name="Division" class="form-control form-control-sm minimal" value="{{cliente.Division}}" required>
+                            {% if cliente.Division %}
+                            <option value='{{cliente.Division}}'>{{cliente.dDivision}}</option>
+                            {% else %}
+                            <option value="" disabled selected>Seleccione uno</option>
+                            {% endif %}
                             <option value="Haas CAM">Haas CAM</option>
                             <option value="Haas Colombia">Haas Colombia</option>
                             <option value="Haas Ecuador">Haas Ecuador</option>
@@ -181,8 +209,12 @@
                     </div>
                     <div class="form-group">
                         <label class="etiqueta">Sub División</label>
-                        <select name="subDivision" class="form-control form-control-sm minimal" value="{{cliente.subDivision}}">
-                            <option value="NA" disabled selected>Seleccione uno</option>
+                        <select name="subDivision" class="form-control form-control-sm minimal" value="{{cliente.subDivision}}" required>
+                            {% if cliente.Division %}
+                            <option value='{{cliente.subDivision}}'>{{cliente.dsubDivision}}</option>
+                            {% else %}
+                            <option value="" disabled selected>Seleccione uno</option>
+                            {% endif %}
                             <option value='HFO'>HFO</option>
                             <option value='CNC'>CNC</option>
                             <option value='OT'>OT</option>
@@ -194,19 +226,73 @@
                     </div>
                     <div class="form-group">
                         <label class="etiqueta">Zona Servicio</label>
-                        <select name="zonaServicio" class="form-control form-control-sm minimal" value="{{cliente.SucServicio}}">
-                            <option value="NA" disabled selected>Seleccione uno</option>
-                            <option value="Norte">Norte</option>
-                            <option value="Sur">Sur</option>
+                        <select name="SucServicio" class="form-control form-control-sm minimal" value="{{cliente.SucServicio}}" required>
+                            {% if cliente.SucServicio %}
+                            <option value='{{cliente.SucServicio}}'>{{cliente.dSucServicio}}</option>
+                            {% else %}
+                            <option value="" disabled selected>Seleccione uno</option>
+                            {% endif %}
+                            <option value='101'>MX - Cd. Juárez</option>
+                            <option value='102'>MX - Celaya</option>
+                            <option value='103'>MX - Chihuahua</option>
+                            <option value='104'>MX - Guadalajara</option>
+                            <option value='105'>MX - León</option>
+                            <option value='106'>MX - Mexicali</option>
+                            <option value='107'>MX - México</option>
+                            <option value='108'>MX - Monterrey</option>
+                            <option value='109'>MX - Puebla</option>
+                            <option value='110'>MX - Querétaro</option>
+                            <option value='111'>MX - Saltillo</option>
+                            <option value='112'>MX - San Luis Potosí</option>
+                            <option value='113'>MX - Sonora</option>
+                            <option value='114'>MX - Tamaulipas</option>
+                            <option value='115'>MX - Tijuana</option>
+                            <option value='116'>MX -Toluca</option>
+                            <option value='117'>MX - Torreón</option>
+                            <option value='118'>CO - Bogotá</option>
+                            <option value='119'>ES - Barcelona</option>
+                            <option value='120'>ES - Madrid</option>
+                            <option value='121'>ES - Sevilla</option>
+                            <option value='122'>ES - Valencia</option>
+                            <option value='123'>ES - Vitoria</option>
+                            <option value='124'>EC - Guayaquil</option>
+                            <option value='125'>CO - Medellín</option>
+                            <option value='126'>CO - Cartagena</option>
+                            <option value='127'>CO - Cali</option>
+                            <option value='128'>CO - Manizales</option>
+                            <option value='129'>CR - Costa Rica</option>
+                            <option value='130'>HO - Tegucigalpa</option>
+                            <option value='131'>GU - Guatemala</option>
+                            <option value='132'>SA - El Salvador</option>
+                            <option value='133'>EC - Quito</option>
+                            <option value='134'>EC - Francisco de Orellana</option>
+                            <option value='135'>EC - Ambato</option>
+                            <option value='136'>EC - Cuenca</option>
+                            <option value='137'>HO - San Pedro Sula</option>
+                            <option value='138'>NI - Managua</option>
+                            <option value='139'>NI - León</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="etiqueta">Tipo Empresa</label>
-                        <select name="tipoEmpresa" class="form-control form-control-sm minimal" value="{{cliente.TipoEmpresa}}">
-                            <option value="NA" disabled selected>Seleccione uno</option>
-                            <option value='Producto propio / Own product'>Producto propio / Own product</option>
-                            <option value='Maquiladora / Factories'>Maquiladora / Factories</option>
-                            <option value='Gobierno / Government'>Gobierno / Government</option>
+                        <label class="etiqueta">Región Ventas</label>
+                        <select name="RegionVts" class="form-control form-control-sm minimal" value="{{cliente.RegionVts}}" required>
+                            {% if cliente.RegionVts %}
+                                <option value='{{cliente.RegionVts}}'>{{cliente.dRegionVts}}</option>
+                            {% else %}
+                                <option value="" disabled selected>Seleccione uno</option>
+                            {% endif %}
+                            <option value='109'>MX - HFO SURESTE</option>
+                            <option value='110'>MX - HFO NORTE</option>
+                            <option value='111'>MX - HFO BAJIO</option>
+                            <option value='112'>MX - HFO PACIFICO OCCIDENTE</option>
+                            <option value='113'>MX - HFO CENTRO</option>
+                            <option value='114'>CENTRO AMERICA</option>
+                            <option value='115'>MX - PLASTICOS</option>
+                            <option value='117'>ES - HFO NORESTE</option>
+                            <option value='118'>ES - HFO LEVANTE</option>
+                            <option value='119'>ES - HFO SUR</option>
+                            <option value='120'>ES - HFO CENTRO</option>
+                            <option value='121'>ES - HFO NORTE</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -221,207 +307,270 @@
             <div class="card-body">
                 <div class="form-group">
                     <label class="etiqueta">No Turnos C</label>
-                    <select name="noTurnos" class="form-control form-control-sm minimal">
-                        <option value="NA" disabled selected>Seleccione uno</option>
-                        <option value="1 Turnos">1 Turno</option>
-                        <option value="2 Turnos">2 Turnos</option>
-                        <option value="3 Turnos">3 Turnos</option>
-                        <option value="4 Turnos">4 Turnos</option>
+                    <select name="NoTurnosC" class="form-control form-control-sm minimal" value="{{cliente.NoTurnosC}}" required>
+                        {% if cliente.NoTurnosC %}
+                            <option value='{{cliente.NoTurnosC}}'>{{cliente.NoTurnosC}}</option>
+                        {% else %}
+                            <option value="" disabled selected>Seleccione uno</option>
+                        {% endif %}
+                        <option value='1'>1</option>
+                        <option value='2'>2</option>
+                        <option value='3'>3</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="etiqueta">Tier (Cadena)</label>
+                    <select name="Tier" class="form-control form-control-sm minimal" value="{{cliente.Tier}}" required>
+                        {% if cliente.Tier %}
+                            <option value='{{cliente.Tier}}'>{{cliente.dTier}}</option>
+                        {% else %}
+                            <option value="" disabled selected>Seleccione uno</option>
+                        {% endif %}<option value='1'>1</option>
+                        <option value='197'>Tier 1</option>
+                        <option value='198'>Tier 2</option>
+                        <option value='199'>Tier 3</option>
+                        <option value='200'>Gobierno</option>
+                        <option value='201'>N/A</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <span style="color:red">* </span><label class="etiqueta">Frecuencia de Compra</label>
+                    <select name="FrecuenciaCompra" class="form-control form-control-sm minimal" value="{{cliente.FrecuenciaCompra}}" required>
+                        {% if cliente.FrecuenciaCompra %}
+                            <option value='{{cliente.FrecuenciaCompra}}'>{{cliente.FrecuenciaCompra}}</option>
+                        {% else %}
+                            <option value='0'>0</option>
+                        {% endif %}
+                        <option value='0'>0</option>
+                        <option value='1'>1</option>
+                        <option value='2'>2</option>
+                        <option value='3 o Mas'>3 o Mas</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="etiqueta">No Maquinas Convencionales C</label>
-                    <select name="NoMaqConve" class="form-control form-control-sm minimal">
-                        <option value="NA" disabled selected>Seleccione uno</option>
+                    <select name="NoMaqConvenC" class="form-control form-control-sm minimal" value="{{cliente.NoMaqConvenC}}">
+                        {% if cliente.NoMaqConvenC %}
+                            <option value='{{cliente.NoMaqConvenC}}'>{{cliente.NoMaqConvenC}}</option>
+                        {% else %}
+                            <option value='0'>0</option>
+                        {% endif %}
                         <option value='0'>0</option>
-                        <option value='1-2'> 1-2</option>
-                        <option value='3-4'> 3-4</option>
-                        <option value='5-10'> 5-10</option>
-                        <option value='+10'>+10</option>
+                        <option value='1 a 5'>1 a 5</option>
+                        <option value='6 a 10'>6 a 10</option>
+                        <option value='> 10'>> 10</option>
                     </select>
                 </div>
-                    <!--<div class="form-group">
-                        <label class="etiqueta">MX email de envio</label>
-                        <input type="text" name="mxEmailEnvio" class="form-control form-control-sm">
-                    </div>-->
-                    <div class="form-group">
-                        <label class="etiqueta">Tier (Cadena)</label>
-                        <select name="tier" class="form-control form-control-sm minimal">
-                            <option value="NA" disabled selected>Seleccione uno</option>
-                            <option value='Tier 1'>Tier 1</option>
-                            <option value='Tier 2'>Tier 2</option>
-                            <option value='Tier 3'>Tier 3</option>
-                            <option value='Gobierno'>Gobierno</option>
-                            <option value='N/A'>N/A </option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="etiqueta">No Maquinas CNC C</label>
-                        <select name="NoMaqCNC" class="form-control form-control-sm minimal">
-                            <option value="NA" disabled selected>Seleccione uno</option>
+                <!--<div class="form-group">
+                    <label class="etiqueta">MX email de envio</label>
+                    <input type="text" name="mxEmailEnvio" class="form-control form-control-sm">
+                </div>-->
+                <div class="form-group">
+                    <label class="etiqueta">No Maquinas CNC C</label>
+                    <select name="NoMaqCNC_C" class="form-control form-control-sm minimal" value="{{cliente.NoMaqCNC_C}}">
+                        {% if cliente.NoMaqCNC_C %}
+                            <option value='{{cliente.NoMaqCNC_C}}'>{{cliente.NoMaqCNC_C}}</option>
+                        {% else %}
+                        <option value='0'>0</option>                
+                        {% endif %}
+                        <option value='0'>0</option>
+                        <option value='1 a 5'>1 a 5</option>
+                        <option value='6 a 10'>6 a 10</option>
+                        <option value='> 10'>> 10</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="etiqueta">No de Maquinas HT C</label>
+                    <select name="NoMaqHT_C" class="form-control form-control-sm minimal" value="{{cliente.NoMaqHT_C}}">
+                        {% if cliente.NoMaqHT_C %}
+                            <option value='{{cliente.NoMaqHT_C}}'>{{cliente.NoMaqHT_C}}</option>
+                        {% else %}
                             <option value='0'>0</option>
-                            <option value='1-2'> 1-2</option>
-                            <option value='3-4'> 3-4</option>
-                            <option value='5-10'> 5-10</option>
-                            <option value='+10'>+10</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="etiqueta">No de Maquinas HT C</label>
-                        <select name="NoMaqHT" class="form-control form-control-sm minimal">
+                        {% endif %}
+                        <option value='0'>0</option>
+                        <option value='1 a 3'>1 a 3</option>
+                        <option value='4 a 6'>4 a 6</option>
+                        <option value='> 6'>> 6</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="etiqueta">Materiales que utilizan CHMER</label>
+                    <select name="MatUseCHMER" class="form-control form-control-sm minimal" value="{{cliente.MatUseCHMER}}">
+                        {% if cliente.MatUseCHMER %}
+                            <option value='{{cliente.MatUseCHMER}}'>{{cliente.dMatUseCHMER}}</option>
+                        {% else %}
+                            <option value="" disabled selected>Seleccione uno</option>
+                        {% endif %}
+                        <option value='170'>Aceros al carbón</option>
+                        <option value='171'>Acero inoxidable</option>
+                        <option value='172'>Carburo de tuxteno</option>
+                        <option value='173'>No Ferrosos</option>
+                        <option value='174'>Aleaciones Especiales</option>
+                        <option value='175'>Fundición</option>
+                        <option value='176'>Varios</option>                        
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="etiqueta">Materiales que utilizan YZUMI</label>
+                    <select name="MatUseYIZUMI" class="form-control form-control-sm minimal" value="{{MatUseYIZUMI}}">
+                        {% if cliente.MatUseYIZUMI %}
+                            <option value='{{cliente.MatUseYIZUMI}}'>{{cliente.dMatUseYIZUMI}}</option>
+                        {% else %}
                             <option value="NA" disabled selected>Seleccione uno</option>
-                            <option value='0'>0</option>
-                            <option value='1-2'> 1-2</option>
-                            <option value='3-4'> 3-4</option>
-                            <option value='5-10'> 5-10</option>
-                            <option value='+10'>+10</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="etiqueta">Materiales que utilizan CHMER</label>
-                        <select name="MatUseCHMER" class="form-control form-control-sm minimal">
-                            <option value="NA" disabled selected>Seleccione uno</option>
-                            <option value='Aceros al carbón /  Carbon Steel'>Aceros al carbón /  Carbon Steel</option>
-                            <option value='Acero inoxidable /  Stainless  Steel'>Acero inoxidable /  Stainless  Steel</option>
-                            <option value='Carburo de tuxteno /  Tungsten carbide'>Carburo de tuxteno /  Tungsten carbide</option>
-                            <option value='No Ferrosos / Non-Ferric'>No Ferrosos / Non-Ferric</option>
-                            <option value='Aleaciones Especiales / Special Alloys'>Aleaciones Especiales / Special Alloys</option>
-                            <option value='Fundición / Casting'>Fundición / Casting</option>
-                            <option value='Varios /  Others'>Varios /  Others</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="etiqueta">Materiales que utilizan YZUMI</label>
-                        <select name="MatUseYIZUMI" class="form-control form-control-sm minimal">
-                            <option value="NA" disabled selected>Seleccione uno</option>
-                            <option value='PETE (Polietileno tereftalato) / PETE'>PETE (Polietileno tereftalato) / PETE</option>
-                            <option value='HDPE (Polietileno de alta densidad) / HDPE'>HDPE (Polietileno de alta densidad) / HDPE</option>
-                            <option value='V (Policloruro de vinilo) / V'>V (Policloruro de vinilo) / V</option>
-                            <option value='LDPE (Polietileno de baja densidad) / LDPE'>LDPE (Polietileno de baja densidad) / LDPE</option>
-                            <option value='PP (Polipropileno) / PP '>PP (Polipropileno) / PP </option>
-                            <option value='PS (Poliestireno) / PS'>PS (Poliestireno) / PS</option>
-                            <option value='Otros Plásticos, resinas, composites / Other Plastics, resins, composites'>Otros Plásticos, resinas, composites / Other Plastics, resins, composites</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="etiqueta">Frecuencia de Compra C</label>
-                        <select name="FrecuenciaCompra" class="form-control form-control-sm minimal">
-                            <option value="NA" disabled selected>Seleccione uno</option>
-                            <option value="Dummy1">Dummy1</option>
-                            <option value="Dummy2">Dummy2</option>
-                            <option value="Dummy3">Dummy3</option>
-                            <option value="Dummy4">Dummy4</option>
-                        </select>
-                    </div>
-                    <!--<div class="form-group">
-                        <label class="etiqueta">División PM</label>
-                        <select name="division" class="form-control form-control-sm minimal">
-                            <option value="NA" disabled selected>Seleccione uno</option>
-                            <option value="Divisón Plásticos">Divisón Plásticos</option>
-                            <option value="Die Casting">Die Casting</option>
-                        </select>
-                    </div>-->
-                    <div class="form-group">
-                        <label class="etiqueta">Región Ventas</label>
-                        <select name="regVentas" class="form-control form-control-sm minimal">
-                            <option value="NA" disabled selected>Seleccione uno</option>
-                            <option value='Norte'>Norte</option>
-                            <option value='Sur'>Sur</option>
-                            <option value='Centro'>Centro</option>
-                            <option value='Bajío'>Bajío</option>
-                            <option value='Pacífico'>Pacífico</option>
-                            <option value='Ecuador'>Ecuador</option>
-                            <option value='Colombia'>Colombia</option>
-                            <option value='CAM'>CAM</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="etiqueta">Actividad Principal FAB</label>
-                        <select name="ActPriFAB" class="form-control form-control-sm minimal">
-                            <option value="NA" disabled selected>Seleccione uno</option>
-                            <option value='Estructuras metálicas /  Metalic structures'>Estructuras metálicas /  Metalic structures</option>
-                            <option value='Bridas, valvulas,conexiones, sellos, rodamientos, tubos, coples / Flanges, valves, connections, seals, bearings, tubes, coupling'>Bridas, valvulas,conexiones, sellos, rodamientos, tubos, coples / Flanges, valves, connections, seals, bearings, tubes, coupling</option>
-                            <option value='Herramientas / TOOL industry'>Herramientas / TOOL industry</option>
-                            <option value='Maquinado de partes / Parts machining'>Maquinado de partes / Parts machining</option>
-                            <option value='Transformación de piezas de fundición / '>Transformación de piezas de fundición / </option>
-                            <option value='Casting Parts machinining'>Casting Parts machinining</option>
-                            <option value='Maquinas, Equipos y automatización /'>Maquinas, Equipos y automatización /</option>
-                            <option value='Machines, Equipment and Automation'>Machines, Equipment and Automation</option>
-                            <option value='Prototipos / Prototypes'>Prototipos / Prototypes</option>
-                            <option value='Troqueles y Matrices / Dies'>Troqueles y Matrices / Dies</option>
-                            <option value='Transformación de lámina /'>Transformación de lámina /</option>
-                            <option value='Sheet transformation'>Sheet transformation</option>
-                            <option value='Estantería y Mobiliario Público /'>Estantería y Mobiliario Público /</option>
-                            <option value='Shelving and Public Furniture'>Shelving and Public Furniture</option>
-                            <option value='Distribuidores de acero /'>Distribuidores de acero /</option>
-                            <option value='Steel distributors'>Steel distributors</option>
-                            <option value='Carrocerías  - Remolques de marca propia /'>Carrocerías  - Remolques de marca propia /</option>
-                            <option value='Bodyworks - Own brand trailers'>Bodyworks - Own brand trailers</option>
-                            <option value='Pailería /  Pailería '>Pailería /  Pailería </option>
-                            <option value='Básculas - Fabricantes de básculas /  Scales - Scale manufacturers'>Básculas - Fabricantes de básculas /  Scales - Scale manufacturers</option>
-                            <option value='Fabricantes de Piezas Metálicas en serie /'>Fabricantes de Piezas Metálicas en serie /</option>
-                            <option value='Serial Metal Parts Manufacturing'>Serial Metal Parts Manufacturing</option>
-                            <option value='Ductos de Lámina / Ductos para aire / Recolectores de Polvo / Filtros Industriales --  Foil Ducts / Air Ducts / Dust Collectors / Industrial Filters'>Ductos de Lámina / Ductos para aire / Recolectores de Polvo / Filtros Industriales --  Foil Ducts / Air Ducts / Dust Collectors / Industrial Filters</option>
-                        </select>
-                    </div>
-                    <!--<div class="form-group">
-                        <label class="etiqueta">Materiales que utilizan CNC, HAAS</label>
-                        <select name="MatUsoCNC_Haas" class="form-control form-control-sm minimal">
-                            <option value='Aceros al carbón /  Carbon Steel'>Aceros al carbón /  Carbon Steel</option>
-                            <option value='Acero inoxidable /  Stainless  Steel'>Acero inoxidable /  Stainless  Steel</option>
-                            <option value='Fundición / Casting'>Fundición / Casting</option>
-                            <option value='No Ferrosos / Non-Ferric'>No Ferrosos / Non-Ferric</option>
-                            <option value='Aleaciones Especiales / Special Alloys'>Aleaciones Especiales / Special Alloys</option>
-                            <option value='Varios / Others '>Varios / Others </option>
-
-                        </select>
-                    </div>-->
-                    <div class="form-group">
-                        <label class="etiqueta">Actividad principal a efectuar con el equipo CNC</label>
-                        <select name="ActPriEquipoCNC" class="form-control form-control-sm minimal">
-                            <option value="NA" disabled selected>Seleccione uno</option>
-                            <option value='Anclas, estructuras metálicas / Anchors, metal structures'>Anclas, estructuras metálicas / Anchors, metal structures</option>
-                            <option value='Bridas, valvulas,conexiones, sellos, rodamientos, tubos, coples / Flanges, valves, connections, seals, bearings, tubes, coupling'>Bridas, valvulas,conexiones, sellos, rodamientos, tubos, coples / Flanges, valves, connections, seals, bearings, tubes, coupling</option>
-                            <option value='Dados de extrusión / Extrusion Dice'>Dados de extrusión / Extrusion Dice</option>
-                            <option value='Dispositivos , gages, herramentales /  Devices, gages, tools'>Dispositivos , gages, herramentales /  Devices, gages, tools</option>
-                            <option value='Grabado /  CNC Engraving'>Grabado /  CNC Engraving</option>
-                            <option value='Herramientas /  Tools'>Herramientas /  Tools</option>
-                            <option value='Investigación, desarrollo, enseñanza / Research, development, training'>Investigación, desarrollo, enseñanza / Research, development, training</option>
-                            <option value='Maquinado de partes / Parts machining'>Maquinado de partes / Parts machining</option>
-                            <option value='Maquinado de piezas de fundición /  Casting Parts Machining'>Maquinado de piezas de fundición /  Casting Parts Machining</option>
-                            <option value='Maquinas, Equipos y automatización / Machinery, Equipment and Automation'>Maquinas, Equipos y automatización / Machinery, Equipment and Automation</option>
-                            <option value='Moldes / Molds'>Moldes / Molds</option>
-                            <option value='Partes para mantenimiento /  maintenance parts'>Partes para mantenimiento /  maintenance parts</option>
-                            <option value='Prototipos /  Prototypes'>Prototipos /  Prototypes</option>
-                            <option value='Tornillos y tuercas / Nuts and bolts'>Tornillos y tuercas / Nuts and bolts</option>
-                            <option value='Troqueles y Matrices / Dies'>Troqueles y Matrices / Dies</option>
-                            <option value='Turbinas / Turbines'>Turbinas / Turbines</option>
-                            <option value='Otros / Others'>Otros / Others</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="etiqueta">Materiales FAB</label>
-                        <select name="MatUsoFab" class="form-control form-control-sm minimal">
-                            <option value="NA" disabled selected>Seleccione uno</option>
-                            <option value='Aluminio / Aluminum'>Aluminio / Aluminum</option>
-                            <option value='Acero /  Steel'>Acero /  Steel</option>
-                            <option value='Acero inoxidable /  Stainless  Steel'>Acero inoxidable /  Stainless  Steel</option>
-                            <option value='No Ferrosos / Non-Ferric'>No Ferrosos / Non-Ferric</option>
-                            <option value='Lámina /  Sheet'>Lámina /  Sheet</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="etiqueta">Material arranque de viruta</label>
-                        <select name="MatViruta" class="form-control form-control-sm minimal">
-                            <option value="NA" disabled selected>Seleccione uno</option>
-                            <option value='Aceros al carbón /  Carbon Steel'>Aceros al carbón /  Carbon Steel</option>
-                            <option value='Acero inoxidable /  Stainless  Steel'>Acero inoxidable /  Stainless  Steel</option>
-                            <option value='Fundición / Casting'>Fundición / Casting</option>
-                            <option value='No Ferrosos / Non-Ferric'>No Ferrosos / Non-Ferric</option>
-                            <option value='Aleaciones Especiales / Special Alloys'>Aleaciones Especiales / Special Alloys</option>
-                            <option value='Varios / Others '>Varios / Others </option>
-                        </select>
-                    </div>
+                        {% endif %}
+                        <option value='179'>PETE (Polietileno tereftalato)</option>
+                        <option value='180'>HDPE (Polietileno de alta densidad)</option>
+                        <option value='181'>V (Policloruro de vinilo)</option>
+                        <option value='182'>LDPE (Polietileno de baja densidad)</option>
+                        <option value='183'>PP (Polipropileno)</option>
+                        <option value='184'>PS (Poliestireno)</option>
+                        <option value='185'>Otros Plásticos, resinas, composites</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="etiqueta">Materiales FAB</label>
+                    <select name="MatUsoFab" class="form-control form-control-sm minimal" value="{{cliente.MatUsoFab}}">
+                        {% if cliente.MatUsoFab %}
+                            <option value='{{cliente.MatUsoFab}}'>{{cliente.dMatUsoFab}}</option>
+                        {% else %}
+                            <option value="" disabled selected>Seleccione uno</option>
+                        {% endif %}
+                        <option value='187'>Aluminio</option>
+                        <option value='188'>Acero</option>
+                        <option value='189'>Acero inoxidable</option>
+                        <option value='190'>No Ferrosos</option>
+                        <option value='191'>Lámina</option>
+                        
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="etiqueta">Material arranque de viruta</label>
+                    <select name="MatViruta" class="form-control form-control-sm minimal" value="{{cliente.MatViruta}}">
+                        {% if cliente.MatViruta %}
+                            <option value='{{cliente.MatViruta}}'>{{cliente.dMatViruta}}</option>
+                        {% else %}
+                            <option value="" disabled selected>Seleccione uno</option>
+                        {% endif %}
+                        <option value='163'>Aceros al carbón</option>
+                        <option value='164'>Acero inoxidable</option>
+                        <option value='165'>Fundición</option>
+                        <option value='166'>No Ferrosos</option>
+                        <option value='167'>Aleaciones Especiales</option>
+                        <option value='168'>Varios</option>
+                    </select>
+                </div>
+                <!--div class="form-group">
+                    <label class="etiqueta">Material uso CNC Haas</label>
+                    <select name="MatUsoCNC_Haas" class="form-control form-control-sm minimal" value="{{cliente.MatUsoCNC_Haas}}">
+                        {% if cliente.MatUsoCNC_Haas %}
+                            <option value='{{cliente.MatUsoCNC_Haas}}'>{{cliente.dMatUsoCNC_Haas}}</option>
+                        {% else %}
+                            <option value="" disabled selected>Seleccione uno</option>
+                        {% endif %}
+                        <option value='163'>Aceros al carbón</option>
+                        <option value='164'>Acero inoxidable</option>
+                        <option value='165'>Fundición</option>
+                        <option value='166'>No Ferrosos</option>
+                        <option value='167'>Aleaciones Especiales</option>
+                        <option value='168'>Varios</option>
+                    </select>
+                </div-->
+                
+                <div class="form-group">
+                    <label class="etiqueta">Actividad Principal FAB</label>
+                    <select name="ActPriFAB" class="form-control form-control-sm minimal" value="{{cliente.ActPriFAB}}">
+                        {% if cliente.ActPriFAB %}
+                            <option value='{{cliente.ActPriFAB}}'>{{cliente.dActPriFAB}}</option>
+                        {% else %}
+                            <option value="" disabled selected>Seleccione uno</option>
+                        {% endif %}
+                        <option value='146'>Estructuras metálicas"</option>
+                        <option value='147'>Bridas, valvulas,conexiones, sellos, rodamientos, tubos, coples"</option>
+                        <option value='148'>Herramientas"</option>
+                        <option value='149'>Maquinado de partes"</option>
+                        <option value='150'>Transformación de piezas de fundición"</option>
+                        <option value='151'>Maquinas, Equipos y automatización"</option>
+                        <option value='152'>Prototipos"</option>
+                        <option value='153'>Troqueles y Matrices"</option>
+                        <option value='154'>Transformación de lamina"</option>
+                        <option value='155'>Estantería y Mobiliario Publico"</option>
+                        <option value='156'>Distribuidores de acero"</option>
+                        <option value='157'>Carrocerías / Remolques de marca propia"</option>
+                        <option value='158'>Paileria"</option>
+                        <option value='159'>Básculas / Fabricantes de básculas"</option>
+                        <option value='160'>Fabricantes de Piezas Metálicas en serie"</option>
+                        <option value='161'>Ductos de Lámina / Ductos para aire / Recolectores de Polvo / Filtros Industriales."</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="etiqueta">Actividad Principal EDM</label>
+                    <select name="ActPriEDM" class="form-control form-control-sm minimal" value="{{cliente.ActPriEDM}}">
+                        {% if cliente.ActPriEDM %}
+                            <option value='{{cliente.ActPriFAB}}'>{{cliente.dActPriFAB}}</option>
+                        {% else %}
+                            <option value="" disabled selected>Seleccione uno</option>
+                        {% endif %}
+                        <option value='124'>Moldes</option>
+                        <option value='125'>Troqueles y Matrices</option>
+                        <option value='126'>Grabado</option>
+                        <option value='127'>Dispositivos , gages</option>
+                        <option value='128'>Herramentales especiales</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="etiqueta">Actividad principal a efectuar con el equipo CNC</label>
+                    <select name="ActPriEquipoCNC" class="form-control form-control-sm minimal" value="{{cliente.ActPriEquipoCNC}}">
+                        {% if cliente.ActPriEquipoCNC %}
+                            <option value='{{cliente.ActPriEquipoCNC}}'>{{cliente.dActPriEquipoCNC}}</option>
+                        {% else %}
+                            <option value="" disabled selected>Seleccione uno</option>
+                        {% endif %}
+                        <option value='106'>Anclas, estructuras metálicas</option>
+                        <option value='107'>Bridas, valvulas,conexiones, sellos, rodamientos, tubos, coples</option>
+                        <option value='108'>Dados de extrusión</option>
+                        <option value='109'>Dispositivos , gages, herramentales</option>
+                        <option value='110'>Grabado</option>
+                        <option value='111'>Herramientas</option>
+                        <option value='112'>Investigación, desarrollo, enseñanza</option>
+                        <option value='113'>Maquinado de partes</option>
+                        <option value='114'>Maquinado de piezas de fundición</option>
+                        <option value='115'>Maquinas, Equipos y automatización</option>
+                        <option value='116'>Moldes</option>
+                        <option value='117'>Partes para mantenimiento</option>
+                        <option value='118'>Prototipos</option>
+                        <option value='119'>Tornillos y tuercas</option>
+                        <option value='120'>Troqueles y Matrices</option>
+                        <option value='121'>Turbinas</option>
+                        <option value='122'>Otros</option>
+                    </select>
+                </div>
+                <!--div class="form-group">
+                    <label class="etiqueta">Actividad principal a efectuar con el equipo CNC</label>
+                    <select name="ActPriEquipo" class="form-control form-control-sm minimal" value="{{cliente.ActPriEquipo}}">
+                        {% if cliente.ActPriEquipo %}
+                            <option value='{{cliente.ActPriEquipo}}'>{{cliente.dActPriEquipo}}</option>
+                        {% else %}
+                            <option value="" disabled selected>Seleccione uno</option>
+                        {% endif %}
+                        <option value='106'>Anclas, estructuras metálicas</option>
+                        <option value='107'>Bridas, valvulas,conexiones, sellos, rodamientos, tubos, coples</option>
+                        <option value='108'>Dados de extrusión</option>
+                        <option value='109'>Dispositivos , gages, herramentales</option>
+                        <option value='110'>Grabado</option>
+                        <option value='111'>Herramientas</option>
+                        <option value='112'>Investigación, desarrollo, enseñanza</option>
+                        <option value='113'>Maquinado de partes</option>
+                        <option value='114'>Maquinado de piezas de fundición</option>
+                        <option value='115'>Maquinas, Equipos y automatización</option>
+                        <option value='116'>Moldes</option>
+                        <option value='117'>Partes para mantenimiento</option>
+                        <option value='118'>Prototipos</option>
+                        <option value='119'>Tornillos y tuercas</option>
+                        <option value='120'>Troqueles y Matrices</option>
+                        <option value='121'>Turbinas</option>
+                        <option value='122'>Otros</option>
+                    </select>
+                </div-->
             </div>
         </div>
     </div>

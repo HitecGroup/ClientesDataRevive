@@ -5,7 +5,7 @@
 {% block body %}
 {% load static %}
 <div class="row">
-<form action="/editarCliente/" method="POST">{% csrf_token %}
+<form action="/editarContacto/" method="POST">{% csrf_token %}
     <div class="col-md-12">
         <h2>{% if contacto.IdContacto %}Edicion de Contacto {% else %}Agrega Contacto {% endif%}
             {% if Gestion %}
@@ -20,7 +20,8 @@
                     <div class="card-body">
                         <div class="form-group">
                                 <div class="form-group">
-                                    <label class="etiqueta">{{Gestion}}Codigo Cliente</label>
+                                    <label class="etiqueta">Codigo Cliente</label>
+                                    <input type="hidden" name="IdCliente" value="{{cliente.IdCliente}}">
                                     <input type="text" name="claveExterna" value="{{cliente.IdCliente}}" class="form-control form-control-sm disabled" readonly disabled>
                                 </div>
                         </div>
@@ -101,7 +102,7 @@
                             <input type="hidden" id="idRegion" value="{{iniRegion.CodeId}}">
                             <input type="hidden" id="Region" value="{{iniRegion.Descrip}}">
                             <label class="etiqueta">Estado</label>
-                            <select id="Estado" name="Estado" class="form-control form-control-sm minimal"></select>
+                            <select id="Estado" name="Estado" class="form-control form-control-sm minimal" required></select>
                         </div>
                     </div>
                     {% if dataInt %}
@@ -121,7 +122,7 @@
                         <div class="form-group col-md-5">
                             <input type="hidden" id="iniDistrito" value="{{iniDistrito}}">
                             <label class="etiqueta">Colonia</label>
-                            <select id="Distrito" name="Distrito" class="form-control form-control-sm minimal"></select>
+                            <select id="Distrito" name="Distrito" class="form-control form-control-sm minimal" required></select>
                         </div>
                     </div>
                     {% if dataInt %}
