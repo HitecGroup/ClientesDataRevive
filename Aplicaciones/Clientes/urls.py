@@ -16,5 +16,6 @@ urlpatterns = [
     path('estados/<codigo>',views.get_estados),
     path('codigos/<codigo>',views.get_codigos),
     path('colonias/<codigo>',views.get_colonias),
-
+    path('bloquearContacto/<codigo>/<cliente>',views.bloquearContacto),
+    path('bloquearDireccion/<cliente>/<idDireccion>',views.bloquearDireccion),
 ]

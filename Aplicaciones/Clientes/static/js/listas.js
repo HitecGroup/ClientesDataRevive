@@ -17,8 +17,9 @@ window.addEventListener("load", async () => {
 const cargaInicial = async() => {
     await ListarPaises();
     await ListarEstados(idPais, true);
+    console.log(idRegistro);
     if(idPais=="MX") {
-        await ListarCodPos(idRegion, true);        
+        await ListarCodPos(idRegion, true);
         if(idRegistro > 0) {
             await ListarColonias(idCodPos, true);   }
     }

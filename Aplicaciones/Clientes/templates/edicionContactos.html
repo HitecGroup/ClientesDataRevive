@@ -51,8 +51,8 @@
         <div class="card">
             <div class="card-body">
                 <div class="row">
-                    <div class='form-group col-md-2' style='display: none;'><label class='etiqueta'>IdCliente</label><input type='text'  name='IdCliente' value='{{contacto.IdCliente}}' class='form-control form-control-sm'></div>
-                    <div class='form-group col-md-2'><label class='etiqueta'>IdContacto</label><input type='text'  name='IdContacto' value='{{contacto.IdContacto}}' class='form-control form-control-sm'></div>
+                    <input type="hidden" id="idRegistro" name="idRegistro" value="{{idRegistro}}">
+                    <div class='form-group col-md-2'><label class='etiqueta'>IdContacto</label><input type='text' value='{{idRegistro}}' class='form-control form-control-sm' readonly disabled></div>
                     <div class='form-group col-md-3'><label class='etiqueta'>Nombre</label><input type='text'  name='Nombre' value='{{contacto.Nombre}}' class='form-control form-control-sm'></div>
                     <div class='form-group col-md-3'><label class='etiqueta'>SegundoNombre</label><input type='text'  name='SegundoNombre' value='{{contacto.SegundoNombre}}' class='form-control form-control-sm'></div>
                     <div class='form-group col-md-4'><label class='etiqueta'>Apellidos</label><input type='text'  name='Apellidos' value='{{contacto.Apellidos}}' class='form-control form-control-sm'></div>
@@ -67,9 +67,9 @@
                         <label class="etiqueta"></label>  
                         <div class="form-check">
                             {% if iniCheckbox.Principal %}
-                                <input class="form-check-input" type="checkbox" name="Principal" value="" checked>
+                                <input class="form-check-input" type="checkbox" id="Principal" name="Principal" value="{{iniCheckbox.Principal}}" checked>
                             {% else %}
-                            <input class="form-check-input" type="checkbox" name="Principal" value="">
+                            <input class="form-check-input" type="checkbox" id="Principal" name="Principal" value="{{iniCheckbox.Principal}}">
                             {% endif %}
                             <label class="etiqueta">Principal</label>
                         </div>                        
@@ -78,9 +78,9 @@
                         <label class="etiqueta"></label>  
                         <div class="form-check">
                             {% if iniCheckbox.VIP %}
-                                <input class="form-check-input" type="checkbox" name="VIP" value="" checked>
+                                <input class="form-check-input" type="checkbox" id="VIP" name="VIP" value="{{iniCheckbox.VIP}}" checked>
                             {% else %}
-                            <input class="form-check-input" type="checkbox" name="VIP" value="">
+                            <input class="form-check-input" type="checkbox" id="VIP" name="VIP" value="{{iniCheckbox.VIP}}">
                             {% endif %}
                             <label class="etiqueta">VIP</label>
                         </div>                        

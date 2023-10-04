@@ -1,15 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from .models import *
-#from models import Clientes
-#from models import Contactos
-#from models import Direcciones
-#from models import Country
-#from models import Region
-#from models import RelReg_Edo
-#from models import Sepomex
-from django.db.models.aggregates import Count
-from django.db.models.aggregates import Sum
+from django.db.models import Count
 
 # Create your views here.
 def home(request):
@@ -18,10 +10,12 @@ def home(request):
 
 def edicionCliente(request,codigo):
     cliente = Clientes.objects.get(IdCliente=codigo)
+    fecha = cliente.FechaNacimiento
+    #fechaNacimiento = datetime.strftime(fecha,'%d/%m/%Y')
     acliente = {"IdCliente":cliente.IdCliente, 
             "ClaveExterna":cliente.ClaveExterna,
             "NombreCliente":cliente.NombreCliente,
-            "FechaConstitucion":cliente.FechaNacimiento, 
+            "FechaNacimiento":fecha, 
             "Sector":cliente.Sector,
             "TipoEmpresa":cliente.TipoEmpresa,
             "TipoCliente":cliente.TipoCliente,
@@ -101,17 +95,32 @@ def editarCliente(request):
     NoMaqConvenC = request.POST['NoMaqConvenC']
     NoMaqCNC_C = request.POST['NoMaqCNC_C']
     NoMaqHT_C = request.POST['NoMaqHT_C']
-    MatUseCHMER = request.POST['MatUseCHMER']
-    MatUseYIZUMI = request.POST['MatUseYIZUMI']
-    MatUsoFab = request.POST['MatUsoFab']
-    MatViruta = request.POST['MatViruta']
-    #MatUsoCNC_Haas = request.POST['MatUsoCNC_Haas']
+
+    MatUseCHMER = MatUseYIZUMI = MatUsoFab = MatViruta = ""
+    if "MatUseCHMER" in request.POST:
+        MatUseCHMER = request.POST['MatUseCHMER']
+    if "MatUseYIZUMI" in request.POST:
+        MatUseYIZUMI = request.POST['MatUseYIZUMI']
+    if "MatUsoFab" in request.POST:
+        MatUsoFab = request.POST['MatUsoFab']
+    if "MatViruta" in request.POST:
+        MatViruta = request.POST['MatViruta']
+    #if "MatUseYIZUMI" in request.POST:
+        #MatUsoCNC_Haas = request.POST['MatUsoCNC_Haas']
+
     FrecuenciaCompra = request.POST['FrecuenciaCompra']
     RegionVts = request.POST['RegionVts']
-    ActPriFAB = request.POST['ActPriFAB']
-    ActPriEDM = request.POST['ActPriEDM']
-    ActPriEquipoCNC = request.POST['ActPriEquipoCNC']
-    #ActPriEquipo = request.POST['ActPriEquipo']
+
+    ActPriFAB = ActPriEDM = ActPriEquipoCNC = ""
+    #ActPriEquipo = ""
+    if "ActPriFAB" in request.POST:
+        ActPriFAB = request.POST['ActPriFAB']
+    if "ActPriEDM" in request.POST:
+        ActPriEDM = request.POST['ActPriEDM']
+    if "ActPriEquipoCNC" in request.POST:
+        ActPriEquipoCNC = request.POST['ActPriEquipoCNC']
+    #if "ActPriEquipo" in request.POST:
+        #ActPriEquipo = request.POST['ActPriEquipo']
     
     cliente = Clientes.objects.get(IdCliente=IdCliente)
     cliente.NombreCliente = NombreCliente
@@ -136,7 +145,7 @@ def editarCliente(request):
     cliente.MatUseYIZUMI = MatUseYIZUMI
     cliente.MatUsoFab = MatUsoFab
     cliente.MatViruta = MatViruta
-    cliente.MatUsoCNC_Haas = MatUsoCNC_Haas
+    #cliente.MatUsoCNC_Haas = MatUsoCNC_Haas
     cliente.FrecuenciaCompra = FrecuenciaCompra
     cliente.RegionVts = RegionVts
     cliente.ActPriFAB = ActPriFAB
@@ -162,14 +171,14 @@ def gestionContactos(request,codigo):
         iniPais = {"CodeId":"MX", "Descrip":"México"}
         iniRegion = {"CodeId":"CMX", "Descrip":"Ciudad de México"}
         iniCheckbox = {"Principal":flag1, "VIP":flag2}
-        return render(request, "edicionContactos.html",{"vista":"Contacto", "Gestion":False, "idContacto":codigo, "contacto":contacto, "cliente":cliente, "iniPais":iniPais, "iniRegion":iniRegion, "iniCodPos":iniCodPos, "iniDistrito":iniDistrito, "dataInt":False, "iniCheckbox":iniCheckbox })
+        return render(request, "edicionContactos.html",{"vista":"Contacto", "Gestion":False, "idRegistro":"0", "contacto":contacto, "cliente":cliente, "iniPais":iniPais, "iniRegion":iniRegion, "iniCodPos":iniCodPos, "iniDistrito":iniDistrito, "dataInt":False, "iniCheckbox":iniCheckbox })
 
 def edicionContacto(request, idCliente, codigo, Gestion):        
     cliente = Clientes.objects.get(IdCliente=idCliente)
     iniCodPos = ""
     iniDistrito = ""
     dataInt = False
-    flag1 = flag2 =False
+    flag1 = flag2 = False
     if codigo=="0" :
         contacto = None
         iniPais = {"CodeId":"MX", "Descrip":"México"}
@@ -195,18 +204,18 @@ def edicionContacto(request, idCliente, codigo, Gestion):
         iniPais = {"CodeId":idPais, "Descrip":pdescrip}
         iniRegion = {"CodeId":contacto.Estado, "Descrip":rdescrip}
 
-        if(contacto.Principal!=""):
+        if( contacto.Principal ):
             flag1 = True
-        if(contacto.Vip!=""):
+        if( contacto.Vip == "1" ):
             flag2 = True
 
     iniCheckbox = {"Principal":flag1, "VIP":flag2}
     
-    return render(request, "edicionContactos.html",{"vista":"Contacto", "Gestion":Gestion, "idContacto":codigo, "contacto":contacto, "cliente":cliente, "iniPais":iniPais, "iniRegion":iniRegion, "iniCodPos":iniCodPos, "iniDistrito":iniDistrito, "dataInt":dataInt, "iniCheckbox":iniCheckbox })
+    return render(request, "edicionContactos.html",{"vista":"Contacto", "Gestion":Gestion, "idRegistro":codigo, "contacto":contacto, "cliente":cliente, "iniPais":iniPais, "iniRegion":iniRegion, "iniCodPos":iniCodPos, "iniDistrito":iniDistrito, "dataInt":dataInt, "iniCheckbox":iniCheckbox })
 
 def editarContacto(request):
     IdCliente = request.POST['IdCliente']
-    IdContacto = request.POST['IdContacto']
+    IdContacto = request.POST['idRegistro']
     NombreContacto = request.POST['Nombre']
     SegundoNombre = request.POST['SegundoNombre']
     Apellidos = request.POST['Apellidos']
@@ -234,50 +243,101 @@ def editarContacto(request):
     PaisExp = request.POST['PaisExp']
     MedioComunicacion = request.POST['MedioComunicacion']
 
-    Principal = VIP = ""
+    Principal = Vip = 0
     
     if "Principal" in request.POST:
-        Principal = "X"    
+        Principal = 1    
     if 'VIP' in request.POST:
-        VIP = "X"
+        Vip = 1
 
-    if(IdContacto != 0) :
+    if(IdContacto != "0") :
         contacto = Contactos.objects.get(IdContacto=IdContacto)
+        contacto.Nombre = NombreContacto
+        contacto.SegundoNombre = SegundoNombre
+        contacto.Apellidos = Apellidos
+        contacto.Telefono = Telefono
+        contacto.TelefonoMovil = TelefonoMovil
+        contacto.CorreoElectronico = CorreoElectronico
+        contacto.Departamento = Departamento
+        contacto.Funcion = Funcion
+        contacto.PaisRegion = PaisRegion
+        contacto.Estado = Estado
+        contacto.CodigoPostal = CodigoPostal
+        contacto.Ciudad = Ciudad
+        contacto.Distrito = Distrito
+        contacto.Calle = Calle
+        contacto.Numero = Numero
+        contacto.Edificio = Edificio
+        contacto.Planta = Planta
+        contacto.PaisExp = PaisExp
+        contacto.MedioComunicacion = MedioComunicacion
+        contacto.Principal = Principal
+        contacto.Vip = Vip    
+        contacto.save()
 
-    Contactos.Nombre = NombreContacto
-    Contactos.SegundoNombre = SegundoNombre
-    Contactos.Apellidos = Apellidos
-    Contactos.Telefono = Telefono
-    Contactos.TelefonoMovil = TelefonoMovil
-    Contactos.CorreoElectronico = CorreoElectronico
-    Contactos.Departamento = Departamento
-    Contactos.Funcion = Funcion
-    Contactos.PaisRegion = PaisRegion
-    Contactos.Estado = Estado
-    Contactos.CodigoPostal = CodigoPostal
-    Contactos.Ciudad = Ciudad
-    Contactos.Distrito = Distrito
-    Contactos.Calle = Calle
-    Contactos.Numero = Numero
-    Contactos.Edificio = Edificio
-    Contactos.Planta = Planta
-    Contactos.PaisExp = PaisExp
-    Contactos.MedioComunicacion = MedioComunicacion
-    Contactos.Principal = Principal
-    Contactos.Vip = VIP
-    
-    Contactos.save
+    else :
+        ultimo = Contactos.objects.order_by('-IdContacto').first()
+        IdContacto = ultimo.IdContacto
 
+        contacto = Contactos.objects.create (
+            IdContacto = str(int(IdContacto)+1),
+            IdCliente = IdCliente,
+            Nombre = NombreContacto,
+            SegundoNombre = SegundoNombre,
+            Apellidos = Apellidos,
+            Telefono = Telefono,
+            TelefonoMovil = TelefonoMovil,
+            CorreoElectronico = CorreoElectronico,
+            Departamento = Departamento,
+            Funcion = Funcion,
+            PaisRegion = PaisRegion,
+            Estado = Estado,
+            CodigoPostal = CodigoPostal,
+            Ciudad = Ciudad,
+            Distrito = Distrito,
+            Calle = Calle,
+            Numero = Numero,
+            Edificio = Edificio,
+            Planta = Planta,
+            PaisExp = PaisExp,
+            MedioComunicacion = MedioComunicacion,
+            Principal = Principal,
+            Vip = Vip,
+            Bloqueo = 0
+        )
+            
     cliente = Clientes.objects.get(IdCliente=IdCliente)
     contactosListados = Contactos.objects.all().filter(IdCliente=IdCliente)
     return render(request,"gestionContactos.html",{"contactos":contactosListados, "cliente":cliente})
 
+def bloquearContacto(request, codigo,cliente):
+
+    contacto = Contactos.objects.get(IdContacto=codigo)
+
+    if contacto.Bloqueo != True:
+
+        contacto.Bloqueo = True
+
+    else:
+
+        contacto.Bloqueo = False
+
+    contacto.save()
+
+ 
+
+    contactosListados = Contactos.objects.all().filter(IdCliente=cliente)
+
+ 
+
+    return render(request,"gestionContactos.html",{"contactos":contactosListados, "cliente":cliente})
 
 def eliminarContacto(request,contacto,cliente):
     contacto = Contactos.objects.get(IdContacto=contacto)
     contacto.delete()
     contactosListados = Contactos.objects.all().filter(IdCliente=cliente)
     return render(request,"gestionContactos.html",{"contactos":contactosListados})
+
 
 def gestionDirecciones(request,codigo):    
     cliente = Clientes.objects.get(IdCliente=codigo)
@@ -392,27 +452,74 @@ def editarDireccion(request):
     if (idRegistro != "0") :
         direcciones = Direcciones.objects.get(IdRegistro=idRegistro)
     
-    direcciones.IdCliente = IdCliente
-    direcciones.PaisRegion = PaisRegion
-    direcciones.Calle = Calle
-    direcciones.Numero = Numero
-    direcciones.Calle2 = Calle2
-    direcciones.Ciudad = Ciudad
-    direcciones.Estado = Estado
-    direcciones.CodigoPostal = CodigoPostal
-    direcciones.Distrito = Distrito
-    direcciones.CodigoDomFiscal = CodigoDomFiscal
-    direcciones.DireccionPrincipal = DireccionPrincipal
-    direcciones.Entrega = Entrega
-    direcciones.DestinatarioMercEstandar = DestinatarioMercEstandar
-    direcciones.DestinatarioFactura = DestinatarioFactura
-    direcciones.Telefono = Telefono
-    direcciones.CorreoElectronico = CorreoElectronico
-    direcciones.SitioWeb =SitioWeb
-    direcciones.save
+        direcciones.IdCliente = IdCliente
+        direcciones.PaisRegion = PaisRegion
+        direcciones.Calle = Calle
+        direcciones.Numero = Numero
+        direcciones.Calle2 = Calle2
+        direcciones.Ciudad = Ciudad
+        direcciones.Estado = Estado
+        direcciones.CodigoPostal = CodigoPostal
+        direcciones.Distrito = Distrito
+        direcciones.CodigoDomFiscal = CodigoDomFiscal
+        direcciones.DireccionPrincipal = DireccionPrincipal
+        direcciones.Entrega = Entrega
+        direcciones.DestinatarioMercEstandar = DestinatarioMercEstandar
+        direcciones.DestinatarioFactura = DestinatarioFactura
+        direcciones.Telefono = Telefono
+        direcciones.CorreoElectronico = CorreoElectronico
+        direcciones.SitioWeb =SitioWeb
+        direcciones.save()
+
+    else :
+        ultimo = Direcciones.objects.order_by('-IdRegistro').first()
+        idRegistro = ultimo.IdRegistro
+
+        direcciones = Direcciones.objects.create (
+            IdCliente = IdCliente,
+            PaisRegion = PaisRegion,
+            Calle = Calle,
+            Numero = Numero,
+            Calle2 = Calle2,
+            Ciudad = Ciudad,
+            Estado = Estado,
+            CodigoPostal = CodigoPostal,
+            Distrito = Distrito,
+            CodigoDomFiscal = CodigoDomFiscal,
+            DireccionPrincipal = DireccionPrincipal,
+            Entrega = Entrega,
+            DestinatarioMercEstandar = DestinatarioMercEstandar,
+            DestinatarioFactura = DestinatarioFactura,
+            Telefono = Telefono,
+            CorreoElectronico = CorreoElectronico,
+            SitioWeb =SitioWeb,
+            Bloqueo = 0
+        )
 
     return redirect("../gestionDirecciones/"+IdCliente)
 
+def bloquearDireccion(request, cliente,idDireccion):
+
+    direccion = Direcciones.objects.get(IdRegistro=idDireccion)
+
+    if direccion.Bloqueo != True:
+
+        direccion.Bloqueo = True
+
+    else:
+
+        direccion.Bloqueo = False
+
+    direccion.save()
+
+    direccionesListados = Direcciones.objects.all().filter(IdCliente=cliente)
+
+    cliente = Clientes.objects.get(IdCliente=cliente)
+
+ 
+    return render(request,"gestionDirecciones.html",{"direcciones":direccionesListados, "cliente":cliente})
+
+ 
 
 #def agregarClienteDireccion(request,codigo):
 #    return render(request,"agregarClienteDireccion.html",{"cliente":codigo})
