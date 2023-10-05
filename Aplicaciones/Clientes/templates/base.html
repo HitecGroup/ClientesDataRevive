@@ -55,19 +55,24 @@
       import * as bootstrap from 'bootstrap'
 
       new bootstrap.Popover(document.getElementById('popoverButton'))
+      
     </script>
     <script>
+      $(document).ready(function () {
+            $('#clientes-table').DataTable();
+        });
+        
         let rutaVista = "../../../";
-let vista = document.getElementById('vista').value;
-let idRegistro = document.getElementById('idRegistro').value;
-let idPais = document.getElementById('idPais').value;
-let pais = document.getElementById('Pais').value;
-let idRegion = document.getElementById('idRegion').value;
-let region = document.getElementById('Region').value;
-let idCodDomFis = document.getElementById('idCodDomFis').value;
-let idCodPos = document.getElementById('idCodPos').value;
-let iniDistrito = document.getElementById('iniDistrito').value;
-let coddomfis = document.getElementById('CodDomFis').value;
+        let vista = document.getElementById('vista').value;
+        let idRegistro = document.getElementById('idRegistro').value;
+        let idPais = document.getElementById('idPais').value;
+        let pais = document.getElementById('Pais').value;
+        let idRegion = document.getElementById('idRegion').value;
+        let region = document.getElementById('Region').value;
+        let idCodDomFis = document.getElementById('idCodDomFis').value;
+        let idCodPos = document.getElementById('idCodPos').value;
+        let iniDistrito = document.getElementById('iniDistrito').value;
+        let coddomfis = document.getElementById('CodDomFis').value;
 
 window.addEventListener("load", async () => {
     await cargaInicial();
@@ -257,9 +262,6 @@ const getCiudad = async(mnpio) => {
     $("#Ciudad").val(mnpio);
 };
 
-
-
-        
-    </script>
+</script>
 </body>
 </html>
