@@ -18,4 +18,5 @@ urlpatterns = [
     path('colonias/<codigo>',views.get_colonias),
     path('bloquearContacto/<codigo>/<cliente>',views.bloquearContacto),
     path('bloquearDireccion/<cliente>/<idDireccion>',views.bloquearDireccion),
+    path('buscarCliente/',views.buscarCliente)
 ]
