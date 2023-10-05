@@ -982,5 +982,7 @@ def buscarCliente(request):
     qs1 = resultadoNombreBusqueda.union(resultadoRfcBusqueda)
     qs2 = resultadoTelefonoBusqueda.union(resultadoAdicionalBusqueda)
     qsf = qs1.union(qs2)
+
+    request.path = "/"
     
     return render(request, "gestionClientes.html",{"clientes":qsf})
