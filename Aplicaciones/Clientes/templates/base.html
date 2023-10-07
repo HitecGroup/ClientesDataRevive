@@ -265,21 +265,18 @@ const getCiudad = async(mnpio) => {
 </script>
 <script>
   const form = document.getElementById('formBusqueda');
-  document.getElementById('btnBuscar').disabled = true;
+  //document.getElementById('btnBuscar').disabled = true;
   
   function validaFormulario(){
-      let nombreBusqueda = document.getElementById('nombreBusqueda').value;
-      let rfcBusqueda = document.getElementById('rfcBusqueda').value;
-      let telefonoBusqueda = document.getElementById('telefonoBusqueda').value;
-      let adicionalBusqueda = document.getElementById('adicionalBusqueda').value;
-  
-      cadena = nombreBusqueda+rfcBusqueda+telefonoBusqueda+adicionalBusqueda;
-  
-      if(cadena.length == 0 || cadena.length == '') {
+      let nombreBusqueda = document.getElementById('Busqueda').value;
+
+      if(nombreBusqueda.length == 0 || nombreBusqueda.length == '') {
           document.getElementById('btnBuscar').disabled = true;
       } else {
           document.getElementById('btnBuscar').disabled = false;
       }
+
+      
   }
   
   

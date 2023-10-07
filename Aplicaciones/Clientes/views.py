@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from .models import *
 from django.db.models import Count
+from django.db.models import Q
 
 # Create your views here.
 def home(request):
@@ -945,44 +946,15 @@ def get_ActPriEquipo(codigo) :
     return (descrip)
 
 def buscarCliente(request):
-    nombreBusqueda = request.POST['nombreBusqueda']
-    rfcBusqueda = request.POST['rfcBusqueda']
-    telefonoBusqueda = request.POST['telefonoBusqueda']
-    adicionalBusqueda = request.POST['adicionalBusqueda']
+    busqueda = request.POST['Busqueda']
+    clientes = Clientes.objects.all()[0:200]
 
-    resultadoNombreBusqueda = []
-    resultadoRfcBusqueda = []
-    resultadoTelefonoBusqueda = []
-    resultadoAdicionalBusqueda = []
-    qs1 = []
-    qs2 = []
-    qsf = []
-
-    if(len(nombreBusqueda) == 0):
-        nombreBusqueda = ' '
-    if(len(rfcBusqueda) == 0):
-        rfcBusqueda = ' '
-    if(len(telefonoBusqueda) == 0):
-        telefonoBusqueda = ' '
-    if(len(adicionalBusqueda) == 0):
-        adicionalBusqueda = ' '
-    
-    if(len(nombreBusqueda) > 0):
-        resultadoNombreBusqueda = Clientes.objects.all().filter(NombreCliente__contains=nombreBusqueda)
-    
-    if(len(rfcBusqueda) > 0):
-        resultadoRfcBusqueda = Clientes.objects.all().filter(RFC__contains=rfcBusqueda)
-    
-    if(len(telefonoBusqueda) > 0):
-        resultadoTelefonoBusqueda = Clientes.objects.all().filter(TelefonoPrincipal__contains=telefonoBusqueda)
-    
-    if(len(adicionalBusqueda) > 0):
-        resultadoAdicionalBusqueda = Clientes.objects.all().filter(NombreAdicional__contains=telefonoBusqueda)
-
-    qs1 = resultadoNombreBusqueda.union(resultadoRfcBusqueda)
-    qs2 = resultadoTelefonoBusqueda.union(resultadoAdicionalBusqueda)
-    qsf = qs1.union(qs2)
-
-    request.path = "/"
-    
-    return render(request, "gestionClientes.html",{"clientes":qsf})
+    if busqueda:
+        clientes = Clientes.objects.filter(
+            Q(IdCliente__icontains = busqueda) |
+            Q(NombreCliente__icontains = busqueda) |
+            Q(RFC__icontains = busqueda) |
+            Q(Duns__icontains = busqueda) 
+        ).distinct()
+   
+    return render(request, "gestionClientesBusqueda.html",{"clientes":clientes})
