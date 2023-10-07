@@ -14,7 +14,7 @@
             <div class="card-body">
                 <div class="form-control">
                     <form id="formBusqueda" action="../buscarCliente/" method="POST">{% csrf_token %}
-                        <label class="etiqueta">Busqueda por coincidencia</label><input class="form-control form-control-sm" value="{{request.GET.Busqueda}}" type="text" placeholder="Introduce algo" id="Busqueda" name="Busqueda">
+                        <label class="etiqueta">Busqueda por coincidencia</label><input class="form-control form-control-sm" value="{{request.POST.Busqueda}}" type="text" placeholder="Introduce algo" id="Busqueda" name="Busqueda">
                         <hr><input type="submit" id="btnBuscar" class="btn btn-danger btn-block" value="Buscar">
                         <hr><b><small>La busqueda se realiza sobre Nombre del Cliente, RFC, DUNS, ID Cliente</small></b>
                     </form>
