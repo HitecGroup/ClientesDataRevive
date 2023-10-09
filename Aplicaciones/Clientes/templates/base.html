@@ -43,6 +43,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script async src="https://cdn.jsdelivr.net/npm/es-module-shims@1/dist/es-module-shims.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="importmap">
     {
       "imports": {
@@ -59,6 +60,7 @@
     </script>
     <script>
       $(document).ready(function () {
+
             $('#clientes-table').DataTable( {
         "language": {
     "processing": "Procesando...",
@@ -306,6 +308,20 @@
 } 
     } );
         });
+        urlBase =  document.URL.split("/");
+        if(document.URL == urlBase[0] + "//" + urlBase[2] + "/buscarCliente/"){
+            Swal.fire(
+                document.title,
+                'Busqueda Finalizada',
+                'success'
+                )  
+        } else if(document.URL == urlBase[0] + "//" + urlBase[2] + "/") {
+            Swal.fire(
+                document.title,
+                'Clientes Cargados',
+                'success'
+                )  
+        }
         
         let rutaVista = "../../../";
         let vista = document.getElementById('vista').value;
