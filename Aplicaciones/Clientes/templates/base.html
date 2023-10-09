@@ -310,7 +310,19 @@
         });
 
         urlBase =  document.URL.split("/");
-        if(document.URL == urlBase[0] + "//" + urlBase[2] + "/buscarCliente/" && document.getElementById('Busqueda').value != ''){
+        if(document.URL == urlBase[0] + "//" + urlBase[2] + "/") {
+            Swal.fire(
+
+                {
+                    title: document.title,
+                    text: 'Clientes Cargados',
+                    imageUrl: 'https://grupohitec.com/wp-content/uploads/2021/06/GRUPO-HITEC.svg',
+                    imageWidth: 300,
+                    imageHeight: 100
+                }
+                )  
+        }
+        /*if(document.URL == urlBase[0] + "//" + urlBase[2] + "/buscarCliente/" && document.getElementById('Busqueda').value != ''){
             Swal.fire(
                 document.title,
                 'Búsqueda finalizada con la palabra: <b>' + document.getElementById('Busqueda').value + '</b>',
@@ -327,7 +339,7 @@
                     imageHeight: 100
                 }
                 )  
-        }
+        }*/
         
         let rutaVista = "../../../";
         let vista = document.getElementById('vista').value;
