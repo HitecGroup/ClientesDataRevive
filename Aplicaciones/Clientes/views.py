@@ -548,7 +548,9 @@ def get_codigos(request, codigo):
     if RelReg_Edo.objects.filter(idRegion=codigo).exists():
         relregedo = RelReg_Edo.objects.get(idRegion=codigo)   
         c_estado = relregedo.c_estado
-        codigos = list(Sepomex.objects.annotate(cnt=Count('D_codigo')).filter(C_estado=c_estado).values('cnt', 'D_codigo').order_by('D_codigo'))
+        #codigos = list(Sepomex.objects.annotate(cnt=Count('D_codigo')).filter(C_estado=c_estado).values('cnt', 'D_codigo').order_by('D_codigo'))
+        codigos = list(Sepomex.objects.order_by().values_list('D_codigo', flat=True).values('D_codigo').distinct().filter(C_estado=c_estado))
+
     
         if (len(codigos)>0):
             data={'message':"Success", 'codigos':codigos}
