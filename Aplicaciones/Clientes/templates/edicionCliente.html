@@ -61,7 +61,7 @@
                         <input type="date" class="form-control form-control-sm" id="fechaNacimiento" name="FechaNacimiento" value="{{cliente.FechaNacimiento|date:'Y-m-d'}}">
                     </div>
                     <div class="form-group">
-                        <label class="etiqueta">Tipo Empresa</label>
+                        <span style="color:red">* </span><label class="etiqueta">Tipo Empresa</label>
                         <select name="TipoEmpresa" class="form-control form-control-sm minimal" value="{{cliente.TipoEmpresa}}" required>
                             {% if cliente.TipoEmpresa %}
                             <option value='{{cliente.TipoEmpresa}}'>{{cliente.dTipoEmpresa}}</option>
@@ -75,7 +75,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="etiqueta">Tipo de Cliente</label>
+                        <span style="color:red">* </span><label class="etiqueta">Tipo de Cliente</label>
                         <select name="TipoCliente" class="form-control form-control-sm minimal" value="{{cliente.TipoCliente}}" required>
                             {% if cliente.TipoCliente %}
                             <option value='{{cliente.TipoCliente}}'>{{cliente.dTipoCliente}}</option>
@@ -87,7 +87,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="etiqueta">Sector</label>
+                        <span style="color:red">* </span><label class="etiqueta">Sector</label>
                         <select name="Sector" class="form-control form-control-sm minimal" value="{{cliente.Sector}}" required>
                             {% if cliente.Sector %}
                             <option value='{{cliente.Sector}}'>{{cliente.dSector}}</option>
@@ -162,7 +162,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="etiqueta">Estado</label>
+                        <span style="color:red">* </span><label class="etiqueta">Estado</label>
                         <select name="Estado" class="form-control form-control-sm minimal" value="{{cliente.Estado}}" required>
                             <option value='{{cliente.Estado}}'>{{cliente.dEstado}}</option>
                             <option value="1">Activo</option>
@@ -174,7 +174,7 @@
                         <input type="text" name="Duns" class="form-control form-control-sm" value="{{cliente.Duns}}" maxlength="9">
                     </div>
                     <div class="form-group">
-                        <label class="etiqueta">Clasificación ABC</label>
+                        <span style="color:red">* </span><label class="etiqueta">Clasificación ABC</label>
                         <select name="Clasificacion" class="form-control form-control-sm minimal" value="{{cliente.Clasificacion}}" required>
                             {% if cliente.Clasificacion %}
                             <option value='{{cliente.Clasificacion}}'>{{cliente.dClasificacion}}</option>
@@ -190,7 +190,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="etiqueta">División</label>
+                        <span style="color:red">* </span><label class="etiqueta">División</label>
                         <select name="Division" class="form-control form-control-sm minimal" value="{{cliente.Division}}" required>
                             {% if cliente.Division %}
                             <option value='{{cliente.Division}}'>{{cliente.dDivision}}</option>
@@ -208,7 +208,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="etiqueta">Sub División</label>
+                        <span style="color:red">* </span><label class="etiqueta">Sub División</label>
                         <select name="subDivision" class="form-control form-control-sm minimal" value="{{cliente.subDivision}}" required>
                             {% if cliente.Division %}
                             <option value='{{cliente.subDivision}}'>{{cliente.dsubDivision}}</option>
@@ -225,7 +225,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="etiqueta">Zona Servicio</label>
+                        <span style="color:red">* </span><label class="etiqueta">Zona Servicio</label>
                         <select name="SucServicio" class="form-control form-control-sm minimal" value="{{cliente.SucServicio}}" required>
                             {% if cliente.SucServicio %}
                             <option value='{{cliente.SucServicio}}'>{{cliente.dSucServicio}}</option>
@@ -274,7 +274,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="etiqueta">Región Ventas</label>
+                        <span style="color:red">* </span><label class="etiqueta">Región Ventas</label>
                         <select name="RegionVts" class="form-control form-control-sm minimal" value="{{cliente.RegionVts}}" required>
                             {% if cliente.RegionVts %}
                                 <option value='{{cliente.RegionVts}}'>{{cliente.dRegionVts}}</option>
@@ -306,7 +306,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="form-group">
-                    <label class="etiqueta">No Turnos C</label>
+                    <span style="color:red">* </span><label class="etiqueta">No Turnos C</label>
                     <select name="NoTurnosC" class="form-control form-control-sm minimal" value="{{cliente.NoTurnosC}}" required>
                         {% if cliente.NoTurnosC %}
                             <option value='{{cliente.NoTurnosC}}'>{{cliente.NoTurnosC}}</option>
@@ -319,7 +319,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label class="etiqueta">Tier (Cadena)</label>
+                    <span style="color:red">* </span><label class="etiqueta">Tier (Cadena)</label>
                     <select name="Tier" class="form-control form-control-sm minimal" value="{{cliente.Tier}}" required>
                         {% if cliente.Tier %}
                             <option value='{{cliente.Tier}}'>{{cliente.dTier}}</option>
@@ -577,6 +577,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
+                <span style="color: red; font-size: 11px;">* Campos requeridos</span>
                 <div class="form-control d-grid gap-2 col-6 mx-auto">
                     <button class="btn btn-primary text-white btn-block">Guardar</button>
                     <a href="/" class="btn btn-danger text-white">Cancelar</a>
