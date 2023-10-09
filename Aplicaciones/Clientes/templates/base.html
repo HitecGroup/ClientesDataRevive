@@ -312,14 +312,19 @@
         if(document.URL == urlBase[0] + "//" + urlBase[2] + "/buscarCliente/"){
             Swal.fire(
                 document.title,
-                'Busqueda Finalizada',
+                'Búsqueda finalizada con la palabra: <b>' + document.getElementById('Busqueda').value + '</b>',
                 'success'
                 )  
         } else if(document.URL == urlBase[0] + "//" + urlBase[2] + "/") {
             Swal.fire(
-                document.title,
-                'Clientes Cargados',
-                'success'
+
+                {
+                    title: document.title,
+                    text: 'Clientes Cargados',
+                    imageUrl: 'https://grupohitec.com/wp-content/uploads/2021/06/GRUPO-HITEC.svg',
+                    imageWidth: 300,
+                    imageHeight: 100
+                }
                 )  
         }
         
