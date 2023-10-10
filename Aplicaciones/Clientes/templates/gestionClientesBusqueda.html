@@ -1,19 +1,25 @@
 {% extends "./base.html" %}
 
-{% block title %} 
+{% block title %} Gestión de Clientes {% endblock%}
 
-    Gestión de Clientes 
-
+{% block user%}
+    {% if session.usrvalid %}
+        <a class="text-white" href="/">Cerrar Sesión</a>
+        <span class="text-white" style="padding-left: 40px; padding-right: 20px;">{{session.nombre}}</span>
+    {% else %}
+        <a class="text-white" href="/">Iniciar Sesión</a>
+    {% endif %}    
 {% endblock%}
 
 {% block body %}
+{% if session.usrvalid %}
 <div class="row">
     <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
         <h4>Buscar Clientes</h4>
         <div class="card">
             <div class="card-body">
                 <div class="form-control">
-                    <form id="formBusqueda" action="../buscarCliente/" method="POST">{% csrf_token %}
+                    <form id="formBusqueda" action="../buscarCliente/{{session.usrid}}" method="POST">{% csrf_token %}
                         <label class="etiqueta">Busqueda por coincidencia</label><input class="form-control form-control-sm" value="{{request.POST.Busqueda}}" type="text" placeholder="Introduce algo" id="Busqueda" name="Busqueda">
                         <hr><input type="submit" id="btnBuscar" class="btn btn-danger btn-block" value="Buscar">
                         <hr><b><small>La busqueda se realiza sobre Nombre del Cliente, RFC, DUNS, ID Cliente</small></b>
@@ -49,7 +55,7 @@
                                 <td>{{c.RFC}}</td>
                                 <td>{{c.SucServicio}}</td>
                                 <td>{{c.RegionVts}}</td>
-                                <td><a href="../edicionCliente/{{c.IdCliente}}" class="btn btn-success btn-sm">Editar</a></td>
+                                <td><a href="../edicionCliente/{{c.IdCliente}}/{{session.usrid}}" class="btn btn-success btn-sm">Editar</a></td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -70,4 +76,7 @@ if(document.getElementById('nombreBusqueda') != null) {
 //telefonoBusqueda
 //adicionalBusqueda
 </script>
+{% else %}
+<h1>Inicie sesión</h1>
+{% endif %}
 {% endblock %}

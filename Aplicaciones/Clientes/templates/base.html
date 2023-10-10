@@ -16,7 +16,11 @@
 <body>
     <nav class="navbar navbar-expand-lg sticky-top bg-black" style="padding: 0px;">
         <div class="container-fluid">
-          <a class="navbar-brand" style="padding: 0px;" href="/"><img src="https://cotizadorhitecpretest.z13.web.core.windows.net/logoCDR.png" height="70px"><!--<img src="https://grupohitec.com/wp-content/uploads/2021/06/GRUPO-HITEC.svg" height="50px">--></a>
+          {% if session.usrvalid %}
+            <a class="navbar-brand" style="padding: 0px;" href="/home/{{session.usrid}}"><img src="https://cotizadorhitecpretest.z13.web.core.windows.net/logoCDR.png" height="70px"><!--<img src="https://grupohitec.com/wp-content/uploads/2021/06/GRUPO-HITEC.svg" height="50px">--></a>
+          {% else %}
+            <a class="navbar-brand" style="padding: 0px;" href="/"><img src="https://cotizadorhitecpretest.z13.web.core.windows.net/logoCDR.png" height="70px"><!--<img src="https://grupohitec.com/wp-content/uploads/2021/06/GRUPO-HITEC.svg" height="50px">--></a>
+          {% endif %} 
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -32,6 +36,7 @@
             <div class="btn-group ml-auto dropleft">
             </div>
           </div>
+          <div>{% block user %}{% endblock%}</div>
         </div>
       </nav>
       <div class="container py-4">
@@ -341,7 +346,7 @@
                 )  
         }*/
         
-        let rutaVista = "../../../";
+        let rutaVista = "../../../../";
         let vista = document.getElementById('vista').value;
         let idRegistro = document.getElementById('idRegistro').value;
         let idPais = document.getElementById('idPais').value;

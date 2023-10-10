@@ -1,0 +1,31 @@
+{% extends "./base.html" %}
+
+{% block title %} CambiarPwd {% endblock%}
+
+{% block body %}
+<div class="form-control">
+<form id="formBusqueda" action="../cambioPwd/" method="POST">{% csrf_token %} 
+    
+    <div class="row" style="display: grid; grid-template-columns: auto 70vh auto;">
+        <div class="row" style="grid-column:2; padding: 1.5em;">
+        <div class="card">
+            <div class="card-header">
+                <h5 style="text-align: center;">Cambio de contraseña</h5>
+            </div>
+            <div class="card-body">
+                <span>{{msg}}</span>
+                <div class='form-group col-md-12'><label class='etiqueta'>Correo Electrónico</label><input type='text'  name='user' class='form-control form-control-sm' required></div>
+                <div class='form-group col-md-12'><label class='etiqueta'>Contraseña actual</label><input type='text'  name='pwd' class='form-control form-control-sm' required></div>
+                <div class='form-group col-md-12'><label class='etiqueta'>Nueva contraseña</label><input type='text'  name='newpwd' class='form-control form-control-sm' required></div>
+                <br><div class="row"><button class="btn btn-primary text-white btn-block">Cambiar contraseña</button></div>
+            </div> 
+            <div class="card-footer" style="text-align: center;">
+                <a href="../">Iniciar sesión</a>
+            </div>
+        </div>
+        </div>
+    </div>
+</form>
+</div>
+
+{% endblock %}

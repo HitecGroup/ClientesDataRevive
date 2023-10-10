@@ -2,18 +2,37 @@
 
 {% block title %} Edita dirección {% endblock%}
 
+{% block user%}
+    {% if session.usrvalid %}
+        <a class="text-white" href="/">Cerrar Sesión</a>
+        <span class="text-white" style="padding-left: 40px; padding-right: 20px;">{{session.nombre}}</span>
+    {% else %}
+        <a class="text-white" href="/">Iniciar Sesión</a>
+    {% endif %}    
+{% endblock%}
+
 {% block body %}
+{% if session.usrvalid %}
 {% load static %}
 <div class="row">
-<form action="/editarDireccion/" method="POST">{% csrf_token %}
+<form action="/editarDireccion/{{session.usrid}}" method="POST">{% csrf_token %}
     <div class="col-md-12">
-        <h2>{% if direcciones.IdCliente %}Edita Dirección Cliente {% else %}Agrega nueva dirección {% endif %} 
+        <div class="row">
+          <div class="col-md-5">
+            <h2>{% if direcciones.IdCliente %}Edita Dirección Cliente {% else %}Agrega nueva dirección {% endif %} 
             {% if Gestion %}
-                <a href="/gestionDirecciones/{{ cliente.IdCliente }}"><img src="https://cotizadorhitecpretest.z13.web.core.windows.net/back.png" height="40px" width="40px"></a>
+                <a href="/gestionDirecciones/{{ cliente.IdCliente }}/{{session.usrid}}"><img src="https://cotizadorhitecpretest.z13.web.core.windows.net/back.png" height="40px" width="40px"></a>
             {% else %}
-                <a href="/edicionCliente/{{ cliente.IdCliente }}"><img src="https://cotizadorhitecpretest.z13.web.core.windows.net/back.png" height="40px" width="40px"></a>
+                <a href="/edicionCliente/{{ cliente.IdCliente }}/{{session.usrid}}"><img src="https://cotizadorhitecpretest.z13.web.core.windows.net/back.png" height="40px" width="40px"></a>
             {% endif %}
-        </h2>
+            </h2>
+          </div>
+          {% if logData.cant %}
+            <div class="col-md-7" style="font-size: 12px; text-align: right; color:blue;">            
+                <span>{{logData.cant}} movimiento(s). </span> <span>Última actualización {{logData.fecha|date:'d/m/Y'}} por {{logData.user}}</span>
+            </div>
+          {%endif%}
+        </div>
         <div class="card">
             <div class="row">
                 <div class="col-md-3">
@@ -199,9 +218,9 @@
                 <div class="form-control d-grid gap-2 col-6 mx-auto">
                     <button type="submit" class="btn btn-primary text-white btn-block">Guardar</button>
                     {% if Gestion %}
-                        <a href="/gestionDirecciones/{{ cliente.IdCliente }}" class="btn btn-danger text-white">Cancelar</a>
+                        <a href="/gestionDirecciones/{{cliente.IdCliente}}/{{session.usrid}}" class="btn btn-danger text-white">Cancelar</a>
                     {% else %}
-                        <a href="/edicionCliente/{{ cliente.IdCliente }}" class="btn btn-danger text-white">Cancelar</a>
+                        <a href="/edicionCliente/{{cliente.IdCliente}}/{{session.usrid}}" class="btn btn-danger text-white">Cancelar</a>
                     {% endif %}
                 </div>
             </div>
@@ -209,4 +228,7 @@
     </div>
 </form>
 </div>
+{% else %}
+<h1>Inicie sesión</h1>
+{% endif %}
 {% endblock %}

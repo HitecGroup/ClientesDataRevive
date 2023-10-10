@@ -1,0 +1,29 @@
+{% extends "./base.html" %}
+
+{% block title %} Login {% endblock%}
+
+{% block body %}
+<div class="form-control">
+<form id="formBusqueda" action="/home_/" method="POST">{% csrf_token %} 
+    
+    <div class="row" style="display: grid; grid-template-columns: auto 70vh auto;">
+        <div class="row" style="grid-column:2; padding: 1.5em;">
+        <div class="card">
+            <div class="card-header">
+                <h5 style="text-align: center;">Inicia sesión</h5>
+            </div>
+                <span>{{session.msg}}</span>
+                <div class='form-group col-md-12'><label class='etiqueta'>Correo Electrónico</label><input type='text'  name='user' class='form-control form-control-sm' required></div>
+                <div class='form-group col-md-12'><label class='etiqueta'>Contraseña</label><input type='text'  name='pwd' class='form-control form-control-sm' required></div>
+                <br><div class="row"><button class="btn btn-primary text-white btn-block">Iniciar sesión</button></div>
+            </div> 
+            <div class="card-footer" style="text-align: center;">
+                <a href="../cambiarPwd">Cambiar contraseña</a>
+            </div>
+        </div>
+        </div>
+    </div>
+</form>
+</div>
+
+{% endblock %}

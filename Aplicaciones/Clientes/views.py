@@ -3,14 +3,79 @@ from django.shortcuts import redirect, render
 from .models import *
 from django.db.models import Count
 from django.db.models import Q
+from datetime import datetime
 
 # Create your views here.
-def home(request):
+def home(request, usrid=0):
+    session = getSession(usrid)
     clientes = Clientes.objects.all()[0:200]
-    return render(request, "gestionClientes.html",{"clientes":clientes})
+    return render(request, "gestionClientes.html",{"clientes":clientes, "session":session})
 
+def login(request):
+    return render(request, "login.html")
 
-def edicionCliente(request,codigo):
+def cambiarPwd(request):
+    return render(request, "cambiarPwd.html")
+
+def cambioPwd(request):
+    user = request.POST['user']
+    pwd = request.POST['pwd']
+    newpwd = request.POST['newpwd']
+    ruta = "cambiarPwd.html"
+
+    if Users.objects.filter(User=user).exists():
+        usuario = Users.objects.get(User=user)
+        if(pwd==usuario.Pwd):
+            usuario.Pwd = newpwd
+            usuario.save()
+            msg = 'La contraseña fue cambiada con éxito.'
+        else :
+            msg = 'La contraseña es incorrecta.  Intente de nuevo.'
+    else:
+        msg = 'El usuario no existe.  Revise e intente de nuevo.'
+
+    return render(request, ruta, {"msg":msg})
+
+def loginUsr(request):
+    user = request.POST['user']
+    pwd = request.POST['pwd']
+
+    usrvalid = False
+    usrid = 0
+    usuario = nombre = msg = ""
+
+    if Users.objects.filter(User=user).exists():
+        usuario = Users.objects.get(User=user)
+        if(pwd==usuario.Pwd):
+            usrvalid = True
+            usrid = usuario.Id      
+            nombre = usuario.Nombre
+            clientes = Clientes.objects.all()[0:200]
+            session = {'usrvalid':usrvalid, 'usrid': usrid, 'user':user, 'nombre':nombre, 'msg':msg}
+            return render(request, "gestionClientes.html",{"clientes":clientes, "session":session})
+        else :
+            msg = 'La contraseña es incorrecta.  Intente de nuevo.'
+    else:
+        msg = 'El usuario no existe.  Revise e intente de nuevo.'
+      
+    session = {'usrvalid':usrvalid, 'usrid': usrid, 'user':user, 'nombre':nombre, 'msg':msg}
+    return render(request, 'login.html',{'session':session})
+
+def getSession(usrid):
+    usrvalid = False
+    user = ""
+    msg = nombre = ""
+
+    if Users.objects.filter(Id=usrid).exists():
+        usuario = Users.objects.get(Id=usrid)
+        usrvalid = True
+        user = usuario.User      
+        nombre = usuario.Nombre
+
+    return ({'usrvalid':usrvalid, 'usrid': usrid, 'user':user, 'nombre':nombre, 'msg':msg})
+
+def edicionCliente(request, codigo, usrid):
+    session = getSession(usrid)
     cliente = Clientes.objects.get(IdCliente=codigo)
     fecha = cliente.FechaNacimiento
     #fechaNacimiento = datetime.strftime(fecha,'%d/%m/%Y')
@@ -72,9 +137,9 @@ def edicionCliente(request,codigo):
             #"DivisionPM":cliente.DivisionPM,
             }
     
-    return render(request, "edicionCliente.html",{"cliente":acliente})
+    return render(request, "edicionCliente.html",{"cliente":acliente, "session":session, "logData":getLogData('Clientes', codigo)})
 
-def editarCliente(request):
+def editarCliente(request, usrid):
     IdCliente = request.POST['claveExterna']
     NombreCliente = request.POST['NombreCliente']
     TipoCliente = request.POST['TipoCliente']
@@ -156,14 +221,49 @@ def editarCliente(request):
     #cliente.ActPriEquipo = ActPriEquipo
     cliente.save()
 
-    return redirect('/')
+    data = {
+        "NombreCliente": NombreCliente,
+        "FechaNacimiento": FechaNacimiento,
+        "Sector": Sector,
+        "TipoCliente": TipoCliente,
+        "ClientePotencial": ClientePotencial,
+        "Estado": Estado,
+        "Duns": Duns,
+        "Clasificacion": Clasificacion,
+        "Division": Division,
+        "subDivision": subDivision,
+        "SucServicio": zonaServicio,
+        "TipoEmpresa": TipoEmpresa,
+        "iDNielsen": iDNielsen,
+        "NoTurnosC": NoTurnosC,
+        "Tier": Tier,
+        "NoMaqConvenC": NoMaqConvenC,
+        "NoMaqCNC_C": NoMaqCNC_C,
+        "NoMaqHT_C": NoMaqHT_C,
+        "MatUseCHMER": MatUseCHMER,
+        "MatUseYIZUMI": MatUseYIZUMI,
+        "MatUsoFab": MatUsoFab,
+        "MatViruta": MatViruta,
+        #"MatUsoCNC_Haas": MatUsoCNC_Haas,
+        "FrecuenciaCompra": FrecuenciaCompra,
+        "RegionVts": RegionVts,
+        "ActPriFAB": ActPriFAB,
+        "ActPriEDM": ActPriEDM,
+        "ActPriEquipoCNC": ActPriEquipoCNC,
+        #"ActPriEquipo": ActPriEquipo,
+    }
 
-def gestionContactos(request,codigo):
+    addLog(usrid, "Update", "Clientes", IdCliente, data)
+
+    return redirect('/home/'+usrid)
+
+def gestionContactos(request, codigo, usrid):
+    session = getSession(usrid)
     cliente = Clientes.objects.get(IdCliente=codigo)
     if Contactos.objects.filter(IdCliente=codigo).exists():
     # Si el cliente tiene contactos envía el listado de contactos del cliente
         contactosListados = Contactos.objects.all().filter(IdCliente=codigo)
-        return render(request,"gestionContactos.html",{"contactos":contactosListados, "cliente":cliente})
+        return render(request,"gestionContactos.html",{"contactos":contactosListados, "cliente":cliente, "session":session})
     else:
     # Si no hay contactos registrados, se envía agregar un contacto
         contacto = None
@@ -173,9 +273,10 @@ def gestionContactos(request,codigo):
         iniPais = {"CodeId":"MX", "Descrip":"México"}
         iniRegion = {"CodeId":"CMX", "Descrip":"Ciudad de México"}
         iniCheckbox = {"Principal":flag1, "VIP":flag2}
-        return render(request, "edicionContactos.html",{"vista":"Contacto", "Gestion":False, "idRegistro":"0", "contacto":contacto, "cliente":cliente, "iniPais":iniPais, "iniRegion":iniRegion, "iniCodPos":iniCodPos, "iniDistrito":iniDistrito, "dataInt":False, "iniCheckbox":iniCheckbox })
+        return render(request, "edicionContactos.html",{"vista":"Contacto", "Gestion":False, "idRegistro":"0", "contacto":contacto, "cliente":cliente, "session":session, "iniPais":iniPais, "iniRegion":iniRegion, "iniCodPos":iniCodPos, "iniDistrito":iniDistrito, "dataInt":False, "iniCheckbox":iniCheckbox })
 
-def edicionContacto(request, idCliente, codigo, Gestion):        
+def edicionContacto(request, idCliente, codigo, Gestion, usrid):
+    session = getSession(usrid)        
     cliente = Clientes.objects.get(IdCliente=idCliente)
     iniCodPos = ""
     iniDistrito = ""
@@ -213,9 +314,10 @@ def edicionContacto(request, idCliente, codigo, Gestion):
 
     iniCheckbox = {"Principal":flag1, "VIP":flag2}
     
-    return render(request, "edicionContactos.html",{"vista":"Contacto", "Gestion":Gestion, "idRegistro":codigo, "contacto":contacto, "cliente":cliente, "iniPais":iniPais, "iniRegion":iniRegion, "iniCodPos":iniCodPos, "iniDistrito":iniDistrito, "dataInt":dataInt, "iniCheckbox":iniCheckbox })
+    return render(request, "edicionContactos.html",{"vista":"Contacto", "Gestion":Gestion, "idRegistro":codigo, "contacto":contacto, "cliente":cliente, "session":session, "logData":getLogData('Contactos', codigo), "iniPais":iniPais, "iniRegion":iniRegion, "iniCodPos":iniCodPos, "iniDistrito":iniDistrito, "dataInt":dataInt, "iniCheckbox":iniCheckbox })
 
-def editarContacto(request):
+def editarContacto(request, usrid):
+    session = getSession(usrid)
     IdCliente = request.POST['IdCliente']
     IdContacto = request.POST['idRegistro']
     NombreContacto = request.POST['Nombre']
@@ -253,6 +355,7 @@ def editarContacto(request):
         Vip = 1
 
     if(IdContacto != "0") :
+        movimiento = 'Update'
         contacto = Contactos.objects.get(IdContacto=IdContacto)
         contacto.Nombre = NombreContacto
         contacto.SegundoNombre = SegundoNombre
@@ -278,6 +381,7 @@ def editarContacto(request):
         contacto.save()
 
     else :
+        movimiento = 'Create'
         ultimo = Contactos.objects.order_by('-IdContacto').first()
         IdContacto = ultimo.IdContacto
 
@@ -307,32 +411,58 @@ def editarContacto(request):
             Vip = Vip,
             Bloqueo = 0
         )
+        IdContacto = contacto.IdContacto
             
-    cliente = Clientes.objects.get(IdCliente=IdCliente)
-    contactosListados = Contactos.objects.all().filter(IdCliente=IdCliente)
-    return render(request,"gestionContactos.html",{"contactos":contactosListados, "cliente":cliente})
+    data = { "IdContacto": IdContacto,
+            "IdCliente": IdCliente,
+            "Nombre": NombreContacto,
+            "SegundoNombre": SegundoNombre,
+            "Apellidos": Apellidos,
+            "Telefono": Telefono,
+            "TelefonoMovil": TelefonoMovil,
+            "CorreoElectronico": CorreoElectronico,
+            "Departamento": Departamento,
+            "Funcion": Funcion,
+            "PaisRegion": PaisRegion,
+            "Estado": Estado,
+            "CodigoPostal": CodigoPostal,
+            "Ciudad": Ciudad,
+            "Distrito": Distrito,
+            "Calle": Calle,
+            "Numero": Numero,
+            "Edificio": Edificio,
+            "Planta": Planta,
+            "PaisExp": PaisExp,
+            "MedioComunicacion": MedioComunicacion,
+            "Principal": Principal,
+            "Vip": Vip
+    }
 
-def bloquearContacto(request, codigo,cliente):
+    entidad = "Contactos"
+    addLog(usrid, movimiento, entidad, IdContacto, data)
+    return redirect("../gestionContactos/"+IdCliente+"/"+usrid)
+    #cliente = Clientes.objects.get(IdCliente=IdCliente)
+    #contactosListados = Contactos.objects.all().filter(IdCliente=IdCliente)
+    #return render(request,"gestionContactos.html",{"contactos":contactosListados, "cliente":cliente, "session":session})
+
+def bloquearContacto(request, codigo,cliente, usrid):
+    session = getSession(usrid)
 
     contacto = Contactos.objects.get(IdContacto=codigo)
 
     if contacto.Bloqueo != True:
-
         contacto.Bloqueo = True
-
+        bloqueo = True
     else:
-
         contacto.Bloqueo = False
+        bloqueo = False
 
     contacto.save()
 
- 
+    addLog(usrid, "Bloqueo", "Contactos", codigo, {"Bloqueo":bloqueo})
 
     contactosListados = Contactos.objects.all().filter(IdCliente=cliente)
-
- 
-
-    return render(request,"gestionContactos.html",{"contactos":contactosListados, "cliente":cliente})
+    return render(request,"gestionContactos.html",{"contactos":contactosListados, "cliente":cliente, "session":session})
 
 def eliminarContacto(request,contacto,cliente):
     contacto = Contactos.objects.get(IdContacto=contacto)
@@ -340,13 +470,13 @@ def eliminarContacto(request,contacto,cliente):
     contactosListados = Contactos.objects.all().filter(IdCliente=cliente)
     return render(request,"gestionContactos.html",{"contactos":contactosListados})
 
-
-def gestionDirecciones(request,codigo):    
+def gestionDirecciones(request,codigo, usrid):
+    session = getSession(usrid) 
     cliente = Clientes.objects.get(IdCliente=codigo)
     if Direcciones.objects.filter(IdCliente=codigo).exists():
         direccionesListados = Direcciones.objects.all().filter(IdCliente=codigo)
     # Si hay direcciones, se envía a gestión de direcciones
-        return render(request,"gestionDirecciones.html",{"direcciones":direccionesListados, "cliente":cliente})
+        return render(request,"gestionDirecciones.html",{"direcciones":direccionesListados, "cliente":cliente, "session":session})
     else:
     # Si no hay direcciones registradas, se envía a edicionClienteDireccion
         flag1 = flag2 = flag3 = flag4 = False
@@ -357,9 +487,10 @@ def gestionDirecciones(request,codigo):
         iniCodDomFis = {"CodeId":"US", "Descrip":"Alabama"}
         iniCheckbox = {"DireccionPrincipal":flag1, "Entrega":flag2, "DestinatarioMercEstandar":flag3, "DestinatarioFactura":flag4}    
         
-        return render(request,"edicionClienteDireccion.html",{"vista":"Cliente", "Gestion":False, "id":0, "cliente":cliente, "iniPais":iniPais, "iniRegion":iniRegion, "iniCodPos":iniCodPos, "iniCodDomFis":iniCodDomFis, "iniDistrito":iniDistrito, "dataInt":False, "dataUS":False, "iniCheckbox":iniCheckbox})
+        return render(request,"edicionClienteDireccion.html",{"vista":"Cliente", "Gestion":False, "id":0, "cliente":cliente, "session":session, "iniPais":iniPais, "iniRegion":iniRegion, "iniCodPos":iniCodPos, "iniCodDomFis":iniCodDomFis, "iniDistrito":iniDistrito, "dataInt":False, "dataUS":False, "iniCheckbox":iniCheckbox})
     
-def edicionClienteDireccion(request,idCliente, codigo, Gestion):
+def edicionClienteDireccion(request,idCliente, codigo, Gestion, usrid):
+    session = getSession(usrid)
     cliente = Clientes.objects.get(IdCliente=idCliente)
     iniCodPos = ""
     iniDistrito = ""
@@ -411,9 +542,9 @@ def edicionClienteDireccion(request,idCliente, codigo, Gestion):
             flag4 = True
 
     iniCheckbox = {"DireccionPrincipal":flag1, "Entrega":flag2, "DestinatarioMercEstandar":flag3, "DestinatarioFactura":flag4}
-    return render(request, "edicionClienteDireccion.html",{"vista":"Cliente", "Gestion": Gestion, "id":codigo, "direcciones":direcciones, "cliente":cliente, "iniPais":iniPais, "iniRegion":iniRegion, "iniCodPos":iniCodPos, "iniCodDomFis":iniCodDomFis, "iniDistrito":iniDistrito, "dataInt":dataInt, "dataUS":dataUS, "iniCheckbox":iniCheckbox})
+    return render(request, "edicionClienteDireccion.html",{"vista":"Cliente", "Gestion": Gestion, "id":codigo, "direcciones":direcciones, "cliente":cliente, "session":session, "logData":getLogData('Direcciones',codigo), "iniPais":iniPais, "iniRegion":iniRegion, "iniCodPos":iniCodPos, "iniCodDomFis":iniCodDomFis, "iniDistrito":iniDistrito, "dataInt":dataInt, "dataUS":dataUS, "iniCheckbox":iniCheckbox})
 
-def editarDireccion(request):
+def editarDireccion(request, usrid):
     idRegistro = request.POST['idRegistro']
     IdCliente = request.POST['idCliente']
     PaisRegion = request.POST['PaisRegion']
@@ -452,6 +583,7 @@ def editarDireccion(request):
         DestinatarioFactura = "X"
     
     if (idRegistro != "0") :
+        movimiento = "Update"
         direcciones = Direcciones.objects.get(IdRegistro=idRegistro)
     
         direcciones.IdCliente = IdCliente
@@ -474,8 +606,9 @@ def editarDireccion(request):
         direcciones.save()
 
     else :
-        ultimo = Direcciones.objects.order_by('-IdRegistro').first()
-        idRegistro = ultimo.IdRegistro
+        movimiento = "Create"
+        #ultimo = Direcciones.objects.order_by('-IdRegistro').first()
+        #idRegistro = ultimo.IdRegistro+1
 
         direcciones = Direcciones.objects.create (
             IdCliente = IdCliente,
@@ -497,29 +630,51 @@ def editarDireccion(request):
             SitioWeb =SitioWeb,
             Bloqueo = 0
         )
+        idRegistro = direcciones.IdRegistro
 
-    return redirect("../gestionDirecciones/"+IdCliente)
+    data = { 
+            "IdCliente": IdCliente,
+            "PaisRegion": PaisRegion,
+            "Calle": Calle,
+            "Numero": Numero,
+            "Calle2": Calle2,
+            "Ciudad": Ciudad,
+            "Estado": Estado,
+            "CodigoPostal": CodigoPostal,
+            "Distrito": Distrito,
+            "CodigoDomFiscal": CodigoDomFiscal,
+            "DireccionPrincipal": DireccionPrincipal,
+            "Entrega": Entrega,
+            "DestinatarioMercEstandar": DestinatarioMercEstandar,
+            "DestinatarioFactura": DestinatarioFactura,
+            "Telefono": Telefono,
+            "CorreoElectronico": CorreoElectronico,
+            "SitioWeb": SitioWeb,
+    }
 
-def bloquearDireccion(request, cliente,idDireccion):
+    entidad = "Direcciones"
+    addLog(usrid, movimiento, entidad, idRegistro, data)
+    return redirect("../gestionDirecciones/"+IdCliente+"/"+usrid)
+
+def bloquearDireccion(request, cliente, idDireccion, usrid):
+    session = getSession(usrid)
 
     direccion = Direcciones.objects.get(IdRegistro=idDireccion)
 
     if direccion.Bloqueo != True:
-
         direccion.Bloqueo = True
-
+        bloqueo = True
     else:
-
         direccion.Bloqueo = False
+        bloqueo = False
 
     direccion.save()
 
+    addLog(usrid, "Bloqueo", "Direcciones", idDireccion, {"Bloqueo":bloqueo})
+
     direccionesListados = Direcciones.objects.all().filter(IdCliente=cliente)
-
     cliente = Clientes.objects.get(IdCliente=cliente)
-
- 
-    return render(request,"gestionDirecciones.html",{"direcciones":direccionesListados, "cliente":cliente})
+    return render(request,"gestionDirecciones.html",{"direcciones":direccionesListados, "cliente":cliente, "session":session})
 
  
 
@@ -914,7 +1069,6 @@ def get_MatUsoCNC_Haas(codigo) :
 
     return (descrip)
 
-
 def get_ActPriEDM(codigo) :
     if   (codigo == '124') :      descrip = 'Moldes'
     elif (codigo == '125') :      descrip = 'Troqueles y Matrices'
@@ -947,7 +1101,8 @@ def get_ActPriEquipo(codigo) :
 
     return (descrip)
 
-def buscarCliente(request):
+def buscarCliente(request, usrid):
+    session = getSession(usrid)
     busqueda = request.POST['Busqueda']
     clientes = Clientes.objects.all()[0:200]
 
@@ -959,4 +1114,39 @@ def buscarCliente(request):
             Q(Duns__icontains = busqueda) 
         ).distinct()
    
-    return render(request, "gestionClientesBusqueda.html",{"clientes":clientes})
+    return render(request, "gestionClientesBusqueda.html",{"clientes":clientes, "session":session})
+
+def addLog(usrid, movimiento, entidad, id, data) :
+    fecha = datetime.now()
+    logdata = Log.objects.create (
+        Fecha = fecha,
+        IdUser = usrid,
+        Entidad = entidad,
+        IdEnt = id,
+        TipoMov = movimiento,
+        Movimiento = movimiento,
+        Movimientojson = data
+    )
+
+    return True
+
+def getLogData(entidad, idRegistro):
+    cant = 0
+    fecha = datetime.today()
+    user = ""
+
+    if(idRegistro!="0"):
+        if Log.objects.filter(Entidad=entidad, IdEnt=idRegistro).exists():
+            cant = Log.objects.filter(Entidad=entidad, IdEnt=idRegistro).count()
+            ultimo = Log.objects.order_by('-id').first()
+            idusr = ultimo.IdUser
+            fecha = ultimo.Fecha
+            usuario = Users.objects.get(Id=idusr)
+            user = usuario.Nombre
+
+    logData = {
+        "cant":  cant,
+        "user":  user,
+        "fecha": fecha
+    }
+    return logData
