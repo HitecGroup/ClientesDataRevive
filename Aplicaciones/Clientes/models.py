@@ -262,7 +262,7 @@ class Users (models.Model):
                             self.Pwd )
 
 class Log (models.Model):
-   Fecha=models.DateField(default="2023-10-01")
+   Fecha=models.DateTimeField(default="2023-10-01 00:00:00")
    IdUser=models.IntegerField(null=False)
    Entidad=models.CharField(max_length=15, blank=False)
    IdEnt=models.CharField(max_length=80, blank=False)

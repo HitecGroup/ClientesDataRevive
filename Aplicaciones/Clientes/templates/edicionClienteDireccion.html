@@ -29,7 +29,7 @@
           </div>
           {% if logData.cant %}
             <div class="col-md-7" style="font-size: 12px; text-align: right; color:blue;">            
-                <span>{{logData.cant}} movimiento(s). </span> <span>Última actualización {{logData.fecha|date:'d/m/Y'}} por {{logData.user}}</span>
+                <span>{{logData.cant}} movimiento(s). </span> <span>Última actualización {{logData.fecha|date:'d/m/Y H:i'}} por {{logData.user}}</span>
             </div>
           {%endif%}
         </div>
