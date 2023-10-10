@@ -1,4 +1,5 @@
 from django.db import models
+import jsonfield
 
 # Create your models here.
 class Clientes(models.Model):
@@ -247,3 +248,34 @@ class RelReg_Edo(models.Model):
         return texto.format(self.c_estado,
                             self.idRegion )
  
+class Users (models.Model):
+    Id=models.AutoField(primary_key=True)
+    User=models.CharField(max_length=50, blank=False)
+    Nombre=models.CharField(max_length=100, blank=False)
+    Pwd=models.CharField(max_length=20, blank=False)
+
+    def __str__(self):
+        texto = "{0} ({1})"
+        return texto.format(self.Id,
+                            self.User,
+                            self.Nombre,
+                            self.Pwd )
+
+class Log (models.Model):
+   Fecha=models.DateField(default="2023-10-01")
+   IdUser=models.IntegerField(null=False)
+   Entidad=models.CharField(max_length=15, blank=False)
+   IdEnt=models.CharField(max_length=80, blank=False)
+   TipoMov=models.CharField(max_length=10, blank=False)    
+   Movimiento=models.CharField(max_length=20, blank=False)
+   Movimientojson = jsonfield.JSONField()
+
+   def __str__(self):
+       texto = "{0} ({1})"
+       return texto.format(self.Fecha,
+                           self.IdUser,
+                           self.Entidad,
+                           self.IdEnt,
+                           self.TipoMov,
+                           self.Movimiento,
+                           self.Movimientojson)
