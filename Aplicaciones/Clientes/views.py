@@ -1138,7 +1138,7 @@ def getLogData(entidad, idRegistro):
     if(idRegistro!="0"):
         if Log.objects.filter(Entidad=entidad, IdEnt=idRegistro).exists():
             cant = Log.objects.filter(Entidad=entidad, IdEnt=idRegistro).count()
-            ultimo = Log.objects.order_by('-id').first()
+            ultimo = Log.objects.filter(Entidad=entidad, IdEnt=idRegistro).order_by('-id').first()
             idusr = ultimo.IdUser
             fecha = ultimo.Fecha
             usuario = Users.objects.get(Id=idusr)
