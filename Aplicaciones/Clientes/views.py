@@ -4,6 +4,7 @@ from .models import *
 from django.db.models import Count
 from django.db.models import Q
 from datetime import datetime
+from django.contrib import messages
 
 # Create your views here.
 def home(request, usrid=0):
@@ -77,8 +78,12 @@ def getSession(usrid):
 def edicionCliente(request, codigo, usrid):
     session = getSession(usrid)
     cliente = Clientes.objects.get(IdCliente=codigo)
+    acliente = setDataCliente(cliente)
+    
+    return render(request, "edicionCliente.html",{"cliente":acliente, "session":session, "logData":getLogData('Clientes', codigo)})
+
+def setDataCliente(cliente):
     fecha = cliente.FechaNacimiento
-    #fechaNacimiento = datetime.strftime(fecha,'%d/%m/%Y')
     acliente = {"IdCliente":cliente.IdCliente, 
             "ClaveExterna":cliente.ClaveExterna,
             "NombreCliente":cliente.NombreCliente,
@@ -135,9 +140,8 @@ def edicionCliente(request, codigo, usrid):
             #"RFC":cliente.RFC,
             #"NombreAdicional":cliente.NombreAdicional,
             #"DivisionPM":cliente.DivisionPM,
-            }
-    
-    return render(request, "edicionCliente.html",{"cliente":acliente, "session":session, "logData":getLogData('Clientes', codigo)})
+    }
+    return acliente
 
 def editarCliente(request, usrid):
     IdCliente = request.POST['claveExterna']
@@ -254,8 +258,9 @@ def editarCliente(request, usrid):
     }
 
     addLog(usrid, "Update", "Clientes", IdCliente, data)
-
-    return redirect('/home/'+usrid)
+    messages.success(request, "Los datos del cliente fueron actualizados con éxito")
+    return redirect('/edicionCliente/'+IdCliente+'/'+usrid)
+    #return redirect('/home/'+usrid)
 
 def gestionContactos(request, codigo, usrid):
     session = getSession(usrid)
@@ -317,7 +322,6 @@ def edicionContacto(request, idCliente, codigo, Gestion, usrid):
     return render(request, "edicionContactos.html",{"vista":"Contacto", "Gestion":Gestion, "idRegistro":codigo, "contacto":contacto, "cliente":cliente, "session":session, "logData":getLogData('Contactos', codigo), "iniPais":iniPais, "iniRegion":iniRegion, "iniCodPos":iniCodPos, "iniDistrito":iniDistrito, "dataInt":dataInt, "iniCheckbox":iniCheckbox })
 
 def editarContacto(request, usrid):
-    session = getSession(usrid)
     IdCliente = request.POST['IdCliente']
     IdContacto = request.POST['idRegistro']
     NombreContacto = request.POST['Nombre']
@@ -379,6 +383,7 @@ def editarContacto(request, usrid):
         contacto.Principal = Principal
         contacto.Vip = Vip    
         contacto.save()
+        messages.success(request, "Los datos del contacto fueron actualizados con éxito")
 
     else :
         movimiento = 'Create'
@@ -412,6 +417,7 @@ def editarContacto(request, usrid):
             Bloqueo = 0
         )
         IdContacto = contacto.IdContacto
+        messages.success(request, "El contacto del cliente fue creado con éxito")
             
     data = { "IdContacto": IdContacto,
             "IdCliente": IdCliente,
@@ -440,10 +446,8 @@ def editarContacto(request, usrid):
 
     entidad = "Contactos"
     addLog(usrid, movimiento, entidad, IdContacto, data)
-    return redirect("../gestionContactos/"+IdCliente+"/"+usrid)
-    #cliente = Clientes.objects.get(IdCliente=IdCliente)
-    #contactosListados = Contactos.objects.all().filter(IdCliente=IdCliente)
-    #return render(request,"gestionContactos.html",{"contactos":contactosListados, "cliente":cliente, "session":session})
+    return redirect('/edicionContacto/'+IdCliente+'/'+IdContacto+'/Gestion/'+usrid)
+    #return redirect("../gestionContactos/"+IdCliente+"/"+usrid)
 
 def bloquearContacto(request, codigo,cliente, usrid):
     session = getSession(usrid)
@@ -453,12 +457,14 @@ def bloquearContacto(request, codigo,cliente, usrid):
     if contacto.Bloqueo != True:
         contacto.Bloqueo = True
         bloqueo = True
+        messages.success(request, "El contacto del cliente ha sido Bloqueado")
     else:
         contacto.Bloqueo = False
         bloqueo = False
+        messages.success(request, "El contacto del cliente ha sido Desbloqueado")
 
     contacto.save()
-
+    
     addLog(usrid, "Bloqueo", "Contactos", codigo, {"Bloqueo":bloqueo})
 
     contactosListados = Contactos.objects.all().filter(IdCliente=cliente)
@@ -604,6 +610,7 @@ def editarDireccion(request, usrid):
         direcciones.CorreoElectronico = CorreoElectronico
         direcciones.SitioWeb =SitioWeb
         direcciones.save()
+        messages.success(request, "Los datos de la dirección del Cliente fue actualizada con éxito")
 
     else :
         movimiento = "Create"
@@ -631,6 +638,7 @@ def editarDireccion(request, usrid):
             Bloqueo = 0
         )
         idRegistro = direcciones.IdRegistro
+        messages.success(request, "La dirección del Cliente fue creada con éxito")
 
     data = { 
             "IdCliente": IdCliente,
@@ -653,8 +661,10 @@ def editarDireccion(request, usrid):
     }
 
     entidad = "Direcciones"
+   
     addLog(usrid, movimiento, entidad, idRegistro, data)
-    return redirect("../gestionDirecciones/"+IdCliente+"/"+usrid)
+    return redirect("/edicionClienteDireccion/"+IdCliente+"/"+str(idRegistro)+"/True/"+usrid)
+    #return redirect("../gestionDirecciones/"+IdCliente+"/"+usrid)
 
 def bloquearDireccion(request, cliente, idDireccion, usrid):
     session = getSession(usrid)
@@ -664,9 +674,11 @@ def bloquearDireccion(request, cliente, idDireccion, usrid):
     if direccion.Bloqueo != True:
         direccion.Bloqueo = True
         bloqueo = True
+        messages.success(request, "La dirección del cliente ha sido Bloqueada")
     else:
         direccion.Bloqueo = False
         bloqueo = False
+        messages.success(request, "La dirección del cliente ha sido Desbloqueada")
 
     direccion.save()
 
