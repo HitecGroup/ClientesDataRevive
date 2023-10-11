@@ -13,7 +13,7 @@
                 <h5 style="text-align: center;">Inicia sesión</h5>
             </div>
                 <span>{{session.msg}}</span>
-                <div class='form-group col-md-12'><label class='etiqueta'>Correo Electrónico</label><input type='text'  name='user' class='form-control form-control-sm' required></div>
+                <div class='form-group col-md-12'><label class='etiqueta'>Correo Electrónico</label><input type='text'  name='user' value="{{request.POST.user}}" class='form-control form-control-sm' required></div>
                 <div class='form-group col-md-12'><label class='etiqueta'>Contraseña</label><input type='password'  name='pwd' class='form-control form-control-sm' required></div>
                 <br><div class="row"><button class="btn btn-primary text-white btn-block">Iniciar sesión</button></div>
             </div> 
