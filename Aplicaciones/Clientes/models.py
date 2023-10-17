@@ -39,6 +39,11 @@ class Clientes(models.Model):
     iDNielsen=models.CharField(max_length=40,default="Varios 2")
     ActPriEquipoCNC=models.CharField(max_length=40,default="Varios 2")
     MatViruta=models.CharField(max_length=40,default="Varios 2")
+    DivHaas=models.CharField(max_length=3,default="000")
+    DivPM=models.CharField(max_length=3,default="000")
+    DivHTools=models.CharField(max_length=3,default="000")
+    DivCNC=models.CharField(max_length=3,default="000")
+    DivNextec=models.CharField(max_length=3,default="000")
 
 
     def __str__(self):
@@ -78,7 +83,12 @@ class Clientes(models.Model):
                             self.subDivision,
                             self.iDNielsen,
                             self.ActPriEquipoCNC,
-                            self.MatViruta
+                            self.MatViruta,
+                            self.DivHaas,
+                            self.DivPM,
+                            self.DivHTools,
+                            self.DivCNC,
+                            self.DivNextec
 )
 
 class Contactos(models.Model):
