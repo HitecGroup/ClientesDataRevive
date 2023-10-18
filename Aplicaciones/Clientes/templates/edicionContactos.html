@@ -77,11 +77,104 @@
                     <div class='form-group col-md-4'><label class='etiqueta'>Apellidos</label><input type='text'  name='Apellidos' value='{{contacto.Apellidos}}' class='form-control form-control-sm'></div>
                     <div class='form-group col-md-2'><label class='etiqueta'>Telefono</label><input type='text'  name='Telefono' value='{{contacto.Telefono}}' class='form-control form-control-sm'></div>
                     <div class='form-group col-md-2'><label class='etiqueta'>TelefonoMovil</label><input type='text'  name='TelefonoMovil' value='{{contacto.TelefonoMovil}}' class='form-control form-control-sm'></div>
-                    <div class='form-group col-md-4'><label class='etiqueta'>CorreoElectronico</label><input type='text'  name='CorreoElectronico' value='{{contacto.CorreoElectronico}}' class='form-control form-control-sm'></div>
-                    <div class='form-group col-md-4'></div>
-                    <div class='form-group col-md-5'><label class='etiqueta'>Departamento</label><input type='text'  name='Departamento' value='{{contacto.Departamento}}' class='form-control form-control-sm'></div>
-                    <div class='form-group col-md-5'><label class='etiqueta'>Funcion</label><input type='text'  name='Funcion' value='{{contacto.Funcion}}' class='form-control form-control-sm'></div>
-                    
+                    <div class='form-group col-md-4'><span style="color:red">* </span><label class='etiqueta'>CorreoElectronico</label><input type='text'  name='CorreoElectronico' value='{{contacto.CorreoElectronico}}' class='form-control form-control-sm' required></div>
+                    <div class='form-group col-md-4'><label class='etiqueta'>MedioComunicacion</label>
+                        <!--input type='text'  name='MedioComunicacion' value='{{contacto.MedioComunicacion}}' class='form-control form-control-sm'></div-->
+                        <select name="MedioComunicacion" class="form-control form-control-sm minimal" value="{{contacto.MedioComunicacion}}">
+                            {% if contacto.MedioComunicacion %}
+                                <option value='{{contacto.MedioComunicacion}}'>{{descrip.dMedioComunicacion}}</option>
+                            {% else %}
+                                <option value="" disabled selected>Seleccione uno</option>
+                            {% endif %}
+                            <option value='001'>Mail</option>
+                            <option value='002'>Teléfono</option>
+                            <option value='003'>WhatsApp</option>                              
+                        </select>
+                    </div>
+                    <!--div class='form-group col-md-5'><label class='etiqueta'>Departamento</label><input type='text'  name='Departamento' value='{{contacto.Departamento}}' class='form-control form-control-sm'></div>
+                    <div class='form-group col-md-5'><label class='etiqueta'>Funcion</label><input type='text'  name='Funcion' value='{{contacto.Funcion}}' class='form-control form-control-sm'></div-->
+                    <div class='form-group col-md-5'>
+                        <label class="etiqueta">Departamento</label>
+                        <select name="Departamento" class="form-control form-control-sm minimal" value="{{contacto.Departamento}}">
+                            {% if contacto.Departamento %}
+                                <option value='{{contacto.Departamento}}'>{{descrip.dDepartamento}}</option>
+                            {% else %}
+                                <option value="" disabled selected>Seleccione uno</option>
+                            {% endif %}
+                            <option value='0001'>Dep.compras</option>
+                            <option value='0002'>Dep.ventas</option>
+                            <option value='0003'>Dep.administración</option>
+                            <option value='0004'>Dep.producción</option>
+                            <option value='0005'>Dep.gestión calidad</option>
+                            <option value='0006'>Secretaría</option>
+                            <option value='0007'>Dep.financiero</option>
+                            <option value='0008'>Dep.jurídico</option>
+                            <option value='0009'>Dep.Recursos Humanos</option>
+                            <option value='0010'>Dep.asuntos gen.</option>
+                            <option value='0011'>Dep.promoción</option>
+                            <option value='0012'>Dep.internacional</option>
+                            <option value='0013'>Dep.exportación</option>
+                            <option value='0014'>Dep.importación</option>
+                            <option value='0015'>Dep.rel.públicas</option>
+                            <option value='0016'>Dep.publicidad</option>
+                            <option value='0017'>Dep.planificación</option>
+                            <option value='0018'>Dep.invest.desar.</option>
+                            <option value='0019'>Dep.Desarr.product.</option>
+                            <option value='0020'>Oficina comercial</option>
+                            <option value='0021'>Dep.servicio</option>
+                            <option value='0022'>Soporte técnico</option>
+                            <option value='0023'>Departamento de TI</option>
+                            <option value='0024'>Departam.Logística</option>
+                        </select>
+                    </div>
+                    <div class='form-group col-md-5'>
+                        <label class="etiqueta">Función</label>
+                        <select name="Funcion" class="form-control form-control-sm minimal" value="{{contacto.Funcion}}">
+                            {% if contacto.Departamento %}
+                                <option value='{{contacto.Funcion}}'>{{descrip.dFuncion}}</option>
+                            {% else %}
+                                <option value="" disabled selected>Seleccione uno</option>
+                            {% endif %}
+                            <option value='Z001'>Arrento</option>
+                            <option value='Z002'>Fnto</option>
+                            <option value='Z003'>Tec</option>
+                            <option value='Z004'>Ent</option>
+                            <option value='Z005'>Comp</option>
+                            <option value='Z006'>Fact</option>
+                            <option value='Z007'>CxP</option>
+                            <option value='Z008'>Tec y Fnto</option>
+                            <option value='Z009'>Tec y Arrento</option>
+                            <option value='Z010'>Tec y Ent</option>
+                            <option value='Z011'>Tec y Comp</option>
+                            <option value='Z012'>Tec y Fact</option>
+                            <option value='Z013'>Comp y Fact</option>
+                            <option value='Z014'>Comp y Ent</option>
+                            <option value='Z015'>Arrento y Fact</option>
+                            <option value='Z016'>Arrento y Ent</option>
+                            <option value='Z017'>Fnto y Fact</option>
+                            <option value='Z018'>Fnto y Ent</option>
+                            <option value='Z019'>Ent y Fact</option>
+                            <option value='Z020'>Tec Comp y Ent</option>
+                            <option value='Z021'>Tec Comp y Fact</option>
+                            <option value='Z022'>Tec Ent y Fact</option>
+                            <option value='Z023'>Arrento Comp y Ent</option>
+                            <option value='Z024'>Arrento Comp y Fact</option>
+                            <option value='Z025'>Arrento Ent y Fact</option>
+                            <option value='Z026'>Arrento Ent y Tec</option>
+                            <option value='Z027'>Fnto Comp y Fact</option>
+                            <option value='Z028'>Fnto Comp y Ent</option>
+                            <option value='Z029'>Fnto Ent y Fact</option>
+                            <option value='Z030'>Fnto Ent y Tec</option>
+                            <option value='Z031'>Comp Ent y Fact</option>
+                            <option value='Z032'>Comp Ent y Tec</option>
+                            <option value='Z033'>Comp Fact y Tec</option>
+                            <option value='Z034'>Tec Comp Ent Fact</option>
+                            <option value='Z035'>Tec Comp Ent Fact y Arrento</option>
+                            <option value='Z036'>Tec Comp Ent Fact y Fnto</option>
+                            <option value='Z037'>Fnto Comp Ent y Fact</option>
+                            <option value='Z038'>Arrento Comp Ent y Fact</option>
+                        </select>
+                    </div>
                     <div class="form-group col-md-1">
                         <label class="etiqueta"></label>  
                         <div class="form-check">
@@ -104,7 +197,7 @@
                             <label class="etiqueta">VIP</label>
                         </div>                        
                     </div>
-                    <div class="row">
+                    <!--div class="row">
                         <input type="hidden" id="vista" value="{{vista}}">
                         <input type="hidden" id="idRegistro" value="0">
                         <input type="hidden" id="idCodDomFis" value="0">
@@ -166,8 +259,8 @@
                     <div class='form-group col-md-2'><label class='etiqueta'>Numero</label><input type='text'  name='Numero' value='{{contacto.Numero}}' class='form-control form-control-sm'></div>
                     <div class='form-group col-md-2'><label class='etiqueta'>Edificio</label><input type='text'  name='Edificio' value='{{contacto.Edificio}}' class='form-control form-control-sm'></div>
                     <div class='form-group col-md-2'><label class='etiqueta'>Planta</label><input type='text'  name='Planta' value='{{contacto.Planta}}' class='form-control form-control-sm'></div>
-                    <div class='form-group col-md-4'><label class='etiqueta'>PaisExp</label><input type='text'  name='PaisExp' value='{{contacto.PaisExp}}' class='form-control form-control-sm'></div>
-                    <div class='form-group col-md-4'><label class='etiqueta'>MedioComunicacion</label><input type='text'  name='MedioComunicacion' value='{{contacto.MedioComunicacion}}' class='form-control form-control-sm'></div>
+                    <div class='form-group col-md-4'><label class='etiqueta'>PaisExp</label><input type='text'  name='PaisExp' value='{{contacto.PaisExp}}' class='form-control form-control-sm'></div-->
+                    
                 </div>
             </div>
         </div>

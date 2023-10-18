@@ -93,7 +93,7 @@
                             <option value='196'>Educación</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <!--div class="form-group">
                         <span style="color:red">* </span><label class="etiqueta">Tipo de Cliente</label>
                         <select name="TipoCliente" class="form-control form-control-sm minimal" value="{{cliente.TipoCliente}}" required>
                             {% if cliente.TipoCliente %}
@@ -104,7 +104,7 @@
                             <option value="Coorporativo">Coorporativo</option>
                             <option value="Particular">Particular</option>
                         </select>
-                    </div>
+                    </div-->
                     <div class="form-group">
                         <span style="color:red">* </span><label class="etiqueta">Sector</label>
                         <select name="Sector" class="form-control form-control-sm minimal" value="{{cliente.Sector}}" required>
@@ -180,19 +180,28 @@
                             <option value="0">No</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <!--div class="form-group">
                         <span style="color:red">* </span><label class="etiqueta">Estado</label>
                         <select name="Estado" class="form-control form-control-sm minimal" value="{{cliente.Estado}}" required>
                             <option value='{{cliente.Estado}}'>{{cliente.dEstado}}</option>
                             <option value="1">Activo</option>
                             <option value="0">Inactivo</option>
                         </select>
-                    </div>
+                    </div-->
                     <div class="form-group">
+                        <div class="row">
+                        <div class="col-md-11">
                         <label class="etiqueta">D-U-N-S</label>
-                        <input type="text" name="Duns" class="form-control form-control-sm" value="{{cliente.Duns}}" maxlength="9">
+                        <input type="text" alt="Texto" name="Duns" class="form-control form-control-sm" value="{{cliente.Duns}}" maxlength="9">
+                        </div>
+                        <div class="col-md-1">
+                        <div style="cursor: pointer; color: blue;" onclick="msgDuns()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                          </svg></div>
+                        </div>
+                        </div>
                     </div>
-                    <div class="form-group">
+                    <!--div class="form-group">
                         <span style="color:red">* </span><label class="etiqueta">Clasificación ABC</label>
                         <select name="Clasificacion" class="form-control form-control-sm minimal" value="{{cliente.Clasificacion}}" required>
                             {% if cliente.Clasificacion %}
@@ -207,8 +216,8 @@
                             <option value='N'>PA</option>
                             <option value='O'>PB</option>
                         </select>
-                    </div>
-                    <div class="form-group">
+                    </div-->
+                    <!--div class="form-group">
                         <span style="color:red">* </span><label class="etiqueta">División</label>
                         <select name="Division" class="form-control form-control-sm minimal" value="{{cliente.Division}}" required>
                             {% if cliente.Division %}
@@ -242,8 +251,72 @@
                             <option value='FAB'>FAB</option>
                             <option value='PM'>PM</option>
                         </select>
+                    </div-->
+                    <div class="form-group">
+                        <label class="etiqueta">División HAAS</label>
+                        <select name="DivHaas" class="form-control form-control-sm minimal" value="{{cliente.DivHaas}}">
+                            {% if cliente.DivHaas %}
+                            <option value='{{cliente.DivHaas}}'>{{cliente.dDivHaas}}</option>
+                            {% else %}
+                            <option value="" disabled selected>Seleccione uno</option>
+                            {% endif %}
+                            <option value='109'>HFO MEXICO</option>
+                            <option value='111'>HFO ECUADOR</option>
+                            <option value='112'>HFO COLOMBIA</option>
+                            <option value='113'>HFO CAM</option>
+                            <option value='114'>HFO ESPAÑA</option>
+                        </select>
                     </div>
                     <div class="form-group">
+                        <label class="etiqueta">División PM</label>
+                        <select name="DivPM" class="form-control form-control-sm minimal" value="{{cliente.DivPM}}">
+                            {% if cliente.DivPM %}
+                            <option value='{{cliente.DivPM}}'>{{cliente.dDivPM}}</option>
+                            {% else %}
+                            <option value="" disabled selected>Seleccione uno</option>
+                            {% endif %}
+                            <option value='116'>PM</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="etiqueta">División HTOOLS</label>
+                        <select name="DivHtools" class="form-control form-control-sm minimal" value="{{cliente.DivHTools}}">
+                            {% if cliente.DivHTools %}
+                            <option value='{{cliente.DivHtools}}'>{{cliente.dDivHtools}}</option>
+                            {% else %}
+                            <option value="" disabled selected>Seleccione uno</option>
+                            {% endif %}
+                            <option value='118'>TOOLS</option>
+                            <option value='119'>SOLUBLES</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="etiqueta">División CNC</label>
+                        <select name="DivCNC" class="form-control form-control-sm minimal" value="{{cliente.DivCNC}}">
+                            {% if cliente.DivCNC %}
+                            <option value='{{cliente.DivCNC}}'>{{cliente.dCNC}}</option>
+                            {% else %}
+                            <option value="" disabled selected>Seleccione uno</option>
+                            {% endif %}
+                            <option value='121'>CNC</option>
+                            <option value='122'>OMNITEC</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="etiqueta">División NEXTEC</label>
+                        <select name="DivNextec" class="form-control form-control-sm minimal" value="{{cliente.DivNextec}}">
+                            {% if cliente.DivNextec %}
+                            <option value='{{cliente.DivNextec}}'>{{cliente.dDivNextec}}</option>
+                            {% else %}
+                            <option value="" disabled selected>Seleccione uno</option>
+                            {% endif %}
+                            <option value='123'>FAB</option>
+                            <option value='124'>EDM</option>
+                        </select>
+                    </div>
+                    <!--div class="form-group"><label class="etiqueta"></label></div>
+                    <div class="form-group"><label class="form-control form-control-sm minimal" style="border-color: transparent;"></label></div-->
+                    <!--div class="form-group">
                         <span style="color:red">* </span><label class="etiqueta">Zona Servicio</label>
                         <select name="SucServicio" class="form-control form-control-sm minimal" value="{{cliente.SucServicio}}" required>
                             {% if cliente.SucServicio %}
@@ -291,8 +364,8 @@
                             <option value='138'>NI - Managua</option>
                             <option value='139'>NI - León</option>
                         </select>
-                    </div>
-                    <div class="form-group">
+                    </div-->
+                    <!--div class="form-group">
                         <span style="color:red">* </span><label class="etiqueta">Región Ventas</label>
                         <select name="RegionVts" class="form-control form-control-sm minimal" value="{{cliente.RegionVts}}" required>
                             {% if cliente.RegionVts %}
@@ -313,10 +386,23 @@
                             <option value='120'>ES - HFO CENTRO</option>
                             <option value='121'>ES - HFO NORTE</option>
                         </select>
-                    </div>
-                    <div class="form-group">
+                    </div-->
+                    <!--div class="form-group">
                         <label class="etiqueta">ID de Nielsen</label>
                         <input type="text" name="iDNielsen" class="form-control form-control-sm" value="{{cliente.iDNielsen}}">
+                    </div-->
+                    <div class="form-group">
+                        <span style="color:red">* </span><label class="etiqueta">No Turnos C</label>
+                        <select name="NoTurnosC" class="form-control form-control-sm minimal" value="{{cliente.NoTurnosC}}" required>
+                            {% if cliente.NoTurnosC %}
+                                <option value='{{cliente.NoTurnosC}}'>{{cliente.NoTurnosC}}</option>
+                            {% else %}
+                                <option value="" disabled selected>Seleccione uno</option>
+                            {% endif %}
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3'>3</option>
+                        </select>
                     </div>
             </div>
         </div>
@@ -324,19 +410,6 @@
     <div class="col-md-6">
         <div class="card">
             <div class="card-body">
-                <div class="form-group">
-                    <span style="color:red">* </span><label class="etiqueta">No Turnos C</label>
-                    <select name="NoTurnosC" class="form-control form-control-sm minimal" value="{{cliente.NoTurnosC}}" required>
-                        {% if cliente.NoTurnosC %}
-                            <option value='{{cliente.NoTurnosC}}'>{{cliente.NoTurnosC}}</option>
-                        {% else %}
-                            <option value="" disabled selected>Seleccione uno</option>
-                        {% endif %}
-                        <option value='1'>1</option>
-                        <option value='2'>2</option>
-                        <option value='3'>3</option>
-                    </select>
-                </div>
                 <div class="form-group">
                     <span style="color:red">* </span><label class="etiqueta">Tier (Cadena)</label>
                     <select name="Tier" class="form-control form-control-sm minimal" value="{{cliente.Tier}}" required>

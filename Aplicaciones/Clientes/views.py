@@ -90,16 +90,21 @@ def setDataCliente(cliente):
             "FechaNacimiento":fecha, 
             "Sector":cliente.Sector,
             "TipoEmpresa":cliente.TipoEmpresa,
-            "TipoCliente":cliente.TipoCliente,
+            #"TipoCliente":cliente.TipoCliente,
             "ClientePotencial":cliente.ClientePotencial,
-            "Estado":cliente.Estado,
+            #"Estado":cliente.Estado,
             "Duns":cliente.Duns,
-            "Clasificacion":cliente.Clasificacion,
-            "Division":cliente.Division,
-            "subDivision":cliente.subDivision,
-            "SucServicio":cliente.SucServicio,
-            "RegionVts":cliente.RegionVts,
-            "iDNielsen":cliente.iDNielsen,
+            #"Clasificacion":cliente.Clasificacion,
+            #"Division":cliente.Division,
+            #"subDivision":cliente.subDivision,
+            "DivHaas":cliente.DivHaas,
+            "DivPM":cliente.DivPM,
+            "DivCNC":cliente.DivCNC,
+            "DivHTools":cliente.DivHTools,
+            "DivNextec":cliente.DivNextec,
+            #"SucServicio":cliente.SucServicio,
+            #"RegionVts":cliente.RegionVts,
+            #"iDNielsen":cliente.iDNielsen,
             "NoTurnosC":cliente.NoTurnosC,
             "Tier":cliente.Tier,
             "FrecuenciaCompra":cliente.FrecuenciaCompra,
@@ -122,7 +127,7 @@ def setDataCliente(cliente):
             "dClasificacion":get_Clasificacion(cliente.Clasificacion),
             "dDivision":get_Division(cliente.Division),
             "dsubDivision":get_SubDivision(cliente.subDivision),
-            "dSucServicio":get_sucServicio(cliente.SucServicio),
+            #"dSucServicio":get_sucServicio(cliente.SucServicio),
             "dTipoEmpresa":get_TipoEmpresa(cliente.TipoEmpresa),
             "dTier":get_Tier(cliente.Tier),
             "dMatUseCHMER":get_MatUseCHMER(cliente.MatUseCHMER),
@@ -130,11 +135,16 @@ def setDataCliente(cliente):
             "dMatUsoFab":get_MatUsoFab(cliente.MatUsoFab),
             "dMatViruta":get_MatViruta(cliente.MatViruta),
             "dMatUsoCNC_Haas":get_MatUsoCNC_Haas(cliente.MatUsoCNC_Haas),
-            "dRegionVts":get_RegionVts(cliente.RegionVts),
+            #"dRegionVts":get_RegionVts(cliente.RegionVts),
             "dActPriFAB":get_ActPriFAB(cliente.ActPriFAB),
             "dActPriEDM":get_ActPriEDM(cliente.ActPriEDM),
             "dActPriEquipoCNC":get_ActPriEquipoCNC(cliente.ActPriEquipoCNC),
             "dActPriEquipo":get_ActPriEquipo(cliente.ActPriEquipo),
+            "dDivHaas":get_DivHaas(cliente.DivHaas),
+            "dDivPM":get_DivPM(cliente.DivPM),
+            "dDivCNC":get_DivCNC(cliente.DivCNC),
+            "dDivHTools":get_DivHTools(cliente.DivHTools),
+            "dDivNextec":get_DivNextec(cliente.DivNextec),
             #"DireccioCliente":cliente.DireccioCliente,
             #"TelefonoPrincipal":cliente.TelefonoPrincipal,
             #"RFC":cliente.RFC,
@@ -146,21 +156,20 @@ def setDataCliente(cliente):
 def editarCliente(request, usrid):
     IdCliente = request.POST['claveExterna']
     NombreCliente = request.POST['NombreCliente']
-    TipoCliente = request.POST['TipoCliente']
+    #TipoCliente = request.POST['TipoCliente']
     ClientePotencial = request.POST['ClientePotencial']
     FechaNacimiento = request.POST['FechaNacimiento']
     Sector = request.POST['Sector']
-    TipoCliente = request.POST['TipoCliente']
     ClientePotencial = request.POST['ClientePotencial']
-    Estado = request.POST['Estado']
+    #Estado = request.POST['Estado']
     Duns = request.POST['Duns']
-    Clasificacion = request.POST['Clasificacion']
-    Division = request.POST['Division']
-    subDivision = request.POST['subDivision']
-    zonaServicio = request.POST['SucServicio']
+    #Clasificacion = request.POST['Clasificacion']
+    #Division = request.POST['Division']
+    #subDivision = request.POST['subDivision']
+    #zonaServicio = request.POST['SucServicio']
     TipoEmpresa = request.POST['TipoEmpresa']
-    iDNielsen = request.POST['iDNielsen']
-    RegionVts = request.POST['RegionVts']
+    #iDNielsen = request.POST['iDNielsen']
+    #RegionVts = request.POST['RegionVts']
     NoTurnosC = request.POST['NoTurnosC']
     Tier = request.POST['Tier']
     NoMaqConvenC = request.POST['NoMaqConvenC']
@@ -178,9 +187,20 @@ def editarCliente(request, usrid):
         MatViruta = request.POST['MatViruta']
     #if "MatUseYIZUMI" in request.POST:
         #MatUsoCNC_Haas = request.POST['MatUsoCNC_Haas']
+    DivHaas = DivCNC = DivHTools = DivNextec = DivPM = ""
+    if "DivHaas" in request.POST:
+        DivHaas = request.POST['DivHaas']
+    if "DivPM" in request.POST:
+        DivPM = request.POST['DivPM']
+    if "DivHTools" in request.POST:
+        DivHTools = request.POST['DivHTools']
+    if "DivCNC" in request.POST:
+        DivCNC = request.POST['DivCNC']
+    if "DivNextec" in request.POST:
+        DivNextec = request.POST['DivNextec']
 
     FrecuenciaCompra = request.POST['FrecuenciaCompra']
-    RegionVts = request.POST['RegionVts']
+    #RegionVts = request.POST['RegionVts']
 
     ActPriFAB = ActPriEDM = ActPriEquipoCNC = ""
     #ActPriEquipo = ""
@@ -197,16 +217,21 @@ def editarCliente(request, usrid):
     cliente.NombreCliente = NombreCliente
     cliente.FechaNacimiento = FechaNacimiento
     cliente.Sector = Sector
-    cliente.TipoCliente = TipoCliente
+    #cliente.TipoCliente = TipoCliente
     cliente.ClientePotencial = ClientePotencial
-    cliente.Estado = Estado
+    #cliente.Estado = Estado
     cliente.Duns = Duns
-    cliente.Clasificacion = Clasificacion
-    cliente.Division = Division
-    cliente.subDivision = subDivision
-    cliente.SucServicio = zonaServicio
+    #cliente.Clasificacion = Clasificacion
+    #cliente.Division = Division
+    #cliente.subDivision = subDivision
+    cliente.DivHaas = DivHaas
+    cliente.DivPM = DivPM
+    cliente.DivCNC = DivCNC
+    cliente.DivHTools = DivHTools
+    cliente.DivNextec = DivNextec
+    #cliente.SucServicio = zonaServicio
     cliente.TipoEmpresa = TipoEmpresa
-    cliente.iDNielsen= iDNielsen
+    #cliente.iDNielsen= iDNielsen
     cliente.NoTurnosC = NoTurnosC
     cliente.Tier = Tier
     cliente.NoMaqConvenC = NoMaqConvenC
@@ -218,7 +243,7 @@ def editarCliente(request, usrid):
     cliente.MatViruta = MatViruta
     #cliente.MatUsoCNC_Haas = MatUsoCNC_Haas
     cliente.FrecuenciaCompra = FrecuenciaCompra
-    cliente.RegionVts = RegionVts
+    #cliente.RegionVts = RegionVts
     cliente.ActPriFAB = ActPriFAB
     cliente.ActPriEDM = ActPriEDM
     cliente.ActPriEquipoCNC = ActPriEquipoCNC
@@ -229,16 +254,21 @@ def editarCliente(request, usrid):
         "NombreCliente": NombreCliente,
         "FechaNacimiento": FechaNacimiento,
         "Sector": Sector,
-        "TipoCliente": TipoCliente,
+        #"TipoCliente": TipoCliente,
         "ClientePotencial": ClientePotencial,
-        "Estado": Estado,
+        #"Estado": Estado,
         "Duns": Duns,
-        "Clasificacion": Clasificacion,
-        "Division": Division,
-        "subDivision": subDivision,
-        "SucServicio": zonaServicio,
+        #"Clasificacion": Clasificacion,
+        #"Division": Division,
+        #"subDivision": subDivision,
+        "DivHaas": DivHaas,
+        "DivPM": DivPM,
+        "DivCNC": DivCNC,
+        "DivHTools": DivHTools,
+        "DivNextec": DivNextec,
+        #"SucServicio": zonaServicio,
         "TipoEmpresa": TipoEmpresa,
-        "iDNielsen": iDNielsen,
+        #"iDNielsen": iDNielsen,
         "NoTurnosC": NoTurnosC,
         "Tier": Tier,
         "NoMaqConvenC": NoMaqConvenC,
@@ -250,7 +280,7 @@ def editarCliente(request, usrid):
         "MatViruta": MatViruta,
         #"MatUsoCNC_Haas": MatUsoCNC_Haas,
         "FrecuenciaCompra": FrecuenciaCompra,
-        "RegionVts": RegionVts,
+        #"RegionVts": RegionVts,
         "ActPriFAB": ActPriFAB,
         "ActPriEDM": ActPriEDM,
         "ActPriEquipoCNC": ActPriEquipoCNC,
@@ -278,7 +308,8 @@ def gestionContactos(request, codigo, usrid):
         iniPais = {"CodeId":"MX", "Descrip":"México"}
         iniRegion = {"CodeId":"CMX", "Descrip":"Ciudad de México"}
         iniCheckbox = {"Principal":flag1, "VIP":flag2}
-        return render(request, "edicionContactos.html",{"vista":"Contacto", "Gestion":False, "idRegistro":"0", "contacto":contacto, "cliente":cliente, "session":session, "iniPais":iniPais, "iniRegion":iniRegion, "iniCodPos":iniCodPos, "iniDistrito":iniDistrito, "dataInt":False, "iniCheckbox":iniCheckbox })
+        descrip = getContactoDescrip(0, contacto)
+        return render(request, "edicionContactos.html",{"vista":"Contacto", "Gestion":False, "idRegistro":"0", "contacto":contacto, "cliente":cliente, "session":session, "iniPais":iniPais, "iniRegion":iniRegion, "iniCodPos":iniCodPos, "iniDistrito":iniDistrito, "dataInt":False, "iniCheckbox":iniCheckbox, "descrip":descrip })
 
 def edicionContacto(request, idCliente, codigo, Gestion, usrid):
     session = getSession(usrid)        
@@ -291,6 +322,7 @@ def edicionContacto(request, idCliente, codigo, Gestion, usrid):
         contacto = None
         iniPais = {"CodeId":"MX", "Descrip":"México"}
         iniRegion = {"CodeId":"CMX", "Descrip":"Ciudad de México"}
+        iniMedioComunicacion = {"CodeId":"002", "Descrip":"Teléfono"}
     else :
         contacto = Contactos.objects.get(IdContacto=codigo)
         idPais = contacto.PaisRegion
@@ -311,15 +343,30 @@ def edicionContacto(request, idCliente, codigo, Gestion, usrid):
             dataInt = True
         iniPais = {"CodeId":idPais, "Descrip":pdescrip}
         iniRegion = {"CodeId":contacto.Estado, "Descrip":rdescrip}
-
+        
         if( contacto.Principal ):
             flag1 = True
         if( contacto.Vip == "1" ):
             flag2 = True
 
     iniCheckbox = {"Principal":flag1, "VIP":flag2}
+    descrip = getContactoDescrip(codigo, contacto)
     
-    return render(request, "edicionContactos.html",{"vista":"Contacto", "Gestion":Gestion, "idRegistro":codigo, "contacto":contacto, "cliente":cliente, "session":session, "logData":getLogData('Contactos', codigo), "iniPais":iniPais, "iniRegion":iniRegion, "iniCodPos":iniCodPos, "iniDistrito":iniDistrito, "dataInt":dataInt, "iniCheckbox":iniCheckbox })
+    return render(request, "edicionContactos.html",{"vista":"Contacto", "Gestion":Gestion, "idRegistro":codigo, "contacto":contacto, "cliente":cliente, "session":session, "logData":getLogData('Contactos', codigo), "iniPais":iniPais, "iniRegion":iniRegion, "iniCodPos":iniCodPos, "iniDistrito":iniDistrito, "dataInt":dataInt, "iniCheckbox":iniCheckbox, "descrip": descrip })
+
+def getContactoDescrip(idContacto, contacto):
+    dFuncion = dDepartamento = dMedioComunicacion = ""
+    if(idContacto!="0"):
+        dFuncion = get_Funcion(contacto.Funcion)
+        dDepartamento = get_Departamento(contacto.Departamento)
+        dMedioComunicacion = get_MedioComunicacion(contacto.MedioComunicacion)
+
+    dContacto = {
+        "dFuncion":         dFuncion,
+        "dDepartamento":    dDepartamento,
+        "dMedioComunicacion":dMedioComunicacion
+    }
+    return dContacto
 
 def editarContacto(request, usrid):
     IdCliente = request.POST['IdCliente']
@@ -330,27 +377,33 @@ def editarContacto(request, usrid):
     Telefono = request.POST['Telefono']
     TelefonoMovil = request.POST['TelefonoMovil']
     CorreoElectronico = request.POST['CorreoElectronico']
-    Departamento = request.POST['Departamento']
-    Funcion = request.POST['Funcion']
-    PaisRegion = request.POST['PaisRegion']
-    Estado = request.POST['Estado']
+    Departamento = Funcion = MedioComunicacion = ""
 
-    if (PaisRegion=="MX"):
-        CodigoPostal = request.POST['CodigoPostal']
-        Ciudad = request.POST['Ciudad']
-        Distrito = request.POST['Distrito']
-    else :
-        CodigoPostal = request.POST['IntCodigoPostal']
-        Ciudad = request.POST['IntCiudad']
-        Distrito = request.POST['IntDistrito']  
+    if "Departamento" in request.POST:
+        Departamento = request.POST['Departamento']
+    if "Funcion" in request.POST:
+        Funcion = request.POST['Funcion']
+    if "MedioComunicacion" in request.POST:
+        MedioComunicacion = request.POST['MedioComunicacion']
 
-    Calle = request.POST['Calle']
-    Numero = request.POST['Numero']
-    Edificio = request.POST['Edificio']
-    Planta = request.POST['Planta']
-    PaisExp = request.POST['PaisExp']
-    MedioComunicacion = request.POST['MedioComunicacion']
+    #PaisRegion = request.POST['PaisRegion']
+    #Estado = request.POST['Estado']
 
+    #if (PaisRegion=="MX"):
+    #    CodigoPostal = request.POST['CodigoPostal']
+    #    Ciudad = request.POST['Ciudad']
+    #    Distrito = request.POST['Distrito']
+    #else :
+    #    CodigoPostal = request.POST['IntCodigoPostal']
+    #    Ciudad = request.POST['IntCiudad']
+    #    Distrito = request.POST['IntDistrito']  
+
+    #Calle = request.POST['Calle']
+    #Numero = request.POST['Numero']
+    #Edificio = request.POST['Edificio']
+    #Planta = request.POST['Planta']
+    #PaisExp = request.POST['PaisExp']
+    
     Principal = Vip = 0
     
     if "Principal" in request.POST:
@@ -369,17 +422,17 @@ def editarContacto(request, usrid):
         contacto.CorreoElectronico = CorreoElectronico
         contacto.Departamento = Departamento
         contacto.Funcion = Funcion
-        contacto.PaisRegion = PaisRegion
-        contacto.Estado = Estado
-        contacto.CodigoPostal = CodigoPostal
-        contacto.Ciudad = Ciudad
-        contacto.Distrito = Distrito
-        contacto.Calle = Calle
-        contacto.Numero = Numero
-        contacto.Edificio = Edificio
-        contacto.Planta = Planta
-        contacto.PaisExp = PaisExp
         contacto.MedioComunicacion = MedioComunicacion
+        #contacto.PaisRegion = PaisRegion
+        #contacto.Estado = Estado
+        #contacto.CodigoPostal = CodigoPostal
+        #contacto.Ciudad = Ciudad
+        #contacto.Distrito = Distrito
+        #contacto.Calle = Calle
+        #contacto.Numero = Numero
+        #contacto.Edificio = Edificio
+        #contacto.Planta = Planta
+        #contacto.PaisExp = PaisExp
         contacto.Principal = Principal
         contacto.Vip = Vip    
         contacto.save()
@@ -401,17 +454,17 @@ def editarContacto(request, usrid):
             CorreoElectronico = CorreoElectronico,
             Departamento = Departamento,
             Funcion = Funcion,
-            PaisRegion = PaisRegion,
-            Estado = Estado,
-            CodigoPostal = CodigoPostal,
-            Ciudad = Ciudad,
-            Distrito = Distrito,
-            Calle = Calle,
-            Numero = Numero,
-            Edificio = Edificio,
-            Planta = Planta,
-            PaisExp = PaisExp,
             MedioComunicacion = MedioComunicacion,
+            #PaisRegion = PaisRegion,
+            #Estado = Estado,
+            #CodigoPostal = CodigoPostal,
+            #Ciudad = Ciudad,
+            #Distrito = Distrito,
+            #Calle = Calle,
+            #Numero = Numero,
+            #Edificio = Edificio,
+            #Planta = Planta,
+            #PaisExp = PaisExp,
             Principal = Principal,
             Vip = Vip,
             Bloqueo = 0
@@ -429,17 +482,17 @@ def editarContacto(request, usrid):
             "CorreoElectronico": CorreoElectronico,
             "Departamento": Departamento,
             "Funcion": Funcion,
-            "PaisRegion": PaisRegion,
-            "Estado": Estado,
-            "CodigoPostal": CodigoPostal,
-            "Ciudad": Ciudad,
-            "Distrito": Distrito,
-            "Calle": Calle,
-            "Numero": Numero,
-            "Edificio": Edificio,
-            "Planta": Planta,
-            "PaisExp": PaisExp,
             "MedioComunicacion": MedioComunicacion,
+            #"PaisRegion": PaisRegion,
+            #"Estado": Estado,
+            #"CodigoPostal": CodigoPostal,
+            #"Ciudad": Ciudad,
+            #"Distrito": Distrito,
+            #"Calle": Calle,
+            #"Numero": Numero,
+            #"Edificio": Edificio,
+            #"Planta": Planta,
+            #"PaisExp": PaisExp,
             "Principal": Principal,
             "Vip": Vip
     }
@@ -1111,6 +1164,117 @@ def get_ActPriEquipo(codigo) :
     elif (codigo == '122') :      descrip = 'Otros'
     else :  descrip = ''
 
+    return (descrip)
+
+def get_Funcion(codigo) :
+    descrip = ""
+    if   (codigo == 'Z001') :      descrip = 'Arrento'
+    elif (codigo == 'Z002') :      descrip = 'Fnto'
+    elif (codigo == 'Z003') :      descrip = 'Tec'
+    elif (codigo == 'Z004') :      descrip = 'Ent'
+    elif (codigo == 'Z005') :      descrip = 'Comp'
+    elif (codigo == 'Z006') :      descrip = 'Fact'
+    elif (codigo == 'Z007') :      descrip = 'CxP'
+    elif (codigo == 'Z008') :      descrip = 'Tec y Fnto'
+    elif (codigo == 'Z009') :      descrip = 'Tec y Arrento'
+    elif (codigo == 'Z010') :      descrip = 'Tec y Ent'
+    elif (codigo == 'Z011') :      descrip = 'Tec y Comp'
+    elif (codigo == 'Z012') :      descrip = 'Tec y Fact'
+    elif (codigo == 'Z013') :      descrip = 'Comp y Fact'
+    elif (codigo == 'Z014') :      descrip = 'Comp y Ent'
+    elif (codigo == 'Z015') :      descrip = 'Arrento y Fact'
+    elif (codigo == 'Z016') :      descrip = 'Arrento y Ent'
+    elif (codigo == 'Z017') :      descrip = 'Fnto y Fact'
+    elif (codigo == 'Z018') :      descrip = 'Fnto y Ent'
+    elif (codigo == 'Z019') :      descrip = 'Ent y Fact'
+    elif (codigo == 'Z020') :      descrip = 'Tec Comp y Ent'
+    elif (codigo == 'Z021') :      descrip = 'Tec Comp y Fact'
+    elif (codigo == 'Z022') :      descrip = 'Tec Ent y Fact'
+    elif (codigo == 'Z023') :      descrip = 'Arrento Comp y Ent'
+    elif (codigo == 'Z024') :      descrip = 'Arrento Comp y Fact'
+    elif (codigo == 'Z025') :      descrip = 'Arrento Ent y Fact'
+    elif (codigo == 'Z026') :      descrip = 'Arrento Ent y Tec'
+    elif (codigo == 'Z027') :      descrip = 'Fnto Comp y Fact'
+    elif (codigo == 'Z028') :      descrip = 'Fnto Comp y Ent'
+    elif (codigo == 'Z029') :      descrip = 'Fnto Ent y Fact'
+    elif (codigo == 'Z030') :      descrip = 'Fnto Ent y Tec'
+    elif (codigo == 'Z031') :      descrip = 'Comp Ent y Fact'
+    elif (codigo == 'Z032') :      descrip = 'Comp Ent y Tec'
+    elif (codigo == 'Z033') :      descrip = 'Comp Fact y Tec'
+    elif (codigo == 'Z034') :      descrip = 'Tec Comp Ent Fact'
+    elif (codigo == 'Z035') :      descrip = 'Tec Comp Ent Fact y Arrento'
+    elif (codigo == 'Z036') :      descrip = 'Tec Comp Ent Fact y Fnto'
+    elif (codigo == 'Z037') :      descrip = 'Fnto Comp Ent y Fact'
+    elif (codigo == 'Z038') :      descrip = 'Arrento Comp Ent y Fact'
+
+    return (descrip)
+
+def get_Departamento(codigo) :
+    descrip = ""
+    if   (codigo == '0001') :      descrip = 'Dep.compras'
+    elif (codigo == '0002') :      descrip = 'Dep.ventas'
+    elif (codigo == '0003') :      descrip = 'Dep.administración'
+    elif (codigo == '0004') :      descrip = 'Dep.producción'
+    elif (codigo == '0005') :      descrip = 'Dep.gestión calidad'
+    elif (codigo == '0006') :      descrip = 'Secretaría'
+    elif (codigo == '0007') :      descrip = 'Dep.financiero'
+    elif (codigo == '0008') :      descrip = 'Dep.jurídico'
+    elif (codigo == '0009') :      descrip = 'Dep.Recursos Humanos'
+    elif (codigo == '0010') :      descrip = 'Dep.asuntos gen.'
+    elif (codigo == '0011') :      descrip = 'Dep.promoción'
+    elif (codigo == '0012') :      descrip = 'Dep.internacional'
+    elif (codigo == '0013') :      descrip = 'Dep.exportación'
+    elif (codigo == '0014') :      descrip = 'Dep.importación'
+    elif (codigo == '0015') :      descrip = 'Dep.rel.públicas'
+    elif (codigo == '0016') :      descrip = 'Dep.publicidad'
+    elif (codigo == '0017') :      descrip = 'Dep.planificación'
+    elif (codigo == '0018') :      descrip = 'Dep.invest.desar.'
+    elif (codigo == '0019') :      descrip = 'Dep.Desarr.product.'
+    elif (codigo == '0020') :      descrip = 'Oficina comercial'
+    elif (codigo == '0021') :      descrip = 'Dep.servicio'
+    elif (codigo == '0022') :      descrip = 'Soporte técnico'
+    elif (codigo == '0023') :      descrip = 'Departamento de TI'
+    elif (codigo == '0024') :      descrip = 'Departam.Logística'
+
+    return (descrip)
+
+def get_DivHaas(codigo) :
+    descrip = ""
+    if   (codigo == '109') :      descrip = 'HFO MEXICO'
+    elif (codigo == '111') :      descrip = 'HFO ECUADOR'
+    elif (codigo == '112') :      descrip = 'HFO COLOMBIA'
+    elif (codigo == '113') :      descrip = 'HFO CAM'
+    elif (codigo == '114') :      descrip = 'HFO ESPAÑA'    
+    return (descrip)
+
+def get_DivPM(codigo) :
+    descrip = ""
+    if   (codigo == '116') :      descrip = 'PM'    
+    return (descrip)
+
+def get_DivHTools(codigo) :
+    descrip = ""
+    if   (codigo == '118') :      descrip = 'TOOLS'
+    elif (codigo == '119') :      descrip = 'SOLUBLES'    
+    return (descrip)
+
+def get_DivCNC(codigo) :
+    descrip = ""
+    if   (codigo == '121') :      descrip = 'CNC'
+    elif (codigo == '122') :      descrip = 'OMNITEC'
+    return (descrip)
+
+def get_DivNextec(codigo) :
+    descrip = ""
+    if   (codigo == '123') :      descrip = 'FAB'
+    elif (codigo == '124') :      descrip = 'EDM'    
+    return (descrip)
+
+def get_MedioComunicacion(codigo) :
+    descrip = ""
+    if   (codigo == '001') :      descrip = 'Mail'
+    elif (codigo == '002') :      descrip = 'Teléfono'
+    elif (codigo == '003') :      descrip = 'WhatsApp'
     return (descrip)
 
 def buscarCliente(request, usrid):
