@@ -252,9 +252,49 @@
                             <option value='PM'>PM</option>
                         </select>
                     </div-->
-                    <div class="form-group">
+                    <div class="row">
                         <label class="etiqueta">División HAAS</label>
-                        <select name="DivHaas" class="form-control form-control-sm minimal" value="{{cliente.DivHaas}}">
+                        <div class="form-group col-md-3" style="height: 35px;">
+                            <div class="form-check">
+                                {% if cliente.DivHaasMexico %}
+                                    <input class="form-check-input" type="checkbox" id="DivHaasMexico" name="DivHaasMexico" value="{{cliente.DivHaasMexico}}" checked>
+                                {% else %}
+                                <input class="form-check-input" type="checkbox" id="DivHaasMexico" name="DivHaasMexico" value="{{cliente.DivHaasMexico}}">
+                                {% endif %}
+                                <label class="etiqueta">HFOMéxico</label>
+                            </div>                        
+                        </div> 
+                        <div class="form-group col-md-3"> 
+                            <div class="form-check">
+                                {% if cliente.DivHaasEcuador %}
+                                    <input class="form-check-input" type="checkbox" id="DivHaasEcuador" name="DivHaasEcuador" value="{{cliente.DivHaasEcuador}}" checked>
+                                {% else %}
+                                <input class="form-check-input" type="checkbox" id="DivHaasEcuador" name="DivHaasEcuador" value="{{cliente.DivHaasEcuador}}">
+                                {% endif %}
+                                <label class="etiqueta">HFOEcuador</label>
+                            </div>                        
+                        </div>
+                        <div class="form-group col-md-3">
+                            <div class="form-check">
+                                {% if cliente.DivHaasColombia %}
+                                    <input class="form-check-input" type="checkbox" id="DivHaasColombia" name="DivHaasColombia" value="{{cliente.DivHaasColombia}}" checked>
+                                {% else %}
+                                <input class="form-check-input" type="checkbox" id="DivHaasColombia" name="DivHaasColombia" value="{{cliente.DivHaasColombia}}">
+                                {% endif %}
+                                <label class="etiqueta">HFOColombia</label>
+                            </div>                        
+                        </div>
+                        <div class="form-group col-md-3">
+                            <div class="form-check">
+                                {% if cliente.DivHaasCAM %}
+                                    <input class="form-check-input" type="checkbox" id="DivHaasCAM" name="DivHaasCAM" value="{{cliente.DivHaasCAM}}" checked>
+                                {% else %}
+                                <input class="form-check-input" type="checkbox" id="DivHaasCAM" name="DivHaasCAM" value="{{cliente.DivHaasCAM}}">
+                                {% endif %}
+                                <label class="etiqueta">HFO CAM</label>
+                            </div>                        
+                        </div> 
+                        <!--select name="DivHaas" class="form-control form-control-sm minimal" value="{{cliente.DivHaas}}" multiple>
                             {% if cliente.DivHaas %}
                             <option value='{{cliente.DivHaas}}'>{{cliente.dDivHaas}}</option>
                             {% else %}
@@ -264,23 +304,52 @@
                             <option value='111'>HFO ECUADOR</option>
                             <option value='112'>HFO COLOMBIA</option>
                             <option value='113'>HFO CAM</option>
-                            <option value='114'>HFO ESPAÑA</option>
-                        </select>
+                        </select-->
                     </div>
-                    <div class="form-group">
+                    <div class="row">
                         <label class="etiqueta">División PM</label>
-                        <select name="DivPM" class="form-control form-control-sm minimal" value="{{cliente.DivPM}}">
+                        <div class="form-group col-md-3" style="height: 36px;">
+                            <div class="form-check">
+                                {% if cliente.DivPM %}
+                                    <input class="form-check-input" type="checkbox" id="DivPM" name="DivPM" value="{{cliente.DivPM}}" checked>
+                                {% else %}
+                                <input class="form-check-input" type="checkbox" id="DivPM" name="DivPM" value="{{cliente.DivPM}}">
+                                {% endif %}
+                                <label class="etiqueta">PM</label>
+                            </div>                        
+                        </div>
+                        <!--select name="DivPM" class="form-control form-control-sm minimal" value="{{cliente.DivPM}}">
                             {% if cliente.DivPM %}
                             <option value='{{cliente.DivPM}}'>{{cliente.dDivPM}}</option>
                             {% else %}
                             <option value="" disabled selected>Seleccione uno</option>
                             {% endif %}
                             <option value='116'>PM</option>
-                        </select>
+                        </select-->
                     </div>
-                    <div class="form-group">
+                    <div class="row">
                         <label class="etiqueta">División HTOOLS</label>
-                        <select name="DivHtools" class="form-control form-control-sm minimal" value="{{cliente.DivHTools}}">
+                        <div class="form-group col-md-3" style="height: 36px;">
+                            <div class="form-check">
+                                {% if cliente.DivHToolsTools %}
+                                    <input class="form-check-input" type="checkbox" id="DivHToolsTools" name="DivHToolsTools" value="{{cliente.DivHToolsTools}}" checked>
+                                {% else %}
+                                <input class="form-check-input" type="checkbox" id="DivHToolsTools" name="DivHToolsTools" value="{{cliente.DivHToolsTools}}">
+                                {% endif %}
+                                <label class="etiqueta">Tools</label>
+                            </div>                        
+                        </div>
+                        <div class="form-group col-md-3">
+                            <div class="form-check">
+                                {% if cliente.DivHToolsSolubles %}
+                                    <input class="form-check-input" type="checkbox" id="DivHToolsSolubles" name="DivHToolsSolubles" value="{{cliente.DivHtoolsSolubles}}" checked>
+                                {% else %}
+                                <input class="form-check-input" type="checkbox" id="DivHToolsSolubles" name="DivHToolsSolubles" value="{{cliente.DivHtoolsSolubles}}">
+                                {% endif %}
+                                <label class="etiqueta">Solubles</label>
+                            </div>                        
+                        </div>
+                        <!--select name="DivHtools" class="form-control form-control-sm minimal" value="{{cliente.DivHTools}}">
                             {% if cliente.DivHTools %}
                             <option value='{{cliente.DivHtools}}'>{{cliente.dDivHtools}}</option>
                             {% else %}
@@ -288,11 +357,31 @@
                             {% endif %}
                             <option value='118'>TOOLS</option>
                             <option value='119'>SOLUBLES</option>
-                        </select>
+                        </select-->
                     </div>
-                    <div class="form-group">
+                    <div class="row">
                         <label class="etiqueta">División CNC</label>
-                        <select name="DivCNC" class="form-control form-control-sm minimal" value="{{cliente.DivCNC}}">
+                        <div class="form-group col-md-3" style="height: 36px;">
+                            <div class="form-check" >
+                                {% if cliente.DivCNCCNC %}
+                                    <input class="form-check-input" type="checkbox" id="DivCNCCNC" name="DivCNCCNC" value="{{cliente.DivCNCCNC}}" checked>
+                                {% else %}
+                                <input class="form-check-input" type="checkbox" id="DivCNCCNC" name="DivCNCCNC" value="{{cliente.DivCNCCNC}}">
+                                {% endif %}
+                                <label class="etiqueta">CNC</label>
+                            </div>                        
+                        </div>
+                        <div class="form-group col-md-3">
+                            <div class="form-check">
+                                {% if cliente.DivCNCOmnitec %}
+                                    <input class="form-check-input" type="checkbox" id="DivCNCOmnitec" name="DivCNCOmnitec" value="{{cliente.DivCNCOmnitec}}" checked>
+                                {% else %}
+                                <input class="form-check-input" type="checkbox" id="DivCNCOmnitec" name="DivCNCOmnitec" value="{{cliente.DivCNCOmnitec}}">
+                                {% endif %}
+                                <label class="etiqueta">OMNITEC</label>
+                            </div>                        
+                        </div>
+                        <!--select name="DivCNC" class="form-control form-control-sm minimal" value="{{cliente.DivCNC}}">
                             {% if cliente.DivCNC %}
                             <option value='{{cliente.DivCNC}}'>{{cliente.dCNC}}</option>
                             {% else %}
@@ -300,11 +389,31 @@
                             {% endif %}
                             <option value='121'>CNC</option>
                             <option value='122'>OMNITEC</option>
-                        </select>
+                        </select-->
                     </div>
-                    <div class="form-group">
+                    <div class="row">
                         <label class="etiqueta">División NEXTEC</label>
-                        <select name="DivNextec" class="form-control form-control-sm minimal" value="{{cliente.DivNextec}}">
+                        <div class="form-group col-md-3" style="height: 35px;">
+                            <div class="form-check">
+                                {% if cliente.DivNextecFAB %}
+                                    <input class="form-check-input" type="checkbox" id="DivNextecFAB" name="DivNextecFAB" value="{{cliente.DivNextecFAB}}" checked>
+                                {% else %}
+                                <input class="form-check-input" type="checkbox" id="DivNextecFAB" name="DivNextecFAB" value="{{cliente.DivNextecFAB}}">
+                                {% endif %}
+                                <label class="etiqueta">FAB</label>
+                            </div>                        
+                        </div>
+                        <div class="form-group col-md-3">
+                            <div class="form-check">
+                                {% if cliente.DivNextecEDM %}
+                                    <input class="form-check-input" type="checkbox" id="DivNextecEDM" name="DivNextecEDM" value="{{cliente.DivNextecEDM}}" checked>
+                                {% else %}
+                                <input class="form-check-input" type="checkbox" id="DivNextecEDM" name="DivNextecEDM" value="{{cliente.DivNextecEDM}}">
+                                {% endif %}
+                                <label class="etiqueta">EDM</label>
+                            </div>                        
+                        </div>
+                        <!--select name="DivNextec" class="form-control form-control-sm minimal" value="{{cliente.DivNextec}}">
                             {% if cliente.DivNextec %}
                             <option value='{{cliente.DivNextec}}'>{{cliente.dDivNextec}}</option>
                             {% else %}
@@ -312,7 +421,7 @@
                             {% endif %}
                             <option value='123'>FAB</option>
                             <option value='124'>EDM</option>
-                        </select>
+                        </select-->
                     </div>
                     <!--div class="form-group"><label class="etiqueta"></label></div>
                     <div class="form-group"><label class="form-control form-control-sm minimal" style="border-color: transparent;"></label></div-->
@@ -417,7 +526,7 @@
                             <option value='{{cliente.Tier}}'>{{cliente.dTier}}</option>
                         {% else %}
                             <option value="" disabled selected>Seleccione uno</option>
-                        {% endif %}<option value='1'>1</option>
+                        {% endif %}
                         <option value='197'>Tier 1</option>
                         <option value='198'>Tier 2</option>
                         <option value='199'>Tier 3</option>

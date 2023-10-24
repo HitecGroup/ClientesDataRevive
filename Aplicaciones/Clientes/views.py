@@ -84,6 +84,18 @@ def edicionCliente(request, codigo, usrid):
 
 def setDataCliente(cliente):
     fecha = cliente.FechaNacimiento
+    DivHaasMexico = validDivision(cliente.IdCliente, 1, 109)
+    DivHaasEcuador = validDivision(cliente.IdCliente, 1, 111)
+    DivHaasColombia = validDivision(cliente.IdCliente, 1, 112)
+    DivHaasCAM = validDivision(cliente.IdCliente, 1, 113)
+    DivPM = validDivision(cliente.IdCliente, 2, 116)
+    DivHToolsTools = validDivision(cliente.IdCliente, 3, 118)
+    DivHToolsSolubles = validDivision(cliente.IdCliente, 3, 119)
+    DivCNCCNC = validDivision(cliente.IdCliente, 4, 121)
+    DivCNCOmnitec = validDivision(cliente.IdCliente, 4, 122)
+    DivNextecFAB = validDivision(cliente.IdCliente, 5, 123)
+    DivNextecEDM = validDivision(cliente.IdCliente, 5, 124)
+
     acliente = {"IdCliente":cliente.IdCliente, 
             "ClaveExterna":cliente.ClaveExterna,
             "NombreCliente":cliente.NombreCliente,
@@ -97,11 +109,17 @@ def setDataCliente(cliente):
             #"Clasificacion":cliente.Clasificacion,
             #"Division":cliente.Division,
             #"subDivision":cliente.subDivision,
-            "DivHaas":cliente.DivHaas,
-            "DivPM":cliente.DivPM,
-            "DivCNC":cliente.DivCNC,
-            "DivHTools":cliente.DivHTools,
-            "DivNextec":cliente.DivNextec,
+            "DivHaasMexico":DivHaasMexico,
+            "DivHaasEcuador":DivHaasEcuador,
+            "DivHaasColombia":DivHaasColombia,
+            "DivHaasCAM":DivHaasCAM,
+            "DivPM":DivPM,
+            "DivCNCCNC":DivCNCCNC,
+            "DivCNCOmnitec":DivCNCOmnitec,
+            "DivHToolsTools":DivHToolsTools,
+            "DivHToolsSolubles":DivHToolsSolubles,
+            "DivNextecFAB":DivNextecFAB,
+            "DivNextecEDM":DivNextecEDM,
             #"SucServicio":cliente.SucServicio,
             #"RegionVts":cliente.RegionVts,
             #"iDNielsen":cliente.iDNielsen,
@@ -172,6 +190,8 @@ def editarCliente(request, usrid):
     #RegionVts = request.POST['RegionVts']
     NoTurnosC = request.POST['NoTurnosC']
     Tier = request.POST['Tier']
+    FrecuenciaCompra = request.POST['FrecuenciaCompra']
+    #RegionVts = request.POST['RegionVts']
     NoMaqConvenC = request.POST['NoMaqConvenC']
     NoMaqCNC_C = request.POST['NoMaqCNC_C']
     NoMaqHT_C = request.POST['NoMaqHT_C']
@@ -187,20 +207,40 @@ def editarCliente(request, usrid):
         MatViruta = request.POST['MatViruta']
     #if "MatUseYIZUMI" in request.POST:
         #MatUsoCNC_Haas = request.POST['MatUsoCNC_Haas']
-    DivHaas = DivCNC = DivHTools = DivNextec = DivPM = ""
-    if "DivHaas" in request.POST:
-        DivHaas = request.POST['DivHaas']
+        
+    DivHaasMexico = DivHaasEcuador = DivHaasColombia = DivHaasCAM = False
+    DivCNCCNC = DivCNCOmnitec = False
+    DivHToolsTools = DivHToolsSolubles = False
+    DivNextecFAB = DivNextecEDM = DivPMPM = False
+    if "DivHaasMexico" in request.POST:
+        DivHaasMexico = True
+    if "DivHaasEcuador" in request.POST:
+        DivHaasEcuador = True
+    if "DivHaasColombia" in request.POST:
+        DivHaasColombia = True
+    if "DivHaasCAM" in request.POST:
+        DivHaasCAM = True
     if "DivPM" in request.POST:
-        DivPM = request.POST['DivPM']
-    if "DivHTools" in request.POST:
-        DivHTools = request.POST['DivHTools']
-    if "DivCNC" in request.POST:
-        DivCNC = request.POST['DivCNC']
-    if "DivNextec" in request.POST:
-        DivNextec = request.POST['DivNextec']
-
-    FrecuenciaCompra = request.POST['FrecuenciaCompra']
-    #RegionVts = request.POST['RegionVts']
+        DivPMPM = True
+    if "DivHToolsTools" in request.POST:
+        DivHToolsTools = True
+    if "DivHToolsSolubles" in request.POST:
+        DivHToolsSolubles = True
+    if "DivCNCCNC" in request.POST:
+        DivCNCCNC = True
+    if "DivCNCOmnitec" in request.POST:
+        DivCNCOmnitec = True
+    if "DivNextecEDM" in request.POST:
+        DivNextecEDM = True
+    if "DivNextecFAB" in request.POST:
+        DivNextecFAB = True
+    
+    DivHaas   = getVal_DivHaas(DivHaasMexico, DivHaasEcuador, DivHaasColombia, DivHaasCAM)
+    DivPM     = getVal_DivPM(DivPMPM)
+    DivCNC    = getVal_DivCNC(DivCNCCNC, DivCNCOmnitec)
+    DivHTools = getVal_DivHTools(DivHToolsTools, DivHToolsSolubles)
+    DivNextec = getVal_DivNextec(DivNextecFAB, DivNextecEDM)
+    
 
     ActPriFAB = ActPriEDM = ActPriEquipoCNC = ""
     #ActPriEquipo = ""
@@ -224,11 +264,6 @@ def editarCliente(request, usrid):
     #cliente.Clasificacion = Clasificacion
     #cliente.Division = Division
     #cliente.subDivision = subDivision
-    cliente.DivHaas = DivHaas
-    cliente.DivPM = DivPM
-    cliente.DivCNC = DivCNC
-    cliente.DivHTools = DivHTools
-    cliente.DivNextec = DivNextec
     #cliente.SucServicio = zonaServicio
     cliente.TipoEmpresa = TipoEmpresa
     #cliente.iDNielsen= iDNielsen
@@ -248,7 +283,25 @@ def editarCliente(request, usrid):
     cliente.ActPriEDM = ActPriEDM
     cliente.ActPriEquipoCNC = ActPriEquipoCNC
     #cliente.ActPriEquipo = ActPriEquipo
+    cliente.DivHaas = DivHaas
+    cliente.DivPM = DivPM
+    cliente.DivCNC = DivCNC
+    cliente.DivHTools = DivHTools
+    cliente.DivNextec = DivNextec
     cliente.save()
+
+    #Actualiza divisiones
+    saveDivision(IdCliente, 1, 109, DivHaasMexico)
+    saveDivision(IdCliente, 1, 111, DivHaasEcuador)
+    saveDivision(IdCliente, 1, 112, DivHaasColombia)
+    saveDivision(IdCliente, 1, 113, DivHaasCAM)
+    saveDivision(IdCliente, 2, 116, DivPM)
+    saveDivision(IdCliente, 3, 118, DivHToolsTools)
+    saveDivision(IdCliente, 3, 119, DivHToolsSolubles)
+    saveDivision(IdCliente, 4, 121, DivCNCCNC)
+    saveDivision(IdCliente, 4, 122, DivCNCOmnitec)
+    saveDivision(IdCliente, 5, 123, DivNextecFAB)
+    saveDivision(IdCliente, 5, 124, DivNextecEDM)
 
     data = {
         "NombreCliente": NombreCliente,
@@ -261,11 +314,6 @@ def editarCliente(request, usrid):
         #"Clasificacion": Clasificacion,
         #"Division": Division,
         #"subDivision": subDivision,
-        "DivHaas": DivHaas,
-        "DivPM": DivPM,
-        "DivCNC": DivCNC,
-        "DivHTools": DivHTools,
-        "DivNextec": DivNextec,
         #"SucServicio": zonaServicio,
         "TipoEmpresa": TipoEmpresa,
         #"iDNielsen": iDNielsen,
@@ -285,6 +333,22 @@ def editarCliente(request, usrid):
         "ActPriEDM": ActPriEDM,
         "ActPriEquipoCNC": ActPriEquipoCNC,
         #"ActPriEquipo": ActPriEquipo,
+        "DivHaas": DivHaas,
+        "DivPM": DivPM,
+        "DivCNC": DivCNC,
+        "DivHTools": DivHTools,
+        "DivNextec": DivNextec,
+        "DivHaasMexico": DivHaasMexico,
+        "DivHaasEcuador": DivHaasEcuador,
+        "DivHaasColombia": DivHaasColombia,
+        "DivHaasCAM": DivHaasCAM,
+        "DivPM": DivPM,
+        "DivCNCCNC": DivCNCCNC,
+        "DivCNCOmnitec": DivCNCOmnitec,
+        "DivHToolsTools": DivHToolsTools,
+        "DivHToolsSolubles": DivHToolsSolubles,
+        "DivNextecFAB": DivNextecFAB,
+        "DivNextecEDM": DivNextecEDM,
     }
 
     addLog(usrid, "Update", "Clientes", IdCliente, data)
@@ -741,7 +805,26 @@ def bloquearDireccion(request, cliente, idDireccion, usrid):
     cliente = Clientes.objects.get(IdCliente=cliente)
     return render(request,"gestionDirecciones.html",{"direcciones":direccionesListados, "cliente":cliente, "session":session})
 
- 
+def validDivision(IdCliente, IdDiv, IdSubDiv):
+    if divisionCliente.objects.filter(IdContacto=IdCliente, IdDivision=IdDiv, IdSubdivision=IdSubDiv).exists():
+        return True
+    else:
+        return False
+    
+def saveDivision(IdCliente, IdDiv, IdSubDiv, save):
+    if divisionCliente.objects.filter(IdContacto=IdCliente, IdDivision=IdDiv, IdSubdivision=IdSubDiv).exists():
+        if(not save):
+            registro = divisionCliente.objects.get(IdContacto=IdCliente, IdDivision=IdDiv, IdSubdivision=IdSubDiv)
+            registro.delete()
+            return
+    else:
+        if(save):
+            division = divisionCliente.objects.create (
+                IdContacto = IdCliente,
+                IdDivision = IdDiv,
+                IdSubdivision = IdSubDiv
+            )
+            return
 
 #def agregarClienteDireccion(request,codigo):
 #    return render(request,"agregarClienteDireccion.html",{"cliente":codigo})
@@ -789,7 +872,6 @@ def get_colonias(request, codigo):
         data={"message":"Not Found"}
 
     return JsonResponse(data)
-
 
 def get_Sector(codigo):
     descrip = ""
@@ -1042,7 +1124,7 @@ def get_RegionVts(codigo) :
 
     return (descrip)
 
-def get_RegionVts(codigo) :
+def get_RegionVts2(codigo) :
     if   (codigo == '109') :      descrip = 'MX - HFO SURESTE'
     elif (codigo == '110') :      descrip = 'MX - HFO NORTE'
     elif (codigo == '111') :      descrip = 'MX - HFO BAJIO'
@@ -1237,6 +1319,69 @@ def get_Departamento(codigo) :
     elif (codigo == '0024') :      descrip = 'Departam.Logística'
 
     return (descrip)
+
+def getVal_DivHaas(divMexico, divEcuador, divColombia, divCAM) :
+    codigo = ""
+    if   (divMexico):   codigo = '109'
+    elif (divEcuador):  codigo = '111'
+    elif (divColombia): codigo = '112'
+    elif (divCAM):      codigo = '113'
+    return (codigo)
+
+def getVal_DivPM(divPM) :
+    codigo = ""
+    if   (divPM):       codigo = '116'
+    return (codigo)
+
+def getVal_DivHTools(divTools, divSolubles) :
+    codigo = ""
+    if   (divTools):    codigo = '118'
+    elif (divSolubles): codigo = '119'
+    return (codigo)
+
+def getVal_DivCNC(divCNC, divOmnitec) :
+    codigo = ""
+    if   (divCNC):      codigo = '121'
+    elif (divOmnitec):  codigo = '122'
+    return (codigo)
+
+def getVal_DivNextec(divFAB, divEDM) :
+    codigo = ""
+    if   (divFAB):      codigo = '123'
+    elif (divEDM):      codigo = '124'
+    return (codigo)
+
+def getCodigo_DivHaas(division) :
+    codigo = ""
+    if   (division == 'DivHaasMexico'):     codigo = '109'
+    elif (division == 'DivHaasEcuador'):    codigo = '111'
+    elif (division == 'DivHaasColombia'):   codigo = '112'
+    elif (division == 'DivHaasCAM'):        codigo = '113'
+    elif (division == 'DivHaasEspana'):     codigo = '114'
+    return (codigo)
+
+def getCodigo_DivPM(division) :
+    codigo = ""
+    if   (division == 'DivPMPM'):           codigo = '116'
+    return (codigo)
+
+def getCodigo_DivHTools(division) :
+    codigo = ""
+    if   (division == 'DivHToolsTools'):    codigo = '118'
+    elif (division == 'DivHToolsSolubles'): codigo = '119'
+    return (codigo)
+
+def getCodigo_DivCNC(division) :
+    codigo = ""
+    if   (division == 'DivCNCCNC'):     codigo = '121'
+    elif (division == 'DivCNCOmnitec'): codigo = '122'
+    return (codigo)
+
+def getCodigo_DivNextec(division) :
+    codigo = ""
+    if   (division == 'DivNextecFAB'):  codigo = '123'
+    elif (division == 'DivNextecEDM'):  codigo = '124'
+    return (codigo)
 
 def get_DivHaas(codigo) :
     descrip = ""
