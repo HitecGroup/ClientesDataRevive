@@ -289,3 +289,16 @@ class Log (models.Model):
                            self.TipoMov,
                            self.Movimiento,
                            self.Movimientojson)
+   
+class divisionCliente (models.Model):
+    IdRegistro=models.AutoField(primary_key=True)
+    IdContacto=models.CharField(max_length=80,default="0000000")
+    IdDivision=models.CharField(max_length=80,default="0000000")
+    IdSubdivision=models.CharField(max_length=80,default="0000000")
+
+    def __str__(self):
+       texto = "{0} ({1})"
+       return texto.format(self.IdRegistro,
+                           self.IdContacto,
+                           self.IdDivision,
+                           self.IdSubdivision)

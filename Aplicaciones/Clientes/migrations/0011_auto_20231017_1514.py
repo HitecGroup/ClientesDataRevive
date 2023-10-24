@@ -5,9 +5,6 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('Clientes', '0010_merge_20231017_1514'),
-    ]
 
     operations = [
         migrations.AddField(
