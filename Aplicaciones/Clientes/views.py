@@ -1250,6 +1250,49 @@ def get_ActPriEquipo(codigo) :
 
 def get_Funcion(codigo) :
     descrip = ""
+    if   (codigo == '01') :      descrip = 'Administrador'
+    elif (codigo == '02') :      descrip = 'Analista'
+    elif (codigo == '03') :      descrip = 'Arquitecto'
+    elif (codigo == '04') :      descrip = 'Asistente'
+    elif (codigo == '05') :      descrip = 'Auxiliar'
+    elif (codigo == '06') :      descrip = 'Contador'
+    elif (codigo == '07') :      descrip = 'Coordinador'
+    elif (codigo == '08') :      descrip = 'Desarrollador'
+    elif (codigo == '09') :      descrip = 'Director'
+    elif (codigo == '10') :      descrip = 'Diseñador'
+    elif (codigo == '11') :      descrip = 'Encargado Almacén/Logística'
+    elif (codigo == '12') :      descrip = 'Estudiante'
+    elif (codigo == '13') :      descrip = 'Gerente'
+    elif (codigo == '14') :      descrip = 'Ingeniero'
+    elif (codigo == '15') :      descrip = 'Jefe'
+    elif (codigo == '16') :      descrip = 'Operador'
+    elif (codigo == '17') :      descrip = 'Programador'
+    elif (codigo == '18') :      descrip = 'Propietario'
+    elif (codigo == '19') :      descrip = 'Supervisor'
+    elif (codigo == '20') :      descrip = 'Técnico'
+    elif (codigo == '21') :      descrip = 'Vendedor'
+    return (descrip)
+
+def get_Departamento(codigo) :
+    descrip = ""
+    if   (codigo == '01') :      descrip = 'Administración'
+    elif (codigo == '02') :      descrip = 'Almacén'
+    elif (codigo == '03') :      descrip = 'Compras'
+    elif (codigo == '04') :      descrip = 'Diseño'
+    elif (codigo == '05') :      descrip = 'Finanzas'
+    elif (codigo == '06') :      descrip = 'Logística'
+    elif (codigo == '07') :      descrip = 'Mantenimiento'
+    elif (codigo == '08') :      descrip = 'Marketing'
+    elif (codigo == '09') :      descrip = 'Producción'
+    elif (codigo == '10') :      descrip = 'Recursos Humanos'
+    elif (codigo == '11') :      descrip = 'Servicio al Cliente'
+    elif (codigo == '12') :      descrip = 'Servicio Técnico'
+    elif (codigo == '13') :      descrip = 'TI'
+    elif (codigo == '14') :      descrip = 'Ventas'
+    return (descrip)
+
+def get_FuncionOld(codigo) :
+    descrip = ""
     if   (codigo == 'Z001') :      descrip = 'Arrento'
     elif (codigo == 'Z002') :      descrip = 'Fnto'
     elif (codigo == 'Z003') :      descrip = 'Tec'
@@ -1291,7 +1334,7 @@ def get_Funcion(codigo) :
 
     return (descrip)
 
-def get_Departamento(codigo) :
+def get_DepartamentoOld(codigo) :
     descrip = ""
     if   (codigo == '0001') :      descrip = 'Dep.compras'
     elif (codigo == '0002') :      descrip = 'Dep.ventas'
