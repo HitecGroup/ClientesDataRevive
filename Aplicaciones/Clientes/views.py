@@ -104,7 +104,7 @@ def setDataCliente(cliente):
             "TipoEmpresa":cliente.TipoEmpresa,
             #"TipoCliente":cliente.TipoCliente,
             "ClientePotencial":cliente.ClientePotencial,
-            #"Estado":cliente.Estado,
+            "Estado":cliente.Estado,
             "Duns":cliente.Duns,
             #"Clasificacion":cliente.Clasificacion,
             #"Division":cliente.Division,
@@ -179,7 +179,7 @@ def editarCliente(request, usrid):
     FechaNacimiento = request.POST['FechaNacimiento']
     Sector = request.POST['Sector']
     ClientePotencial = request.POST['ClientePotencial']
-    #Estado = request.POST['Estado']
+    Estado = request.POST['Estado']
     Duns = request.POST['Duns']
     #Clasificacion = request.POST['Clasificacion']
     #Division = request.POST['Division']
@@ -259,7 +259,7 @@ def editarCliente(request, usrid):
     cliente.Sector = Sector
     #cliente.TipoCliente = TipoCliente
     cliente.ClientePotencial = ClientePotencial
-    #cliente.Estado = Estado
+    cliente.Estado = Estado
     cliente.Duns = Duns
     #cliente.Clasificacion = Clasificacion
     #cliente.Division = Division
@@ -309,7 +309,7 @@ def editarCliente(request, usrid):
         "Sector": Sector,
         #"TipoCliente": TipoCliente,
         "ClientePotencial": ClientePotencial,
-        #"Estado": Estado,
+        "Estado": Estado,
         "Duns": Duns,
         #"Clasificacion": Clasificacion,
         #"Division": Division,
@@ -938,13 +938,13 @@ def get_Sector(codigo):
     return (descrip)
 
 def get_ClientePotencial(codigo) :
-    if (codigo == '1') :   descrip = 'Si'
+    if (codigo == True) :   descrip = 'Si'
     else :                  descrip = 'No'
 
     return (descrip)
 
 def get_Estado(codigo) :
-    if (codigo == '1') :   descrip = 'Activo'
+    if (codigo == True) :   descrip = 'Activo'
     else :                  descrip = 'Inactivo'
 
     return (descrip)

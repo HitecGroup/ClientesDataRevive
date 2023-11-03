@@ -76,6 +76,14 @@
                         <input type="text" name="nombreClienteMirror" value="{{cliente.NombreCliente}}" class="form-control form-control-sm" readonly disabled>
                     </div>
                     <div class="form-group">
+                        <span style="color:red">* </span><label class="etiqueta">Estado</label>
+                        <select name="Estado" class="form-control form-control-sm minimal" value="{{cliente.Estado}}" required>
+                            <option value='{{cliente.Estado}}'>{{cliente.dEstado}}</option>
+                            <option value="1">Activo</option>
+                            <option value="0">Inactivo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label class="etiqueta">Fecha Constitución</label>
                         <input type="date" class="form-control form-control-sm" id="fechaNacimiento" name="FechaNacimiento" value="{{cliente.FechaNacimiento|date:'Y-m-d'}}">
                     </div>
@@ -180,14 +188,6 @@
                             <option value="0">No</option>
                         </select>
                     </div>
-                    <!--div class="form-group">
-                        <span style="color:red">* </span><label class="etiqueta">Estado</label>
-                        <select name="Estado" class="form-control form-control-sm minimal" value="{{cliente.Estado}}" required>
-                            <option value='{{cliente.Estado}}'>{{cliente.dEstado}}</option>
-                            <option value="1">Activo</option>
-                            <option value="0">Inactivo</option>
-                        </select>
-                    </div-->
                     <div class="form-group">
                         <div class="row">
                         <div class="col-md-11">
