@@ -372,7 +372,7 @@ def gestionContactos(request, codigo, usrid):
         iniPais = {"CodeId":"MX", "Descrip":"México"}
         iniRegion = {"CodeId":"CMX", "Descrip":"Ciudad de México"}
         iniCheckbox = {"Principal":flag1, "VIP":flag2}
-        descrip = getContactoDescrip(0, contacto)
+        descrip = getContactoDescrip("0", contacto)
         return render(request, "edicionContactos.html",{"vista":"Contacto", "Gestion":False, "idRegistro":"0", "contacto":contacto, "cliente":cliente, "session":session, "iniPais":iniPais, "iniRegion":iniRegion, "iniCodPos":iniCodPos, "iniDistrito":iniDistrito, "dataInt":False, "iniCheckbox":iniCheckbox, "descrip":descrip })
 
 def edicionContacto(request, idCliente, codigo, Gestion, usrid):
