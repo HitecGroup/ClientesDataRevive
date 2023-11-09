@@ -181,15 +181,21 @@
                             <option value='Z41'>Taller/Maquiladora</option>
                         </select>
                     </div>
+
                     <div class="form-group">
+                        <label class="etiqueta">Sitio Web</label>
+                        <input type="text" name="SitioWeb" value="{{cliente.SitioWeb}}" class="form-control form-control-sm">
+                    </div>
+
+                    <!--div class="form-group">
                         <label class="etiqueta">Cliente Potencial</label>
                         <select name="ClientePotencial" class="form-control form-control-sm minimal" value="{{cliente.ClientePotencial}}">
                             <option value='{{cliente.ClientePotencial}}'>{{cliente.dClientePotencial}}</option>
                             <option value="1">Si</option>
                             <option value="0">No</option>
                         </select>
-                    </div>
-                    <div class="form-group">
+                    </div-->
+                    <!--div class="form-group">
                         <div class="row">
                         <div class="col-md-11">
                         <label class="etiqueta">D-U-N-S</label>
@@ -201,7 +207,7 @@
                           </svg></div>
                         </div>
                         </div>
-                    </div>
+                    </div-->
                     <!--div class="form-group">
                         <span style="color:red">* </span><label class="etiqueta">Clasificación ABC</label>
                         <select name="Clasificacion" class="form-control form-control-sm minimal" value="{{cliente.Clasificacion}}" required>
@@ -253,9 +259,10 @@
                             <option value='PM'>PM</option>
                         </select>
                     </div-->
+                    <br>
                     <div class="row">
                         <label class="etiqueta">División HAAS</label>
-                        <div class="form-group col-md-3" style="height: 35px;">
+                        <div class="form-group col-md-3" style="height: 40px;">
                             <div class="form-check">
                                 {% if cliente.DivHaasMexico %}
                                     <input class="form-check-input" type="checkbox" id="DivHaasMexico" name="DivHaasMexico" value="{{cliente.DivHaasMexico}}" checked>
@@ -265,7 +272,7 @@
                                 <label class="etiqueta">HFOMéxico</label>
                             </div>                        
                         </div> 
-                        <div class="form-group col-md-3"> 
+                        <div class="form-group col-md-3" style="height: 40px;"> 
                             <div class="form-check">
                                 {% if cliente.DivHaasEcuador %}
                                     <input class="form-check-input" type="checkbox" id="DivHaasEcuador" name="DivHaasEcuador" value="{{cliente.DivHaasEcuador}}" checked>
@@ -275,7 +282,7 @@
                                 <label class="etiqueta">HFOEcuador</label>
                             </div>                        
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-3" style="height: 40px;">
                             <div class="form-check">
                                 {% if cliente.DivHaasColombia %}
                                     <input class="form-check-input" type="checkbox" id="DivHaasColombia" name="DivHaasColombia" value="{{cliente.DivHaasColombia}}" checked>
@@ -285,7 +292,7 @@
                                 <label class="etiqueta">HFOColombia</label>
                             </div>                        
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-3" style="height: 40px;">
                             <div class="form-check">
                                 {% if cliente.DivHaasCAM %}
                                     <input class="form-check-input" type="checkbox" id="DivHaasCAM" name="DivHaasCAM" value="{{cliente.DivHaasCAM}}" checked>
@@ -308,7 +315,7 @@
                         </select-->
                     </div>
                     <div class="row">
-                        <label class="etiqueta">División PM</label>
+                        <label class="etiqueta">División A&G Plastic Machinery</label>
                         <div class="form-group col-md-3" style="height: 36px;">
                             <div class="form-check">
                                 {% if cliente.DivPM %}
@@ -329,7 +336,7 @@
                         </select-->
                     </div>
                     <div class="row">
-                        <label class="etiqueta">División HTOOLS</label>
+                        <label class="etiqueta">División Hitec Tools</label>
                         <div class="form-group col-md-3" style="height: 36px;">
                             <div class="form-check">
                                 {% if cliente.DivHToolsTools %}
@@ -340,7 +347,7 @@
                                 <label class="etiqueta">Tools</label>
                             </div>                        
                         </div>
-                        <div class="form-group col-md-3">
+                        <!--div class="form-group col-md-3">
                             <div class="form-check">
                                 {% if cliente.DivHToolsSolubles %}
                                     <input class="form-check-input" type="checkbox" id="DivHToolsSolubles" name="DivHToolsSolubles" value="{{cliente.DivHtoolsSolubles}}" checked>
@@ -349,7 +356,7 @@
                                 {% endif %}
                                 <label class="etiqueta">Solubles</label>
                             </div>                        
-                        </div>
+                        </div-->
                         <!--select name="DivHtools" class="form-control form-control-sm minimal" value="{{cliente.DivHTools}}">
                             {% if cliente.DivHTools %}
                             <option value='{{cliente.DivHtools}}'>{{cliente.dDivHtools}}</option>
@@ -361,7 +368,7 @@
                         </select-->
                     </div>
                     <div class="row">
-                        <label class="etiqueta">División CNC</label>
+                        <label class="etiqueta">División Hitec CNC Maquinaria de México</label>
                         <div class="form-group col-md-3" style="height: 36px;">
                             <div class="form-check" >
                                 {% if cliente.DivCNCCNC %}
@@ -393,7 +400,7 @@
                         </select-->
                     </div>
                     <div class="row">
-                        <label class="etiqueta">División NEXTEC</label>
+                        <label class="etiqueta">División NEXTEC Machinery</label>
                         <div class="form-group col-md-3" style="height: 35px;">
                             <div class="form-check">
                                 {% if cliente.DivNextecFAB %}
@@ -424,6 +431,7 @@
                             <option value='124'>EDM</option>
                         </select-->
                     </div>
+                    <br>
                     <!--div class="form-group"><label class="etiqueta"></label></div>
                     <div class="form-group"><label class="form-control form-control-sm minimal" style="border-color: transparent;"></label></div-->
                     <!--div class="form-group">
@@ -514,43 +522,112 @@
                             <option value='3'>3</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <span style="color:red">* </span><label class="etiqueta">Tier (Cadena)</label>
+                        <select name="Tier" class="form-control form-control-sm minimal" value="{{cliente.Tier}}" required>
+                            {% if cliente.Tier %}
+                                <option value='{{cliente.Tier}}'>{{cliente.dTier}}</option>
+                            {% else %}
+                                <option value="" disabled selected>Seleccione uno</option>
+                            {% endif %}
+                            <option value='197'>Tier 1</option>
+                            <option value='198'>Tier 2</option>
+                            <option value='199'>Tier 3</option>
+                            <option value='200'>Gobierno</option>
+                            <option value='201'>N/A</option>
+                        </select>
+                    </div>
+                    <!--div class="form-group">
+                        <span style="color:red">* </span><label class="etiqueta">Frecuencia de Compra</label>
+                        <select name="FrecuenciaCompra" class="form-control form-control-sm minimal" value="{{cliente.FrecuenciaCompra}}" required>
+                            {% if cliente.FrecuenciaCompra %}
+                                <option value='{{cliente.FrecuenciaCompra}}'>{{cliente.FrecuenciaCompra}}</option>
+                            {% else %}
+                                <option value='0'>0</option>
+                            {% endif %}
+                            <option value='0'>0</option>
+                            <option value='1'>1</option>
+                            <option value='2'>2</option>
+                            <option value='3 o Mas'>3 o Mas</option>
+                        </select>
+                    </div-->
+                    <br>
+                    <div class="form-group">
+                    <label class="etiqueta">Materiales Electroerosión</label>
+                    <select name="MatUseCHMER" class="form-control form-control-sm minimal" value="{{cliente.MatUseCHMER}}">
+                        {% if cliente.MatUseCHMER %}
+                            <option value='{{cliente.MatUseCHMER}}'>{{cliente.dMatUseCHMER}}</option>
+                        {% else %}
+                            <option value="" disabled selected>Seleccione uno</option>
+                        {% endif %}
+                        <option value='170'>Aceros al carbón</option>
+                        <option value='171'>Acero inoxidable</option>
+                        <option value='172'>Carburo de tuxteno</option>
+                        <option value='173'>No Ferrosos</option>
+                        <option value='174'>Aleaciones Especiales</option>
+                        <option value='175'>Fundición</option>
+                        <option value='176'>Varios</option>                        
+                    </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="etiqueta">Materiales Inyección</label>
+                        <select name="MatUseYIZUMI" class="form-control form-control-sm minimal" value="{{MatUseYIZUMI}}">
+                            {% if cliente.MatUseYIZUMI %}
+                                <option value='{{cliente.MatUseYIZUMI}}'>{{cliente.dMatUseYIZUMI}}</option>
+                            {% else %}
+                                <option value="NA" disabled selected>Seleccione uno</option>
+                            {% endif %}
+                            <option value='179'>PETE (Polietileno tereftalato)</option>
+                            <option value='180'>HDPE (Polietileno de alta densidad)</option>
+                            <option value='181'>V (Policloruro de vinilo)</option>
+                            <option value='182'>LDPE (Polietileno de baja densidad)</option>
+                            <option value='183'>PP (Polipropileno)</option>
+                            <option value='184'>PS (Poliestireno)</option>
+                            <option value='185'>Otros Plásticos, resinas, composites</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="etiqueta">Materiales FAB</label>
+                        <select name="MatUsoFab" class="form-control form-control-sm minimal" value="{{cliente.MatUsoFab}}">
+                            {% if cliente.MatUsoFab %}
+                                <option value='{{cliente.MatUsoFab}}'>{{cliente.dMatUsoFab}}</option>
+                            {% else %}
+                                <option value="" disabled selected>Seleccione uno</option>
+                            {% endif %}
+                            <option value='187'>Aluminio</option>
+                            <option value='188'>Acero</option>
+                            <option value='189'>Acero inoxidable</option>
+                            <option value='190'>No Ferrosos</option>
+                            <option value='191'>Lámina</option>
+                            
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="etiqueta">Material Arranque de viruta</label>
+                        <select name="MatViruta" class="form-control form-control-sm minimal" value="{{cliente.MatViruta}}">
+                            {% if cliente.MatViruta %}
+                                <option value='{{cliente.MatViruta}}'>{{cliente.dMatViruta}}</option>
+                            {% else %}
+                                <option value="" disabled selected>Seleccione uno</option>
+                            {% endif %}
+                            <option value='163'>Aceros al carbón</option>
+                            <option value='164'>Acero inoxidable</option>
+                            <option value='165'>Fundición</option>
+                            <option value='166'>No Ferrosos</option>
+                            <option value='167'>Aleaciones Especiales</option>
+                            <option value='168'>Varios</option>
+                        </select>
+                    </div>
+                    <br><br><br><br><br><br>
             </div>
         </div>
     </div>
     <div class="col-md-6">
         <div class="card">
             <div class="card-body">
+                
                 <div class="form-group">
-                    <span style="color:red">* </span><label class="etiqueta">Tier (Cadena)</label>
-                    <select name="Tier" class="form-control form-control-sm minimal" value="{{cliente.Tier}}" required>
-                        {% if cliente.Tier %}
-                            <option value='{{cliente.Tier}}'>{{cliente.dTier}}</option>
-                        {% else %}
-                            <option value="" disabled selected>Seleccione uno</option>
-                        {% endif %}
-                        <option value='197'>Tier 1</option>
-                        <option value='198'>Tier 2</option>
-                        <option value='199'>Tier 3</option>
-                        <option value='200'>Gobierno</option>
-                        <option value='201'>N/A</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <span style="color:red">* </span><label class="etiqueta">Frecuencia de Compra</label>
-                    <select name="FrecuenciaCompra" class="form-control form-control-sm minimal" value="{{cliente.FrecuenciaCompra}}" required>
-                        {% if cliente.FrecuenciaCompra %}
-                            <option value='{{cliente.FrecuenciaCompra}}'>{{cliente.FrecuenciaCompra}}</option>
-                        {% else %}
-                            <option value='0'>0</option>
-                        {% endif %}
-                        <option value='0'>0</option>
-                        <option value='1'>1</option>
-                        <option value='2'>2</option>
-                        <option value='3 o Mas'>3 o Mas</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="etiqueta">No Maquinas Convencionales C</label>
+                    <label class="etiqueta"># Maquinas Convencionales</label>
                     <select name="NoMaqConvenC" class="form-control form-control-sm minimal" value="{{cliente.NoMaqConvenC}}">
                         {% if cliente.NoMaqConvenC %}
                             <option value='{{cliente.NoMaqConvenC}}'>{{cliente.NoMaqConvenC}}</option>
@@ -567,8 +644,8 @@
                     <label class="etiqueta">MX email de envio</label>
                     <input type="text" name="mxEmailEnvio" class="form-control form-control-sm">
                 </div>-->
-                <div class="form-group">
-                    <label class="etiqueta">No Maquinas CNC C</label>
+                <!--div class="form-group">
+                    <label class="etiqueta"># Maquinas CNC C</label>
                     <select name="NoMaqCNC_C" class="form-control form-control-sm minimal" value="{{cliente.NoMaqCNC_C}}">
                         {% if cliente.NoMaqCNC_C %}
                             <option value='{{cliente.NoMaqCNC_C}}'>{{cliente.NoMaqCNC_C}}</option>
@@ -580,8 +657,752 @@
                         <option value='6 a 10'>6 a 10</option>
                         <option value='> 10'>> 10</option>
                     </select>
+                </div-->
+                <div class="card" style="margin-top: 3px; margin-bottom: 2px;">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="etiqueta"># Máq Competencia - Arranque de Viruta</label>
+                            <select name="NoMaqArrViruta" class="form-control form-control-sm minimal" value="{{cliente.NoMaqCNC_C}}">
+                                {% if cliente.NoMaqArrViruta %}
+                                    <option value='{{cliente.NoMaqArrViruta}}'>{{cliente.NoMaqArrViruta}}</option>
+                                {% else %}
+                                <option value='0'>0</option>                
+                                {% endif %}
+                                <option value='0'>0</option>
+                                <option value='1 a 5'>1 a 5</option>
+                                <option value='6 a 10'>6 a 10</option>
+                                <option value='> 10'>> 10</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-3" style="height: 35px;">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 1</label>
+                                </div>
+                            </div> 
+                            <div class="form-group col-md-3"> 
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 2</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 3</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 4</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 5</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 6</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 7</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 8</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 9</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Otra</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-7">
+                                <input type="text">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
+
+                <div class="card" style="margin-top: 3px; margin-bottom: 2px;">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="etiqueta"># Máq Competencia - Electroerosión</label>
+                            <select name="NoMaqElectroerosion" class="form-control form-control-sm minimal" value="{{cliente.NoMaqElectroerosion}}">
+                                {% if cliente.NoMaqElectroerosion %}
+                                    <option value='{{cliente.NoMaqElectroerosion}}'>{{cliente.NoMaqElectroerosion}}</option>
+                                {% else %}
+                                <option value='0'>0</option>                
+                                {% endif %}
+                                <option value='0'>0</option>
+                                <option value='1 a 5'>1 a 5</option>
+                                <option value='6 a 10'>6 a 10</option>
+                                <option value='> 10'>> 10</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-3" style="height: 35px;">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 1</label>
+                                </div>
+                            </div> 
+                            <div class="form-group col-md-3"> 
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 2</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 3</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 4</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 5</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 6</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 7</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 8</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 9</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Otra</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-7">
+                                <input type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 3px; margin-bottom: 2px;">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="etiqueta"># Máq Competencia - Inyección</label>
+                            <select name="NoMaqInyeccion" class="form-control form-control-sm minimal" value="{{cliente.NoMaqInyeccion}}">
+                                {% if cliente.NoMaqInyeccion %}
+                                    <option value='{{cliente.NoMaqInyeccion}}'>{{cliente.NoMaqInyeccion}}</option>
+                                {% else %}
+                                <option value='0'>0</option>                
+                                {% endif %}
+                                <option value='0'>0</option>
+                                <option value='1 a 5'>1 a 5</option>
+                                <option value='6 a 10'>6 a 10</option>
+                                <option value='> 10'>> 10</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-3" style="height: 35px;">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 1</label>
+                                </div>
+                            </div> 
+                            <div class="form-group col-md-3"> 
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 2</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 3</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 4</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 5</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 6</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 7</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 8</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 9</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Otra</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-7">
+                                <input type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 3px; margin-bottom: 3px;">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="etiqueta"># Máq Competencia - Láser</label>
+                            <select name="NoMaqLaser" class="form-control form-control-sm minimal" value="{{cliente.NoMaqLaser}}">
+                                {% if cliente.NoMaqLaser %}
+                                    <option value='{{cliente.NoMaqLaser}}'>{{cliente.NoMaqLaser}}</option>
+                                {% else %}
+                                <option value='0'>0</option>                
+                                {% endif %}
+                                <option value='0'>0</option>
+                                <option value='1 a 5'>1 a 5</option>
+                                <option value='6 a 10'>6 a 10</option>
+                                <option value='> 10'>> 10</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-3" style="height: 35px;">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 1</label>
+                                </div>
+                            </div> 
+                            <div class="form-group col-md-3"> 
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 2</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 3</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 4</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 5</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 6</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 7</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 8</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 9</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Otra</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-7">
+                                <input type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 3px; margin-bottom: 3px;">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="etiqueta"># Máq Competencia - Prensas</label>
+                            <select name="NoMaqPrensas" class="form-control form-control-sm minimal" value="{{cliente.NoMaqPrensas}}">
+                                {% if cliente.NoMaqPrensas %}
+                                    <option value='{{cliente.NoMaqPrensas}}'>{{cliente.NoMaqPrensas}}</option>
+                                {% else %}
+                                <option value='0'>0</option>                
+                                {% endif %}
+                                <option value='0'>0</option>
+                                <option value='1 a 5'>1 a 5</option>
+                                <option value='6 a 10'>6 a 10</option>
+                                <option value='> 10'>> 10</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-3" style="height: 35px;">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 1</label>
+                                </div>
+                            </div> 
+                            <div class="form-group col-md-3"> 
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 2</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 3</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 4</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 5</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 6</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 7</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 8</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 9</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Otra</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-7">
+                                <input type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 3px; margin-bottom: 3px;">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="etiqueta"># Máq Competencia - Dobladoras</label>
+                            <select name="NoMaqDobladoras" class="form-control form-control-sm minimal" value="{{cliente.NoMaqDobladoras}}">
+                                {% if cliente.NoMaqDobladoras %}
+                                    <option value='{{cliente.NoMaqDobladoras}}'>{{cliente.NoMaqDobladoras}}</option>
+                                {% else %}
+                                <option value='0'>0</option>                
+                                {% endif %}
+                                <option value='0'>0</option>
+                                <option value='1 a 5'>1 a 5</option>
+                                <option value='6 a 10'>6 a 10</option>
+                                <option value='> 10'>> 10</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-3" style="height: 35px;">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 1</label>
+                                </div>
+                            </div> 
+                            <div class="form-group col-md-3"> 
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 2</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 3</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 4</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 5</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 6</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 7</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 8</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Marca 9</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <div class="form-check">
+                                    {% if cliente.Maq %}
+                                        <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}" checked>
+                                    {% else %}
+                                    <input class="form-check-input" type="checkbox" id="Maq" name="Maq" value="{{cliente.Maq}}">
+                                    {% endif %}
+                                    <label class="etiqueta">Otra</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-7">
+                                <input type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--div class="form-group">
                     <label class="etiqueta">No de Maquinas HT C</label>
                     <select name="NoMaqHT_C" class="form-control form-control-sm minimal" value="{{cliente.NoMaqHT_C}}">
                         {% if cliente.NoMaqHT_C %}
@@ -594,73 +1415,8 @@
                         <option value='4 a 6'>4 a 6</option>
                         <option value='> 6'>> 6</option>
                     </select>
-                </div>
-                <div class="form-group">
-                    <label class="etiqueta">Materiales que utilizan CHMER</label>
-                    <select name="MatUseCHMER" class="form-control form-control-sm minimal" value="{{cliente.MatUseCHMER}}">
-                        {% if cliente.MatUseCHMER %}
-                            <option value='{{cliente.MatUseCHMER}}'>{{cliente.dMatUseCHMER}}</option>
-                        {% else %}
-                            <option value="" disabled selected>Seleccione uno</option>
-                        {% endif %}
-                        <option value='170'>Aceros al carbón</option>
-                        <option value='171'>Acero inoxidable</option>
-                        <option value='172'>Carburo de tuxteno</option>
-                        <option value='173'>No Ferrosos</option>
-                        <option value='174'>Aleaciones Especiales</option>
-                        <option value='175'>Fundición</option>
-                        <option value='176'>Varios</option>                        
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="etiqueta">Materiales que utilizan YZUMI</label>
-                    <select name="MatUseYIZUMI" class="form-control form-control-sm minimal" value="{{MatUseYIZUMI}}">
-                        {% if cliente.MatUseYIZUMI %}
-                            <option value='{{cliente.MatUseYIZUMI}}'>{{cliente.dMatUseYIZUMI}}</option>
-                        {% else %}
-                            <option value="NA" disabled selected>Seleccione uno</option>
-                        {% endif %}
-                        <option value='179'>PETE (Polietileno tereftalato)</option>
-                        <option value='180'>HDPE (Polietileno de alta densidad)</option>
-                        <option value='181'>V (Policloruro de vinilo)</option>
-                        <option value='182'>LDPE (Polietileno de baja densidad)</option>
-                        <option value='183'>PP (Polipropileno)</option>
-                        <option value='184'>PS (Poliestireno)</option>
-                        <option value='185'>Otros Plásticos, resinas, composites</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="etiqueta">Materiales FAB</label>
-                    <select name="MatUsoFab" class="form-control form-control-sm minimal" value="{{cliente.MatUsoFab}}">
-                        {% if cliente.MatUsoFab %}
-                            <option value='{{cliente.MatUsoFab}}'>{{cliente.dMatUsoFab}}</option>
-                        {% else %}
-                            <option value="" disabled selected>Seleccione uno</option>
-                        {% endif %}
-                        <option value='187'>Aluminio</option>
-                        <option value='188'>Acero</option>
-                        <option value='189'>Acero inoxidable</option>
-                        <option value='190'>No Ferrosos</option>
-                        <option value='191'>Lámina</option>
-                        
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="etiqueta">Material arranque de viruta</label>
-                    <select name="MatViruta" class="form-control form-control-sm minimal" value="{{cliente.MatViruta}}">
-                        {% if cliente.MatViruta %}
-                            <option value='{{cliente.MatViruta}}'>{{cliente.dMatViruta}}</option>
-                        {% else %}
-                            <option value="" disabled selected>Seleccione uno</option>
-                        {% endif %}
-                        <option value='163'>Aceros al carbón</option>
-                        <option value='164'>Acero inoxidable</option>
-                        <option value='165'>Fundición</option>
-                        <option value='166'>No Ferrosos</option>
-                        <option value='167'>Aleaciones Especiales</option>
-                        <option value='168'>Varios</option>
-                    </select>
-                </div>
+                </div-->
+                
                 <!--div class="form-group">
                     <label class="etiqueta">Material uso CNC Haas</label>
                     <select name="MatUsoCNC_Haas" class="form-control form-control-sm minimal" value="{{cliente.MatUsoCNC_Haas}}">
@@ -678,7 +1434,7 @@
                     </select>
                 </div-->
                 
-                <div class="form-group">
+                <!--div class="form-group">
                     <label class="etiqueta">Actividad Principal FAB</label>
                     <select name="ActPriFAB" class="form-control form-control-sm minimal" value="{{cliente.ActPriFAB}}">
                         {% if cliente.ActPriFAB %}
@@ -703,8 +1459,8 @@
                         <option value='160'>Fabricantes de Piezas Metálicas en serie"</option>
                         <option value='161'>Ductos de Lámina / Ductos para aire / Recolectores de Polvo / Filtros Industriales."</option>
                     </select>
-                </div>
-                <div class="form-group">
+                </div-->
+                <!--div class="form-group">
                     <label class="etiqueta">Actividad Principal EDM</label>
                     <select name="ActPriEDM" class="form-control form-control-sm minimal" value="{{cliente.ActPriEDM}}">
                         {% if cliente.ActPriEDM %}
@@ -718,8 +1474,8 @@
                         <option value='127'>Dispositivos , gages</option>
                         <option value='128'>Herramentales especiales</option>
                     </select>
-                </div>
-                <div class="form-group">
+                </div-->
+                <!--div class="form-group">
                     <label class="etiqueta">Actividad principal a efectuar con el equipo CNC</label>
                     <select name="ActPriEquipoCNC" class="form-control form-control-sm minimal" value="{{cliente.ActPriEquipoCNC}}">
                         {% if cliente.ActPriEquipoCNC %}
@@ -745,7 +1501,7 @@
                         <option value='121'>Turbinas</option>
                         <option value='122'>Otros</option>
                     </select>
-                </div>
+                </div-->
                 <!--div class="form-group">
                     <label class="etiqueta">Actividad principal a efectuar con el equipo CNC</label>
                     <select name="ActPriEquipo" class="form-control form-control-sm minimal" value="{{cliente.ActPriEquipo}}">

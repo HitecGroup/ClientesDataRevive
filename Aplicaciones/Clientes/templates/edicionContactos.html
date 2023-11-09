@@ -75,7 +75,7 @@
                     <div class='form-group col-md-3'><label class='etiqueta'>Nombre</label><input type='text'  name='Nombre' value='{{contacto.Nombre}}' class='form-control form-control-sm'></div>
                     <div class='form-group col-md-3'><label class='etiqueta'>SegundoNombre</label><input type='text'  name='SegundoNombre' value='{{contacto.SegundoNombre}}' class='form-control form-control-sm'></div>
                     <div class='form-group col-md-4'><label class='etiqueta'>Apellidos</label><input type='text'  name='Apellidos' value='{{contacto.Apellidos}}' class='form-control form-control-sm'></div>
-                    <div class='form-group col-md-2'><label class='etiqueta'>Telefono</label><input type='text'  name='Telefono' value='{{contacto.Telefono}}' class='form-control form-control-sm'></div>
+                    <div class='form-group col-md-2'><label class='etiqueta'>Telefono</label><input type='number'  name='Telefono' value='{{contacto.Telefono}}' class='form-control form-control-sm'></div>
                     <div class='form-group col-md-2'><label class='etiqueta'>TelefonoMovil</label><input type='text'  name='TelefonoMovil' value='{{contacto.TelefonoMovil}}' class='form-control form-control-sm'></div>
                     <div class='form-group col-md-4'><span style="color:red">* </span><label class='etiqueta'>CorreoElectronico</label><input type='text'  name='CorreoElectronico' value='{{contacto.CorreoElectronico}}' class='form-control form-control-sm' required></div>
                     <div class='form-group col-md-4'><label class='etiqueta'>MedioComunicacion</label>
@@ -93,6 +93,37 @@
                     </div>
                     <!--div class='form-group col-md-5'><label class='etiqueta'>Departamento</label><input type='text'  name='Departamento' value='{{contacto.Departamento}}' class='form-control form-control-sm'></div>
                     <div class='form-group col-md-5'><label class='etiqueta'>Funcion</label><input type='text'  name='Funcion' value='{{contacto.Funcion}}' class='form-control form-control-sm'></div-->
+                    <div class='form-group col-md-5'>
+                            <label class="etiqueta">Función</label>
+                            <select name="Funcion" class="form-control form-control-sm minimal" value="{{contacto.Funcion}}">
+                                {% if contacto.Departamento %}
+                                    <option value='{{contacto.Funcion}}'>{{descrip.dFuncion}}</option>
+                                {% else %}
+                                    <option value="" disabled selected>Seleccione uno</option>
+                                {% endif %}
+                                <option value='01'>Administrador</option>
+                                <option value='02'>Analista</option>
+                                <option value='03'>Arquitecto</option>
+                                <option value='04'>Asistente</option>
+                                <option value='05'>Auxiliar</option>
+                                <option value='06'>Contador</option>
+                                <option value='07'>Coordinador</option>
+                                <option value='08'>Desarrollador</option>
+                                <option value='09'>Director</option>
+                                <option value='10'>Diseñador</option>
+                                <option value='11'>Encargado Almacén/Logística</option>
+                                <option value='12'>Estudiante</option>
+                                <option value='13'>Gerente</option>
+                                <option value='14'>Ingeniero</option>
+                                <option value='15'>Jefe</option>
+                                <option value='16'>Operador</option>
+                                <option value='17'>Programador</option>
+                                <option value='18'>Propietario</option>
+                                <option value='19'>Supervisor</option>
+                                <option value='20'>Técnico</option>
+                                <option value='21'>Vendedor</option>
+                            </select>
+                    </div>
                     <div class='form-group col-md-5'>
                         <label class="etiqueta">Departamento</label>
                         <select name="Departamento" class="form-control form-control-sm minimal" value="{{contacto.Departamento}}">
@@ -117,38 +148,8 @@
                             <option value='14'>Ventas</option>
                         </select>
                     </div>
-                    <div class='form-group col-md-5'>
-                        <label class="etiqueta">Función</label>
-                        <select name="Funcion" class="form-control form-control-sm minimal" value="{{contacto.Funcion}}">
-                            {% if contacto.Departamento %}
-                                <option value='{{contacto.Funcion}}'>{{descrip.dFuncion}}</option>
-                            {% else %}
-                                <option value="" disabled selected>Seleccione uno</option>
-                            {% endif %}
-                            <option value='01'>Administrador</option>
-                            <option value='02'>Analista</option>
-                            <option value='03'>Arquitecto</option>
-                            <option value='04'>Asistente</option>
-                            <option value='05'>Auxiliar</option>
-                            <option value='06'>Contador</option>
-                            <option value='07'>Coordinador</option>
-                            <option value='08'>Desarrollador</option>
-                            <option value='09'>Director</option>
-                            <option value='10'>Diseñador</option>
-                            <option value='11'>Encargado Almacén/Logística</option>
-                            <option value='12'>Estudiante</option>
-                            <option value='13'>Gerente</option>
-                            <option value='14'>Ingeniero</option>
-                            <option value='15'>Jefe</option>
-                            <option value='16'>Operador</option>
-                            <option value='17'>Programador</option>
-                            <option value='18'>Propietario</option>
-                            <option value='19'>Supervisor</option>
-                            <option value='20'>Técnico</option>
-                            <option value='21'>Vendedor</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-1">
+                    
+                    <div class="form-group col-md-2">
                         <label class="etiqueta"></label>  
                         <div class="form-check">
                             {% if iniCheckbox.Principal %}
@@ -159,7 +160,7 @@
                             <label class="etiqueta">Principal</label>
                         </div>                        
                     </div>                      
-                    <div class="form-group col-md-1">
+                    <!--div class="form-group col-md-1">
                         <label class="etiqueta"></label>  
                         <div class="form-check">
                             {% if iniCheckbox.VIP %}
@@ -169,7 +170,101 @@
                             {% endif %}
                             <label class="etiqueta">VIP</label>
                         </div>                        
+                    </div-->
+
+                    <div class="form-group col-md-3">
+                        <label class="etiqueta"></label>  
+                        <div class="form-check">
+                            {% if iniCheckbox.Principal %}
+                                <input class="form-check-input" type="checkbox" id="Principal" name="Principal" value="{{iniCheckbox.Principal}}" checked>
+                            {% else %}
+                            <input class="form-check-input" type="checkbox" id="Principal" name="Principal" value="{{iniCheckbox.Principal}}">
+                            {% endif %}
+                            <label class="etiqueta">Haas México</label>
+                        </div>                        
                     </div>
+                    <div class="form-group col-md-3">
+                        <label class="etiqueta"></label>  
+                        <div class="form-check">
+                            {% if iniCheckbox.Principal %}
+                                <input class="form-check-input" type="checkbox" id="Principal" name="Principal" value="{{iniCheckbox.Principal}}" checked>
+                            {% else %}
+                            <input class="form-check-input" type="checkbox" id="Principal" name="Principal" value="{{iniCheckbox.Principal}}">
+                            {% endif %}
+                            <label class="etiqueta">Haas Colombia</label>
+                        </div>                        
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="etiqueta"></label>  
+                        <div class="form-check">
+                            {% if iniCheckbox.Principal %}
+                                <input class="form-check-input" type="checkbox" id="Principal" name="Principal" value="{{iniCheckbox.Principal}}" checked>
+                            {% else %}
+                            <input class="form-check-input" type="checkbox" id="Principal" name="Principal" value="{{iniCheckbox.Principal}}">
+                            {% endif %}
+                            <label class="etiqueta">Haas CAM</label>
+                        </div>                        
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="etiqueta"></label>  
+                        <div class="form-check">
+                            {% if iniCheckbox.Principal %}
+                                <input class="form-check-input" type="checkbox" id="Principal" name="Principal" value="{{iniCheckbox.Principal}}" checked>
+                            {% else %}
+                            <input class="form-check-input" type="checkbox" id="Principal" name="Principal" value="{{iniCheckbox.Principal}}">
+                            {% endif %}
+                            <label class="etiqueta">Haas Ecuador</label>
+                        </div>                        
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="etiqueta"></label>  
+                        <div class="form-check">
+                            {% if iniCheckbox.Principal %}
+                                <input class="form-check-input" type="checkbox" id="Principal" name="Principal" value="{{iniCheckbox.Principal}}" checked>
+                            {% else %}
+                            <input class="form-check-input" type="checkbox" id="Principal" name="Principal" value="{{iniCheckbox.Principal}}">
+                            {% endif %}
+                            <label class="etiqueta">Nextec Machinery</label>
+                        </div>                        
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="etiqueta"></label>  
+                        <div class="form-check">
+                            {% if iniCheckbox.Principal %}
+                                <input class="form-check-input" type="checkbox" id="Principal" name="Principal" value="{{iniCheckbox.Principal}}" checked>
+                            {% else %}
+                            <input class="form-check-input" type="checkbox" id="Principal" name="Principal" value="{{iniCheckbox.Principal}}">
+                            {% endif %}
+                            <label class="etiqueta">A&G Plastic Machinery</label>
+                        </div>                        
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="etiqueta"></label>  
+                        <div class="form-check">
+                            {% if iniCheckbox.Principal %}
+                                <input class="form-check-input" type="checkbox" id="Principal" name="Principal" value="{{iniCheckbox.Principal}}" checked>
+                            {% else %}
+                            <input class="form-check-input" type="checkbox" id="Principal" name="Principal" value="{{iniCheckbox.Principal}}">
+                            {% endif %}
+                            <label class="etiqueta">Hitec CNC Maquinaria de México</label>
+                        </div>                        
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="etiqueta"></label>  
+                        <div class="form-check">
+                            {% if iniCheckbox.Principal %}
+                                <input class="form-check-input" type="checkbox" id="Principal" name="Principal" value="{{iniCheckbox.Principal}}" checked>
+                            {% else %}
+                            <input class="form-check-input" type="checkbox" id="Principal" name="Principal" value="{{iniCheckbox.Principal}}">
+                            {% endif %}
+                            <label class="etiqueta">Hitec Tools</label>
+                        </div>                        
+                    </div>
+
+
+
+
+
                     <!--div class="row">
                         <input type="hidden" id="vista" value="{{vista}}">
                         <input type="hidden" id="idRegistro" value="0">

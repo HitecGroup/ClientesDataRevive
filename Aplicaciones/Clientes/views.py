@@ -90,7 +90,7 @@ def setDataCliente(cliente):
     DivHaasCAM = validDivision(cliente.IdCliente, 1, 113)
     DivPM = validDivision(cliente.IdCliente, 2, 116)
     DivHToolsTools = validDivision(cliente.IdCliente, 3, 118)
-    DivHToolsSolubles = validDivision(cliente.IdCliente, 3, 119)
+    #DivHToolsSolubles = validDivision(cliente.IdCliente, 3, 119)
     DivCNCCNC = validDivision(cliente.IdCliente, 4, 121)
     DivCNCOmnitec = validDivision(cliente.IdCliente, 4, 122)
     DivNextecFAB = validDivision(cliente.IdCliente, 5, 123)
@@ -103,9 +103,9 @@ def setDataCliente(cliente):
             "Sector":cliente.Sector,
             "TipoEmpresa":cliente.TipoEmpresa,
             #"TipoCliente":cliente.TipoCliente,
-            "ClientePotencial":cliente.ClientePotencial,
+            #"ClientePotencial":cliente.ClientePotencial,
             "Estado":cliente.Estado,
-            "Duns":cliente.Duns,
+            #"Duns":cliente.Duns,
             #"Clasificacion":cliente.Clasificacion,
             #"Division":cliente.Division,
             #"subDivision":cliente.subDivision,
@@ -117,7 +117,7 @@ def setDataCliente(cliente):
             "DivCNCCNC":DivCNCCNC,
             "DivCNCOmnitec":DivCNCOmnitec,
             "DivHToolsTools":DivHToolsTools,
-            "DivHToolsSolubles":DivHToolsSolubles,
+            #"DivHToolsSolubles":DivHToolsSolubles,
             "DivNextecFAB":DivNextecFAB,
             "DivNextecEDM":DivNextecEDM,
             #"SucServicio":cliente.SucServicio,
@@ -125,22 +125,22 @@ def setDataCliente(cliente):
             #"iDNielsen":cliente.iDNielsen,
             "NoTurnosC":cliente.NoTurnosC,
             "Tier":cliente.Tier,
-            "FrecuenciaCompra":cliente.FrecuenciaCompra,
+            #"FrecuenciaCompra":cliente.FrecuenciaCompra,
             "NoMaqConvenC":cliente.NoMaqConvenC,
-            "NoMaqCNC_C":cliente.NoMaqCNC_C,
-            "NoMaqHT_C":cliente.NoMaqHT_C,
+            #"NoMaqCNC_C":cliente.NoMaqCNC_C,
+            #"NoMaqHT_C":cliente.NoMaqHT_C,
             "MatUseCHMER":cliente.MatUseCHMER,
             "MatUseYIZUMI":cliente.MatUseYIZUMI,
             "MatUsoFab":cliente.MatUsoFab,
             "MatViruta":cliente.MatViruta,
             #"MatUsoCNC_Haas":cliente.MatUsoCNC_Haas,
-            "ActPriFAB":cliente.ActPriFAB,
-            "ActPriEDM":cliente.ActPriEDM,
-            "ActPriEquipoCNC":cliente.ActPriEquipoCNC,
+            #"ActPriFAB":cliente.ActPriFAB,
+            #"ActPriEDM":cliente.ActPriEDM,
+            #"ActPriEquipoCNC":cliente.ActPriEquipoCNC,
             #"ActPriEquipo":cliente.ActPriEquipo,
             "dSector":get_Sector(cliente.Sector),
             "dTipoCliente":get_TipoCliente(cliente.TipoCliente),
-            "dClientePotencial":get_ClientePotencial(cliente.ClientePotencial),
+            #"dClientePotencial":get_ClientePotencial(cliente.ClientePotencial),
             "dEstado":get_Estado(cliente.Estado),
             "dClasificacion":get_Clasificacion(cliente.Clasificacion),
             "dDivision":get_Division(cliente.Division),
@@ -154,10 +154,10 @@ def setDataCliente(cliente):
             "dMatViruta":get_MatViruta(cliente.MatViruta),
             "dMatUsoCNC_Haas":get_MatUsoCNC_Haas(cliente.MatUsoCNC_Haas),
             #"dRegionVts":get_RegionVts(cliente.RegionVts),
-            "dActPriFAB":get_ActPriFAB(cliente.ActPriFAB),
-            "dActPriEDM":get_ActPriEDM(cliente.ActPriEDM),
-            "dActPriEquipoCNC":get_ActPriEquipoCNC(cliente.ActPriEquipoCNC),
-            "dActPriEquipo":get_ActPriEquipo(cliente.ActPriEquipo),
+            #"dActPriFAB":get_ActPriFAB(cliente.ActPriFAB),
+            #"dActPriEDM":get_ActPriEDM(cliente.ActPriEDM),
+            #"dActPriEquipoCNC":get_ActPriEquipoCNC(cliente.ActPriEquipoCNC),
+            #"dActPriEquipo":get_ActPriEquipo(cliente.ActPriEquipo),
             "dDivHaas":get_DivHaas(cliente.DivHaas),
             "dDivPM":get_DivPM(cliente.DivPM),
             "dDivCNC":get_DivCNC(cliente.DivCNC),
@@ -178,9 +178,9 @@ def editarCliente(request, usrid):
     ClientePotencial = request.POST['ClientePotencial']
     FechaNacimiento = request.POST['FechaNacimiento']
     Sector = request.POST['Sector']
-    ClientePotencial = request.POST['ClientePotencial']
+    #ClientePotencial = request.POST['ClientePotencial']
     Estado = request.POST['Estado']
-    Duns = request.POST['Duns']
+    #Duns = request.POST['Duns']
     #Clasificacion = request.POST['Clasificacion']
     #Division = request.POST['Division']
     #subDivision = request.POST['subDivision']
@@ -190,11 +190,11 @@ def editarCliente(request, usrid):
     #RegionVts = request.POST['RegionVts']
     NoTurnosC = request.POST['NoTurnosC']
     Tier = request.POST['Tier']
-    FrecuenciaCompra = request.POST['FrecuenciaCompra']
+    #FrecuenciaCompra = request.POST['FrecuenciaCompra']
     #RegionVts = request.POST['RegionVts']
     NoMaqConvenC = request.POST['NoMaqConvenC']
-    NoMaqCNC_C = request.POST['NoMaqCNC_C']
-    NoMaqHT_C = request.POST['NoMaqHT_C']
+    #NoMaqCNC_C = request.POST['NoMaqCNC_C']
+    #NoMaqHT_C = request.POST['NoMaqHT_C']
 
     MatUseCHMER = MatUseYIZUMI = MatUsoFab = MatViruta = ""
     if "MatUseCHMER" in request.POST:
@@ -210,7 +210,8 @@ def editarCliente(request, usrid):
         
     DivHaasMexico = DivHaasEcuador = DivHaasColombia = DivHaasCAM = False
     DivCNCCNC = DivCNCOmnitec = False
-    DivHToolsTools = DivHToolsSolubles = False
+    DivHToolsTools = False
+    #DivHToolsSolubles = False
     DivNextecFAB = DivNextecEDM = DivPMPM = False
     if "DivHaasMexico" in request.POST:
         DivHaasMexico = True
@@ -224,8 +225,8 @@ def editarCliente(request, usrid):
         DivPMPM = True
     if "DivHToolsTools" in request.POST:
         DivHToolsTools = True
-    if "DivHToolsSolubles" in request.POST:
-        DivHToolsSolubles = True
+    #if "DivHToolsSolubles" in request.POST:
+    #    DivHToolsSolubles = True
     if "DivCNCCNC" in request.POST:
         DivCNCCNC = True
     if "DivCNCOmnitec" in request.POST:
@@ -242,14 +243,14 @@ def editarCliente(request, usrid):
     DivNextec = getVal_DivNextec(DivNextecFAB, DivNextecEDM)
     
 
-    ActPriFAB = ActPriEDM = ActPriEquipoCNC = ""
+    #ActPriFAB = ActPriEDM = ActPriEquipoCNC = ""
     #ActPriEquipo = ""
-    if "ActPriFAB" in request.POST:
-        ActPriFAB = request.POST['ActPriFAB']
-    if "ActPriEDM" in request.POST:
-        ActPriEDM = request.POST['ActPriEDM']
-    if "ActPriEquipoCNC" in request.POST:
-        ActPriEquipoCNC = request.POST['ActPriEquipoCNC']
+    #if "ActPriFAB" in request.POST:
+    #    ActPriFAB = request.POST['ActPriFAB']
+    #if "ActPriEDM" in request.POST:
+    #    ActPriEDM = request.POST['ActPriEDM']
+    #if "ActPriEquipoCNC" in request.POST:
+    #    ActPriEquipoCNC = request.POST['ActPriEquipoCNC']
     #if "ActPriEquipo" in request.POST:
         #ActPriEquipo = request.POST['ActPriEquipo']
     
@@ -258,9 +259,9 @@ def editarCliente(request, usrid):
     cliente.FechaNacimiento = FechaNacimiento
     cliente.Sector = Sector
     #cliente.TipoCliente = TipoCliente
-    cliente.ClientePotencial = ClientePotencial
+    #cliente.ClientePotencial = ClientePotencial
     cliente.Estado = Estado
-    cliente.Duns = Duns
+    #cliente.Duns = Duns
     #cliente.Clasificacion = Clasificacion
     #cliente.Division = Division
     #cliente.subDivision = subDivision
@@ -270,18 +271,18 @@ def editarCliente(request, usrid):
     cliente.NoTurnosC = NoTurnosC
     cliente.Tier = Tier
     cliente.NoMaqConvenC = NoMaqConvenC
-    cliente.NoMaqCNC_C = NoMaqCNC_C
-    cliente.NoMaqHT_C = NoMaqHT_C
+    #cliente.NoMaqCNC_C = NoMaqCNC_C
+    #cliente.NoMaqHT_C = NoMaqHT_C
     cliente.MatUseCHMER = MatUseCHMER
     cliente.MatUseYIZUMI = MatUseYIZUMI
     cliente.MatUsoFab = MatUsoFab
     cliente.MatViruta = MatViruta
     #cliente.MatUsoCNC_Haas = MatUsoCNC_Haas
-    cliente.FrecuenciaCompra = FrecuenciaCompra
+    #cliente.FrecuenciaCompra = FrecuenciaCompra
     #cliente.RegionVts = RegionVts
-    cliente.ActPriFAB = ActPriFAB
-    cliente.ActPriEDM = ActPriEDM
-    cliente.ActPriEquipoCNC = ActPriEquipoCNC
+    #cliente.ActPriFAB = ActPriFAB
+    #cliente.ActPriEDM = ActPriEDM
+    #cliente.ActPriEquipoCNC = ActPriEquipoCNC
     #cliente.ActPriEquipo = ActPriEquipo
     cliente.DivHaas = DivHaas
     cliente.DivPM = DivPM
@@ -297,7 +298,7 @@ def editarCliente(request, usrid):
     saveDivision(IdCliente, 1, 113, DivHaasCAM)
     saveDivision(IdCliente, 2, 116, DivPM)
     saveDivision(IdCliente, 3, 118, DivHToolsTools)
-    saveDivision(IdCliente, 3, 119, DivHToolsSolubles)
+    #saveDivision(IdCliente, 3, 119, DivHToolsSolubles)
     saveDivision(IdCliente, 4, 121, DivCNCCNC)
     saveDivision(IdCliente, 4, 122, DivCNCOmnitec)
     saveDivision(IdCliente, 5, 123, DivNextecFAB)
@@ -308,9 +309,9 @@ def editarCliente(request, usrid):
         "FechaNacimiento": FechaNacimiento,
         "Sector": Sector,
         #"TipoCliente": TipoCliente,
-        "ClientePotencial": ClientePotencial,
+        #"ClientePotencial": ClientePotencial,
         "Estado": Estado,
-        "Duns": Duns,
+        #"Duns": Duns,
         #"Clasificacion": Clasificacion,
         #"Division": Division,
         #"subDivision": subDivision,
@@ -320,18 +321,18 @@ def editarCliente(request, usrid):
         "NoTurnosC": NoTurnosC,
         "Tier": Tier,
         "NoMaqConvenC": NoMaqConvenC,
-        "NoMaqCNC_C": NoMaqCNC_C,
-        "NoMaqHT_C": NoMaqHT_C,
+        #"NoMaqCNC_C": NoMaqCNC_C,
+        #"NoMaqHT_C": NoMaqHT_C,
         "MatUseCHMER": MatUseCHMER,
         "MatUseYIZUMI": MatUseYIZUMI,
         "MatUsoFab": MatUsoFab,
         "MatViruta": MatViruta,
         #"MatUsoCNC_Haas": MatUsoCNC_Haas,
-        "FrecuenciaCompra": FrecuenciaCompra,
+        #"FrecuenciaCompra": FrecuenciaCompra,
         #"RegionVts": RegionVts,
-        "ActPriFAB": ActPriFAB,
-        "ActPriEDM": ActPriEDM,
-        "ActPriEquipoCNC": ActPriEquipoCNC,
+        #"ActPriFAB": ActPriFAB,
+        #"ActPriEDM": ActPriEDM,
+        #"ActPriEquipoCNC": ActPriEquipoCNC,
         #"ActPriEquipo": ActPriEquipo,
         "DivHaas": DivHaas,
         "DivPM": DivPM,
@@ -346,7 +347,7 @@ def editarCliente(request, usrid):
         "DivCNCCNC": DivCNCCNC,
         "DivCNCOmnitec": DivCNCOmnitec,
         "DivHToolsTools": DivHToolsTools,
-        "DivHToolsSolubles": DivHToolsSolubles,
+        #"DivHToolsSolubles": DivHToolsSolubles,
         "DivNextecFAB": DivNextecFAB,
         "DivNextecEDM": DivNextecEDM,
     }
@@ -593,11 +594,43 @@ def eliminarContacto(request,contacto,cliente):
     contactosListados = Contactos.objects.all().filter(IdCliente=cliente)
     return render(request,"gestionContactos.html",{"contactos":contactosListados})
 
+def setDirecciones(data):
+    dPaisRegion = getDescripPais(data.PaisRegion)
+    dRegion = getDescripPais(data.PaisRegion, data.Estado)
+
+    aDirecciones = {
+        "IdRegistro":data.IdRegistro, 
+        "IdCliente": data.IdCliente,
+        "PaisRegion": data.PaisRegion,
+        "dPaisRegion": dPaisRegion,
+        "Calle": data.Calle,
+        "Numero": data.Numero,
+        "Calle2": data.Calle2,
+        "Ciudad": data.Ciudad,
+        "Estado": data.Estado,
+        "dRegion": dRegion,
+        "CodigoPostal": data.CodigoPostal,
+        "Distrito": data.Distrito,
+        "CodigoDomFiscal": data.CodigoDomFiscal,
+        "DireccionPrincipal": data.DireccionPrincipal,
+        "Entrega": data.Entrega,
+        "DestinatarioMercEstandar": data.DestinatarioMercEstandar,
+        "DestinatarioFactura": data.DestinatarioFactura,
+        "Telefono": data.Telefono,
+        "CorreoElectronico": data.CorreoElectronico,
+        "SitioWeb": data.SitioWeb,
+        "Bloqueo": data.Bloqueo,
+    }
+    return aDirecciones
+
 def gestionDirecciones(request,codigo, usrid):
     session = getSession(usrid) 
     cliente = Clientes.objects.get(IdCliente=codigo)
     if Direcciones.objects.filter(IdCliente=codigo).exists():
         direccionesListados = Direcciones.objects.all().filter(IdCliente=codigo)
+        #direcciones = Direcciones.objects.all().filter(IdCliente=codigo)
+        #for d in direcciones:
+        #    direccionesListados = setDirecciones(d)
     # Si hay direcciones, se envía a gestión de direcciones
         return render(request,"gestionDirecciones.html",{"direcciones":direccionesListados, "cliente":cliente, "session":session})
     else:
@@ -809,8 +842,8 @@ def validDivision(IdCliente, IdDiv, IdSubDiv):
     if divisionCliente.objects.filter(IdContacto=IdCliente, IdDivision=IdDiv, IdSubdivision=IdSubDiv).exists():
         return True
     else:
-        return False
-    
+        return False   
+
 def saveDivision(IdCliente, IdDiv, IdSubDiv, save):
     if divisionCliente.objects.filter(IdContacto=IdCliente, IdDivision=IdDiv, IdSubdivision=IdSubDiv).exists():
         if(not save):
@@ -830,7 +863,7 @@ def saveDivision(IdCliente, IdDiv, IdSubDiv, save):
 #    return render(request,"agregarClienteDireccion.html",{"cliente":codigo})
 
 def get_paises(request):
-    paises = list(Country.objects.values())
+    paises = list(Country.objects.order_by('Descrip').values())
     if (len(paises)>0):
         data={'message':"Success", 'paises':paises}
     else:
@@ -872,6 +905,20 @@ def get_colonias(request, codigo):
         data={"message":"Not Found"}
 
     return JsonResponse(data)
+
+def getDescripPais(request, codigo):
+    descrip = ""
+    if Country.objects.filter(CodeId=codigo).exists():
+        pais = Country.objects.get(CodeId=codigo)
+        descrip = pais.Descrip
+    return descrip
+
+def getDescripRegion(request, IdCountry, codigo):
+    descrip = ""
+    if Region.objects.filter(IdCountry=IdCountry, CodeId=codigo).exists():
+        region = Region.objects.get(IdCountry=IdCountry, CodeId=codigo)
+        descrip = region.Descrip
+    return descrip
 
 def get_Sector(codigo):
     descrip = ""
