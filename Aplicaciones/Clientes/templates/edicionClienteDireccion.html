@@ -78,7 +78,7 @@
                         <input type="hidden" id="idPais" value="{{iniPais.CodeId}}">
                         <input type="hidden" id="Pais" value="{{iniPais.Descrip}}">
                         <span style="color:red">* </span><label class="etiqueta">Pais</label>
-                        <select id="PaisRegion" name="PaisRegion" class="form-control form-control-sm minimal" value="{{direcciones.PaisRegion}}" required></select>
+                        <select id="PaisRegion" name="PaisRegion" class="form-control form-control-sm minimal" value="{{direcciones.PaisRegion|upper}}" required></select>
                     </div>
                     <div class="form-group col-md-6">
                         <input type="hidden" id="idRegion" value="{{iniRegion.CodeId}}">
@@ -99,7 +99,7 @@
                     </div>
                     <div class="form-group col-md-5">
                         <label class="etiqueta">Municipio o Alcaldía</label>
-                        <input type="text" id="Ciudad" name="Ciudad" value="{{direcciones.Ciudad}}" class="form-control form-control-sm">
+                        <input type="text" style="text-transform:uppercase;" id="Ciudad" name="Ciudad" value="{{direcciones.Ciudad}}" class="form-control form-control-sm">
                     </div>
                     <div class="form-group col-md-5">
                         <input type="hidden" id="iniDistrito" value="{{iniDistrito}}">
@@ -118,11 +118,11 @@
                     </div>
                     <div class="form-group col-md-5">
                         <label class="etiqueta">Ciudad</label>
-                        <input type="text" id="IntCiudad" name="IntCiudad" value="{{direcciones.Ciudad}}" class="form-control form-control-sm">
+                        <input type="text" style="text-transform:uppercase;" id="IntCiudad" name="IntCiudad" value="{{direcciones.Ciudad|upper}}" class="form-control form-control-sm">
                     </div>
                     <div class="form-group col-md-5">
                         <label class="etiqueta">Distrito</label>
-                        <input type="text" id="IntDistrito" name="IntDistrito" value="{{direcciones.Distrito}}" class="form-control form-control-sm">
+                        <input type="text" style="text-transform:uppercase;" id="IntDistrito" name="IntDistrito" value="{{direcciones.Distrito|upper}}" class="form-control form-control-sm">
                     </div>
                     {% if dataUS %}
                     <div id="dataUS" class="row">                
@@ -144,7 +144,7 @@
                 <div class="row">
                     <div class="form-group col-md-4">
                             <label class="etiqueta">Calle</label>
-                            <input type="text" name="Calle" value="{{direcciones.Calle}}" class="form-control form-control-sm">
+                            <input type="text" style="text-transform:uppercase;" name="Calle" value="{{direcciones.Calle|upper}}" class="form-control form-control-sm">
                     </div>
                     <div class="form-group col-md-2">
                             <label class="etiqueta">Número</label>
@@ -152,15 +152,15 @@
                     </div>
                     <!--div class="form-group col-md-10">
                             <label class="etiqueta">Calle 2</label>
-                            <input type="text" name="Calle2" value="{{direcciones.Calle2}}" class="form-control form-control-sm">
+                            <input type="text" name="Calle2" value="{{direcciones.Calle2|upper}}" class="form-control form-control-sm">
                     </div-->
                     <div class="form-group col-md-2">
                         <label class="etiqueta">Teléfono</label>
-                        <input type="number" min="1" max="9999999999" name="Telefono" value="{{direcciones.Telefono}}" class="form-control form-control-sm">
+                        <input type='text' maxlength="10" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" name="Telefono" value="{{direcciones.Telefono}}" class="form-control form-control-sm">
                     </div>
                     <div class="form-group col-md-4">
                         <label class="etiqueta">CorreoElectronico</label>
-                        <input type="text" name="CorreoElectronico" value="{{direcciones.CorreoElectronico}}" class="form-control form-control-sm">
+                        <input type="email" name="CorreoElectronico" value="{{direcciones.CorreoElectronico}}" class="form-control form-control-sm">
                     </div>
                     
                     <div class="form-group col-md-2">

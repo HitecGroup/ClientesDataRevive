@@ -164,7 +164,7 @@ const ListarColonias = async(CodPos, inival) => {
                 opciones += `<option value='${colonia.D_asenta}'>${colonia.D_asenta}</option>`;
             });
             Distrito.innerHTML = opciones;
-            getCiudad(mnpio);
+            //getCiudad(mnpio);
         }
         else {
             alert("Colonias no encontrados");

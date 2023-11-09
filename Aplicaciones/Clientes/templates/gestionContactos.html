@@ -67,8 +67,8 @@
                                     <tr>
                                         <td><small>{{forloop.counter}}</small></td>
                                         <td><small>{{c.IdContacto}}</small></td>
-                                        <td><small>{{c.Nombre}}</small></td>
-                                        <td><small>{{c.Apellidos}}</small></td>
+                                        <td><small>{{c.Nombre|upper}}</small></td>
+                                        <td><small>{{c.Apellidos|upper}}</small></td>
                                         <td><small>{{c.Telefono}}</small></td>
                                         <td><small>{{c.Funcion}}</small></td>
                                         <td><small>{% if c.Bloqueo == True %}SI{% endif %}</small></td>

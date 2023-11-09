@@ -120,37 +120,16 @@
                             <option value='{{cliente.Sector}}'>{{cliente.dSector}}</option>
                             {% else %}
                             <option value="" disabled selected>Seleccione uno</option>
-                            {% endif %}
-                            <option value='11'>Agrícola</option>
-                            <option value='22'>Servicios públicos</option>
-                            <option value='23'>Construcción</option>
-                            <option value='31'>Fabricación</option>
-                            <option value='42'>Comercio mayorista</option>
-                            <option value='44'>Comercio minorista</option>
-                            <option value='48'>Transporte y almacenamiento</option>
-                            <option value='51'>Información</option>
-                            <option value='52'>Finanzas y seguro</option>
-                            <option value='53'>Bienes inmuebles, alquiler y leasing</option>
-                            <option value='54'>Servicios profesionales, científicos y técnicos</option>
-                            <option value='55'>Gestión de compañías y empresas</option>
-                            <option value='56'>Servicios de recuperación, gestión de desechos y soporte administrativo</option>
-                            <option value='61'>Servicios educativos</option>
-                            <option value='62'>Atención médica y asistencia social</option>
-                            <option value='71'>Arte, entretenimiento y recreación</option>
-                            <option value='72'>Servicios de alimentación y alojamiento</option>
-                            <option value='81'>Otros servicios (excepto administración pública)</option>
-                            <option value='92'>Administración pública</option>
+                            {% endif %}                            
                             <option value='Z01'>Aeroespacial y Aeronáutica</option>
+                            <option value='11'>Agrícola</option>
                             <option value='Z02'>Alimentos y bebidas</option>
-                            <option value='Z03'>Artículos y Maquinaria Industrial</option>
                             <option value='Z04'>Automotriz</option>
-                            <option value='Z05'>Bearings</option>
-                            <option value='Z06'>Bombas y válvulas otras</option>
-                            <option value='Z07'>Bombas y válvulas PET</option>
+                            <option value='Z06'>Bombas y válvulas</option>
                             <option value='Z08'>Calzado</option>
-                            <option value='Z10'>Corte lámina</option>
+                            <option value='23'>Construcción</option>
                             <option value='Z11'>Educación</option>
-                            <option value='Z12'>Eléctrico / Electrónica</option>
+                            <option value='Z12'>Eléctrico/Electrónica</option>
                             <option value='Z13'>Entretenimiento y Deportes</option>
                             <option value='Z14'>Estructuras y Perfiles</option>
                             <option value='Z15'>Farmacéutico</option>
@@ -172,13 +151,9 @@
                             <option value='Z31'>Naval</option>
                             <option value='Z33'>Otras</option>
                             <option value='Z34'>Papelero</option>
-                            <option value='Z35'>Petróleo y Gas</option>
-                            <option value='Z36'>Plástico</option>
-                            <option value='Z37'>Prensado</option>
-                            <option value='Z38'>Químico</option>
+                            <option value='Z35'>Petróleo y gas</option>
                             <option value='Z39'>Robótica y automatización</option>
                             <option value='Z40'>Textil</option>
-                            <option value='Z41'>Taller/Maquiladora</option>
                         </select>
                     </div>
 
@@ -431,7 +406,7 @@
                             <option value='124'>EDM</option>
                         </select-->
                     </div>
-                    <br>
+                    
                     <!--div class="form-group"><label class="etiqueta"></label></div>
                     <div class="form-group"><label class="form-control form-control-sm minimal" style="border-color: transparent;"></label></div-->
                     <!--div class="form-group">
@@ -551,8 +526,95 @@
                             <option value='3 o Mas'>3 o Mas</option>
                         </select>
                     </div-->
-                    <br>
-                    <div class="form-group">
+                    
+                    <!--div class="form-group">
+                        <label class="etiqueta">Material Arranque de viruta</label>
+                        <select name="MatViruta" class="form-control form-control-sm minimal" value="{{cliente.MatViruta}}">
+                            {% if cliente.MatViruta %}
+                                <option value='{{cliente.MatViruta}}'>{{cliente.dMatViruta}}</option>
+                            {% else %}
+                                <option value="" disabled selected>Seleccione uno</option>
+                            {% endif %}
+                            <option value='163'>Aceros al carbón</option>
+                            <option value='164'>Acero inoxidable</option>
+                            <option value='165'>Fundición</option>
+                            <option value='166'>No Ferrosos</option>
+                            <option value='167'>Aleaciones Especiales</option>
+                            <option value='168'>Varios</option>
+                        </select>
+                    </div-->
+
+                    <div class="card" style="margin-top: 3px; margin-bottom: 3px;">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label class="etiqueta">Materiales que utilizan Arranque de viruta</label>                                
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <div class="form-check">
+                                        {% if cliente.MatArrV %}
+                                            <input class="form-check-input" type="checkbox" id="MatArrV" name="MatArrV" value="{{cliente.MatArrV}}" checked>
+                                        {% else %}
+                                        <input class="form-check-input" type="checkbox" id="MatArrV" name="MatArrV" value="{{cliente.MatArrV}}">
+                                        {% endif %}
+                                        <label class="etiqueta">Aceros al carbón</label>
+                                    </div>
+                                </div> 
+                                <div class="form-group col-md-4"> 
+                                    <div class="form-check">
+                                        {% if cliente.MatArrV %}
+                                            <input class="form-check-input" type="checkbox" id="MatArrV" name="MatArrV" value="{{cliente.MatArrV}}" checked>
+                                        {% else %}
+                                        <input class="form-check-input" type="checkbox" id="MatArrV" name="MatArrV" value="{{cliente.MatArrV}}">
+                                        {% endif %}
+                                        <label class="etiqueta">Acero inoxidable</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <div class="form-check">
+                                        {% if cliente.MatArrV %}
+                                            <input class="form-check-input" type="checkbox" id="MatArrV" name="MatArrV" value="{{cliente.MatArrV}}" checked>
+                                        {% else %}
+                                        <input class="form-check-input" type="checkbox" id="MatArrV" name="MatArrV" value="{{cliente.MatArrV}}">
+                                        {% endif %}
+                                        <label class="etiqueta">Fundición</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <div class="form-check">
+                                        {% if cliente.MatArrV %}
+                                            <input class="form-check-input" type="checkbox" id="MatArrV" name="MatArrV" value="{{cliente.MatArrV}}" checked>
+                                        {% else %}
+                                        <input class="form-check-input" type="checkbox" id="MatArrV" name="MatArrV" value="{{cliente.MatArrV}}">
+                                        {% endif %}
+                                        <label class="etiqueta">No Ferrosos</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <div class="form-check">
+                                        {% if cliente.MatArrV %}
+                                            <input class="form-check-input" type="checkbox" id="MatArrV" name="MatArrV" value="{{cliente.MatArrV}}" checked>
+                                        {% else %}
+                                        <input class="form-check-input" type="checkbox" id="MatArrV" name="MatArrV" value="{{cliente.MatArrV}}">
+                                        {% endif %}
+                                        <label class="etiqueta">Aleaciones especiales</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <div class="form-check">
+                                        {% if cliente.MatArrV %}
+                                            <input class="form-check-input" type="checkbox" id="MatArrV" name="MatArrV" value="{{cliente.MatArrV}}" checked>
+                                        {% else %}
+                                        <input class="form-check-input" type="checkbox" id="MatArrV" name="MatArrV" value="{{cliente.MatArrV}}">
+                                        {% endif %}
+                                        <label class="etiqueta">Varios</label>
+                                    </div>
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--div class="form-group">
                     <label class="etiqueta">Materiales Electroerosión</label>
                     <select name="MatUseCHMER" class="form-control form-control-sm minimal" value="{{cliente.MatUseCHMER}}">
                         {% if cliente.MatUseCHMER %}
@@ -568,8 +630,89 @@
                         <option value='175'>Fundición</option>
                         <option value='176'>Varios</option>                        
                     </select>
+                    </div-->
+
+                    <div class="card" style="margin-top: 3px; margin-bottom: 3px;">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label class="etiqueta">Materiales que utilizan Electroerosión</label>                                
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <div class="form-check">
+                                        {% if cliente.MatElectro %}
+                                            <input class="form-check-input" type="checkbox" id="MatElectro" name="MatElectro" value="{{cliente.MatElectro}}" checked>
+                                        {% else %}
+                                        <input class="form-check-input" type="checkbox" id="MatElectro" name="MatElectro" value="{{cliente.MatElectro}}">
+                                        {% endif %}
+                                        <label class="etiqueta">Aceros al carbón</label>
+                                    </div>
+                                </div> 
+                                <div class="form-group col-md-4"> 
+                                    <div class="form-check">
+                                        {% if cliente.MatElectro %}
+                                            <input class="form-check-input" type="checkbox" id="MatElectro" name="MatElectro" value="{{cliente.MatElectro}}" checked>
+                                        {% else %}
+                                        <input class="form-check-input" type="checkbox" id="MatElectro" name="MatElectro" value="{{cliente.MatElectro}}">
+                                        {% endif %}
+                                        <label class="etiqueta">Acero inoxidable</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <div class="form-check">
+                                        {% if cliente.MatElectro %}
+                                            <input class="form-check-input" type="checkbox" id="MatElectro" name="MatElectro" value="{{cliente.MatElectro}}" checked>
+                                        {% else %}
+                                        <input class="form-check-input" type="checkbox" id="MatElectro" name="MatElectro" value="{{cliente.MatElectro}}">
+                                        {% endif %}
+                                        <label class="etiqueta">Carburo de tuxteno</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <div class="form-check">
+                                        {% if cliente.MatElectro %}
+                                            <input class="form-check-input" type="checkbox" id="MatElectro" name="MatElectro" value="{{cliente.MatElectro}}" checked>
+                                        {% else %}
+                                        <input class="form-check-input" type="checkbox" id="MatElectro" name="MatElectro" value="{{cliente.MatElectro}}">
+                                        {% endif %}
+                                        <label class="etiqueta">No Ferrosos</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <div class="form-check">
+                                        {% if cliente.MatElectro %}
+                                            <input class="form-check-input" type="checkbox" id="MatElectro" name="MatElectro" value="{{cliente.MatElectro}}" checked>
+                                        {% else %}
+                                        <input class="form-check-input" type="checkbox" id="MatElectro" name="MatElectro" value="{{cliente.MatElectro}}">
+                                        {% endif %}
+                                        <label class="etiqueta">Aleaciones especiales</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <div class="form-check">
+                                        {% if cliente.MatElectro %}
+                                            <input class="form-check-input" type="checkbox" id="MatElectro" name="MatElectro" value="{{cliente.MatElectro}}" checked>
+                                        {% else %}
+                                        <input class="form-check-input" type="checkbox" id="MatElectro" name="MatElectro" value="{{cliente.MatElectro}}">
+                                        {% endif %}
+                                        <label class="etiqueta">Fundición</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <div class="form-check">
+                                        {% if cliente.MatElectro %}
+                                            <input class="form-check-input" type="checkbox" id="MatElectro" name="MatElectro" value="{{cliente.MatElectro}}" checked>
+                                        {% else %}
+                                        <input class="form-check-input" type="checkbox" id="MatElectro" name="MatElectro" value="{{cliente.MatElectro}}">
+                                        {% endif %}
+                                        <label class="etiqueta">Varios</label>
+                                    </div>
+                                </div>                                
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
+
+                    <!--div class="form-group">
                         <label class="etiqueta">Materiales Inyección</label>
                         <select name="MatUseYIZUMI" class="form-control form-control-sm minimal" value="{{MatUseYIZUMI}}">
                             {% if cliente.MatUseYIZUMI %}
@@ -585,8 +728,89 @@
                             <option value='184'>PS (Poliestireno)</option>
                             <option value='185'>Otros Plásticos, resinas, composites</option>
                         </select>
+                    </div-->
+
+                    <div class="card" style="margin-top: 3px; margin-bottom: 3px;">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label class="etiqueta">Materiales que utilizan Inyección</label>                                
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6" style="height: 35px;">
+                                    <div class="form-check">
+                                        {% if cliente.MatInyeccion %}
+                                            <input class="form-check-input" type="checkbox" id="MatInyeccion" name="MatInyeccion" value="{{cliente.MatInyeccion}}" checked>
+                                        {% else %}
+                                        <input class="form-check-input" type="checkbox" id="MatInyeccion" name="MatInyeccion" value="{{cliente.MatInyeccion}}">
+                                        {% endif %}
+                                        <label class="etiqueta">PETE (Polietileno tereftalato)</label>
+                                    </div>
+                                </div> 
+                                <div class="form-group col-md-7"> 
+                                    <div class="form-check">
+                                        {% if cliente.MatInyeccion %}
+                                            <input class="form-check-input" type="checkbox" id="MatInyeccion" name="MatInyeccion" value="{{cliente.MatInyeccion}}" checked>
+                                        {% else %}
+                                        <input class="form-check-input" type="checkbox" id="MatInyeccion" name="MatInyeccion" value="{{cliente.MatInyeccion}}">
+                                        {% endif %}
+                                        <label class="etiqueta">HDPE (Polietileno de alta densidad)</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <div class="form-check">
+                                        {% if cliente.MatInyeccion %}
+                                            <input class="form-check-input" type="checkbox" id="MatInyeccion" name="MatInyeccion" value="{{cliente.MatInyeccion}}" checked>
+                                        {% else %}
+                                        <input class="form-check-input" type="checkbox" id="MatInyeccion" name="MatInyeccion" value="{{cliente.MatInyeccion}}">
+                                        {% endif %}
+                                        <label class="etiqueta">V (Policloruro de vinilo)</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-7">
+                                    <div class="form-check">
+                                        {% if cliente.MatInyeccion %}
+                                            <input class="form-check-input" type="checkbox" id="MatInyeccion" name="MatInyeccion" value="{{cliente.MatInyeccion}}" checked>
+                                        {% else %}
+                                        <input class="form-check-input" type="checkbox" id="MatInyeccion" name="MatInyeccion" value="{{cliente.MatInyeccion}}">
+                                        {% endif %}
+                                        <label class="etiqueta">LDPE (Polietileno de baja densidad)</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <div class="form-check">
+                                        {% if cliente.MatInyeccion %}
+                                            <input class="form-check-input" type="checkbox" id="MatInyeccion" name="MatInyeccion" value="{{cliente.MatInyeccion}}" checked>
+                                        {% else %}
+                                        <input class="form-check-input" type="checkbox" id="MatInyeccion" name="MatInyeccion" value="{{cliente.MatInyeccion}}">
+                                        {% endif %}
+                                        <label class="etiqueta">PP (Polipropileno)</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <div class="form-check">
+                                        {% if cliente.MatInyeccion %}
+                                            <input class="form-check-input" type="checkbox" id="MatInyeccion" name="MatInyeccion" value="{{cliente.MatInyeccion}}" checked>
+                                        {% else %}
+                                        <input class="form-check-input" type="checkbox" id="MatInyeccion" name="MatInyeccion" value="{{cliente.MatInyeccion}}">
+                                        {% endif %}
+                                        <label class="etiqueta">PS (Poliestireno)</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-7">
+                                    <div class="form-check">
+                                        {% if cliente.MatInyeccion %}
+                                            <input class="form-check-input" type="checkbox" id="MatInyeccion" name="MatInyeccion" value="{{cliente.MatInyeccion}}" checked>
+                                        {% else %}
+                                        <input class="form-check-input" type="checkbox" id="MatInyeccion" name="MatInyeccion" value="{{cliente.MatInyeccion}}">
+                                        {% endif %}
+                                        <label class="etiqueta">Otros Plásticos, resinas, composites</label>
+                                    </div>
+                                </div>                                
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
+
+                    <!--div class="form-group">
                         <label class="etiqueta">Materiales FAB</label>
                         <select name="MatUsoFab" class="form-control form-control-sm minimal" value="{{cliente.MatUsoFab}}">
                             {% if cliente.MatUsoFab %}
@@ -601,24 +825,69 @@
                             <option value='191'>Lámina</option>
                             
                         </select>
+                    </div-->
+                    
+                    <div class="card" style="margin-top: 3px; margin-bottom: 3px;">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label class="etiqueta">Materiales que utilizan FAB</label>                                
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-3" style="height: 35px;">
+                                    <div class="form-check">
+                                        {% if cliente.MatFAB %}
+                                            <input class="form-check-input" type="checkbox" id="MatFAB" name="MatFAB" value="{{cliente.MatFAB}}" checked>
+                                        {% else %}
+                                        <input class="form-check-input" type="checkbox" id="MatFAB" name="MatFAB" value="{{cliente.MatFAB}}">
+                                        {% endif %}
+                                        <label class="etiqueta">Aluminio</label>
+                                    </div>
+                                </div> 
+                                <div class="form-group col-md-2"> 
+                                    <div class="form-check">
+                                        {% if cliente.MatFAB %}
+                                            <input class="form-check-input" type="checkbox" id="MatFAB" name="MatFAB" value="{{cliente.MatFAB}}" checked>
+                                        {% else %}
+                                        <input class="form-check-input" type="checkbox" id="MatFAB" name="MatFAB" value="{{cliente.MatFAB}}">
+                                        {% endif %}
+                                        <label class="etiqueta">Acero</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <div class="form-check">
+                                        {% if cliente.MatFAB %}
+                                            <input class="form-check-input" type="checkbox" id="MatFAB" name="MatFAB" value="{{cliente.MatFAB}}" checked>
+                                        {% else %}
+                                        <input class="form-check-input" type="checkbox" id="MatFAB" name="MatFAB" value="{{cliente.MatFAB}}">
+                                        {% endif %}
+                                        <label class="etiqueta">Acero inoxidable</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <div class="form-check">
+                                        {% if cliente.MatFAB %}
+                                            <input class="form-check-input" type="checkbox" id="MatFAB" name="MatFAB" value="{{cliente.MatFAB}}" checked>
+                                        {% else %}
+                                        <input class="form-check-input" type="checkbox" id="MatFAB" name="MatFAB" value="{{cliente.MatFAB}}">
+                                        {% endif %}
+                                        <label class="etiqueta">No ferrosos</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <div class="form-check">
+                                        {% if cliente.MatFAB %}
+                                            <input class="form-check-input" type="checkbox" id="MatFAB" name="MatFAB" value="{{cliente.MatFAB}}" checked>
+                                        {% else %}
+                                        <input class="form-check-input" type="checkbox" id="MatFAB" name="MatFAB" value="{{cliente.MatFAB}}">
+                                        {% endif %}
+                                        <label class="etiqueta">Lámina</label>
+                                    </div>
+                                </div>
+                                                                
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label class="etiqueta">Material Arranque de viruta</label>
-                        <select name="MatViruta" class="form-control form-control-sm minimal" value="{{cliente.MatViruta}}">
-                            {% if cliente.MatViruta %}
-                                <option value='{{cliente.MatViruta}}'>{{cliente.dMatViruta}}</option>
-                            {% else %}
-                                <option value="" disabled selected>Seleccione uno</option>
-                            {% endif %}
-                            <option value='163'>Aceros al carbón</option>
-                            <option value='164'>Acero inoxidable</option>
-                            <option value='165'>Fundición</option>
-                            <option value='166'>No Ferrosos</option>
-                            <option value='167'>Aleaciones Especiales</option>
-                            <option value='168'>Varios</option>
-                        </select>
-                    </div>
-                    <br><br><br><br><br><br>
+                    
             </div>
         </div>
     </div>

@@ -72,12 +72,12 @@
                 <div class="row">
                     <input type="hidden" id="idRegistro" name="idRegistro" value="{{idRegistro}}">
                     <div class='form-group col-md-2'><label class='etiqueta'>IdContacto</label><input type='text' value='{{idRegistro}}' class='form-control form-control-sm' readonly disabled></div>
-                    <div class='form-group col-md-3'><label class='etiqueta'>Nombre</label><input type='text'  name='Nombre' value='{{contacto.Nombre}}' class='form-control form-control-sm'></div>
-                    <div class='form-group col-md-3'><label class='etiqueta'>SegundoNombre</label><input type='text'  name='SegundoNombre' value='{{contacto.SegundoNombre}}' class='form-control form-control-sm'></div>
-                    <div class='form-group col-md-4'><label class='etiqueta'>Apellidos</label><input type='text'  name='Apellidos' value='{{contacto.Apellidos}}' class='form-control form-control-sm'></div>
-                    <div class='form-group col-md-2'><label class='etiqueta'>Telefono</label><input type='number'  name='Telefono' value='{{contacto.Telefono}}' class='form-control form-control-sm'></div>
-                    <div class='form-group col-md-2'><label class='etiqueta'>TelefonoMovil</label><input type='number'  name='TelefonoMovil' value='{{contacto.TelefonoMovil}}' class='form-control form-control-sm'></div>
-                    <div class='form-group col-md-4'><span style="color:red">* </span><label class='etiqueta'>CorreoElectronico</label><input type='text'  name='CorreoElectronico' value='{{contacto.CorreoElectronico}}' class='form-control form-control-sm' required></div>
+                    <div class='form-group col-md-3'><label class='etiqueta'>Nombre</label><input type='text' style="text-transform:uppercase;" name='Nombre' value='{{contacto.Nombre|upper}}' class='form-control form-control-sm'></div>
+                    <div class='form-group col-md-3'><label class='etiqueta'>SegundoNombre</label><input type='text' style="text-transform:uppercase;" name='SegundoNombre' value='{{contacto.SegundoNombre|upper}}' class='form-control form-control-sm'></div>
+                    <div class='form-group col-md-4'><label class='etiqueta'>Apellidos</label><input type='text' style="text-transform:uppercase;" name='Apellidos' value='{{contacto.Apellidos|upper}}' class='form-control form-control-sm'></div>
+                    <div class='form-group col-md-2'><label class='etiqueta'>Telefono</label><input type='text' maxlength="10" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" name='Telefono' value='{{contacto.Telefono}}' class='form-control form-control-sm'></div>
+                    <div class='form-group col-md-2'><label class='etiqueta'>TelefonoMovil</label><input type='text' maxlength="10" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" name='TelefonoMovil' value='{{contacto.TelefonoMovil}}' class='form-control form-control-sm'></div>
+                    <div class='form-group col-md-4'><span style="color:red">* </span><label class='etiqueta'>CorreoElectronico</label><input type='email'  name='CorreoElectronico' value='{{contacto.CorreoElectronico}}' class='form-control form-control-sm' required></div>
                     <div class='form-group col-md-4'><label class='etiqueta'>MedioComunicacion</label>
                         <!--input type='text'  name='MedioComunicacion' value='{{contacto.MedioComunicacion}}' class='form-control form-control-sm'></div-->
                         <select name="MedioComunicacion" class="form-control form-control-sm minimal" value="{{contacto.MedioComunicacion}}">

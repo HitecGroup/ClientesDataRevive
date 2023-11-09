@@ -9,9 +9,15 @@ from django.contrib import messages
 # Create your views here.
 def home(request, usrid=0):
     session = getSession(usrid)
+    
+    clientesOk = []
     clientes = Clientes.objects.all()[0:200]
-    return render(request, "gestionClientes.html",{"clientes":clientes, "session":session})
+    for item in clientes.iterator():
+        item.RegionVts = get_RegionVts(item.RegionVts)
+        clientesOk.append(item)
 
+    return render(request, "gestionClientes.html",{"clientes":clientesOk, "session":session})
+ 
 def login(request):
     return render(request, "login.html")
 
@@ -51,9 +57,15 @@ def loginUsr(request):
             usrvalid = True
             usrid = usuario.Id      
             nombre = usuario.Nombre
+            
+            clientesOk = []
             clientes = Clientes.objects.all()[0:200]
+            for item in clientes.iterator():
+                item.RegionVts = get_RegionVts(item.RegionVts)
+                clientesOk.append(item)
+
             session = {'usrvalid':usrvalid, 'usrid': usrid, 'user':user, 'nombre':nombre, 'msg':msg}
-            return render(request, "gestionClientes.html",{"clientes":clientes, "session":session})
+            return render(request, "gestionClientes.html",{"clientes":clientesOk, "session":session})
         else :
             msg = 'La contraseña es incorrecta.  Intente de nuevo.'
     else:
@@ -95,6 +107,7 @@ def setDataCliente(cliente):
     DivCNCOmnitec = validDivision(cliente.IdCliente, 4, 122)
     DivNextecFAB = validDivision(cliente.IdCliente, 5, 123)
     DivNextecEDM = validDivision(cliente.IdCliente, 5, 124)
+    dRegionVts = get_RegionVts(cliente.RegionVts)
 
     acliente = {"IdCliente":cliente.IdCliente, 
             "ClaveExterna":cliente.ClaveExterna,
@@ -153,7 +166,7 @@ def setDataCliente(cliente):
             "dMatUsoFab":get_MatUsoFab(cliente.MatUsoFab),
             "dMatViruta":get_MatViruta(cliente.MatViruta),
             "dMatUsoCNC_Haas":get_MatUsoCNC_Haas(cliente.MatUsoCNC_Haas),
-            #"dRegionVts":get_RegionVts(cliente.RegionVts),
+            "dRegionVts":dRegionVts,
             #"dActPriFAB":get_ActPriFAB(cliente.ActPriFAB),
             #"dActPriEDM":get_ActPriEDM(cliente.ActPriEDM),
             #"dActPriEquipoCNC":get_ActPriEquipoCNC(cliente.ActPriEquipoCNC),
@@ -605,7 +618,7 @@ def setDirecciones(data):
         "dPaisRegion": dPaisRegion,
         "Calle": data.Calle,
         "Numero": data.Numero,
-        "Calle2": data.Calle2,
+        #"Calle2": data.Calle2,
         "Ciudad": data.Ciudad,
         "Estado": data.Estado,
         "dRegion": dRegion,
@@ -618,7 +631,7 @@ def setDirecciones(data):
         "DestinatarioFactura": data.DestinatarioFactura,
         "Telefono": data.Telefono,
         "CorreoElectronico": data.CorreoElectronico,
-        "SitioWeb": data.SitioWeb,
+        #"SitioWeb": data.SitioWeb,
         "Bloqueo": data.Bloqueo,
     }
     return aDirecciones
@@ -720,11 +733,11 @@ def editarDireccion(request, usrid):
     
     Calle = request.POST['Calle']
     Numero = request.POST['Numero']
-    Calle2 = request.POST['Calle2']
+    #Calle2 = request.POST['Calle2']
     CodigoDomFiscal = ""
     Telefono = request.POST['Telefono']
     CorreoElectronico = request.POST['CorreoElectronico']
-    SitioWeb = request.POST['SitioWeb']   
+    #SitioWeb = request.POST['SitioWeb']   
 
     DireccionPrincipal = Entrega = ""
     DestinatarioMercEstandar = DestinatarioFactura = ""
@@ -746,7 +759,7 @@ def editarDireccion(request, usrid):
         direcciones.PaisRegion = PaisRegion
         direcciones.Calle = Calle
         direcciones.Numero = Numero
-        direcciones.Calle2 = Calle2
+        #direcciones.Calle2 = Calle2
         direcciones.Ciudad = Ciudad
         direcciones.Estado = Estado
         direcciones.CodigoPostal = CodigoPostal
@@ -758,7 +771,7 @@ def editarDireccion(request, usrid):
         direcciones.DestinatarioFactura = DestinatarioFactura
         direcciones.Telefono = Telefono
         direcciones.CorreoElectronico = CorreoElectronico
-        direcciones.SitioWeb =SitioWeb
+        #direcciones.SitioWeb =SitioWeb
         direcciones.save()
         messages.success(request, "Los datos de la dirección del Cliente fue actualizada con éxito")
 
@@ -772,7 +785,7 @@ def editarDireccion(request, usrid):
             PaisRegion = PaisRegion,
             Calle = Calle,
             Numero = Numero,
-            Calle2 = Calle2,
+            #Calle2 = Calle2,
             Ciudad = Ciudad,
             Estado = Estado,
             CodigoPostal = CodigoPostal,
@@ -784,7 +797,7 @@ def editarDireccion(request, usrid):
             DestinatarioFactura = DestinatarioFactura,
             Telefono = Telefono,
             CorreoElectronico = CorreoElectronico,
-            SitioWeb =SitioWeb,
+            #SitioWeb =SitioWeb,
             Bloqueo = 0
         )
         idRegistro = direcciones.IdRegistro
@@ -795,7 +808,7 @@ def editarDireccion(request, usrid):
             "PaisRegion": PaisRegion,
             "Calle": Calle,
             "Numero": Numero,
-            "Calle2": Calle2,
+            #"Calle2": Calle2,
             "Ciudad": Ciudad,
             "Estado": Estado,
             "CodigoPostal": CodigoPostal,
@@ -807,7 +820,7 @@ def editarDireccion(request, usrid):
             "DestinatarioFactura": DestinatarioFactura,
             "Telefono": Telefono,
             "CorreoElectronico": CorreoElectronico,
-            "SitioWeb": SitioWeb,
+            #"SitioWeb": SitioWeb,
     }
 
     entidad = "Direcciones"
@@ -922,42 +935,21 @@ def getDescripRegion(request, IdCountry, codigo):
 
 def get_Sector(codigo):
     descrip = ""
-    if(codigo=="11"):            descrip = "Agrícola"
-    elif (codigo == '22') :      descrip = 'Servicios públicos'
-    elif (codigo == '23') :      descrip = 'Construcción'
-    elif (codigo == '31') :      descrip = 'Fabricación'
-    elif (codigo == '42') :      descrip = 'Comercio mayorista'
-    elif (codigo == '44') :      descrip = 'Comercio minorista'
-    elif (codigo == '48') :      descrip = 'Transporte y almacenamiento'
-    elif (codigo == '51') :      descrip = 'Información'
-    elif (codigo == '52') :      descrip = 'Finanzas y seguro'
-    elif (codigo == '53') :      descrip = 'Bienes inmuebles, alquiler y leasing'
-    elif (codigo == '54') :      descrip = 'Servicios profesionales, científicos y técnicos'
-    elif (codigo == '55') :      descrip = 'Gestión de compañías y empresas'
-    elif (codigo == '56') :      descrip = 'Servicios de recuperación, gestión de desechos y soporte administrativo'
-    elif (codigo == '61') :      descrip = 'Servicios educativos'
-    elif (codigo == '62') :      descrip = 'Atención médica y asistencia social'
-    elif (codigo == '71') :      descrip = 'Arte, entretenimiento y recreación'
-    elif (codigo == '72') :      descrip = 'Servicios de alimentación y alojamiento'
-    elif (codigo == '81') :      descrip = 'Otros servicios (excepto administración pública)'
-    elif (codigo == '92') :      descrip = 'Administración pública'
-    elif (codigo == 'Z01') :      descrip = 'Aeroespacial y Aeronáutica'
+    if (codigo == 'Z01') :        descrip = 'Aeroespacial y Aeronáutica'
+    elif (codigo == '11') :       descrip = 'Agrícola'
     elif (codigo == 'Z02') :      descrip = 'Alimentos y bebidas'
-    elif (codigo == 'Z03') :      descrip = 'Artículos y Maquinaria Industrial'
     elif (codigo == 'Z04') :      descrip = 'Automotriz'
-    elif (codigo == 'Z05') :      descrip = 'Bearings'
-    elif (codigo == 'Z06') :      descrip = 'Bombas y válvulas otras'
-    elif (codigo == 'Z07') :      descrip = 'Bombas y válvulas PET'
+    elif (codigo == 'Z06') :      descrip = 'Bombas y válvulas'
     elif (codigo == 'Z08') :      descrip = 'Calzado'
-    elif (codigo == 'Z10') :      descrip = 'Corte lámina'
+    elif (codigo == '23') :       descrip = 'Construcción'
     elif (codigo == 'Z11') :      descrip = 'Educación'
-    elif (codigo == 'Z12') :      descrip = 'Eléctrico'
+    elif (codigo == 'Z12') :      descrip = 'Eléctrico/Electrónica'
     elif (codigo == 'Z13') :      descrip = 'Entretenimiento y Deportes'
     elif (codigo == 'Z14') :      descrip = 'Estructuras y Perfiles'
     elif (codigo == 'Z15') :      descrip = 'Farmacéutico'
     elif (codigo == 'Z16') :      descrip = 'Ferrocarril'
     elif (codigo == 'Z17') :      descrip = 'Forja'
-    elif (codigo == 'Z18') :      descrip = 'Funcición'
+    elif (codigo == 'Z18') :      descrip = 'Fundición'
     elif (codigo == 'Z19') :      descrip = 'Generación de Energía'
     elif (codigo == 'Z20') :      descrip = 'Gobierno'
     elif (codigo == 'Z21') :      descrip = 'Herramientas y utillaje'
@@ -965,21 +957,76 @@ def get_Sector(codigo):
     elif (codigo == 'Z23') :      descrip = 'Joyería'
     elif (codigo == 'Z24') :      descrip = 'Línea blanca'
     elif (codigo == 'Z25') :      descrip = 'Mantenimiento'
-    elif (codigo == 'Z26') :      descrip = 'Médico'
+    elif (codigo == 'Z26') :      descrip = 'Médico / Dental'
     elif (codigo == 'Z27') :      descrip = 'Militar'
     elif (codigo == 'Z28') :      descrip = 'Minera'
     elif (codigo == 'Z29') :      descrip = 'Moldes, troqueles y matrices'
     elif (codigo == 'Z30') :      descrip = 'Muebles'
     elif (codigo == 'Z31') :      descrip = 'Naval'
     elif (codigo == 'Z33') :      descrip = 'Otras'
-    elif (codigo == 'Z34') :      descrip = 'Papelelero'
-    elif (codigo == 'Z35') :      descrip = 'Petróleo y Gas'
-    elif (codigo == 'Z36') :      descrip = 'Plástico'
-    elif (codigo == 'Z37') :      descrip = 'Prensado'
-    elif (codigo == 'Z38') :      descrip = 'Químico'
+    elif (codigo == 'Z34') :      descrip = 'Papelero'
+    elif (codigo == 'Z35') :      descrip = 'Petróleo y gas'
     elif (codigo == 'Z39') :      descrip = 'Robótica y automatización'
     elif (codigo == 'Z40') :      descrip = 'Textil'
-    elif (codigo == 'Z41') :      descrip = 'Taller/Maquiladora'
+
+    #if(codigo=="11"):            descrip = "Agrícola" 
+    #elif (codigo == '22') :      descrip = 'Servicios públicos'
+    #elif (codigo == '23') :      descrip = 'Construcción'
+    #elif (codigo == '31') :      descrip = 'Fabricación'
+    #elif (codigo == '42') :      descrip = 'Comercio mayorista'
+    #elif (codigo == '44') :      descrip = 'Comercio minorista'
+    #elif (codigo == '48') :      descrip = 'Transporte y almacenamiento'
+    #elif (codigo == '51') :      descrip = 'Información'
+    #elif (codigo == '52') :      descrip = 'Finanzas y seguro'
+    #elif (codigo == '53') :      descrip = 'Bienes inmuebles, alquiler y leasing'
+    #elif (codigo == '54') :      descrip = 'Servicios profesionales, científicos y técnicos'
+    #elif (codigo == '55') :      descrip = 'Gestión de compañías y empresas'
+    #elif (codigo == '56') :      descrip = 'Servicios de recuperación, gestión de desechos y soporte administrativo'
+    #elif (codigo == '61') :      descrip = 'Servicios educativos'
+    #elif (codigo == '62') :      descrip = 'Atención médica y asistencia social'
+    #elif (codigo == '71') :      descrip = 'Arte, entretenimiento y recreación'
+    #elif (codigo == '72') :      descrip = 'Servicios de alimentación y alojamiento'
+    #elif (codigo == '81') :      descrip = 'Otros servicios (excepto administración pública)'
+    #elif (codigo == '92') :      descrip = 'Administración pública'
+    #elif (codigo == 'Z01') :      descrip = 'Aeroespacial y Aeronáutica'
+    #elif (codigo == 'Z02') :      descrip = 'Alimentos y bebidas'
+    #elif (codigo == 'Z03') :      descrip = 'Artículos y Maquinaria Industrial'
+    #elif (codigo == 'Z04') :      descrip = 'Automotriz'
+    #elif (codigo == 'Z05') :      descrip = 'Bearings'
+    #elif (codigo == 'Z06') :      descrip = 'Bombas y válvulas otras'
+    #elif (codigo == 'Z07') :      descrip = 'Bombas y válvulas PET'
+    #elif (codigo == 'Z08') :      descrip = 'Calzado'
+    #elif (codigo == 'Z10') :      descrip = 'Corte lámina'
+    #elif (codigo == 'Z11') :      descrip = 'Educación'
+    #elif (codigo == 'Z12') :      descrip = 'Eléctrico'
+    #elif (codigo == 'Z13') :      descrip = 'Entretenimiento y Deportes'
+    #elif (codigo == 'Z14') :      descrip = 'Estructuras y Perfiles'
+    #elif (codigo == 'Z15') :      descrip = 'Farmacéutico'
+    #elif (codigo == 'Z16') :      descrip = 'Ferrocarril'
+    #elif (codigo == 'Z17') :      descrip = 'Forja'
+    #elif (codigo == 'Z18') :      descrip = 'Funcición'
+    #elif (codigo == 'Z19') :      descrip = 'Generación de Energía'
+    #elif (codigo == 'Z20') :      descrip = 'Gobierno'
+    #elif (codigo == 'Z21') :      descrip = 'Herramientas y utillaje'
+    #elif (codigo == 'Z22') :      descrip = 'Instrumental de precisión'
+    #elif (codigo == 'Z23') :      descrip = 'Joyería'
+    #elif (codigo == 'Z24') :      descrip = 'Línea blanca'
+    #elif (codigo == 'Z25') :      descrip = 'Mantenimiento'
+    #elif (codigo == 'Z26') :      descrip = 'Médico'
+    #elif (codigo == 'Z27') :      descrip = 'Militar'
+    #elif (codigo == 'Z28') :      descrip = 'Minera'
+    #elif (codigo == 'Z29') :      descrip = 'Moldes, troqueles y matrices'
+    #elif (codigo == 'Z30') :      descrip = 'Muebles'
+    #elif (codigo == 'Z31') :      descrip = 'Naval'
+    #elif (codigo == 'Z33') :      descrip = 'Otras'
+    #elif (codigo == 'Z34') :      descrip = 'Papelelero'
+    #elif (codigo == 'Z35') :      descrip = 'Petróleo y Gas'
+    #elif (codigo == 'Z36') :      descrip = 'Plástico'
+    #elif (codigo == 'Z37') :      descrip = 'Prensado'
+    #elif (codigo == 'Z38') :      descrip = 'Químico'
+    #elif (codigo == 'Z39') :      descrip = 'Robótica y automatización'
+    #elif (codigo == 'Z40') :      descrip = 'Textil'
+    #elif (codigo == 'Z41') :      descrip = 'Taller/Maquiladora'
     else :                        descrip = ""
 
     return (descrip)
@@ -1524,8 +1571,12 @@ def buscarCliente(request, usrid):
             Q(RFC__icontains = busqueda) |
             Q(Duns__icontains = busqueda) 
         ).distinct()
-   
-    return render(request, "gestionClientesBusqueda.html",{"clientes":clientes, "session":session})
+        clientesOk = []
+        for item in clientes.iterator():
+            item.RegionVts = get_RegionVts(item.RegionVts)
+            clientesOk.append(item)
+
+    return render(request, "gestionClientesBusqueda.html",{"clientes":clientesOk, "session":session})
 
 def addLog(usrid, movimiento, entidad, id, data) :
     fecha = datetime.now()
