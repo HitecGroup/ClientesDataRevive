@@ -44,6 +44,13 @@ class Clientes(models.Model):
     DivHTools=models.CharField(max_length=3,default="000")
     DivCNC=models.CharField(max_length=3,default="000")
     DivNextec=models.CharField(max_length=3,default="000")
+    IdUser=models.CharField(max_length=12,default="00000000000")
+    MaqCompArrVir=models.CharField(max_length=10,default="000000000")
+    MaqCompElectro=models.CharField(max_length=10,default="000000000")
+    MaqCompInyec=models.CharField(max_length=10,default="000000000")
+    MaqCompLaser=models.CharField(max_length=10,default="000000000")
+    MaqCompPrensa=models.CharField(max_length=10,default="000000000")
+    MaqCompDoblad=models.CharField(max_length=10,default="000000000")
 
 
     def __str__(self):
@@ -88,7 +95,14 @@ class Clientes(models.Model):
                             self.DivPM,
                             self.DivHTools,
                             self.DivCNC,
-                            self.DivNextec
+                            self.DivNextec,
+                            self.IdUser,
+                            self.MaqCompArrVir,
+                            self.MaqCompElectro,
+                            self.MaqCompInyec,
+                            self.MaqCompLaser,
+                            self.MaqCompPrensa,
+                            self.MaqCompDoblad
 )
 
 class Contactos(models.Model):
@@ -302,3 +316,28 @@ class divisionCliente (models.Model):
                            self.IdContacto,
                            self.IdDivision,
                            self.IdSubdivision)
+    
+class MaterialCliente (models.Model):
+    IdCliente=models.AutoField(primary_key=True)
+    IdMaterial=models.CharField(max_length=3,default="000")
+    IdTipo=models.CharField(max_length=3,default="000")
+
+    def __str__(self):
+       texto = "{0} ({1})"
+       return texto.format(self.IdCliente,
+                           self.IdMaterial,
+                           self.IdTipo)
+
+class MaquinasCliente (models.Model):
+    IdCliente=models.AutoField(primary_key=True)
+    IdMaquina=models.CharField(max_length=3,default="000")
+    IdMarca=models.CharField(max_length=3,default="000")
+    Marca=models.CharField(max_length=40,default="SIN MARCA")
+
+
+    def __str__(self):
+       texto = "{0} ({1})"
+       return texto.format(self.IdCliente,
+                           self.IdMaquina,
+                           self.IdMarca,
+                           self.Marca)

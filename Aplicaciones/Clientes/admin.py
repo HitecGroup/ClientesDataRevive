@@ -9,6 +9,8 @@ from .models import Country
 from .models import divisionCliente
 from .models import Users
 from .models import Log
+from .models import MaterialCliente
+from .models import MaquinasCliente
 # Register your models here.
 
 admin.site.register(Clientes)
@@ -20,4 +22,6 @@ admin.site.register(RelReg_Edo)
 admin.site.register(Country)
 admin.site.register(divisionCliente)
 admin.site.register(Users)
-admin.site.register(Log)
+admin.site.register(Log),
+admin.site.register(MaterialCliente),
+admin.site.register(MaquinasCliente)
