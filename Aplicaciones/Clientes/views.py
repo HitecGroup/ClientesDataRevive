@@ -373,7 +373,12 @@ def gestionContactos(request, codigo, usrid):
     if Contactos.objects.filter(IdCliente=codigo).exists():
     # Si el cliente tiene contactos envía el listado de contactos del cliente
         contactosListados = Contactos.objects.all().filter(IdCliente=codigo)
-        return render(request,"gestionContactos.html",{"contactos":contactosListados, "cliente":cliente, "session":session})
+        contactosListadosOK = []
+        for item in contactosListados.iterator():
+            item.Funcion = get_Funcion(item.Funcion)
+            contactosListadosOK.append(item)
+
+        return render(request,"gestionContactos.html",{"contactos":contactosListadosOK, "cliente":cliente, "session":session})
     else:
     # Si no hay contactos registrados, se envía agregar un contacto
         contacto = None
@@ -596,13 +601,21 @@ def bloquearContacto(request, codigo,cliente, usrid):
     addLog(usrid, "Bloqueo", "Contactos", codigo, {"Bloqueo":bloqueo})
 
     contactosListados = Contactos.objects.all().filter(IdCliente=cliente)
-    return render(request,"gestionContactos.html",{"contactos":contactosListados, "cliente":cliente, "session":session})
+    contactosListadosOK = []
+    for item in contactosListados.iterator():
+        item.Funcion = get_Funcion(item.Funcion)
+        contactosListadosOK.append(item)
+    return render(request,"gestionContactos.html",{"contactos":contactosListadosOK, "cliente":cliente, "session":session})
 
 def eliminarContacto(request,contacto,cliente):
     contacto = Contactos.objects.get(IdContacto=contacto)
     contacto.delete()
     contactosListados = Contactos.objects.all().filter(IdCliente=cliente)
-    return render(request,"gestionContactos.html",{"contactos":contactosListados})
+    contactosListadosOK = []
+    for item in contactosListados.iterator():
+        item.Funcion = get_Funcion(item.Funcion)
+        contactosListadosOK.append(item)
+    return render(request,"gestionContactos.html",{"contactos":contactosListadosOK})
 
 def setDirecciones(data):
     dPaisRegion = getDescripPais(data.PaisRegion)
