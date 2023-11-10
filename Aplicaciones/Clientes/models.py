@@ -318,7 +318,7 @@ class divisionCliente (models.Model):
                            self.IdSubdivision)
     
 class MaterialCliente (models.Model):
-    IdCliente=models.AutoField(primary_key=True)
+    IdCliente=models.CharField(max_length=20)
     IdMaterial=models.CharField(max_length=3,default="000")
     IdTipo=models.CharField(max_length=3,default="000")
 
@@ -329,7 +329,7 @@ class MaterialCliente (models.Model):
                            self.IdTipo)
 
 class MaquinasCliente (models.Model):
-    IdCliente=models.AutoField(primary_key=True)
+    IdCliente=models.CharField(max_length=20)
     IdMaquina=models.CharField(max_length=3,default="000")
     IdMarca=models.CharField(max_length=3,default="000")
     Marca=models.CharField(max_length=40,default="SIN MARCA")
@@ -341,3 +341,12 @@ class MaquinasCliente (models.Model):
                            self.IdMaquina,
                            self.IdMarca,
                            self.Marca)
+
+class DivisionContacto (models.Model):
+    IdContacto=models.CharField(max_length=20)
+    Division=models.CharField(max_length=30,default="Division Desccrp")
+
+    def __str__(self):
+       texto = "{0} ({1})"
+       return texto.format(self.IdContacto,
+                           self.Division)

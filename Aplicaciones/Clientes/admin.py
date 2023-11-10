@@ -11,6 +11,7 @@ from .models import Users
 from .models import Log
 from .models import MaterialCliente
 from .models import MaquinasCliente
+from .models import DivisionContacto
 # Register your models here.
 
 admin.site.register(Clientes)
@@ -25,3 +26,4 @@ admin.site.register(Users)
 admin.site.register(Log),
 admin.site.register(MaterialCliente),
 admin.site.register(MaquinasCliente)
+admin.site.register(DivisionContacto)
