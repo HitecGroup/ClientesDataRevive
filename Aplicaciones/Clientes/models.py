@@ -318,17 +318,20 @@ class divisionCliente (models.Model):
                            self.IdSubdivision)
     
 class MaterialCliente (models.Model):
+    my_row_id=models.BigAutoField(primary_key=True)
     IdCliente=models.CharField(max_length=20)
     IdMaterial=models.CharField(max_length=3,default="000")
     IdTipo=models.CharField(max_length=3,default="000")
 
     def __str__(self):
        texto = "{0} ({1})"
-       return texto.format(self.IdCliente,
+       return texto.format(self.my_row_id,
+                           self.IdCliente,
                            self.IdMaterial,
                            self.IdTipo)
 
 class MaquinasCliente (models.Model):
+    my_row_id=models.BigAutoField(primary_key=True)
     IdCliente=models.CharField(max_length=20)
     IdMaquina=models.CharField(max_length=3,default="000")
     IdMarca=models.CharField(max_length=3,default="000")
@@ -337,16 +340,19 @@ class MaquinasCliente (models.Model):
 
     def __str__(self):
        texto = "{0} ({1})"
-       return texto.format(self.IdCliente,
+       return texto.format(self.my_row_id,
+                           self.IdCliente,
                            self.IdMaquina,
                            self.IdMarca,
                            self.Marca)
 
 class DivisionContacto (models.Model):
+    my_row_id=models.BigAutoField(primary_key=True)
     IdContacto=models.CharField(max_length=20)
     Division=models.CharField(max_length=30,default="Division Desccrp")
 
     def __str__(self):
        texto = "{0} ({1})"
-       return texto.format(self.IdContacto,
+       return texto.format(self.my_row_id,
+                           self.IdContacto,
                            self.Division)
