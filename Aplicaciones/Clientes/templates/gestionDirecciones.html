@@ -53,7 +53,6 @@
                                 <thead style="background-color: #E5E5E5;font-size: 14px;">
                                     <tr>
                                         <th>#</th>
-                                        <th><small>Id</small></th>
                                         <th><small>Pais</small></th>
                                         <th><small>Estado</small></th>
                                         <th><small>CP</small></th>
@@ -67,7 +66,6 @@
                                     {% for d in direcciones %}
                                     <tr>
                                         <td><small>{{forloop.counter}}</small></td>
-                                        <td><small>{{d.IdRegistro}}</small></td>
                                         <td><small>{{d.PaisRegion|upper}}</small></td>
                                         <td><small>{{d.Estado|upper}}</small></td>
                                         <td><small>{{d.CodigoPostal}}</small></td>

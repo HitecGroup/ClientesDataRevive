@@ -50,7 +50,10 @@ const cargaInicial = async() => {
     });
 
     Estado.addEventListener("change", (event) => {
-        ListarCodPos(event.target.value);
+        PaisRegion = document.getElementById('PaisRegion').value;
+        if(PaisRegion=='MX') {
+            ListarCodPos(event.target.value);
+        }
         clearColonias();
     });
 
@@ -104,7 +107,15 @@ const ListarEstados = async(idPais, inival) => {
 
             if(vista=='Cliente') {
                 if(idPais=="US") {
-                    CodigoDomFiscal.innerHTML = opciones;   }
+                    if (inival) {
+                        opciones = `<option value='${idCodDomFis}'>${coddomfis}</option>`;
+                    }
+                    estados = data.estados;
+                    estados.forEach((estado)=> {
+                        opciones += `<option value='${estado.CodeId}'>${estado.Descrip}</option>`;
+                    });
+                    CodigoDomFiscal.innerHTML = opciones;   
+                }
                 else {
                     opciones = ``;
                     CodigoDomFiscal.innerHTML = opciones;   }
@@ -164,7 +175,9 @@ const ListarColonias = async(CodPos, inival) => {
                 opciones += `<option value='${colonia.D_asenta}'>${colonia.D_asenta}</option>`;
             });
             Distrito.innerHTML = opciones;
-            //getCiudad(mnpio);
+            if(!inival) {
+                getCiudad(mnpio);
+            }
         }
         else {
             alert("Colonias no encontrados");

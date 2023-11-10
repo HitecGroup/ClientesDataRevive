@@ -10,7 +10,8 @@ from django.contrib import messages
 def home(request, usrid=0):
     session = getSession(usrid)
     clientesOk = []
-    clientes = Clientes.objects.all()[0:200]
+    #clientes = Clientes.objects.all().filter(IdUser=usrid)[0:200]
+    clientes = Clientes.objects.all().filter()[0:200]
     for item in clientes.iterator():
         item.RegionVts = get_RegionVts(item.RegionVts)
         clientesOk.append(item)
@@ -58,7 +59,8 @@ def loginUsr(request):
             usrid = usuario.Id      
             nombre = usuario.Nombre
             clientesOk = []
-            clientes = Clientes.objects.all()[0:200]
+            clientes = Clientes.objects.all().filter(IdUser=usrid)[0:200]
+            #clientes = Clientes.objects.all().filter()[0:200]
             for item in clientes.iterator():
                 item.RegionVts = get_RegionVts(item.RegionVts)
                 clientesOk.append(item)
@@ -106,6 +108,173 @@ def setDataCliente(cliente):
     DivNextecFAB = validDivision(cliente.IdCliente, 5, 123)
     DivNextecEDM = validDivision(cliente.IdCliente, 5, 124)
 
+    ArrVirMat01 = validMaterial(cliente.IdCliente, '01', '163')
+    ArrVirMat02 = validMaterial(cliente.IdCliente, '01', '164')
+    ArrVirMat03 = validMaterial(cliente.IdCliente, '01', '165')
+    ArrVirMat04 = validMaterial(cliente.IdCliente, '01', '166')
+    ArrVirMat05 = validMaterial(cliente.IdCliente, '01', '167')
+    ArrVirMat06 = validMaterial(cliente.IdCliente, '01', '168')
+
+    ElectroMat01 = validMaterial(cliente.IdCliente, '02', '170')
+    ElectroMat02 = validMaterial(cliente.IdCliente, '02', '171')
+    ElectroMat03 = validMaterial(cliente.IdCliente, '02', '172')
+    ElectroMat04 = validMaterial(cliente.IdCliente, '02', '173')
+    ElectroMat05 = validMaterial(cliente.IdCliente, '02', '174')
+    ElectroMat06 = validMaterial(cliente.IdCliente, '02', '175')
+    ElectroMat07 = validMaterial(cliente.IdCliente, '02', '176')
+
+    InyecMat01 = validMaterial(cliente.IdCliente, '03', '179')
+    InyecMat02 = validMaterial(cliente.IdCliente, '03', '180')
+    InyecMat03 = validMaterial(cliente.IdCliente, '03', '181')
+    InyecMat04 = validMaterial(cliente.IdCliente, '03', '182')
+    InyecMat05 = validMaterial(cliente.IdCliente, '03', '183')
+    InyecMat06 = validMaterial(cliente.IdCliente, '03', '184')
+    InyecMat07 = validMaterial(cliente.IdCliente, '03', '185')
+
+    FABMat01 = validMaterial(cliente.IdCliente, '04', '187')
+    FABMat02 = validMaterial(cliente.IdCliente, '04', '188')
+    FABMat03 = validMaterial(cliente.IdCliente, '04', '189')
+    FABMat04 = validMaterial(cliente.IdCliente, '04', '190')
+    FABMat05 = validMaterial(cliente.IdCliente, '04', '191')
+
+    MarcaArrVir01 = "Dn Solutions"
+    MarcaArrVir02 = 'Okuma'
+    MarcaArrVir03 = 'Dmg Mori'
+    MarcaArrVir04 = 'Mazak'
+    MarcaArrVir05 = 'Hision'
+    MarcaArrVir06 = 'Hyundai'
+    MarcaArrVir07 = 'Baoji'
+    MarcaArrVir08 = 'Makino'
+    MarcaArrVir09 = 'Romi'
+    MarcaArrVir10 = 'Chiron'
+    MarcaArrVirOtra = getMarca(cliente.IdCliente, '01', 'Otr')
+    ArrVirMarca01 = validMarca(cliente.IdCliente, '01', '01')
+    ArrVirMarca02 = validMarca(cliente.IdCliente, '01', '02')
+    ArrVirMarca03 = validMarca(cliente.IdCliente, '01', '03')
+    ArrVirMarca04 = validMarca(cliente.IdCliente, '01', '04')
+    ArrVirMarca05 = validMarca(cliente.IdCliente, '01', '05')
+    ArrVirMarca06 = validMarca(cliente.IdCliente, '01', '06')
+    ArrVirMarca07 = validMarca(cliente.IdCliente, '01', '07')
+    ArrVirMarca08 = validMarca(cliente.IdCliente, '01', '08')
+    ArrVirMarca09 = validMarca(cliente.IdCliente, '01', '09')
+    ArrVirMarca10 = validMarca(cliente.IdCliente, '01', '10')
+    ArrVirMarcaOtra = validMarca(cliente.IdCliente, '01', 'Otr')
+
+    MarcaElectro01 = "Sodick"
+    MarcaElectro02 = 'Mitsubishi'
+    MarcaElectro03 = 'Shem'
+    MarcaElectro04 = 'Accutex'
+    MarcaElectro05 = 'Makino'
+    MarcaElectro06 = 'Ipretech'
+    MarcaElectro07 = 'Mc-Lane'
+    MarcaElectro08 = 'Excetek'
+    MarcaElectro09 = 'Maincasa'
+    MarcaElectro10 = 'Protecnic'
+    MarcaElectroOtra = getMarca(cliente.IdCliente, '02', 'Otr')
+    ElectroMarca01 = validMarca(cliente.IdCliente, '02', '01')
+    ElectroMarca02 = validMarca(cliente.IdCliente, '02', '02')
+    ElectroMarca03 = validMarca(cliente.IdCliente, '02', '03')
+    ElectroMarca04 = validMarca(cliente.IdCliente, '02', '04')
+    ElectroMarca05 = validMarca(cliente.IdCliente, '02', '05')
+    ElectroMarca06 = validMarca(cliente.IdCliente, '02', '06')
+    ElectroMarca07 = validMarca(cliente.IdCliente, '02', '07')
+    ElectroMarca08 = validMarca(cliente.IdCliente, '02', '08')
+    ElectroMarca09 = validMarca(cliente.IdCliente, '02', '09')
+    ElectroMarca10 = validMarca(cliente.IdCliente, '02', '10')
+    ElectroMarcaOtra = validMarca(cliente.IdCliente, '02', 'Otr')
+
+    MarcaInyec01 = "Haitian"
+    MarcaInyec02 = 'Engel'
+    MarcaInyec03 = 'Sumitomo'
+    MarcaInyec04 = 'Krauss Maffei'
+    MarcaInyec05 = 'Nissei'
+    MarcaInyec06 = 'Borche'
+    MarcaInyec07 = 'Arburg'
+    MarcaInyec08 = 'CLF'
+    MarcaInyec09 = 'Tai-Mex'
+    MarcaInyec10 = 'Bole'
+    MarcaInyecOtra = getMarca(cliente.IdCliente, '03', 'Otr')
+    InyecMarca01 = validMarca(cliente.IdCliente, '03', '01')
+    InyecMarca02 = validMarca(cliente.IdCliente, '03', '02')
+    InyecMarca03 = validMarca(cliente.IdCliente, '03', '03')
+    InyecMarca04 = validMarca(cliente.IdCliente, '03', '04')
+    InyecMarca05 = validMarca(cliente.IdCliente, '03', '05')
+    InyecMarca06 = validMarca(cliente.IdCliente, '03', '06')
+    InyecMarca07 = validMarca(cliente.IdCliente, '03', '07')
+    InyecMarca08 = validMarca(cliente.IdCliente, '03', '08')
+    InyecMarca09 = validMarca(cliente.IdCliente, '03', '09')
+    InyecMarca10 = validMarca(cliente.IdCliente, '03', '10')
+    InyecMarcaOtra = validMarca(cliente.IdCliente, '03', 'Otr')
+
+    MarcaLaser01 = "Bodor"
+    MarcaLaser02 = 'Gweike'
+    MarcaLaser03 = 'Trumpf'
+    MarcaLaser04 = 'Bimex'
+    MarcaLaser05 = 'Durma'
+    MarcaLaser06 = 'Aida'
+    MarcaLaser07 = 'Amada'
+    MarcaLaser08 = 'JFY'
+    MarcaLaser09 = 'Bystronic'
+    MarcaLaser10 = 'BLM'
+    MarcaLaserOtra = getMarca(cliente.IdCliente, '04', 'Otr')
+    LaserMarca01 = validMarca(cliente.IdCliente, '04', '01')
+    LaserMarca02 = validMarca(cliente.IdCliente, '04', '02')
+    LaserMarca03 = validMarca(cliente.IdCliente, '04', '03')
+    LaserMarca04 = validMarca(cliente.IdCliente, '04', '04')
+    LaserMarca05 = validMarca(cliente.IdCliente, '04', '05')
+    LaserMarca06 = validMarca(cliente.IdCliente, '04', '06')
+    LaserMarca07 = validMarca(cliente.IdCliente, '04', '07')
+    LaserMarca08 = validMarca(cliente.IdCliente, '04', '08')
+    LaserMarca09 = validMarca(cliente.IdCliente, '04', '09')
+    LaserMarca10 = validMarca(cliente.IdCliente, '04', '10')
+    LaserMarcaOtra = validMarca(cliente.IdCliente, '04', 'Otr')
+
+    MarcaPrensa01 = "Fagor"
+    MarcaPrensa02 = 'Aida'
+    MarcaPrensa03 = 'Simpac'
+    MarcaPrensa04 = 'Shem'
+    MarcaPrensa05 = 'Amada'
+    MarcaPrensa06 = 'Komatsu'
+    MarcaPrensa07 = 'Schuler'
+    MarcaPrensa08 = 'Marubeni'
+    MarcaPrensa09 = 'Mitsubishi'
+    MarcaPrensa10 = 'Seyi'
+    MarcaPrensaOtra = getMarca(cliente.IdCliente, '05', 'Otr')
+    PrensaMarca01 = validMarca(cliente.IdCliente, '05', '01')
+    PrensaMarca02 = validMarca(cliente.IdCliente, '05', '02')
+    PrensaMarca03 = validMarca(cliente.IdCliente, '05', '03')
+    PrensaMarca04 = validMarca(cliente.IdCliente, '05', '04')
+    PrensaMarca05 = validMarca(cliente.IdCliente, '05', '05')
+    PrensaMarca06 = validMarca(cliente.IdCliente, '05', '06')
+    PrensaMarca07 = validMarca(cliente.IdCliente, '05', '07')
+    PrensaMarca08 = validMarca(cliente.IdCliente, '05', '08')
+    PrensaMarca09 = validMarca(cliente.IdCliente, '05', '09')
+    PrensaMarca10 = validMarca(cliente.IdCliente, '05', '10')
+    PrensaMarcaOtra = validMarca(cliente.IdCliente, '05', 'Otr')
+
+    MarcaDoblad01 = "Durma"
+    MarcaDoblad02 = 'Amada'
+    MarcaDoblad03 = 'Shem'
+    MarcaDoblad04 = 'Bystronic'
+    MarcaDoblad05 = 'Yawe'
+    MarcaDoblad06 = 'Amob'
+    MarcaDoblad07 = 'Trumpf'
+    MarcaDoblad08 = 'BLM'
+    MarcaDoblad09 = 'Nargesa'
+    MarcaDoblad10 = 'MVD'
+    MarcaDobladOtra = getMarca(cliente.IdCliente, '06', 'Otr')
+    DobladMarca01 = validMarca(cliente.IdCliente, '06', '01')
+    DobladMarca02 = validMarca(cliente.IdCliente, '06', '02')
+    DobladMarca03 = validMarca(cliente.IdCliente, '06', '03')
+    DobladMarca04 = validMarca(cliente.IdCliente, '06', '04')
+    DobladMarca05 = validMarca(cliente.IdCliente, '06', '05')
+    DobladMarca06 = validMarca(cliente.IdCliente, '06', '06')
+    DobladMarca07 = validMarca(cliente.IdCliente, '06', '07')
+    DobladMarca08 = validMarca(cliente.IdCliente, '06', '08')
+    DobladMarca09 = validMarca(cliente.IdCliente, '06', '09')
+    DobladMarca10 = validMarca(cliente.IdCliente, '06', '10')
+    DobladMarcaOtra = validMarca(cliente.IdCliente, '06', 'Otr')
+
     acliente = {"IdCliente":cliente.IdCliente, 
             "ClaveExterna":cliente.ClaveExterna,
             "NombreCliente":cliente.NombreCliente,
@@ -139,15 +308,14 @@ def setDataCliente(cliente):
             "NoMaqConvenC":cliente.NoMaqConvenC,
             #"NoMaqCNC_C":cliente.NoMaqCNC_C,
             #"NoMaqHT_C":cliente.NoMaqHT_C,
-            "MatUseCHMER":cliente.MatUseCHMER,
-            "MatUseYIZUMI":cliente.MatUseYIZUMI,
-            "MatUsoFab":cliente.MatUsoFab,
-            "MatViruta":cliente.MatViruta,
+            #"MatUseCHMER":cliente.MatUseCHMER,
+            #"MatUseYIZUMI":cliente.MatUseYIZUMI,
+            #"MatUsoFab":cliente.MatUsoFab,
+            #"MatViruta":cliente.MatViruta,
             #"MatUsoCNC_Haas":cliente.MatUsoCNC_Haas,
             #"ActPriFAB":cliente.ActPriFAB,
             #"ActPriEDM":cliente.ActPriEDM,
             #"ActPriEquipoCNC":cliente.ActPriEquipoCNC,
-            #"ActPriEquipo":cliente.ActPriEquipo,
             "dSector":get_Sector(cliente.Sector),
             "dTipoCliente":get_TipoCliente(cliente.TipoCliente),
             #"dClientePotencial":get_ClientePotencial(cliente.ClientePotencial),
@@ -158,16 +326,15 @@ def setDataCliente(cliente):
             #"dSucServicio":get_sucServicio(cliente.SucServicio),
             "dTipoEmpresa":get_TipoEmpresa(cliente.TipoEmpresa),
             "dTier":get_Tier(cliente.Tier),
-            "dMatUseCHMER":get_MatUseCHMER(cliente.MatUseCHMER),
-            "dMatUseYIZUMI":get_MatUseYIZUMI(cliente.MatUseYIZUMI),
-            "dMatUsoFab":get_MatUsoFab(cliente.MatUsoFab),
-            "dMatViruta":get_MatViruta(cliente.MatViruta),
-            "dMatUsoCNC_Haas":get_MatUsoCNC_Haas(cliente.MatUsoCNC_Haas),
+            #"dMatUseCHMER":get_MatUseCHMER(cliente.MatUseCHMER),
+            #"dMatUseYIZUMI":get_MatUseYIZUMI(cliente.MatUseYIZUMI),
+            #"dMatUsoFab":get_MatUsoFab(cliente.MatUsoFab),
+            #"dMatViruta":get_MatViruta(cliente.MatViruta),
+            #"dMatUsoCNC_Haas":get_MatUsoCNC_Haas(cliente.MatUsoCNC_Haas),
             #"dRegionVts":get_RegionVts(cliente.RegionVts),
             #"dActPriFAB":get_ActPriFAB(cliente.ActPriFAB),
             #"dActPriEDM":get_ActPriEDM(cliente.ActPriEDM),
             #"dActPriEquipoCNC":get_ActPriEquipoCNC(cliente.ActPriEquipoCNC),
-            #"dActPriEquipo":get_ActPriEquipo(cliente.ActPriEquipo),
             "dDivHaas":get_DivHaas(cliente.DivHaas),
             "dDivPM":get_DivPM(cliente.DivPM),
             "dDivCNC":get_DivCNC(cliente.DivCNC),
@@ -177,7 +344,173 @@ def setDataCliente(cliente):
             #"TelefonoPrincipal":cliente.TelefonoPrincipal,
             #"RFC":cliente.RFC,
             #"NombreAdicional":cliente.NombreAdicional,
-            #"DivisionPM":cliente.DivisionPM,
+            #"DivisionPM"":cliente.DivisionPM,
+            "SitioWeb":cliente.ActPriEquipo,
+            "ArrVirMat01": ArrVirMat01,
+            "ArrVirMat02": ArrVirMat02,
+            "ArrVirMat03": ArrVirMat03,
+            "ArrVirMat04": ArrVirMat04,
+            "ArrVirMat05": ArrVirMat05,
+            "ArrVirMat06": ArrVirMat06,
+            "ElectroMat01": ElectroMat01,
+            "ElectroMat02": ElectroMat02,
+            "ElectroMat03": ElectroMat03,
+            "ElectroMat04": ElectroMat04,
+            "ElectroMat05": ElectroMat05,
+            "ElectroMat06": ElectroMat06,
+            "ElectroMat07": ElectroMat07,
+            "InyecMat01": InyecMat01,
+            "InyecMat02": InyecMat02,
+            "InyecMat03": InyecMat03,
+            "InyecMat04": InyecMat04,
+            "InyecMat05": InyecMat05,
+            "InyecMat06": InyecMat06,
+            "InyecMat07": InyecMat07,
+            "FABMat01": FABMat01,
+            "FABMat02": FABMat02,
+            "FABMat03": FABMat03,
+            "FABMat04": FABMat04,
+            "FABMat05": FABMat05,
+            "MaqCompArrVir": cliente.MaqCompArrVir,
+            "MaqCompElectro": cliente.MaqCompElectro,
+            "MaqCompInyec": cliente.MaqCompInyec,
+            "MaqCompLaser": cliente.MaqCompLaser,
+            "MaqCompPrensa": cliente.MaqCompPrensa,
+            "MaqCompDoblad": cliente.MaqCompDoblad,
+            "MarcaArrVir01": MarcaArrVir01,
+            "MarcaArrVir02": MarcaArrVir02,
+            "MarcaArrVir03": MarcaArrVir03,
+            "MarcaArrVir04": MarcaArrVir04,
+            "MarcaArrVir05": MarcaArrVir05,
+            "MarcaArrVir06": MarcaArrVir06,
+            "MarcaArrVir07": MarcaArrVir07,
+            "MarcaArrVir08": MarcaArrVir08,
+            "MarcaArrVir09": MarcaArrVir09,
+            "MarcaArrVir10": MarcaArrVir10,
+            "MarcaArrVirOtra": MarcaArrVirOtra,
+            "ArrVirMarca01": ArrVirMarca01,
+            "ArrVirMarca02": ArrVirMarca02,
+            "ArrVirMarca03": ArrVirMarca03,
+            "ArrVirMarca04": ArrVirMarca04,
+            "ArrVirMarca05": ArrVirMarca05,
+            "ArrVirMarca06": ArrVirMarca06,
+            "ArrVirMarca07": ArrVirMarca07,
+            "ArrVirMarca08": ArrVirMarca08,
+            "ArrVirMarca09": ArrVirMarca09,
+            "ArrVirMarca10": ArrVirMarca10,
+            "ArrVirMarcaOtra": ArrVirMarcaOtra,
+            "MarcaElectro01": MarcaElectro01,
+            "MarcaElectro02": MarcaElectro02,
+            "MarcaElectro03": MarcaElectro03,
+            "MarcaElectro04": MarcaElectro04,
+            "MarcaElectro05": MarcaElectro05,
+            "MarcaElectro06": MarcaElectro06,
+            "MarcaElectro07": MarcaElectro07,
+            "MarcaElectro08": MarcaElectro08,
+            "MarcaElectro09": MarcaElectro09,
+            "MarcaElectro10": MarcaElectro10,
+            "MarcaElectroOtra": MarcaElectroOtra,
+            "ElectroMarca01": ElectroMarca01,
+            "ElectroMarca02": ElectroMarca02,
+            "ElectroMarca03": ElectroMarca03,
+            "ElectroMarca04": ElectroMarca04,
+            "ElectroMarca05": ElectroMarca05,
+            "ElectroMarca06": ElectroMarca06,
+            "ElectroMarca07": ElectroMarca07,
+            "ElectroMarca08": ElectroMarca08,
+            "ElectroMarca09": ElectroMarca09,
+            "ElectroMarca10": ElectroMarca10,
+            "ElectroMarcaOtra": ElectroMarcaOtra,
+            "MarcaInyec01": MarcaInyec01,
+            "MarcaInyec02": MarcaInyec02,
+            "MarcaInyec03": MarcaInyec03,
+            "MarcaInyec04": MarcaInyec04,
+            "MarcaInyec05": MarcaInyec05,
+            "MarcaInyec06": MarcaInyec06,
+            "MarcaInyec07": MarcaInyec07,
+            "MarcaInyec08": MarcaInyec08,
+            "MarcaInyec09": MarcaInyec09,
+            "MarcaInyec10": MarcaInyec10,
+            "MarcaInyecOtra": MarcaInyecOtra,
+            "InyecMarca01": InyecMarca01,
+            "InyecMarca02": InyecMarca02,
+            "InyecMarca03": InyecMarca03,
+            "InyecMarca04": InyecMarca04,
+            "InyecMarca05": InyecMarca05,
+            "InyecMarca06": InyecMarca06,
+            "InyecMarca07": InyecMarca07,
+            "InyecMarca08": InyecMarca08,
+            "InyecMarca09": InyecMarca09,
+            "InyecMarca10": InyecMarca10,
+            "InyecMarcaOtra": InyecMarcaOtra,
+            "MarcaLaser01": MarcaLaser01,
+            "MarcaLaser02": MarcaLaser02,
+            "MarcaLaser03": MarcaLaser03,
+            "MarcaLaser04": MarcaLaser04,
+            "MarcaLaser05": MarcaLaser05,
+            "MarcaLaser06": MarcaLaser06,
+            "MarcaLaser07": MarcaLaser07,
+            "MarcaLaser08": MarcaLaser08,
+            "MarcaLaser09": MarcaLaser09,
+            "MarcaLaser10": MarcaLaser10,
+            "MarcaLaserOtra": MarcaLaserOtra,
+            "LaserMarca01": LaserMarca01,
+            "LaserMarca02": LaserMarca02,
+            "LaserMarca03": LaserMarca03,
+            "LaserMarca04": LaserMarca04,
+            "LaserMarca05": LaserMarca05,
+            "LaserMarca06": LaserMarca06,
+            "LaserMarca07": LaserMarca07,
+            "LaserMarca08": LaserMarca08,
+            "LaserMarca09": LaserMarca09,
+            "LaserMarca10": LaserMarca10,
+            "LaserMarcaOtra": LaserMarcaOtra,
+            "MarcaPrensa01": MarcaPrensa01,
+            "MarcaPrensa02": MarcaPrensa02,
+            "MarcaPrensa03": MarcaPrensa03,
+            "MarcaPrensa04": MarcaPrensa04,
+            "MarcaPrensa05": MarcaPrensa05,
+            "MarcaPrensa06": MarcaPrensa06,
+            "MarcaPrensa07": MarcaPrensa07,
+            "MarcaPrensa08": MarcaPrensa08,
+            "MarcaPrensa09": MarcaPrensa09,
+            "MarcaPrensa10": MarcaPrensa10,
+            "MarcaPrensaOtra": MarcaPrensaOtra,
+            "PrensaMarca01": PrensaMarca01,
+            "PrensaMarca02": PrensaMarca02,
+            "PrensaMarca03": PrensaMarca03,
+            "PrensaMarca04": PrensaMarca04,
+            "PrensaMarca05": PrensaMarca05,
+            "PrensaMarca06": PrensaMarca06,
+            "PrensaMarca07": PrensaMarca07,
+            "PrensaMarca08": PrensaMarca08,
+            "PrensaMarca09": PrensaMarca09,
+            "PrensaMarca10": PrensaMarca10,
+            "PrensaMarcaOtra": PrensaMarcaOtra,
+            "MarcaDoblad01": MarcaDoblad01,
+            "MarcaDoblad02": MarcaDoblad02,
+            "MarcaDoblad03": MarcaDoblad03,
+            "MarcaDoblad04": MarcaDoblad04,
+            "MarcaDoblad05": MarcaDoblad05,
+            "MarcaDoblad06": MarcaDoblad06,
+            "MarcaDoblad07": MarcaDoblad07,
+            "MarcaDoblad08": MarcaDoblad08,
+            "MarcaDoblad09": MarcaDoblad09,
+            "MarcaDoblad10": MarcaDoblad10,
+            "MarcaDobladOtra": MarcaDobladOtra,
+            "DobladMarca01": DobladMarca01,
+            "DobladMarca02": DobladMarca02,
+            "DobladMarca03": DobladMarca03,
+            "DobladMarca04": DobladMarca04,
+            "DobladMarca05": DobladMarca05,
+            "DobladMarca06": DobladMarca06,
+            "DobladMarca07": DobladMarca07,
+            "DobladMarca08": DobladMarca08,
+            "DobladMarca09": DobladMarca09,
+            "DobladMarca10": DobladMarca10,
+            "DobladMarcaOtra": DobladMarcaOtra,
+
+
     }
     return acliente
 
@@ -185,10 +518,9 @@ def editarCliente(request, usrid):
     IdCliente = request.POST['claveExterna']
     NombreCliente = request.POST['NombreCliente']
     #TipoCliente = request.POST['TipoCliente']
-    ClientePotencial = request.POST['ClientePotencial']
+    #ClientePotencial = request.POST['ClientePotencial']
     FechaNacimiento = request.POST['FechaNacimiento']
     Sector = request.POST['Sector']
-    #ClientePotencial = request.POST['ClientePotencial']
     Estado = request.POST['Estado']
     #Duns = request.POST['Duns']
     #Clasificacion = request.POST['Clasificacion']
@@ -205,19 +537,8 @@ def editarCliente(request, usrid):
     NoMaqConvenC = request.POST['NoMaqConvenC']
     #NoMaqCNC_C = request.POST['NoMaqCNC_C']
     #NoMaqHT_C = request.POST['NoMaqHT_C']
+    SitioWeb = request.POST['SitioWeb']
 
-    MatUseCHMER = MatUseYIZUMI = MatUsoFab = MatViruta = ""
-    if "MatUseCHMER" in request.POST:
-        MatUseCHMER = request.POST['MatUseCHMER']
-    if "MatUseYIZUMI" in request.POST:
-        MatUseYIZUMI = request.POST['MatUseYIZUMI']
-    if "MatUsoFab" in request.POST:
-        MatUsoFab = request.POST['MatUsoFab']
-    if "MatViruta" in request.POST:
-        MatViruta = request.POST['MatViruta']
-    #if "MatUseYIZUMI" in request.POST:
-        #MatUsoCNC_Haas = request.POST['MatUsoCNC_Haas']
-        
     DivHaasMexico = DivHaasEcuador = DivHaasColombia = DivHaasCAM = False
     DivCNCCNC = DivCNCOmnitec = False
     DivHToolsTools = False
@@ -249,21 +570,248 @@ def editarCliente(request, usrid):
     DivHaas   = getVal_DivHaas(DivHaasMexico, DivHaasEcuador, DivHaasColombia, DivHaasCAM)
     DivPM     = getVal_DivPM(DivPMPM)
     DivCNC    = getVal_DivCNC(DivCNCCNC, DivCNCOmnitec)
-    DivHTools = getVal_DivHTools(DivHToolsTools, DivHToolsSolubles)
+    DivHTools = getVal_DivHTools(DivHToolsTools, "")
     DivNextec = getVal_DivNextec(DivNextecFAB, DivNextecEDM)
     
+    ArrVirMat01 = ArrVirMat02 = ArrVirMat03 = ArrVirMat04 = ArrVirMat05 = ArrVirMat06 = False
+    ElectroMat01 = ElectroMat02 = ElectroMat03 = ElectroMat04 = ElectroMat05 = ElectroMat06 = ElectroMat07 = False
+    InyecMat01 = InyecMat02 = InyecMat03 = InyecMat04 = InyecMat05 = InyecMat06 = InyecMat07 = False
+    FABMat01 = FABMat02 = FABMat03 = FABMat04 = FABMat05 = False
+
+    if "ArrVirMat01" in request.POST:
+        ArrVirMat01 = True
+    if "ArrVirMat02" in request.POST:
+        ArrVirMat02 = True
+    if "ArrVirMat03" in request.POST:
+        ArrVirMat03 = True
+    if "ArrVirMat04" in request.POST:
+        ArrVirMat04 = True
+    if "ArrVirMat05" in request.POST:
+        ArrVirMat05 = True
+    if "ArrVirMat06" in request.POST:
+        ArrVirMat06 = True
+    if "ElectroMat01" in request.POST:
+        ElectroMat01 = True
+    if "ElectroMat02" in request.POST:
+        ElectroMat02 = True
+    if "ElectroMat03" in request.POST:
+        ElectroMat03 = True
+    if "ElectroMat04" in request.POST:
+        ElectroMat04 = True
+    if "ElectroMat05" in request.POST:
+        ElectroMat05 = True
+    if "ElectroMat06" in request.POST:
+        ElectroMat06 = True
+    if "ElectroMat07" in request.POST:
+        ElectroMat07 = True
+    if "InyecMat01" in request.POST:
+        InyecMat01 = True
+    if "InyecMat02" in request.POST:
+        InyecMat02 = True
+    if "InyecMat03" in request.POST:
+        InyecMat03 = True
+    if "InyecMat04" in request.POST:
+        InyecMat04 = True
+    if "InyecMat05" in request.POST:
+        InyecMat05 = True
+    if "InyecMat06" in request.POST:
+        InyecMat06 = True
+    if "InyecMat07" in request.POST:
+        InyecMat07 = True
+    if "FABMat01" in request.POST:
+        FABMat01 = True
+    if "FABMat02" in request.POST:
+        FABMat02 = True
+    if "FABMat03" in request.POST:
+        FABMat03 = True
+    if "FABMat04" in request.POST:
+        FABMat04 = True
+    if "FABMat05" in request.POST:
+        FABMat05 = True
+
+    MatViruta = getVal_MatUseArrVir(ArrVirMat01, ArrVirMat02, ArrVirMat03, ArrVirMat04, ArrVirMat05, ArrVirMat06)
+    MatUseCHMER = getVal_MatUseElectro(ElectroMat01, ElectroMat02, ElectroMat03, ElectroMat04, ElectroMat05, ElectroMat06, ElectroMat07)
+    MatUseYIZUMI = getVal_MatUseInyec(InyecMat01, InyecMat02, InyecMat03, InyecMat04, InyecMat05, InyecMat06, InyecMat07)
+    MatUsoFab = getVal_MatUseFAB(FABMat01, FABMat02, FABMat03, FABMat04, FABMat05)
+    
+    MaqCompArrVir = request.POST['MaqCompArrVir']
+    MaqCompElectro = request.POST['MaqCompElectro']
+    MaqCompInyec = request.POST['MaqCompInyec']
+    MaqCompLaser = request.POST['MaqCompLaser']
+    MaqCompPrensa = request.POST['MaqCompPrensa']
+    MaqCompDoblad = request.POST['MaqCompDoblad']
+
+    MarcaArrVirOtra = request.POST['MarcaArrVirOtra']
+    MarcaElectroOtra = request.POST['MarcaElectroOtra']
+    MarcaInyecOtra = request.POST['MarcaInyecOtra']
+    MarcaLaserOtra = request.POST['MarcaLaserOtra']
+    MarcaPrensaOtra = request.POST['MarcaPrensaOtra']
+    MarcaDobladOtra = request.POST['MarcaDobladOtra']
+
+    ArrVirMarca01 = ArrVirMarca02 = ArrVirMarca03 = ArrVirMarca04 = ArrVirMarca05 = False
+    ArrVirMarca06 = ArrVirMarca07 = ArrVirMarca08 = ArrVirMarca09 = ArrVirMarca10 = ArrVirMarcaOtra = False
+    if "ArrVirMarca01" in request.POST:
+        ArrVirMarca01 = True
+    if "ArrVirMarca02" in request.POST:
+        ArrVirMarca02 = True
+    if "ArrVirMarca03" in request.POST:
+        ArrVirMarca03 = True
+    if "ArrVirMarca04" in request.POST:
+        ArrVirMarca04 = True
+    if "ArrVirMarca05" in request.POST:
+        ArrVirMarca05 = True
+    if "ArrVirMarca06" in request.POST:
+        ArrVirMarca06 = True
+    if "ArrVirMarca07" in request.POST:
+        ArrVirMarca07 = True
+    if "ArrVirMarca08" in request.POST:
+        ArrVirMarca08 = True
+    if "ArrVirMarca09" in request.POST:
+        ArrVirMarca09 = True
+    if "ArrVirMarca10" in request.POST:
+        ArrVirMarca10 = True
+    if "ArrVirMarcaOtra" in request.POST:
+        ArrVirMarcaOtra = True
+    ArrVirMarcaOtra = validOtra(ArrVirMarcaOtra, MarcaArrVirOtra)    
+
+    ElectroMarca01 = ElectroMarca02 = ElectroMarca03 = ElectroMarca04 = ElectroMarca05 = False
+    ElectroMarca06 = ElectroMarca07 = ElectroMarca08 = ElectroMarca09 = ElectroMarca10 = ElectroMarcaOtra = False
+    if "ElectroMarca01" in request.POST:
+        ElectroMarca01 = True
+    if "ElectroMarca02" in request.POST:
+        ElectroMarca02 = True
+    if "ElectroMarca03" in request.POST:
+        ElectroMarca03 = True
+    if "ElectroMarca04" in request.POST:
+        ElectroMarca04 = True
+    if "ElectroMarca05" in request.POST:
+        ElectroMarca05 = True
+    if "ElectroMarca06" in request.POST:
+        ElectroMarca06 = True
+    if "ElectroMarca07" in request.POST:
+        ElectroMarca07 = True
+    if "ElectroMarca08" in request.POST:
+        ElectroMarca08 = True
+    if "ElectroMarca09" in request.POST:
+        ElectroMarca09 = True
+    if "ElectroMarca10" in request.POST:
+        ElectroMarca10 = True
+    if "ElectroMarcaOtra" in request.POST:
+        ElectroMarcaOtra = True
+    ElectroMarcaOtra = validOtra(ElectroMarcaOtra, MarcaElectroOtra)
+
+    InyecMarca01 = InyecMarca02 = InyecMarca03 = InyecMarca04 = InyecMarca05 = False
+    InyecMarca06 = InyecMarca07 = InyecMarca08 = InyecMarca09 = InyecMarca10 = InyecMarcaOtra = False
+    if "InyecMarca01" in request.POST:
+        InyecMarca01 = True
+    if "InyecMarca02" in request.POST:
+        InyecMarca02 = True
+    if "InyecMarca03" in request.POST:
+        InyecMarca03 = True
+    if "InyecMarca04" in request.POST:
+        InyecMarca04 = True
+    if "InyecMarca05" in request.POST:
+        InyecMarca05 = True
+    if "InyecMarca06" in request.POST:
+        InyecMarca06 = True
+    if "InyecMarca07" in request.POST:
+        InyecMarca07 = True
+    if "InyecMarca08" in request.POST:
+        InyecMarca08 = True
+    if "InyecMarca09" in request.POST:
+        InyecMarca09 = True
+    if "InyecMarca10" in request.POST:
+        InyecMarca10 = True
+    if "InyecMarcaOtra" in request.POST:
+        InyecMarcaOtra = True
+    InyecMarcaOtra = validOtra(InyecMarcaOtra, MarcaInyecOtra)
+
+    LaserMarca01 = LaserMarca02 = LaserMarca03 = LaserMarca04 = LaserMarca05 = False
+    LaserMarca06 = LaserMarca07 = LaserMarca08 = LaserMarca09 = LaserMarca10 = LaserMarcaOtra = False
+    if "LaserMarca01" in request.POST:
+        LaserMarca01 = True
+    if "LaserMarca02" in request.POST:
+        LaserMarca02 = True
+    if "LaserMarca03" in request.POST:
+        LaserMarca03 = True
+    if "LaserMarca04" in request.POST:
+        LaserMarca04 = True
+    if "LaserMarca05" in request.POST:
+        LaserMarca05 = True
+    if "LaserMarca06" in request.POST:
+        LaserMarca06 = True
+    if "LaserMarca07" in request.POST:
+        LaserMarca07 = True
+    if "LaserMarca08" in request.POST:
+        LaserMarca08 = True
+    if "LaserMarca09" in request.POST:
+        LaserMarca09 = True
+    if "LaserMarca10" in request.POST:
+        LaserMarca10 = True
+    if "LaserMarcaOtra" in request.POST:
+        LaserMarcaOtra = True
+    LaserMarcaOtra = validOtra(LaserMarcaOtra, MarcaLaserOtra)
+
+    PrensaMarca01 = PrensaMarca02 = PrensaMarca03 = PrensaMarca04 = PrensaMarca05 = False
+    PrensaMarca06 = PrensaMarca07 = PrensaMarca08 = PrensaMarca09 = PrensaMarca10 = PrensaMarcaOtra = False
+    if "PrensaMarca01" in request.POST:
+        PrensaMarca01 = True
+    if "PrensaMarca02" in request.POST:
+        PrensaMarca02 = True
+    if "PrensaMarca03" in request.POST:
+        PrensaMarca03 = True
+    if "PrensaMarca04" in request.POST:
+        PrensaMarca04 = True
+    if "PrensaMarca05" in request.POST:
+        PrensaMarca05 = True
+    if "PrensaMarca06" in request.POST:
+        PrensaMarca06 = True
+    if "PrensaMarca07" in request.POST:
+        PrensaMarca07 = True
+    if "PrensaMarca08" in request.POST:
+        PrensaMarca08 = True
+    if "PrensaMarca09" in request.POST:
+        PrensaMarca09 = True
+    if "PrensaMarca10" in request.POST:
+        PrensaMarca10 = True
+    if "PrensaMarcaOtra" in request.POST:
+        PrensaMarcaOtra = True
+    PrensaMarcaOtra = validOtra(PrensaMarcaOtra, MarcaPrensaOtra)
+
+    DobladMarca01 = DobladMarca02 = DobladMarca03 = DobladMarca04 = DobladMarca05 = False
+    DobladMarca06 = DobladMarca07 = DobladMarca08 = DobladMarca09 = DobladMarca10 = DobladMarcaOtra = False
+    if "DobladMarca01" in request.POST:
+        DobladMarca01 = True
+    if "DobladMarca02" in request.POST:
+        DobladMarca02 = True
+    if "DobladMarca03" in request.POST:
+        DobladMarca03 = True
+    if "DobladMarca04" in request.POST:
+        DobladMarca04 = True
+    if "DobladMarca05" in request.POST:
+        DobladMarca05 = True
+    if "DobladMarca06" in request.POST:
+        DobladMarca06 = True
+    if "DobladMarca07" in request.POST:
+        DobladMarca07 = True
+    if "DobladMarca08" in request.POST:
+        DobladMarca08 = True
+    if "DobladMarca09" in request.POST:
+        DobladMarca09 = True
+    if "DobladMarca10" in request.POST:
+        DobladMarca10 = True
+    if "DobladMarcaOtra" in request.POST:
+        DobladMarcaOtra = True
+    DobladMarcaOtra = validOtra(DobladMarcaOtra, MarcaDobladOtra)
 
     #ActPriFAB = ActPriEDM = ActPriEquipoCNC = ""
-    #ActPriEquipo = ""
     #if "ActPriFAB" in request.POST:
     #    ActPriFAB = request.POST['ActPriFAB']
     #if "ActPriEDM" in request.POST:
     #    ActPriEDM = request.POST['ActPriEDM']
     #if "ActPriEquipoCNC" in request.POST:
     #    ActPriEquipoCNC = request.POST['ActPriEquipoCNC']
-    #if "ActPriEquipo" in request.POST:
-        #ActPriEquipo = request.POST['ActPriEquipo']
-    
+        
     cliente = Clientes.objects.get(IdCliente=IdCliente)
     cliente.NombreCliente = NombreCliente
     cliente.FechaNacimiento = FechaNacimiento
@@ -293,12 +841,18 @@ def editarCliente(request, usrid):
     #cliente.ActPriFAB = ActPriFAB
     #cliente.ActPriEDM = ActPriEDM
     #cliente.ActPriEquipoCNC = ActPriEquipoCNC
-    #cliente.ActPriEquipo = ActPriEquipo
+    cliente.ActPriEquipo = SitioWeb
     cliente.DivHaas = DivHaas
     cliente.DivPM = DivPM
     cliente.DivCNC = DivCNC
     cliente.DivHTools = DivHTools
     cliente.DivNextec = DivNextec
+    cliente.MaqCompArrVir = MaqCompArrVir
+    cliente.MaqCompElectro = MaqCompElectro
+    cliente.MaqCompInyec = MaqCompInyec
+    cliente.MaqCompLaser = MaqCompLaser
+    cliente.MaqCompPrensa = MaqCompPrensa
+    cliente.MaqCompDoblad = MaqCompDoblad
     cliente.save()
 
     #Actualiza divisiones
@@ -313,6 +867,101 @@ def editarCliente(request, usrid):
     saveDivision(IdCliente, 4, 122, DivCNCOmnitec)
     saveDivision(IdCliente, 5, 123, DivNextecFAB)
     saveDivision(IdCliente, 5, 124, DivNextecEDM)
+
+    #Actualiza Materiales
+    saveMaterial(IdCliente, '01', '163', ArrVirMat01)
+    saveMaterial(IdCliente, '01', '164', ArrVirMat02)
+    saveMaterial(IdCliente, '01', '165', ArrVirMat03)
+    saveMaterial(IdCliente, '01', '166', ArrVirMat04)
+    saveMaterial(IdCliente, '01', '167', ArrVirMat05)
+    saveMaterial(IdCliente, '01', '168', ArrVirMat06)
+    saveMaterial(IdCliente, '02', '170', ElectroMat01)
+    saveMaterial(IdCliente, '02', '171', ElectroMat02)
+    saveMaterial(IdCliente, '02', '172', ElectroMat03)
+    saveMaterial(IdCliente, '02', '173', ElectroMat04)
+    saveMaterial(IdCliente, '02', '174', ElectroMat05)
+    saveMaterial(IdCliente, '02', '175', ElectroMat06)
+    saveMaterial(IdCliente, '02', '176', ElectroMat07)
+    saveMaterial(IdCliente, '03', '179', InyecMat01)
+    saveMaterial(IdCliente, '03', '180', InyecMat02)
+    saveMaterial(IdCliente, '03', '181', InyecMat03)
+    saveMaterial(IdCliente, '03', '182', InyecMat04)
+    saveMaterial(IdCliente, '03', '183', InyecMat05)
+    saveMaterial(IdCliente, '03', '184', InyecMat06)
+    saveMaterial(IdCliente, '03', '185', InyecMat07)
+    saveMaterial(IdCliente, '04', '187', FABMat01)
+    saveMaterial(IdCliente, '04', '188', FABMat02)
+    saveMaterial(IdCliente, '04', '189', FABMat03)
+    saveMaterial(IdCliente, '04', '190', FABMat04)
+    saveMaterial(IdCliente, '04', '191', FABMat05)
+
+    #Actualiza Marcas
+    saveMarca(IdCliente, '01', '01', 'Dn Solutions', ArrVirMarca01)
+    saveMarca(IdCliente, '01', '02', 'Okuma', ArrVirMarca02)
+    saveMarca(IdCliente, '01', '03', 'Dmg Mori', ArrVirMarca03)
+    saveMarca(IdCliente, '01', '04', 'Mazak', ArrVirMarca04)
+    saveMarca(IdCliente, '01', '05', 'Hision', ArrVirMarca05)
+    saveMarca(IdCliente, '01', '06', 'Hyundai', ArrVirMarca06)
+    saveMarca(IdCliente, '01', '07', 'Baoji', ArrVirMarca07)
+    saveMarca(IdCliente, '01', '08', 'Makino', ArrVirMarca08)
+    saveMarca(IdCliente, '01', '09', 'Romi', ArrVirMarca09)
+    saveMarca(IdCliente, '01', '10', 'Chiron', ArrVirMarca10)
+    saveMarca(IdCliente, '01', 'Otr', MarcaArrVirOtra, ArrVirMarcaOtra)
+    saveMarca(IdCliente, '02', '01', 'Sodick', ElectroMarca01)
+    saveMarca(IdCliente, '02', '02', 'Mitsubishi', ElectroMarca02)
+    saveMarca(IdCliente, '02', '03', 'Shem', ElectroMarca03)
+    saveMarca(IdCliente, '02', '04', 'Accutex', ElectroMarca04)
+    saveMarca(IdCliente, '02', '05', 'Makino', ElectroMarca05)
+    saveMarca(IdCliente, '02', '06', 'Ipretech', ElectroMarca06)
+    saveMarca(IdCliente, '02', '07', 'Mc-Lane', ElectroMarca07)
+    saveMarca(IdCliente, '02', '08', 'Excetek', ElectroMarca08)
+    saveMarca(IdCliente, '02', '09', 'Maincasa', ElectroMarca09)
+    saveMarca(IdCliente, '02', '10', 'Protecnic', ElectroMarca10)
+    saveMarca(IdCliente, '02', 'Otr', MarcaElectroOtra, ElectroMarcaOtra)
+    saveMarca(IdCliente, '03', '01', 'Haitian', InyecMarca01)
+    saveMarca(IdCliente, '03', '02', 'Engel', InyecMarca02)
+    saveMarca(IdCliente, '03', '03', 'Sumitomo', InyecMarca03)
+    saveMarca(IdCliente, '03', '04', 'Krauss Maffei', InyecMarca04)
+    saveMarca(IdCliente, '03', '05', 'Nissei', InyecMarca05)
+    saveMarca(IdCliente, '03', '06', 'Borche', InyecMarca06)
+    saveMarca(IdCliente, '03', '07', 'Arburg', InyecMarca07)
+    saveMarca(IdCliente, '03', '08', 'CLF', InyecMarca08)
+    saveMarca(IdCliente, '03', '09', 'Tai-Mex', InyecMarca09)
+    saveMarca(IdCliente, '03', '10', 'Bole', InyecMarca10)
+    saveMarca(IdCliente, '03', 'Otr', MarcaInyecOtra, InyecMarcaOtra)
+    saveMarca(IdCliente, '04', '01', 'Bodor', LaserMarca01)
+    saveMarca(IdCliente, '04', '02', 'Gweike', LaserMarca02)
+    saveMarca(IdCliente, '04', '03', 'Trumpf', LaserMarca03)
+    saveMarca(IdCliente, '04', '04', 'Bimex', LaserMarca04)
+    saveMarca(IdCliente, '04', '05', 'Durma', LaserMarca05)
+    saveMarca(IdCliente, '04', '06', 'Aida', LaserMarca06)
+    saveMarca(IdCliente, '04', '07', 'Amada', LaserMarca07)
+    saveMarca(IdCliente, '04', '08', 'JFY', LaserMarca08)
+    saveMarca(IdCliente, '04', '09', 'Bystronic', LaserMarca09)
+    saveMarca(IdCliente, '04', '10', 'BLM', LaserMarca10)
+    saveMarca(IdCliente, '04', 'Otr', MarcaLaserOtra, LaserMarcaOtra)
+    saveMarca(IdCliente, '05', '01', 'Fagor', PrensaMarca01)
+    saveMarca(IdCliente, '05', '02', 'Aida', PrensaMarca02)
+    saveMarca(IdCliente, '05', '03', 'Simpac', PrensaMarca03)
+    saveMarca(IdCliente, '05', '04', 'Shem', PrensaMarca04)
+    saveMarca(IdCliente, '05', '05', 'Amada', PrensaMarca05)
+    saveMarca(IdCliente, '05', '06', 'Komatsu', PrensaMarca06)
+    saveMarca(IdCliente, '05', '07', 'Schuler', PrensaMarca07)
+    saveMarca(IdCliente, '05', '08', 'Marubeni', PrensaMarca08)
+    saveMarca(IdCliente, '05', '09', 'Mitsubishi', PrensaMarca09)
+    saveMarca(IdCliente, '05', '10', 'Seyi', PrensaMarca10)
+    saveMarca(IdCliente, '05', 'Otr', MarcaPrensaOtra, PrensaMarcaOtra)
+    saveMarca(IdCliente, '06', '01', 'Durma', DobladMarca01)
+    saveMarca(IdCliente, '06', '02', 'Amada', DobladMarca02)
+    saveMarca(IdCliente, '06', '03', 'Shem', DobladMarca03)
+    saveMarca(IdCliente, '06', '04', 'Bystronic', DobladMarca04)
+    saveMarca(IdCliente, '06', '05', 'Yawei', DobladMarca05)
+    saveMarca(IdCliente, '06', '06', 'Amob', DobladMarca06)
+    saveMarca(IdCliente, '06', '07', 'Trumpf', DobladMarca07)
+    saveMarca(IdCliente, '06', '08', 'BLM', DobladMarca08)
+    saveMarca(IdCliente, '06', '09', 'Nargesa', DobladMarca09)
+    saveMarca(IdCliente, '06', '10', 'MVD', DobladMarca10)
+    saveMarca(IdCliente, '06', 'Otr', MarcaDobladOtra, DobladMarcaOtra)
 
     data = {
         "NombreCliente": NombreCliente,
@@ -343,7 +992,7 @@ def editarCliente(request, usrid):
         #"ActPriFAB": ActPriFAB,
         #"ActPriEDM": ActPriEDM,
         #"ActPriEquipoCNC": ActPriEquipoCNC,
-        #"ActPriEquipo": ActPriEquipo,
+        "SitioWeb": SitioWeb,
         "DivHaas": DivHaas,
         "DivPM": DivPM,
         "DivCNC": DivCNC,
@@ -360,6 +1009,92 @@ def editarCliente(request, usrid):
         #"DivHToolsSolubles": DivHToolsSolubles,
         "DivNextecFAB": DivNextecFAB,
         "DivNextecEDM": DivNextecEDM,
+        "ArrVirMat01": ArrVirMat01,
+        "ArrVirMat02": ArrVirMat02,
+        "ArrVirMat03": ArrVirMat03,
+        "ArrVirMat04": ArrVirMat04,
+        "ArrVirMat05": ArrVirMat05,
+        "ArrVirMat06": ArrVirMat06,
+        "ElectroMat01": ElectroMat01,
+        "ElectroMat02": ElectroMat02,
+        "ElectroMat03": ElectroMat03,
+        "ElectroMat04": ElectroMat04,
+        "ElectroMat05": ElectroMat05,
+        "ElectroMat06": ElectroMat06,
+        "ElectroMat07": ElectroMat07,
+        "InyecMat01": InyecMat01,
+        "InyecMat02": InyecMat02,
+        "InyecMat03": InyecMat03,
+        "InyecMat04": InyecMat04,
+        "InyecMat05": InyecMat05,
+        "InyecMat06": InyecMat06,
+        "InyecMat07": InyecMat07,
+        "FABMat01": FABMat01,
+        "FABMat02": FABMat02,
+        "FABMat03": FABMat03,
+        "FABMat04": FABMat04,
+        "FABMat05": FABMat05,
+        "ArrVirMarca01": ArrVirMarca01,
+        "ArrVirMarca02": ArrVirMarca02,
+        "ArrVirMarca03": ArrVirMarca03,
+        "ArrVirMarca04": ArrVirMarca04,
+        "ArrVirMarca05": ArrVirMarca05,
+        "ArrVirMarca06": ArrVirMarca06,
+        "ArrVirMarca07": ArrVirMarca07,
+        "ArrVirMarca08": ArrVirMarca08,
+        "ArrVirMarca09": ArrVirMarca09,
+        "ArrVirMarca10": ArrVirMarca10,
+        "ArrVirMarcaOtra": ArrVirMarcaOtra,
+        "ElectroMarca01": ElectroMarca01,
+        "ElectroMarca02": ElectroMarca02,
+        "ElectroMarca03": ElectroMarca03,
+        "ElectroMarca04": ElectroMarca04,
+        "ElectroMarca05": ElectroMarca05,
+        "ElectroMarca06": ElectroMarca06,
+        "ElectroMarca07": ElectroMarca07,
+        "ElectroMarca08": ElectroMarca08,
+        "ElectroMarca09": ElectroMarca09,
+        "ElectroMarcaOtra": ElectroMarcaOtra,
+        "InyecMarca01": InyecMarca01,
+        "InyecMarca02": InyecMarca02,
+        "InyecMarca03": InyecMarca03,
+        "InyecMarca04": InyecMarca04,
+        "InyecMarca05": InyecMarca05,
+        "InyecMarca06": InyecMarca06,
+        "InyecMarca07": InyecMarca07,
+        "InyecMarca08": InyecMarca08,
+        "InyecMarca09": InyecMarca09,
+        "InyecMarcaOtra": InyecMarcaOtra,
+        "LaserMarca01": LaserMarca01,
+        "LaserMarca02": LaserMarca02,
+        "LaserMarca03": LaserMarca03,
+        "LaserMarca04": LaserMarca04,
+        "LaserMarca05": LaserMarca05,
+        "LaserMarca06": LaserMarca06,
+        "LaserMarca07": LaserMarca07,
+        "LaserMarca08": LaserMarca08,
+        "LaserMarca09": LaserMarca09,
+        "LaserMarcaOtra": LaserMarcaOtra,
+        "PrensaMarca01": PrensaMarca01,
+        "PrensaMarca02": PrensaMarca02,
+        "PrensaMarca03": PrensaMarca03,
+        "PrensaMarca04": PrensaMarca04,
+        "PrensaMarca05": PrensaMarca05,
+        "PrensaMarca06": PrensaMarca06,
+        "PrensaMarca07": PrensaMarca07,
+        "PrensaMarca08": PrensaMarca08,
+        "PrensaMarca09": PrensaMarca09,
+        "PrensaMarcaOtra": PrensaMarcaOtra,
+        "DobladMarca01": DobladMarca01,
+        "DobladMarca02": DobladMarca02,
+        "DobladMarca03": DobladMarca03,
+        "DobladMarca04": DobladMarca04,
+        "DobladMarca05": DobladMarca05,
+        "DobladMarca06": DobladMarca06,
+        "DobladMarca07": DobladMarca07,
+        "DobladMarca08": DobladMarca08,
+        "DobladMarca09": DobladMarca09,
+        "DobladMarcaOtra": DobladMarcaOtra,
     }
 
     addLog(usrid, "Update", "Clientes", IdCliente, data)
@@ -431,8 +1166,9 @@ def edicionContacto(request, idCliente, codigo, Gestion, usrid):
 
     iniCheckbox = {"Principal":flag1, "VIP":flag2}
     descrip = getContactoDescrip(codigo, contacto)
+    division = getDivisiones(codigo)
     
-    return render(request, "edicionContactos.html",{"vista":"Contacto", "Gestion":Gestion, "idRegistro":codigo, "contacto":contacto, "cliente":cliente, "session":session, "logData":getLogData('Contactos', codigo), "iniPais":iniPais, "iniRegion":iniRegion, "iniCodPos":iniCodPos, "iniDistrito":iniDistrito, "dataInt":dataInt, "iniCheckbox":iniCheckbox, "descrip": descrip })
+    return render(request, "edicionContactos.html",{"vista":"Contacto", "Gestion":Gestion, "idRegistro":codigo, "contacto":contacto, "cliente":cliente, "session":session, "logData":getLogData('Contactos', codigo), "iniPais":iniPais, "iniRegion":iniRegion, "iniCodPos":iniCodPos, "iniDistrito":iniDistrito, "dataInt":dataInt, "iniCheckbox":iniCheckbox, "descrip": descrip, "division":division })
 
 def getContactoDescrip(idContacto, contacto):
     dFuncion = dDepartamento = dMedioComunicacion = ""
@@ -447,6 +1183,42 @@ def getContactoDescrip(idContacto, contacto):
         "dMedioComunicacion":dMedioComunicacion
     }
     return dContacto
+
+#Obtiene las divisiones registradas del Contacto
+def getDivisiones(codigo):
+    HaasMexico = HaasColombia = HaasCAM = HaasEcuador = False
+    NextecMachinery = AGPlastic = HitecCNC = HitecTools = False
+    if divisionCliente.objects.filter(IdContacto=codigo).exists():
+        divisiones = divisionCliente.objects.all().filter(IdContacto=codigo)
+        for item in divisiones:
+            if (item.IdDivision == 'Haas México'):
+                HaasMexico = True
+            elif (item.IdDivision == 'Haas CAM') :
+                HaasCAM = True
+            elif (item.IdDivision == 'Haas Colombia') :
+                HaasColombia = True
+            elif (item.IdDivision == 'Haas Ecuador') :
+                HaasEcuador = True
+            elif (item.IdDivision == 'Hitec CNC Maquinaria de México') :
+                HitecCNC = True
+            elif (item.IdDivision == 'Hitec Tools') :
+                HitecTools = True
+            elif (item.IdDivision == 'Nexttec Machinery') :
+                NextecMachinery = True
+            elif (item.IdDivision == 'A&G Plastic Machinery') :
+                AGPlastic= True
+
+    divisiones = {
+        "HaasMexico": HaasMexico,
+        "HaasColombia": HaasColombia,
+        "HaasCAM": HaasCAM,
+        "HaasEcuador": HaasEcuador,
+        "NextecMachinery": NextecMachinery,
+        "AGPlastic": AGPlastic,
+        "HitecCNC": HitecCNC,
+        "HitecTools": HitecTools
+    }
+    return divisiones
 
 def editarContacto(request, usrid):
     IdCliente = request.POST['IdCliente']
@@ -485,11 +1257,29 @@ def editarContacto(request, usrid):
     #PaisExp = request.POST['PaisExp']
     
     Principal = Vip = 0
-    
     if "Principal" in request.POST:
         Principal = 1    
     if 'VIP' in request.POST:
         Vip = 1
+
+    HaasMexico = HaasColombia = HaasCAM = HaasEcuador = False
+    NextecMachinery = AGPlastic = HitecCNC = HitecTools = False
+    if "HaasMexico" in request.POST:
+        HaasMexico = True
+    if "HaasColombia" in request.POST:
+        HaasColombia = True
+    if "HaasCAM" in request.POST:
+        HaasCAM = True
+    if "HaasEcuador" in request.POST:
+        HaasEcuador = True
+    if "NextecMachinery" in request.POST:
+        NextecMachinery = True
+    if "AGPlastic" in request.POST:
+        AGPlastic = True
+    if "HitecCNC" in request.POST:
+        HitecCNC = True
+    if "HitecTools" in request.POST:
+        HitecTools = True
 
     if(IdContacto != "0") :
         movimiento = 'Update'
@@ -552,6 +1342,15 @@ def editarContacto(request, usrid):
         IdContacto = contacto.IdContacto
         messages.success(request, "El contacto del cliente fue creado con éxito")
             
+    #saveDivisionContacto(IdContacto, 'Haas México', HaasMexico)
+    #saveDivisionContacto(IdContacto, 'Haas Colombia', HaasColombia)
+    #saveDivisionContacto(IdContacto, 'Haas CAM', HaasCAM)
+    #saveDivisionContacto(IdContacto, 'Haas Ecuador', HaasEcuador)
+    #saveDivisionContacto(IdContacto, 'Haas México', NextecMachinery)
+    #saveDivisionContacto(IdContacto, 'A&G Plastic Machinery', AGPlastic)
+    #saveDivisionContacto(IdContacto, 'Hitec CNC Maquinaria de México', HitecCNC)
+    #saveDivisionContacto(IdContacto, 'Hitec Tools', HitecTools)
+
     data = { "IdContacto": IdContacto,
             "IdCliente": IdCliente,
             "Nombre": NombreContacto,
@@ -574,7 +1373,15 @@ def editarContacto(request, usrid):
             #"Planta": Planta,
             #"PaisExp": PaisExp,
             "Principal": Principal,
-            "Vip": Vip
+            "Vip": Vip,
+            "HaasMexico": HaasMexico,
+            "HaasColombia": HaasColombia,
+            "HaasCAM": HaasCAM,
+            "HaasEcuador": HaasEcuador,
+            "NextecMachinery": NextecMachinery,
+            "AGPlastic": AGPlastic,
+            "HitecCNC": HitecCNC,
+            "HitecTools": HitecTools,
     }
 
     entidad = "Contactos"
@@ -711,8 +1518,9 @@ def edicionClienteDireccion(request,idCliente, codigo, Gestion, usrid):
                 dataUS = True
                 coddomfis = ""
                 if(direcciones.CodigoDomFiscal != ""):
-                    regcoddomfis = Region.objects.get(IdCountry=idPais, CodeId=direcciones.CodigoDomFiscal)
-                    coddomfis=regcoddomfis.Descrip
+                    if Region.objects.filter(IdCountry=idPais, CodeId=direcciones.CodigoDomFiscal).exists():
+                        regcoddomfis = Region.objects.get(IdCountry=idPais, CodeId=direcciones.CodigoDomFiscal)
+                        coddomfis=regcoddomfis.Descrip
 
         iniPais = {"CodeId":idPais, "Descrip":pdescrip}
         iniRegion = {"CodeId":direcciones.Estado, "Descrip":rdescrip}
@@ -750,11 +1558,11 @@ def editarDireccion(request, usrid):
     
     Calle = request.POST['Calle']
     Numero = request.POST['Numero']
-    Calle2 = request.POST['Calle2']
+    #Calle2 = request.POST['Calle2']
     CodigoDomFiscal = ""
     Telefono = request.POST['Telefono']
     CorreoElectronico = request.POST['CorreoElectronico']
-    SitioWeb = request.POST['SitioWeb']   
+    #SitioWeb = request.POST['SitioWeb']   
 
     DireccionPrincipal = Entrega = ""
     DestinatarioMercEstandar = DestinatarioFactura = ""
@@ -776,7 +1584,7 @@ def editarDireccion(request, usrid):
         direcciones.PaisRegion = PaisRegion
         direcciones.Calle = Calle
         direcciones.Numero = Numero
-        direcciones.Calle2 = Calle2
+        #direcciones.Calle2 = Calle2
         direcciones.Ciudad = Ciudad
         direcciones.Estado = Estado
         direcciones.CodigoPostal = CodigoPostal
@@ -788,7 +1596,7 @@ def editarDireccion(request, usrid):
         direcciones.DestinatarioFactura = DestinatarioFactura
         direcciones.Telefono = Telefono
         direcciones.CorreoElectronico = CorreoElectronico
-        direcciones.SitioWeb =SitioWeb
+        #direcciones.SitioWeb =SitioWeb
         direcciones.save()
         messages.success(request, "Los datos de la dirección del Cliente fue actualizada con éxito")
 
@@ -802,7 +1610,7 @@ def editarDireccion(request, usrid):
             PaisRegion = PaisRegion,
             Calle = Calle,
             Numero = Numero,
-            Calle2 = Calle2,
+            #Calle2 = Calle2,
             Ciudad = Ciudad,
             Estado = Estado,
             CodigoPostal = CodigoPostal,
@@ -814,7 +1622,7 @@ def editarDireccion(request, usrid):
             DestinatarioFactura = DestinatarioFactura,
             Telefono = Telefono,
             CorreoElectronico = CorreoElectronico,
-            SitioWeb =SitioWeb,
+            #SitioWeb =SitioWeb,
             Bloqueo = 0
         )
         idRegistro = direcciones.IdRegistro
@@ -825,7 +1633,7 @@ def editarDireccion(request, usrid):
             "PaisRegion": PaisRegion,
             "Calle": Calle,
             "Numero": Numero,
-            "Calle2": Calle2,
+            #"Calle2": Calle2,
             "Ciudad": Ciudad,
             "Estado": Estado,
             "CodigoPostal": CodigoPostal,
@@ -837,7 +1645,7 @@ def editarDireccion(request, usrid):
             "DestinatarioFactura": DestinatarioFactura,
             "Telefono": Telefono,
             "CorreoElectronico": CorreoElectronico,
-            "SitioWeb": SitioWeb,
+            #"SitioWeb": SitioWeb,
     }
 
     entidad = "Direcciones"
@@ -868,12 +1676,14 @@ def bloquearDireccion(request, cliente, idDireccion, usrid):
     cliente = Clientes.objects.get(IdCliente=cliente)
     return render(request,"gestionDirecciones.html",{"direcciones":direccionesListados, "cliente":cliente, "session":session})
 
+#Valida que exista el registro de la división del cliente
 def validDivision(IdCliente, IdDiv, IdSubDiv):
     if divisionCliente.objects.filter(IdContacto=IdCliente, IdDivision=IdDiv, IdSubdivision=IdSubDiv).exists():
         return True
     else:
         return False   
 
+#Registra o elimina división del Cliente
 def saveDivision(IdCliente, IdDiv, IdSubDiv, save):
     if divisionCliente.objects.filter(IdContacto=IdCliente, IdDivision=IdDiv, IdSubdivision=IdSubDiv).exists():
         if(not save):
@@ -889,8 +1699,80 @@ def saveDivision(IdCliente, IdDiv, IdSubDiv, save):
             )
             return
 
-#def agregarClienteDireccion(request,codigo):
-#    return render(request,"agregarClienteDireccion.html",{"cliente":codigo})
+#Registra o elimina división del Contacto
+def saveDivisionContacto(IdContacto, Division, save):
+    if divisionCliente.objects.filter(IdContacto=IdContacto, IdDivision=Division).exists():
+        if(not save):
+            registro = divisionCliente.objects.get(IdContacto=IdContacto, IdDivision=Division)
+            registro.delete()
+            return
+    else:
+        if(save):
+            division = divisionCliente.objects.create (
+                IdContacto = IdContacto,
+                IdDivision = Division
+            )
+            return
+
+def validMarca(IdCliente, IdMaquina, IdMarca):
+    if MaquinasCliente.objects.filter(IdCliente=IdCliente, IdMaquina=IdMaquina, IdMarca=IdMarca).exists():
+        return True
+    else:
+        return False   
+    
+def getMarca(IdCliente, IdMaquina, IdMarca):
+    descrip = ""
+    if MaquinasCliente.objects.filter(IdCliente=IdCliente, IdMaquina=IdMaquina, IdMarca=IdMarca).exists():
+        marca = MaquinasCliente.objects.get(IdCliente=IdCliente, IdMaquina=IdMaquina, IdMarca=IdMarca)
+        descrip = marca.Marca
+    return descrip  
+
+def saveMarca(IdCliente, IdMaquina, IdMarca, Marca, save):
+    if MaquinasCliente.objects.filter(IdCliente=IdCliente, IdMaquina=IdMaquina, IdMarca=IdMarca).exists():
+        if(not save):
+            registro = MaquinasCliente.objects.get(IdCliente=IdCliente, IdMaquina=IdMaquina, IdMarca=IdMarca)
+            registro.delete()
+            return
+    else:
+        if(save):
+            data = MaquinasCliente.objects.create (
+                IdCliente = IdCliente,
+                IdMaquina = IdMaquina,
+                IdMarca = IdMarca,
+                Marca = Marca
+            )
+            return
+
+def validOtra(flag, valor) :
+    if flag :
+        if  valor == '' :
+            flag = False
+    else :
+        if valor != "" :
+            flag = True
+    return flag
+
+def validMaterial(IdCliente, IdMaterial, IdTipo):
+    if MaterialCliente.objects.filter(IdCliente=IdCliente, IdMaterial=IdMaterial, IdTipo=IdTipo).exists():
+        return True
+    else:
+        return False   
+    
+def saveMaterial(IdCliente, IdMaterial, IdTipo, save):
+    if MaterialCliente.objects.filter(IdCliente=IdCliente, IdMaterial=IdMaterial, IdTipo=IdTipo).exists():
+        if(not save):
+            registro = MaterialCliente.objects.get(IdCliente=IdCliente, IdMaterial=IdMaterial, IdTipo=IdTipo)
+            registro.delete()
+            return
+    else:
+        if(save):
+            data = MaterialCliente.objects.create (
+                IdCliente = IdCliente,
+                IdMaterial = IdMaterial,
+                IdTipo = IdTipo
+            )
+            return
+
 
 def get_paises(request):
     paises = list(Country.objects.order_by('Descrip').values())
@@ -917,7 +1799,6 @@ def get_codigos(request, codigo):
         #codigos = list(Sepomex.objects.annotate(cnt=Count('D_codigo')).filter(C_estado=c_estado).values('cnt', 'D_codigo').order_by('D_codigo'))
         codigos = list(Sepomex.objects.order_by().values_list('D_codigo', flat=True).values('D_codigo').distinct().filter(C_estado=c_estado))
 
-    
         if (len(codigos)>0):
             data={'message':"Success", 'codigos':codigos}
         else:
@@ -1046,14 +1927,14 @@ def get_TipoCliente(codigo) :
     return (descrip)
 
 def get_Division(codigo) :
-    if   (codigo == 'Haas CAM') :      descrip = 'Haas CAM'
-    elif (codigo == 'Haas Colombia') :      descrip = 'Haas Colombia'
-    elif (codigo == 'Haas Ecuador') :      descrip = 'Haas Ecuador'
-    elif (codigo == 'Haas México') :      descrip = 'Haas México'
-    elif (codigo == 'Hitec CNC Maquinaria de México') :      descrip = 'Hitec CNC Maquinaria de México'
-    elif (codigo == 'Hitec Tools') :      descrip = 'Hitec Tools'
-    elif (codigo == 'Nexttec Machinery') :      descrip = 'Nexttec Machinery'
-    elif (codigo == 'A&G Plastic Machinery') :      descrip = 'A&G Plastic Machinery'
+    if   (codigo == 'Haas CAM') :                           descrip = 'Haas CAM'
+    elif (codigo == 'Haas Colombia') :                      descrip = 'Haas Colombia'
+    elif (codigo == 'Haas Ecuador') :                       descrip = 'Haas Ecuador'
+    elif (codigo == 'Haas México') :                        descrip = 'Haas México'
+    elif (codigo == 'Hitec CNC Maquinaria de México') :     descrip = 'Hitec CNC Maquinaria de México'
+    elif (codigo == 'Hitec Tools') :                        descrip = 'Hitec Tools'
+    elif (codigo == 'Nexttec Machinery') :                  descrip = 'Nexttec Machinery'
+    elif (codigo == 'A&G Plastic Machinery') :              descrip = 'A&G Plastic Machinery'
     else :      descrip = ''
 
     return (descrip)
@@ -1535,6 +2416,50 @@ def get_DivNextec(codigo) :
     elif (codigo == '124') :      descrip = 'EDM'    
     return (descrip)
 
+
+def getVal_MatUseArrVir(ArrVirMat01, ArrVirMat02, ArrVirMat03, ArrVirMat04, ArrVirMat05, ArrVirMat06) :
+    codigo = ""
+    if   (ArrVirMat01):      codigo = '163'
+    elif (ArrVirMat02):      codigo = '164'
+    elif (ArrVirMat03):      codigo = '165'
+    elif (ArrVirMat04):      codigo = '166'
+    elif (ArrVirMat05):      codigo = '167'
+    elif (ArrVirMat06):      codigo = '168'
+    return (codigo)
+
+def getVal_MatUseElectro(ElectroMat01, ElectroMat02, ElectroMat03, ElectroMat04, ElectroMat05, ElectroMat06, ElectroMat07) :
+    codigo = ""
+    if   (ElectroMat01): codigo = '170'
+    elif (ElectroMat02):      codigo = '171'
+    elif (ElectroMat03):      codigo = '172'
+    elif (ElectroMat04):      codigo = '173'
+    elif (ElectroMat05):      codigo = '174'
+    elif (ElectroMat06):      codigo = '175'
+    elif (ElectroMat07):      codigo = '176'
+    return (codigo)
+
+def getVal_MatUseInyec(InyecMat01, InyecMat02, InyecMat03, InyecMat04, InyecMat05, InyecMat06, InyecMat07) :
+    codigo = ""
+    if   (InyecMat01): codigo = '179'
+    elif (InyecMat02):      codigo = '180'
+    elif (InyecMat03):      codigo = '181'
+    elif (InyecMat04):      codigo = '182'
+    elif (InyecMat05):      codigo = '183'
+    elif (InyecMat06):      codigo = '184'
+    elif (InyecMat07):      codigo = '185'
+    return (codigo)
+
+def getVal_MatUseFAB(FABMat01, FABMat02, FABMat03, FABMat04, FABMat05) :
+    codigo = ""
+    if   (FABMat01):      codigo = '187'
+    elif (FABMat02):      codigo = '188'
+    elif (FABMat03):      codigo = '189'
+    elif (FABMat04):      codigo = '190'
+    elif (FABMat05):      codigo = '191'
+    return (codigo)
+
+
+
 def get_MedioComunicacion(codigo) :
     descrip = ""
     if   (codigo == '001') :      descrip = 'Mail'
@@ -1546,9 +2471,9 @@ def buscarCliente(request, usrid):
     session = getSession(usrid)
     busqueda = request.POST['Busqueda']
     clientesOk = []
-    clientes = Clientes.objects.all()[0:200]
+    #clientes = Clientes.objects.all().filter(IdUser=usrid)[0:200]
+    clientes = Clientes.objects.all().filter()[0:200]
     
-
     if busqueda:
         clientes = Clientes.objects.filter(
             Q(IdCliente__icontains = busqueda) |
@@ -1558,8 +2483,9 @@ def buscarCliente(request, usrid):
         ).distinct()
     
     for item in clientes.iterator():
-        item.RegionVts = get_RegionVts(item.RegionVts)
-        clientesOk.append(item)
+        #if(item.IdUser==usrid):
+            item.RegionVts = get_RegionVts(item.RegionVts)
+            clientesOk.append(item)
    
     return render(request, "gestionClientesBusqueda.html",{"clientes":clientesOk, "session":session})
 
