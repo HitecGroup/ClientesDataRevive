@@ -10,8 +10,8 @@ from django.contrib import messages
 def home(request, usrid=0):
     session = getSession(usrid)
     clientesOk = []
-    #clientes = Clientes.objects.all().filter(IdUser=usrid)[0:200]
-    clientes = Clientes.objects.all().filter()[0:200]
+    clientes = Clientes.objects.all().filter(IdUser=usrid)[0:200]
+    #clientes = Clientes.objects.all().filter()[0:200]
     for item in clientes.iterator():
         item.RegionVts = get_RegionVts(item.RegionVts)
         clientesOk.append(item)
@@ -59,8 +59,8 @@ def loginUsr(request):
             usrid = usuario.Id      
             nombre = usuario.Nombre
             clientesOk = []
-            #clientes = Clientes.objects.all().filter(IdUser=usrid)[0:200]
-            clientes = Clientes.objects.all().filter()[0:200]
+            clientes = Clientes.objects.all().filter(IdUser=usrid)[0:200]
+            #clientes = Clientes.objects.all().filter()[0:200]
             for item in clientes.iterator():
                 item.RegionVts = get_RegionVts(item.RegionVts)
                 clientesOk.append(item)
@@ -2605,8 +2605,8 @@ def buscarCliente(request, usrid):
     session = getSession(usrid)
     busqueda = request.POST['Busqueda']
     clientesOk = []
-    #clientes = Clientes.objects.all().filter(IdUser=usrid)[0:200]
-    clientes = Clientes.objects.all().filter()[0:200]
+    clientes = Clientes.objects.all().filter(IdUser=usrid)[0:200]
+    #clientes = Clientes.objects.all().filter()[0:200]
     
     if busqueda:
         clientes = Clientes.objects.filter(
@@ -2617,7 +2617,7 @@ def buscarCliente(request, usrid):
         ).distinct()
     
     for item in clientes.iterator():
-        #if(item.IdUser==usrid):
+        if(item.IdUser==usrid):
             item.RegionVts = get_RegionVts(item.RegionVts)
             clientesOk.append(item)
    
