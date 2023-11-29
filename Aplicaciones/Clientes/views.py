@@ -639,12 +639,12 @@ def setDataCliente(cliente):
             "dDivCNC":get_DivCNC(cliente.DivCNC),
             "dDivHTools":get_DivHTools(cliente.DivHTools),
             "dDivNextec":get_DivNextec(cliente.DivNextec),
-            #"DireccioCliente":cliente.DireccioCliente,
             #"TelefonoPrincipal":cliente.TelefonoPrincipal,
             #"RFC":cliente.RFC,
             #"NombreAdicional":cliente.NombreAdicional,
             #"DivisionPM"":cliente.DivisionPM,
             "SitioWeb":cliente.ActPriEquipo,
+            "Comentarios":cliente.DireccioCliente,
             "MaqCompArrVir": cliente.MaqCompArrVir,
             "MaqCompElectro": cliente.MaqCompElectro,
             "MaqCompInyec": cliente.MaqCompInyec,
@@ -678,6 +678,7 @@ def editarCliente(request, usrid):
     #NoMaqCNC_C = request.POST['NoMaqCNC_C']
     #NoMaqHT_C = request.POST['NoMaqHT_C']
     SitioWeb = request.POST['SitioWeb']
+    Comentarios = request.POST['Comentarios']
 
     DivHaasMexico = DivHaasEcuador = DivHaasColombia = DivHaasCAM = False
     DivCNCCNC = DivCNCOmnitec = DivHToolsTools = False
@@ -1080,6 +1081,7 @@ def editarCliente(request, usrid):
     #cliente.ActPriEDM = ActPriEDM
     #cliente.ActPriEquipoCNC = ActPriEquipoCNC
     cliente.ActPriEquipo = SitioWeb
+    cliente.DireccioCliente = Comentarios
     cliente.DivHaas = DivHaas
     cliente.DivPM = DivPM
     cliente.DivCNC = DivCNC
@@ -1237,6 +1239,7 @@ def editarCliente(request, usrid):
         #"ActPriEDM": ActPriEDM,
         #"ActPriEquipoCNC": ActPriEquipoCNC,
         "SitioWeb": SitioWeb,
+        "Comentarios": Comentarios,
         "divisiones": divisiones,
         "materiales": materiales,
         "marcasMaq": marcasMaq,
@@ -1361,11 +1364,15 @@ def edicionContacto(request, idCliente, codigo, Gestion, usrid):
         if( contacto.Vip == "1" ):
             flag2 = True
 
+        otroDepto = ""
+        if( contacto.PaisExp != "Sin Dato" ):
+            otroDepto = contacto.PaisExp
+
     iniCheckbox = {"Principal":flag1, "VIP":flag2}
     descrip = getContactoDescrip(codigo, contacto)
     division = getDivisiones(codigo)
     
-    return render(request, "edicionContactos.html",{"vista":"Contacto", "Gestion":Gestion, "idRegistro":codigo, "contacto":contacto, "cliente":cliente, "session":session, "logData":getLogData('Contactos', codigo), "iniPais":iniPais, "iniRegion":iniRegion, "iniCodPos":iniCodPos, "iniDistrito":iniDistrito, "dataInt":dataInt, "iniCheckbox":iniCheckbox, "descrip": descrip, "division":division })
+    return render(request, "edicionContactos.html",{"vista":"Contacto", "Gestion":Gestion, "idRegistro":codigo, "contacto":contacto, "cliente":cliente, "session":session, "logData":getLogData('Contactos', codigo), "iniPais":iniPais, "iniRegion":iniRegion, "iniCodPos":iniCodPos, "iniDistrito":iniDistrito, "dataInt":dataInt, "iniCheckbox":iniCheckbox, "descrip": descrip, "division":division, "otroDepto":otroDepto })
 
 #Obtiene la descripción de campos por su Id para mostrar en el formulario
 def getContactoDescrip(idContacto, contacto):
@@ -1461,6 +1468,10 @@ def editarContacto(request, usrid):
     if 'VIP' in request.POST:
         Vip = 1
 
+    otroDepto = ""
+    if Departamento == '16':
+        otroDepto = request.POST['otroDepto']
+        
     if(IdContacto != "0") :
         movimiento = 'Update'
         contacto = Contactos.objects.get(IdContacto=IdContacto)
@@ -1482,9 +1493,9 @@ def editarContacto(request, usrid):
         #contacto.Numero = Numero
         #contacto.Edificio = Edificio
         #contacto.Planta = Planta
-        #contacto.PaisExp = PaisExp
+        contacto.PaisExp = otroDepto
         contacto.Principal = Principal
-        contacto.Vip = Vip    
+        contacto.Vip = Vip
         contacto.save()
         messages.success(request, "Los datos del contacto fueron actualizados con éxito")
 
@@ -1514,7 +1525,7 @@ def editarContacto(request, usrid):
             #Numero = Numero,
             #Edificio = Edificio,
             #Planta = Planta,
-            #PaisExp = PaisExp,
+            PaisExp = otroDepto,
             Principal = Principal,
             Vip = Vip,
             Bloqueo = 0
@@ -1581,7 +1592,7 @@ def editarContacto(request, usrid):
             #"Numero": Numero,
             #"Edificio": Edificio,
             #"Planta": Planta,
-            #"PaisExp": PaisExp,
+            "PaisExp": otroDepto,
             "Principal": Principal,
             "Vip": Vip,
             "HaasMexico": HaasMexico,
@@ -2381,6 +2392,8 @@ def get_Departamento(codigo) :
     elif (codigo == '12') :      descrip = 'Servicio Técnico'
     elif (codigo == '13') :      descrip = 'TI'
     elif (codigo == '14') :      descrip = 'Ventas'
+    elif (codigo == '15') :      descrip = 'Ingeniería'
+    elif (codigo == '16') :      descrip = 'Otro'
     return (descrip)
 
 def get_FuncionOld(codigo) :
