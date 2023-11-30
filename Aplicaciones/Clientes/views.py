@@ -1324,13 +1324,16 @@ def gestionContactos(request, codigo, usrid):
         iniRegion = {"CodeId":"CMX", "Descrip":"Ciudad de México"}
         iniCheckbox = {"Principal":flag1, "VIP":flag2}
         descrip = getContactoDescrip("0", contacto)
-        return render(request, "edicionContactos.html",{"vista":"Contacto", "Gestion":False, "idRegistro":"0", "contacto":contacto, "cliente":cliente, "session":session, "iniPais":iniPais, "iniRegion":iniRegion, "iniCodPos":iniCodPos, "iniDistrito":iniDistrito, "dataInt":False, "iniCheckbox":iniCheckbox, "descrip":descrip })
+        otroDepto = ""
+        division = getDivisiones(0)
+        return render(request, "edicionContactos.html",{"vista":"Contacto", "Gestion":False, "idRegistro":"0", "contacto":contacto, "cliente":cliente, "session":session, "iniPais":iniPais, "iniRegion":iniRegion, "iniCodPos":iniCodPos, "iniDistrito":iniDistrito, "dataInt":False, "iniCheckbox":iniCheckbox, "descrip":descrip, "division":division, "otroDepto":otroDepto })
 
 def edicionContacto(request, idCliente, codigo, Gestion, usrid):
     session = getSession(usrid)        
     cliente = Clientes.objects.get(IdCliente=idCliente)
     iniCodPos = ""
     iniDistrito = ""
+    otroDepto = ""
     dataInt = False
     flag1 = flag2 = False
     if codigo=="0" :
@@ -1364,7 +1367,6 @@ def edicionContacto(request, idCliente, codigo, Gestion, usrid):
         if( contacto.Vip == "1" ):
             flag2 = True
 
-        otroDepto = ""
         if( contacto.PaisExp != "Sin Dato" ):
             otroDepto = contacto.PaisExp
 
